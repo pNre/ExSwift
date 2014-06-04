@@ -70,5 +70,28 @@ extension String {
         
     }
     
+    /**
+    *  Random string
+    *  @param length String length, 0 -> random length
+    *  @param charset Chars to use in the random string costruction
+    *  @return Random string
+    */
+    static func random (var length len: Int = 0, charset: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") -> String {
+        
+        if len < 1 {
+            len = Int.random(max: 16)
+        }
+        
+        var result = String()
+        let max = charset.length() - 1
+        
+        for i in 0..len {
+            result += charset[Int.random(min: 0, max: max)]!
+        }
+        
+        return result
+        
+    }
+    
 }
 

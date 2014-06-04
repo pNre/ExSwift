@@ -73,4 +73,24 @@ class ExSwiftIntTests: XCTestCase {
         })
 
     }
+    
+    func testAfter() {
+
+        let f = 2.after({ () -> Bool in return true })
+
+        XCTAssertNil(f())
+        XCTAssertNil(f())
+        XCTAssertTrue(f())
+        
+        var called = false
+        
+        let g = 2.after({ called = true })
+        
+        g()
+        g()
+        g()
+
+        XCTAssertTrue(called)
+        
+    }
 }

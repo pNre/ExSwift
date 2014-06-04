@@ -14,9 +14,9 @@ extension Int {
     *  Calls a function self times
     *  @param call Function to call
     */
-    func times (call: () -> Any) {
+    func times <T> (call: () -> T) {
         self.times({
-            (index: Int) -> Any in
+            (index: Int) -> T in
             return call()
         })
     }
@@ -27,18 +27,34 @@ extension Int {
     */
     func times (call: () -> ()) {
         self.times({
-            (index: Int) -> Any in
+            (index: Int) -> () in
             call()
         })
     }
-    
+
     /**
-    *  Calls a function self times (with no return value)
+    *  Calls a function self times
     *  @param call Function to call
     */
-    func times (call: (Int) -> Any) {
+    func times <T> (call: (Int) -> T) {
         for i in 0..self {
             call(i)
+        }
+    }
+    
+    /**
+    *  Creates a function that executes call only after being called n times
+    *  @param call Function to call after self times
+    *  @return Newly constructed function
+    */
+    func after <T> (call: () -> T) -> (() -> T?) {
+        var times = self
+        return {
+            if times-- <= 0 {
+                return call()
+            }
+            
+            return nil
         }
     }
     

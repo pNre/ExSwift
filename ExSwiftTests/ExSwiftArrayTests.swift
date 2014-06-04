@@ -19,7 +19,15 @@ class ExtensionsArrayTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
     }
-    
+
+    func testReject () {
+        var odd = array.reject({
+            return $0 % 2 == 0
+        })
+
+        XCTAssert(odd == [1, 3, 5])
+    }
+
     func testEach() {
         var result = Array<Int>()
         
@@ -71,6 +79,12 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssert(array.intersection([1, 2], [1, 2], [1, 3]) == [1])
     }
     
+    func testUnion() {
+        XCTAssert(array.union([1]) == array)
+        XCTAssert(array.union([]) == array)
+        XCTAssert(array.union([6]) == [1, 2, 3, 4, 5, 6])
+    }
+    
     func testZip() {
         var zip1 = [1, 2].zip(["A", "B"])
         
@@ -94,32 +108,32 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(1, singleSample.count)
         XCTAssertEqual(2, longerSample.count)
     }
-    
+
     func testSubscriptRange() {
         XCTAssert(array[0..0] == [])
         XCTAssert(array[0..1] == [1])
         XCTAssert(array[0..2] == [1, 2])
     }
-    
+
     func testShuffled() {
         var shuffled = array.shuffled()
         XCTAssert(shuffled.difference(array) == [])
     }
-    
+
     func testShuffle() {
         var toShuffle = array.copy()
         toShuffle.shuffle()
         XCTAssert(toShuffle.difference(array) == [])
     }
-    
+
     func testMax() {
         XCTAssertEqual(5, array.max() as Int)
     }
-    
+
     func testMin() {
         XCTAssertEqual(1, array.min() as Int)
     }
-    
+
     /*
     func testPerformanceExample() {
         // This is an example of a performance test case.
