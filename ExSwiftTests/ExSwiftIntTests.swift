@@ -43,5 +43,23 @@ class ExSwiftIntTests: XCTestCase {
         XCTAssertTrue((-2).isEven())
         
     }
+    
+    func testOdd() {
+        
+        XCTAssertTrue((-1).isOdd())
+        XCTAssertTrue(3.isOdd())
+        XCTAssertFalse(4.isOdd())
+        XCTAssertFalse((-2).isOdd())
+        
+    }
+    
+    func testRandom() {
+        
+        10.times({
+            var a = Int.random(min: 5, max: 10)
+            XCTAssertGreaterThanOrEqual(a, 5)
+            XCTAssertLessThanOrEqual(a, 10)
+        })
 
+    }
 }

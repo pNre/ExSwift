@@ -17,6 +17,8 @@
 		1EE9FE77193E211B003B6F4F /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9FE74193E211B003B6F4F /* Int.swift */; };
 		1EE9FE78193E211B003B6F4F /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9FE74193E211B003B6F4F /* Int.swift */; };
 		1EE9FE7A193E2124003B6F4F /* ExSwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9FE79193E2124003B6F4F /* ExSwiftArrayTests.swift */; };
+		1EF7EBBF193EFC150009B44C /* ExSwiftStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF7EBBE193EFC150009B44C /* ExSwiftStringTests.swift */; };
+		1EF7EBC1193F16CE0009B44C /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF7EBC0193F16CE0009B44C /* Dictionary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,8 @@
 		1EE9FE73193E211B003B6F4F /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		1EE9FE74193E211B003B6F4F /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		1EE9FE79193E2124003B6F4F /* ExSwiftArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwiftArrayTests.swift; sourceTree = "<group>"; };
+		1EF7EBBE193EFC150009B44C /* ExSwiftStringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwiftStringTests.swift; sourceTree = "<group>"; };
+		1EF7EBC0193F16CE0009B44C /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 				1EE9FE73193E211B003B6F4F /* Array.swift */,
 				1EE9FE74193E211B003B6F4F /* Int.swift */,
 				1EE9FE5B193E2112003B6F4F /* AppDelegate.swift */,
+				1EF7EBC0193F16CE0009B44C /* Dictionary.swift */,
 				1EE9FE5D193E2112003B6F4F /* Images.xcassets */,
 				1EE9FE59193E2112003B6F4F /* Supporting Files */,
 			);
@@ -105,6 +110,7 @@
 			children = (
 				1EE9FE79193E2124003B6F4F /* ExSwiftArrayTests.swift */,
 				1E873FD2193E279D00D94D39 /* ExSwiftIntTests.swift */,
+				1EF7EBBE193EFC150009B44C /* ExSwiftStringTests.swift */,
 				1EE9FE67193E2112003B6F4F /* Supporting Files */,
 			);
 			path = ExSwiftTests;
@@ -216,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EE9FE77193E211B003B6F4F /* Int.swift in Sources */,
+				1EF7EBC1193F16CE0009B44C /* Dictionary.swift in Sources */,
 				1EE9FE5C193E2112003B6F4F /* AppDelegate.swift in Sources */,
 				1E2318B9193E33AE0069210D /* String.swift in Sources */,
 				1EE9FE75193E211B003B6F4F /* Array.swift in Sources */,
@@ -227,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E2318BA193E37790069210D /* String.swift in Sources */,
+				1EF7EBBF193EFC150009B44C /* ExSwiftStringTests.swift in Sources */,
 				1E873FD3193E279E00D94D39 /* ExSwiftIntTests.swift in Sources */,
 				1EE9FE7A193E2124003B6F4F /* ExSwiftArrayTests.swift in Sources */,
 				1EE9FE78193E211B003B6F4F /* Int.swift in Sources */,

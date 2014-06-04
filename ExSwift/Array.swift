@@ -1,6 +1,6 @@
 //
 //  Array.swift
-//  Extensions
+//  ExSwift
 //
 //  Created by pNre on 03/06/14.
 //  Copyright (c) 2014 pNre. All rights reserved.
@@ -161,10 +161,127 @@ extension Array {
         return result
         
     }
+    
+    /**
+    *  Randomly rearranges the elements of self using the Fisher-Yates shuffle
+    */
+    func shuffle () {
+        
+        for var i = self.count - 1; i >= 1; i-- {
+            var j = Int.random(max: i)
+            var temp = self[j]
+            self[j] = self[i]
+            self[i] = temp
+        }
+        
+    }
+    
+    /**
+    *  Creates an array of shuffled values
+    *  @return Shuffled copy of self
+    */
+    func shuffled () -> Array<T> {
+        var shuffled = self.copy()
+        
+        //  The shuffling is done using the Fisher-Yates shuffle
+        for i in 0..self.count {
+            var j = Int.random(max: i)
+            if j != i {
+                shuffled[i] = shuffled[j]
+            }
+            shuffled[j] = self[i]
+        }
+        
+        return shuffled
+    }
+    
+    /**
+    *  Returns a random subarray of length n
+    *  @param n Length
+    *  @return Random subarray of length n
+    */
+    func sample (size n: Int = 1) -> Array<T> {
+        var index = Int.random(max: count - n)
+        return self[index..(n + index)]
+    }
 
+    /**
+    *  Returns a subarray in the given range
+    *  @return Subarray or nil if the index is out of bounds
+    */
+    subscript (range: Range<Int>) -> Array<T> {
+        var subarray = Array<T>()
+            
+        for var i = range.startIndex; i < range.endIndex; i++ {
+            subarray += [self[i]]
+        }
+            
+        return subarray
+    }
+    
+    /**
+    *  Returns the max value in the current array
+    *  @return Max value
+    */
+    func max <T: Comparable> () -> T {
+
+        //  Find a better way to do this
+        
+        var max = self.first() as? T
+        
+        for i in 1..count {
+            
+            if var current = self.get(i) as? T {
+            
+                if current > max {
+                    max = current
+                }
+            
+            }
+            
+        }
+        
+        //  The max is not compatible with T
+        assert(max)
+        
+        return max!
+  
+    }
+    
+    /**
+    *  Returns the min value in the current array
+    *  @return Min value
+    */
+    func min <T: Comparable> () -> T {
+        
+        //  Find a better way to do this
+        
+        var min = self.first() as? T
+        
+        for i in 1..count {
+            
+            if var current = self.get(i) as? T {
+                
+                if current < min {
+                    min = current
+                }
+                
+            }
+            
+        }
+        
+        //  The max is not compatible with T
+        assert(min)
+        
+        return min!
+        
+    }
     
 }
 
+/**
+*  Shorthand for the array difference
+*/
 @infix func - <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
     return first.difference(second)
 }

@@ -72,6 +72,39 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual("B", b)
     }
     
+    func testSample() {
+        var singleSample = array.sample()
+        var longerSample = array.sample(size: 2)
+        
+        XCTAssertEqual(1, singleSample.count)
+        XCTAssertEqual(2, longerSample.count)
+    }
+    
+    func testSubscriptRange() {
+        XCTAssert(array[0..0] == [])
+        XCTAssert(array[0..1] == [1])
+        XCTAssert(array[0..2] == [1, 2])
+    }
+    
+    func testShuffled() {
+        var shuffled = array.shuffled()
+        XCTAssert(shuffled.difference(array) == [])
+    }
+    
+    func testShuffle() {
+        var toShuffle = array.copy()
+        toShuffle.shuffle()
+        XCTAssert(toShuffle.difference(array) == [])
+    }
+    
+    func testMax() {
+        XCTAssertEqual(5, array.max() as Int)
+    }
+    
+    func testMin() {
+        XCTAssertEqual(1, array.min() as Int)
+    }
+    
     /*
     func testPerformanceExample() {
         // This is an example of a performance test case.
