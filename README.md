@@ -36,10 +36,10 @@ Name | Signatures | Usage
 ##### Operators #####
 Name | Signature | Function | Usage
 ---- | --------- | -------- | -----
-\- (minus)|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Difference|`[1, 2] - [2, 4] == [1]`
-\& (and)|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Intersection|`[1, 2] & [2, 4] == [2]`
-\| (or)|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|union|`[1, 2] | [2, 4] == [1, 2, 4]`
-\[x..y] & \[x...y]|`subscript(range: Range<Int>) -> Array<T>`|Returns the sub-array from index *x* to index *y*|`var a = [1, 2, 3]; var b = a[1...2]`
+`-` (minus)|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Difference|`[1, 2] - [2, 4] == [1]`
+`&` (and)|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Intersection|`[1, 2] & [2, 4] == [2]`
+<code>&#124;</code> (bitwise or)|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|union|<code>[1, 2] &#124; [2, 4] == [1, 2, 4]</code>
+`[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> Array<T>`|Returns the sub-array from index *x* to index *y*|`var a = [1, 2, 3]; var b = a[1...2]`
 
 ### Int ###
 ##### Instance Methods #####
@@ -55,7 +55,7 @@ Name | Signatures | Usage
 ##### Class Methods #####
 
 Name | Signatures | Usage
----- | ---------- |
+---- | ---------- | -----
 **`random`**|`random(min: Int = 0, max: Int) -> Int`|`Int.random(min: 1, max: 1000)`
 
 ### String ###
@@ -74,8 +74,8 @@ Name | Signature | Usage
 ##### Operators #####
 Name | Signature|Function
 ---- | ---------|--------
-\[x]|`subscript(index: Int) -> String?`|Returns the substring at index *x*
-\[x..y] & \[x...y]|`subscript(range: Range<Int>) -> String`|Returns the substring from index *x* to index *y*
+`[x]`|`subscript(index: Int) -> String?`|Returns the substring at index *x*
+`[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> String`|Returns the substring from index *x* to index *y*
 
 ### Range ###
 ##### Instance Methods #####
@@ -91,8 +91,8 @@ Name | Signatures | Usage
 Name | Signatures | Usage
 ---- | ---------- | -------
 **`has`**|`has (key: KeyType) -> Bool`|`["A": 2, "B": 3, "C": 4].has("A") == true`
-**`map`**|`map(mapFunction map: (KeyType, ValueType) -> (KeyType, ValueType)) -> Dictionary<KeyType, ValueType>`|`let dictionary = [ "A": 1, "B": 2, "C": 3 ]`<br>`let mapped = dictionary.map(mapFunction: { return ($0 + "!", $1 + 1) })`<br>`mapped == ["A!": 2, "B!": 3, "C!": 4]`
-**`mapValues`**|`mapValues(mapFunction map: (KeyType, ValueType) -> (ValueType)) -> Dictionary<KeyType, ValueType>`|`let dictionary = [ "A": 1, "B": 2, "C": 3 ]`<br>`let mapped = dictionary.mapValues(mapFunction: { return $1 + 1 })`<br>`mapped == ["A": 2, "B": 3, "C": 4]`
+**`map`**|`map(mapFunction map: (KeyType, ValueType) -> (KeyType, ValueType)) -> Dictionary<KeyType, ValueType>`|See [Examples/Dictionary.md](Examples/Dictionary.md)
+**`mapValues`**|`mapValues(mapFunction map: (KeyType, ValueType) -> (ValueType)) -> Dictionary<KeyType, ValueType>`|See [Examples/Dictionary.md](Examples/Dictionary.md)|
 
 ### To Do ###
 * Compile as library as soon as XCode 6 stops crashing.
