@@ -20,6 +20,21 @@ class ExtensionsArrayTests: XCTestCase {
         super.tearDown()
     }
     
+    func testEach() {
+        var result = Array<Int>()
+        
+        array.each({
+            result.append($0)
+        })
+        
+        XCTAssert(result == array)
+    }
+    
+    func testRange() {
+        XCTAssert(Array<Int>.range(0..2) == [0, 1])
+        XCTAssert(Array<Int>.range(0...2) == [0, 1, 2])
+    }
+    
     func testContains() {
         XCTAssertFalse(array.contains("A"))
         XCTAssertFalse(array.contains(6))

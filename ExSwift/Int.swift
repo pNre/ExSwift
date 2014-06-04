@@ -15,9 +15,10 @@ extension Int {
     *  @param call Function to call
     */
     func times (call: () -> Any) {
-        for _ in 0..self {
-            call()
-        }
+        self.times({
+            (index: Int) -> Any in
+            return call()
+        })
     }
     
     /**
@@ -25,8 +26,19 @@ extension Int {
     *  @param call Function to call
     */
     func times (call: () -> ()) {
-        for _ in 0..self {
+        self.times({
+            (index: Int) -> Any in
             call()
+        })
+    }
+    
+    /**
+    *  Calls a function self times (with no return value)
+    *  @param call Function to call
+    */
+    func times (call: (Int) -> Any) {
+        for i in 0..self {
+            call(i)
         }
     }
     

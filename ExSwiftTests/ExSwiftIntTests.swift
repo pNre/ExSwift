@@ -32,6 +32,17 @@ class ExSwiftIntTests: XCTestCase {
         })
         
         XCTAssertEqual(5, count)
+    }
+    
+    func testTimesWithIndex() {
+        
+        var indexes = Array<Int>()
+        
+        5.times({
+            indexes.append($0)
+        })
+        
+        XCTAssert(indexes == [0, 1, 2, 3, 4])
         
     }
     

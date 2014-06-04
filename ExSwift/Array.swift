@@ -277,6 +277,35 @@ extension Array {
         
     }
     
+    /**
+    *  Iterates on self
+    *  @param call Function to call for each element
+    */
+    func each (call: (T) -> ()) {
+        
+        for item in self {
+            call(item)
+        }
+        
+    }
+    
+    /**
+    *  Constructs an array containing the integers in the given range
+    *  @param range
+    *  @return Array of integers
+    */
+    static func range (range: Range<Int>) -> Array<Int> {
+        
+        var result = Array<Int>()
+        
+        for i in range {
+            result.append(i)
+        }
+        
+        return result
+        
+    }
+    
 }
 
 /**

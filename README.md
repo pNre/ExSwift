@@ -21,6 +21,13 @@ Name | Signature
 **`sample`**|`sample (size n: Int = 1) -> Array<T>`
 **`max`**|`max <T: Comparable> () -> T`
 **`min`**|`min <T: Comparable> () -> T`
+**`each`**|`each (call: (T) -> ())`
+
+##### Class Methods #####
+
+Name | Signatures | Example
+---- | ---------- | -------
+**`range`**|`range (range: Range<Int>) -> Array<Int>`|`Array<Int>.range(0...2) == [0, 1, 2]`
 
 ##### Operators #####
 Name | Signature|Function
@@ -33,7 +40,7 @@ Name | Signature|Function
 
 Name | Signatures
 ---- | ---------
-**`times`**|`times (call: () -> Any)`<br>`times (call: () -> ())`
+**`times`**|`times (call: (Int) -> Any)`<br>`times (call: () -> Any)`<br>`times (call: () -> ())`
 **`sleep`**|`sleep ()`
 **`isEven`**|`isEven () -> Bool`
 **`isOdd`**|`idOdd () -> Bool`
