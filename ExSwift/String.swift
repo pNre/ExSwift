@@ -14,24 +14,19 @@ extension String {
     *  Returns the substring in the given range
     *  @return Substring
     */
-    subscript (range: Range<Int>) -> String {
-        var substring = String()
-        var start = range.startIndex
-        var stop = range.endIndex
-            
-        for char in unicodeScalars {
-            if start <= 0 && stop > 0 {
-                substring += String(char)
-            }
-            
-            start--
-            stop--
-            
+    subscript (range: Range<Int>) -> String? {
+        if let chars = Array(unicodeScalars).get(range) {
+        
+            return chars.reduce(String(), combine: {
+                (substring: String, char: UnicodeScalar) -> String in
+                return substring + String(char)
+            })
+
         }
-            
-        return substring
+        
+        return nil
     }
-    
+
     /**
     *  Returns the unicode char at position index in the string
     *  @return Unicode char as String or nil if the index is out of bounds
@@ -86,8 +81,8 @@ extension String {
 */
 @infix func * (first: String, second: Int) -> String {
     var result = String()
-    
-    for i in 0..second {
+
+    second.times {
         result += first
     }
     

@@ -59,13 +59,6 @@ extension Int {
     }
     
     /**
-    *  Sleeps for self seconds
-    */
-    func sleep () {
-        NSThread.sleepForTimeInterval(Double(self))
-    }
-    
-    /**
     *  Checks if a number is even
     *  @return True if self is even
     */

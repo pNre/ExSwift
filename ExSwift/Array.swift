@@ -150,7 +150,22 @@ extension Array {
     func get (index: Int) -> T? {
         return index < count ? self[index] : nil
     }
-
+    
+    /**
+    *  Gets the objects in the specified range
+    *  @param range
+    *  @return Subarray in range
+    */
+    func get (range: Range<Int>) -> Array<T>? {
+        var subarray = Array<T>()
+        
+        for var i = range.startIndex; i < range.endIndex; i++ {
+            subarray += [self[i]]
+        }
+        
+        return subarray
+    }
+    
     /**
     *  Creates an array of grouped elements, the first of which contains the first elements of the given arrays, the 2nd contains the 2nd elements of the given arrays, and so on
     *  @param arrays Arrays to zip
@@ -224,20 +239,6 @@ extension Array {
     func sample (size n: Int = 1) -> Array<T> {
         let index = Int.random(max: count - n)
         return self[index..(n + index)]
-    }
-
-    /**
-    *  Returns a subarray in the given range
-    *  @return Subarray or nil if the index is out of bounds
-    */
-    subscript (range: Range<Int>) -> Array<T> {
-        var subarray = Array<T>()
-
-        for var i = range.startIndex; i < range.endIndex; i++ {
-            subarray += [self[i]]
-        }
-
-        return subarray
     }
 
     /**
@@ -447,6 +448,20 @@ extension Array {
     */
     static func range <U: ForwardIndex> (range: Range<U>) -> Array<U> {
         return Array<U>(range)
+    }
+    
+    /**
+    *  Returns a subarray in the given range
+    *  @return Subarray or nil if the index is out of bounds
+    */
+    subscript (range: Range<Int>) -> Array<T> {
+        var subarray = Array<T>()
+            
+        for var i = range.startIndex; i < range.endIndex; i++ {
+            subarray += [self[i]]
+        }
+        
+        return subarray
     }
 
 }

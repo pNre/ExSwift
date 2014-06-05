@@ -39,3 +39,11 @@ extension Range {
     }
 
 }
+
+/**
+*  Ranges comparison
+*/
+@infix func == <U: ForwardIndex> (first: Range<U>, second: Range<U>) -> Bool {
+    return first.startIndex == second.startIndex &&
+           first.endIndex == second.endIndex
+}

@@ -2,6 +2,28 @@
 
 JavaScript inspired (lo-dash, underscore) set of Swift extensions for standard types, functions and classes.
 
+## Contents ##
+
+- [ExSwift](#exswift)
+	- [Array](#array)
+    	- [Instance Methods](#instance-methods)
+		- [Class Methods](#class-methods)
+		- [Operators](#operators)
+    - [Int](#int)
+    	- [Instance Methods](#instance-methods-1)
+    	- [Class Methods](#class-methods-1)
+    - [Float](#float)
+    	- [Instance Methods](#instance-methods-2)
+    	- [Class Methods](#class-methods-2)
+    - [String](#string)
+    	- [Instance Methods](#instance-methods-3)
+		- [Class Methods](#class-methods-3)
+		- [Operators](#operators-1)
+    - [Range](#range)
+    	- [Instance Methods](#instance-methods-4)
+    - [Dictionary](#dictionary)
+    	- [Instance Methods](#instance-methods-5)
+
 ### Array ###
 Examples in [Examples/Array.md](Examples/Array.md)
 
@@ -42,34 +64,41 @@ Name | Signatures
 **`range`**|`range <U: ForwardIndex> (range: Range<U>) -> Array<U>`
 
 ##### Operators #####
-Name | Signature | Function | Usage
----- | --------- | -------- | -----
-`-`|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Difference|`[1, 2] - [2, 4] == [1]`
-`&`|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Intersection|`[1, 2] & [2, 4] == [2]`
-<code>&#124;</code>|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|union|<code>[1, 2] &#124; [2, 4] == [1, 2, 4]</code>
-`[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> Array<T>`|Returns the sub-array from index *x* to index *y*|`var a = [1, 2, 3]; var b = a[1...2]`
+Name | Signature | Function
+---- | --------- | --------
+`-`|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Difference
+`&`|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Intersection
+<code>&#124;</code>|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Union
+`[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> Array<T>`|Returns the sub-array from index *x* to index *y*
 
 ### Int ###
+Examples in [Examples/Int.md](Examples/Int.md)
+
 ##### Instance Methods #####
 
-Name | Signatures | Usage
----- | ---------- | -------
-**`times`**|`times <T> (call: (Int) -> T)`<br>`times <T> (call: () -> T)`<br>`times (call: () -> ())`|`3.times({ (index: Int) -> Any in println(index) })`<br>`2.times({ println("Hello") })`
-**`after`**|`after <T> (call: () -> T) -> (() -> T?)`|`let a = 2.after({ println("Ciao") })`<br>`f()`<br>`f()`<br>`f() // prints Ciao`
-**`sleep`**|`sleep ()`|`2.sleep()`
-**`isEven`**|`isEven () -> Bool`|`2.isEven()`
-**`isOdd`**|`idOdd () -> Bool`|`1.isOdd()`
-**`upTo`**|`upTo (limit: Int, call: (Int) -> ())`|`5.upTo(10, { println($0) })`
-**`downTo`**|`downTo (limit: Int, call: (Int) -> ())`|`5.downTo(0, { println($0) })`
+Name | Signatures
+---- | ----------
+**`times`**|`times <T> (call: (Int) -> T)`<br>`times <T> (call: () -> T)`<br>`times (call: () -> ())`
+**`after`**|`after <T> (call: () -> T) -> (() -> T?)`
+**`isEven`**|`isEven () -> Bool`
+**`isOdd`**|`idOdd () -> Bool`
+**`upTo`**|`upTo (limit: Int, call: (Int) -> ())`
+**`downTo`**|`downTo (limit: Int, call: (Int) -> ())`
 
 ##### Class Methods #####
 
-Name | Signatures | Usage
----- | ---------- | -----
-**`random`**|`random(min: Int = 0, max: Int) -> Int`|`Int.random(min: 1, max: 1000)`
+Name | Signatures
+---- | ----------
+**`random`**|`random(min: Int = 0, max: Int) -> Int`
 
 
 ### Float ###
+##### Instance Methods #####
+
+Name | Signature
+---- | ---------
+**`abs`**|`abs () -> Float`
+
 ##### Class Methods #####
 
 Name | Signatures | Usage
@@ -77,24 +106,26 @@ Name | Signatures | Usage
 **`random`**|`random(min: Float = 0, max: Float) -> Float`|`Float.random(min: 1, max: 1000)`
 
 ### String ###
+Examples in [Examples/String.md](Examples/String.md)
+
 ##### Instance Methods #####
 
-Name | Signature | Usage
----- | --------- | -----
-**`length`**|`length () -> Int`|`"Hi".length() == 2`
+Name | Signature
+---- | ---------
+**`length`**|`length () -> Int`
 
 ##### Class Methods #####
 
-Name | Signature | Usage
----- | --------- | -----
-**`random`**|`func random (var length len: Int = 0, charset: String = "...") -> String`|`String.random()`
+Name | Signature
+---- | ---------
+**`random`**|`func random (var length len: Int = 0, charset: String = "...") -> String`
 
 ##### Operators #####
-Name | Signature|Function
----- | ---------|--------
-`[x]`|`subscript(index: Int) -> String?`|Returns the substring at index *x*
-`[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> String`|Returns the substring from index *x* to index *y*
-`S * n`|`* (first: String, second: Int) -> String`|Repeats `n` times the string `S`
+Name | Signature
+---- | ---------
+`[x]`|`subscript(index: Int) -> String?`
+`[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> String`
+`S * n`|`* (first: String, second: Int) -> String`
 
 ### Range ###
 ##### Instance Methods #####
@@ -103,6 +134,11 @@ Name | Signatures | Usage
 ---- | ---------- | -------
 **`times`**|`times (call: (T) -> ())`<br>`times (call: () -> ())`|`(2..4).times({ (index: Int) in println(index) })`<br>`(2..4).times({ println("Hi") })`
 **`each`**|`each (call: (T) -> ())`|`(2..4).each({ (index: Int) in println(index) })`
+
+##### Operators #####
+Name | Signature|Function
+---- | ---------|--------
+`=`|`== <U: ForwardIndex> (first: Range<U>, second: Range<U>) -> Bool`|Compares 2 ranges
 
 ### Dictionary ###
 Examples in [Examples/Dictionary.md](Examples/Dictionary.md)

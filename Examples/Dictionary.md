@@ -1,4 +1,18 @@
 #Dictionary
+### Contents ###
+
+- [Dictionary](#dictionary)
+    - [Instance Methods](#instance-methods)
+    	- [`has`](#has)
+    	- [`isEmpty`](#isempty)
+    	- [`map`](#map)
+    	- [`mapValues`](#mapvalues)
+    	- [`each`](#each)
+    	- [`filter`](#filter)
+    	- [`merge`](#merge)
+    	- [`shift`](#shift) 
+    	
+### Instance Methods ###
 
 #### `has` ####
 ```swift
