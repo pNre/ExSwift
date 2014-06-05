@@ -31,4 +31,34 @@ class ExSwiftDictionaryTests: XCTestCase {
         XCTAssert(mapped == ["AA": 2, "BA": 3, "CA": 4])
     }
     
+    func testFilter() {
+        let filtered = dictionary.filter {
+            (key: String, Value: Int) in
+            return key != "A"
+        }
+        
+        XCTAssert(filtered == ["B": 2, "C": 3])
+    }
+
+    func testIsEmpty() {
+        let e = Dictionary<String, String>()
+
+        XCTAssertTrue(e.isEmpty())
+        XCTAssertFalse(dictionary.isEmpty())
+    }
+
+    func testMerge() {
+        let a = dictionary.merge([ "D": 4 ])
+        
+        XCTAssert(a == ["A": 1, "B": 2, "C": 3, "D": 4])
+    }
+
+    func testShift() {
+        let (key, value) = dictionary.shift()
+        
+        XCTAssertEqual(2, dictionary.count)
+        XCTAssertNotNil(key)
+        XCTAssertNotNil(value)
+    }
+    
 }

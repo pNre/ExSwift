@@ -38,20 +38,12 @@ extension String {
     */
     subscript (index: Int) -> String? {
     
-        var current = 0
-            
-        for char in unicodeScalars {
-            
-            if (current == index) {
-                return String(char)
-            }
-            
-            current++
-            
+        if let char = Array(unicodeScalars).get(index) {
+            return String(char)
         }
         
         return nil
-            
+
     }
     
     /**
@@ -59,14 +51,8 @@ extension String {
     *  @return Length
     */
     func length () -> Int {
-        
-        var length = 0
-        
-        for char in unicodeScalars {
-            length++
-        }
-        
-        return length
+
+        return Array(unicodeScalars).count
         
     }
     

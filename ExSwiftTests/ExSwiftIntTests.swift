@@ -85,4 +85,24 @@ class ExSwiftIntTests: XCTestCase {
         XCTAssertTrue(called)
         
     }
+    
+    func testUpTo() {
+        
+        var result = Array<Int>()
+        
+        5.upTo(10, { result.append($0) })
+     
+        XCTAssert(result == Array(5...10))
+        
+    }
+    
+    func testDownTo() {
+        
+        var result = Array<Int>()
+        
+        3.downTo(0, { result.append($0) })
+        
+        XCTAssert(result == [3, 2, 1, 0])
+        
+    }
 }

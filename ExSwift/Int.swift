@@ -80,6 +80,28 @@ extension Int {
     func isOdd () -> Bool {
         return !self.isEven()
     }
+
+    /**
+     *  Iterates call, passing in integer values from self up to and including limit.
+     */
+    func upTo (limit: Int, call: (Int) -> ()) {
+        if limit < self {
+            return
+        }
+
+        (self...limit).each(call)
+    }
+    
+    /**
+    *  Iterates call, passing in integer values from self down to and including limit.
+    */
+    func downTo (limit: Int, call: (Int) -> ()) {
+        if limit > self {
+            return
+        }
+
+        Array(limit...self).reverse().each(call)
+    }
     
     /**
     *  Returns a random integer between min and max (inclusive)

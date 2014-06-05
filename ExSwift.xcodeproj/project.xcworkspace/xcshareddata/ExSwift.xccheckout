@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>500A85F7-81EB-442A-9371-A35B0B117B50</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ExSwift</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8A1C408D-6511-4413-A9C8-9DFB19BA2680</key>
+		<string>https://github.com/pNre/ExSwift.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ExSwift.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8A1C408D-6511-4413-A9C8-9DFB19BA2680</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/pNre/ExSwift.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8A1C408D-6511-4413-A9C8-9DFB19BA2680</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8A1C408D-6511-4413-A9C8-9DFB19BA2680</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ExSwift</string>
+		</dict>
+	</array>
+</dict>
+</plist>

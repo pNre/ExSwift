@@ -11,6 +11,14 @@ import Foundation
 extension Float {
     
     /**
+    *  Returns the absolute value of self
+    *  @return Absolute value
+    */
+    func abs () -> Float {
+        return fabsf(self)
+    }
+    
+    /**
     *  Returns a random float between min and max (inclusive)
     *  @return Random float
     */

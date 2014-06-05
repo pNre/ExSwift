@@ -57,7 +57,7 @@ extension Array {
         var result: Array<T> = self as Array<T>
         var intersection = Array<T>()
 
-        for i in 0..values.count {
+        for (i, value) in enumerate(values) {
 
             //  the intersection is computed by intersecting a couple per loop:
             //  self n values[0], (self n values[0]) n values[1], ...
@@ -68,7 +68,7 @@ extension Array {
 
             //  find common elements and save them in first set
             //  to intersect in the next loop
-            for item in values[i] {
+            for item in value {
                 if result.contains(item) {
                     intersection.append(item as T)
                 }
@@ -309,7 +309,19 @@ extension Array {
         }
 
     }
-
+    
+    /**
+    *  Iterates on self with index
+    *  @param call Function to call for each element
+    */
+    func each (call: (Int, T) -> ()) {
+        
+        for (index, item) in enumerate(self) {
+            call(index, item)
+        }
+        
+    }
+    
     /**
     *  Checks if call returns true for any element of self
     *  @param call Function to call for each element
@@ -364,19 +376,35 @@ extension Array {
     func take (n: Int) -> Array<T> {
         return self[0..n]
     }
+
+    /**
+    *  Returns a new array by removing duplicate values in self
+    *  @return Unique array
+    */
+    func unique <T: Equatable> () -> Array<T> {
+        var result = Array<T>()
+
+        for item in self {
+            if !result.contains(item as T) {
+                result.append(item as T)
+            }
+        }
+
+        return result
+    }
     
     /**
     *  Removes the last element from self and returns it
     *  @return The removed element
     */
-    mutating func pop() -> T {
+    mutating func pop () -> T {
         return self.removeLast()
     }
     
     /**
     *  Same as append
     */
-    mutating func push(newElement: T) {
+    mutating func push (newElement: T) {
         return self.append(newElement)
     }
     
@@ -384,32 +412,41 @@ extension Array {
     *  Returns the first element of self and removes it
     *  @return The removed element
     */
-    mutating func shift() -> T {
+    mutating func shift () -> T {
         return self.removeAtIndex(0)
     }
-    
+
     /**
     *  Prepends objects to the front of self
     */
-    mutating func unshift(newElement: T) {
+    mutating func unshift (newElement: T) {
         self.insert(newElement, atIndex: 0)
     }
-    
+
+    /**
+    *  Deletes all the items in self that are equal to element
+    *  @param element
+    */
+    mutating func remove <U: Equatable> (element: U) {
+        let anotherSelf = self.copy()
+
+        removeAll(keepCapacity: true)
+        
+        anotherSelf.each {
+            (index: Int, current: T) in
+            if current as U != element {
+                self.append(current)
+            }
+        }
+    }
+
     /**
     *  Constructs an array containing the integers in the given range
     *  @param range
     *  @return Array of integers
     */
-    static func range (range: Range<Int>) -> Array<Int> {
-
-        var result = Array<Int>()
-
-        for i in range {
-            result.append(i)
-        }
-
-        return result
-
+    static func range <U: ForwardIndex> (range: Range<U>) -> Array<U> {
+        return Array<U>(range)
     }
 
 }

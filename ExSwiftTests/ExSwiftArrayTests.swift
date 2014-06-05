@@ -33,6 +33,15 @@ class ExtensionsArrayTests: XCTestCase {
         })
         
         XCTAssert(result == array)
+        
+        result.removeAll(keepCapacity: true)
+        
+        array.each({
+            (index: Int, item: Int) in
+            result.append(index)
+        })
+        
+        XCTAssert(result == array.map( { return $0 - 1 } ))
     }
     
     func testRange() {
@@ -154,6 +163,18 @@ class ExtensionsArrayTests: XCTestCase {
     func testUnshift() {
         array.unshift(0)
         XCTAssertEqual(0, array.first()!)
+    }
+
+    func testRemove() {
+        array.append(array.last()!)
+        array.remove(array.last()!)
+        
+        XCTAssert(array == [1, 2, 3, 4])
+    }
+
+    func testUnique() {
+        let arr = [1, 1, 1, 2, 3]
+        XCTAssert(arr.unique() as Array<Int> == [1, 2, 3])
     }
 
     /*

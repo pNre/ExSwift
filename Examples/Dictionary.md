@@ -5,6 +5,13 @@
 let dictionary = [ "A": 1, "B": 2, "C": 3 ]
 dictionary.has("A") // true
 ```
+#### `isEmpty` ####
+```swift
+let dictionary = [ "A": 1, "B": 2, "C": 3 ]
+dictionary.isEmpty() // false
+let e = Dictionary<String, String>()
+e.isEmpty() // true
+```
 
 #### `each` ####
 ```swift
@@ -26,3 +33,18 @@ let mapped = dictionary.mapValues(mapFunction: { return $1 + 1 })
 println(mapped) // ["A": 2, "B": 3, "C": 4]
 ```
 
+#### `filter` ####
+```swift
+let dictionary = [ "A": 1, "B": 2, "C": 3 ]
+let filtered = dictionary.filter {
+    (key: String, Value: Int) in return key != "A"
+}
+println(filtered) // ["B": 2, "C": 3]
+```
+
+#### `merge` ####
+```swift
+let dictionary = [ "A": 1, "B": 2, "C": 3 ]
+let merged = dictionary.merge( ["D": 4] )
+println(merged) // [ "A": 1, "B": 2, "C": 3, "D": 4 ]
+```
