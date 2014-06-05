@@ -10,26 +10,18 @@ import XCTest
 
 class ExSwiftRangeTests: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-         super.tearDown()
-    }
-
     func testTimes() {
         var count = 0
-        
+
         (2..4).times({
             count++
             return
         })
 
         XCTAssertEqual(count, 2)
-        
+
         count = 0
-        
+
         (2...4).times({
             count++
             return
@@ -39,20 +31,20 @@ class ExSwiftRangeTests: XCTestCase {
     }
 
     func testEach() {
-        
+
         var items = Array<Int>()
-        
+
         (0..2).each({
             items.append($0)
         })
-        
+
         XCTAssert(items == [0, 1])
-        
+
         (0..0).each({ (current: Int) in
             XCTFail()
             return
         })
-        
+
     }
-    
+
 }

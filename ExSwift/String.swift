@@ -95,3 +95,15 @@ extension String {
     
 }
 
+/**
+*  Repeat a string
+*/
+@infix func * (first: String, second: Int) -> String {
+    var result = String()
+    
+    for i in 0..second {
+        result += first
+    }
+    
+    return result
+}

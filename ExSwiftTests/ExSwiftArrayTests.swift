@@ -10,16 +10,13 @@ import XCTest
 
 class ExtensionsArrayTests: XCTestCase {
 
-    var array = [1, 2, 3, 4, 5]
-    
+    var array: Array<Int> = []
+
     override func setUp() {
         super.setUp()
+        array = [1, 2, 3, 4, 5]
     }
     
-    override func tearDown() {
-        super.tearDown()
-    }
-
     func testReject () {
         var odd = array.reject({
             return $0 % 2 == 0
@@ -132,6 +129,31 @@ class ExtensionsArrayTests: XCTestCase {
 
     func testMin() {
         XCTAssertEqual(1, array.min() as Int)
+    }
+    
+    func testTake() {
+        XCTAssert(array.take(3) == [1, 2, 3])
+        XCTAssert(array.take(0) == [])
+    }
+
+    func testPop() {
+        XCTAssertEqual(5, array.pop())
+        XCTAssert(array == [1, 2, 3, 4])
+    }
+
+    func testPush() {
+        array.push(6)
+        XCTAssertEqual(6, array.last()!)
+    }
+
+    func testShift() {
+        XCTAssertEqual(1, array.shift())
+        XCTAssert(array == [2, 3, 4, 5])
+    }
+
+    func testUnshift() {
+        array.unshift(0)
+        XCTAssertEqual(0, array.first()!)
     }
 
     /*

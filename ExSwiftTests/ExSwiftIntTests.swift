@@ -10,14 +10,6 @@ import XCTest
 
 class ExSwiftIntTests: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
-
     func testTimes() {
         var count = 0
 

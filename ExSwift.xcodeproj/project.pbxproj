@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1E2318B9193E33AE0069210D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2318B8193E33AE0069210D /* String.swift */; };
 		1E2318BA193E37790069210D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2318B8193E33AE0069210D /* String.swift */; };
+		1E6ECF41193F9E67001EF359 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6ECF40193F9E67001EF359 /* Float.swift */; };
+		1E6ECF42193F9E67001EF359 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6ECF40193F9E67001EF359 /* Float.swift */; };
+		1E6ECF44193F9F87001EF359 /* ExSwiftFloatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6ECF43193F9F87001EF359 /* ExSwiftFloatTests.swift */; };
 		1E7875AB193F6DB5007416AF /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7875AA193F6DB5007416AF /* Range.swift */; };
 		1E7875AD193F6E69007416AF /* ExSwiftRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7875AC193F6E69007416AF /* ExSwiftRangeTests.swift */; };
 		1E7875AE193F6E95007416AF /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7875AA193F6DB5007416AF /* Range.swift */; };
@@ -38,6 +41,8 @@
 
 /* Begin PBXFileReference section */
 		1E2318B8193E33AE0069210D /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		1E6ECF40193F9E67001EF359 /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
+		1E6ECF43193F9F87001EF359 /* ExSwiftFloatTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwiftFloatTests.swift; sourceTree = "<group>"; };
 		1E7875AA193F6DB5007416AF /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
 		1E7875AC193F6E69007416AF /* ExSwiftRangeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwiftRangeTests.swift; sourceTree = "<group>"; };
 		1E7875B0193F7DED007416AF /* ExSwiftDictionaryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwiftDictionaryTests.swift; sourceTree = "<group>"; };
@@ -99,6 +104,7 @@
 				1EE9FE74193E211B003B6F4F /* Int.swift */,
 				1EF7EBC0193F16CE0009B44C /* Dictionary.swift */,
 				1E7875AA193F6DB5007416AF /* Range.swift */,
+				1E6ECF40193F9E67001EF359 /* Float.swift */,
 				1EE9FE5B193E2112003B6F4F /* AppDelegate.swift */,
 				1EE9FE5D193E2112003B6F4F /* Images.xcassets */,
 				1EE9FE59193E2112003B6F4F /* Supporting Files */,
@@ -122,6 +128,7 @@
 				1EF7EBBE193EFC150009B44C /* ExSwiftStringTests.swift */,
 				1E7875AC193F6E69007416AF /* ExSwiftRangeTests.swift */,
 				1E7875B0193F7DED007416AF /* ExSwiftDictionaryTests.swift */,
+				1E6ECF43193F9F87001EF359 /* ExSwiftFloatTests.swift */,
 				1EE9FE67193E2112003B6F4F /* Supporting Files */,
 			);
 			path = ExSwiftTests;
@@ -235,6 +242,7 @@
 				1EE9FE77193E211B003B6F4F /* Int.swift in Sources */,
 				1EF7EBC1193F16CE0009B44C /* Dictionary.swift in Sources */,
 				1EE9FE5C193E2112003B6F4F /* AppDelegate.swift in Sources */,
+				1E6ECF41193F9E67001EF359 /* Float.swift in Sources */,
 				1E7875AB193F6DB5007416AF /* Range.swift in Sources */,
 				1E2318B9193E33AE0069210D /* String.swift in Sources */,
 				1EE9FE75193E211B003B6F4F /* Array.swift in Sources */,
@@ -245,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E6ECF42193F9E67001EF359 /* Float.swift in Sources */,
 				1E7875AF193F6E98007416AF /* Dictionary.swift in Sources */,
 				1E7875AE193F6E95007416AF /* Range.swift in Sources */,
 				1E2318BA193E37790069210D /* String.swift in Sources */,
@@ -253,6 +262,7 @@
 				1EE9FE7A193E2124003B6F4F /* ExSwiftArrayTests.swift in Sources */,
 				1E7875AD193F6E69007416AF /* ExSwiftRangeTests.swift in Sources */,
 				1EE9FE78193E211B003B6F4F /* Int.swift in Sources */,
+				1E6ECF44193F9F87001EF359 /* ExSwiftFloatTests.swift in Sources */,
 				1E7875B1193F7DED007416AF /* ExSwiftDictionaryTests.swift in Sources */,
 				1EE9FE76193E211B003B6F4F /* Array.swift in Sources */,
 			);

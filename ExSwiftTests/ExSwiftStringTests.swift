@@ -10,14 +10,6 @@ import XCTest
 
 class ExSwiftStringTests: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
-
     func testLength() {
         XCTAssertEqual(0, "".length())
         XCTAssertEqual(1, "A".length())
@@ -33,6 +25,12 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual("T", string[1]!)
         XCTAssertEqual("😗", string[string.length() - 1]!)
         XCTAssertEqual("Test😗", string[1..6])
+    }
+    
+    func testRepeat () {
+        
+        XCTAssertEqual("AAA", "A" * 3)
+        
     }
 
 }

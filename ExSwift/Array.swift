@@ -62,7 +62,7 @@ extension Array {
             //  the intersection is computed by intersecting a couple per loop:
             //  self n values[0], (self n values[0]) n values[1], ...
             if (i > 0) {
-                result = intersection.copy()
+                result = intersection
                 intersection = Array<T>()
             }
 
@@ -130,10 +130,10 @@ extension Array {
     */
     func indexOf <T: Equatable> (item: T) -> Int {
 
-        for i in 0..count {
-            if let object = self[i] as? T {
+        for (index, value) in enumerate(self) {
+            if let object = value as? T {
                 if object == item {
-                    return i
+                    return index
                 }
             }
         }
@@ -186,7 +186,7 @@ extension Array {
     /**
     *  Randomly rearranges the elements of self using the Fisher-Yates shuffle
     */
-    func shuffle () {
+    mutating func shuffle () {
 
         for var i = self.count - 1; i >= 1; i-- {
             let j = Int.random(max: i)
@@ -356,7 +356,45 @@ extension Array {
             return !exclude($0)
         })
     }
-
+    
+    /**
+    *  Returns first n elements from self
+    *  @return First n elements
+    */
+    func take (n: Int) -> Array<T> {
+        return self[0..n]
+    }
+    
+    /**
+    *  Removes the last element from self and returns it
+    *  @return The removed element
+    */
+    mutating func pop() -> T {
+        return self.removeLast()
+    }
+    
+    /**
+    *  Same as append
+    */
+    mutating func push(newElement: T) {
+        return self.append(newElement)
+    }
+    
+    /**
+    *  Returns the first element of self and removes it
+    *  @return The removed element
+    */
+    mutating func shift() -> T {
+        return self.removeAtIndex(0)
+    }
+    
+    /**
+    *  Prepends objects to the front of self
+    */
+    mutating func unshift(newElement: T) {
+        self.insert(newElement, atIndex: 0)
+    }
+    
     /**
     *  Constructs an array containing the integers in the given range
     *  @param range
