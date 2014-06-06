@@ -1,6 +1,6 @@
 # ExSwift
 
-JavaScript inspired (lo-dash, underscore) set of Swift extensions for standard types, functions and classes.
+JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for standard types and classes.
 
 ## Contents ##
 
@@ -57,6 +57,8 @@ Name | Signature
 **`shift`**|`shift() -> T`
 **`unshift`**|`unshift(newElement: T)`
 **`groupBy`**|`groupBy <U> (groupingFunction group: (T) -> (U)) -> Dictionary<U, Array<T>>`
+**`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
+**`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 
 ##### Class Methods #####
 
@@ -114,6 +116,7 @@ Examples in [Examples/String.md](Examples/String.md)
 Name | Signature
 ---- | ---------
 **`length`**|`length () -> Int`
+**`explode`**|`explode (separator: Character) -> String[]`
 
 ##### Class Methods #####
 
@@ -159,6 +162,7 @@ Name | Signatures
 **`groupBy`**|`groupBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Array<ValueType>>`
 **`any`**|`any (test: (KeyType, ValueType) -> (Bool)) -> Bool`
 **`all`**|`all (test: (KeyType, ValueType) -> (Bool)) -> Bool`
+**`reduce`**|`reduce <U> (initial: U, combine: (U, Element) -> U) -> U`
 
 ### To Do ###
 * Compile as library as soon as XCode 6 stops crashing.

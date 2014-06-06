@@ -14,6 +14,7 @@
     	- [`groupBy`](#groupby) 
     	- [`all`](#all) 
     	- [`any`](#any) 
+    	- [`reduce`](#reduce) 
     	
 ### Instance Methods ###
 
@@ -113,3 +114,13 @@ dictionary.all {
 // → false
 ```
 
+#### `reduce` ####
+```swift
+let dictionary = [ "A": 1, "B": 2, "C": 3 ]
+let reduced = dictionary.reduce(Dictionary<Int, String>(), {
+    (var initial: Dictionary<Int, String>, couple: (String, Int)) in
+    initial.updateValue(couple.0, forKey: couple.1)
+    return initial
+})
+// → [2: "B", 3: "C", 1: "A"]
+```

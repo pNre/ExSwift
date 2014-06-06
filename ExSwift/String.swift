@@ -52,6 +52,18 @@ extension String {
     }
     
     /**
+    *  Returns an array of strings, each of which is a substring of self formed by splitting it on separator
+    *  @param separator
+    *  @return Array of strings
+    */
+    func explode (separator: Character) -> String[] {
+        return split(self, {
+            (element: Character) -> Bool in
+            return element == separator
+        })
+    }
+    
+    /**
     *  Random string
     *  @param length String length, 0 -> random length
     *  @param charset Chars to use in the random string costruction

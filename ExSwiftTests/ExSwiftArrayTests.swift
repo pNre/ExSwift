@@ -187,6 +187,30 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssert(Array(group[true]!) == [4, 5])
         XCTAssert(Array(group[false]!) == [1, 2, 3])
     }
+
+    func testReduceRight () {
+        let list = [[0, 1], [2, 3], [4, 5]];
+        let flat = list.reduceRight(Array<Int>(), { return $0 + $1 });
+        XCTAssert(flat == [4, 5, 2, 3, 0, 1])
+    }
+
+    func testImplode () {
+        XCTAssert(["A", "B", "C"].implode("A") == "AABAC")
+    }
+    
+    func testPluck () {
+
+        let values = [
+            ["Name": "Bob", "Score": 6],
+            ["Name": "Tim", "Score": 8]
+        ]
+
+        let result = values.pluck("Score") as Int[]
+
+        println(result)
+        
+    }
+
     /*
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -194,5 +218,5 @@ class ExtensionsArrayTests: XCTestCase {
             
         }
     }*/
-    
+
 }

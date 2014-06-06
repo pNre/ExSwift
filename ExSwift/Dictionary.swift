@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Swift
 
 extension Dictionary {
 
@@ -76,7 +77,7 @@ extension Dictionary {
      *  @param testFunction
      *  @return Filtered dictionary
      */
-    func filter(testFunction test: (KeyType, ValueType) -> Bool) -> Dictionary<KeyType, ValueType> {
+    func filter (testFunction test: (KeyType, ValueType) -> Bool) -> Dictionary<KeyType, ValueType> {
         
         var result = Dictionary<KeyType, ValueType>()
         
@@ -185,7 +186,14 @@ extension Dictionary {
         return false
         
     }
-    
+
+    /**
+    *  Same as Array.reduce
+    */
+    func reduce <U> (initial: U, combine: (U, Element) -> U) -> U {
+        return Swift.reduce(self, initial, combine)
+    }
+
     /**
     *  Removes a (key, value) pair from self and returns it as tuple
     *  @return (key, value)

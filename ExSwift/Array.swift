@@ -174,21 +174,16 @@ extension Array {
         var result = Array<Array<Any?>>()
 
         //  Gets the longest array
-        let max = arrays.reduce(count, combine: {
-            (max: Int, item: Array<Any>) -> Int in
-            return item.count > max ? item.count : max;
-        })
+        let max = arrays.map { (array: Array<Any>) -> Int in
+            return array.count
+        }.max() as Int
 
         for i in 0..max {
-            var item = Array<Any?>()
 
-            item.append(get(i))
-
-            for array in arrays {
-                item.append(array.get(i))
-            }
-
-            result.append(item)
+            //  i-th element in self as array + every i-th element in each array in arrays
+            result.append([get(i)] + arrays.map {
+                (array: Array<Any>) -> Any? in return array.get(i)
+            })
 
         }
 
@@ -327,9 +322,9 @@ extension Array {
     *  Opposite of filter
     */
     func reject (exclude: (T -> Bool)) -> Array<T> {
-        return self.filter({
+        return filter {
             return !exclude($0)
-        })
+        }
     }
     
     /**
@@ -387,6 +382,27 @@ extension Array {
         
         return result
         
+    }
+    
+    /**
+     *  Joins the array elements with a separator
+     *  @param separator
+     *  @return Joined object if self is not empty 
+     *          and its elements are instances of C, nil otherwise
+     */
+    func implode <C: ExtensibleCollection> (separator: C) -> C? {
+        if self.first() is C {
+            return Swift.join(separator, reinterpretCast(self) as Array<C>)
+        }
+        
+        return nil
+    }
+    
+    /**
+    *  self.reduce from right to left
+    */
+    func reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U {
+        return self.reverse().reduce(initial, combine: combine)
     }
 
     /**

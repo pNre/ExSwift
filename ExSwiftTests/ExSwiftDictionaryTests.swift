@@ -96,4 +96,16 @@ class ExSwiftDictionaryTests: XCTestCase {
         XCTAssertFalse(all)
     }
     
+    func testReduce () {
+        
+        let reduced = dictionary.reduce(Dictionary<Int, String>(), {
+            (var initial: Dictionary<Int, String>, couple: (String, Int)) in
+            initial.updateValue(couple.0, forKey: couple.1)
+            return initial
+        })
+        
+        XCTAssert(reduced == [2: "B", 3: "C", 1: "A"])
+        
+    }
+
 }

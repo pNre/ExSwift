@@ -4,7 +4,8 @@
 
 - [String](#string)
     - [Instance Methods](#instance-methods)
-    	- [`length`](#times)
+    	- [`length`](#length)
+    	- [`explode`](#explode)
     - [Class Methods](#class-methods)
     	- [`random`](#random)
     - [Operators](#operators)
@@ -18,6 +19,13 @@
 ```
 "Hi".length() 
 // → 2
+```
+
+##### `explode` #####
+```
+let string = "A B C"
+string.explode(" ")
+// → ["A", "B", "C"]
 ```
 
 ### Class Methods ###

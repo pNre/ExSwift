@@ -30,6 +30,8 @@
     	- [`shift`](#shift)
     	- [`unshift`](#unshift)
     	- [`groupBy`](#groupby)   
+    	- [`reduceRight`](#reduceright)   
+    	- [`implode`](#implode)
     - [Class Methods](#class-methods)
     	- [`range`](#range)
     - [Operators](#operators)
@@ -259,6 +261,19 @@ let group = array.groupBy(groupingFunction: {
     return value > 3
 })
 // → [true: [5, 6], false: [1, 2, 3]]
+```
+
+##### `reduceRight` #####
+```
+let list = [[0, 1], [2, 3], [4, 5]];
+list.reduceRight(Array<Int>(), { return $0 + $1 });
+// → [4, 5, 2, 3, 0, 1]
+```
+
+##### `implode` #####
+```
+["A", "B", "C"].implode("_")
+// → A_B_C
 ```
 
 ### Class Methods ###

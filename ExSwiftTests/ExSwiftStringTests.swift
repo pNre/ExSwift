@@ -33,4 +33,11 @@ class ExSwiftStringTests: XCTestCase {
         
     }
 
+    func testExplode () {
+        
+        let string = "A B C"
+        XCTAssert(string.explode(" ") == ["A", "B", "C"])
+        
+    }
+    
 }
