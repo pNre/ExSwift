@@ -122,26 +122,24 @@ extension Array {
         }
         return nil
     }
-
+    
     /**
     *  Gets the index at which the first occurrence of item is found
     *  @param item The item to search for
     *  @return Index of the matched item or -1
     */
-    func indexOf <T: Equatable> (item: T) -> Int {
-
-        for (index, value) in enumerate(self) {
-            if let object = value as? T {
-                if object == item {
-                    return index
-                }
+    func indexOf <U: Equatable> (item: U) -> Int {
+        if item is T {
+            if let found = find(reinterpretCast(self) as Array<U>, item) {
+                return found
             }
+
+            return -1
         }
-        
+
         return -1
-
     }
-
+    
     /**
     *  Gets the object at the specified index if exists
     *  @param index
@@ -205,9 +203,7 @@ extension Array {
 
         for var i = self.count - 1; i >= 1; i-- {
             let j = Int.random(max: i)
-            let temp = self[j]
-            self[j] = self[i]
-            self[i] = temp
+            swap(&self[i], &self[j])
         }
 
     }
