@@ -52,10 +52,11 @@ Name | Signature
 **`any`**|`any (call: (T) -> Bool) -> Bool`
 **`all`**|`all (call: (T) -> Bool) -> Bool`
 **`reject`**|`reject (exclude: (T -> Bool)) -> Array<T>`
-**`pop`**|`pop() -> T`|
-**`push`**|`push(newElement: T)`|
-**`shift`**|`shift() -> T`|
-**`unshift`**|`unshift(newElement: T)`|
+**`pop`**|`pop() -> T`
+**`push`**|`push(newElement: T)`
+**`shift`**|`shift() -> T`
+**`unshift`**|`unshift(newElement: T)`
+**`groupBy`**|`groupBy <U> (groupingFunction group: (T) -> (U)) -> Dictionary<U, Array<T>>`
 
 ##### Class Methods #####
 
@@ -155,6 +156,9 @@ Name | Signatures
 **`filter`**|`filter(testFunction test: (KeyType, ValueType) -> Bool) -> Dictionary<KeyType, ValueType>`
 **`merge`**|`merge (dictionaries: Dictionary<KeyType, ValueType>...) -> Dictionary<KeyType, ValueType>`
 **`shift`**|`shift () -> (KeyType, ValueType)`
+**`groupBy`**|`groupBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Array<ValueType>>`
+**`any`**|`any (test: (KeyType, ValueType) -> (Bool)) -> Bool`
+**`all`**|`all (test: (KeyType, ValueType) -> (Bool)) -> Bool`
 
 ### To Do ###
 * Compile as library as soon as XCode 6 stops crashing.

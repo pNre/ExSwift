@@ -116,9 +116,76 @@ extension Dictionary {
         }
         
         return result
-        
+
     }
 
+    /**
+    *  Creates a dictionary composed of keys generated from the results of running each element of self through groupingFunction. The corresponding value of each key is an array of the elements responsible for generating the key.
+    *  @param groupingFunction
+    *  @return Grouped dictionary
+    */
+    func groupBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Array<ValueType>> {
+        
+        var result = Dictionary<T, Array<ValueType>>();
+        
+        for (key, value) in self {
+            
+            let groupKey = group(key, value)
+            var array: Array<ValueType>? = nil
+            
+            //  This is the first object for groupKey
+            if !result.has(groupKey) {
+                array = Array<ValueType>()
+            } else {
+                array = result[groupKey]
+            }
+            
+            var finalArray = array!
+
+            finalArray.push(value)
+            
+            result[groupKey] = finalArray
+            
+        }
+        
+        return result
+        
+    }
+    
+    /**
+    *  Checks if test returns true for all the elements in self
+    *  @param test Function to call for each element
+    *  @return True if call returns true for all the elements in self
+    */
+    func all (test: (KeyType, ValueType) -> (Bool)) -> Bool {
+        
+        for (key, value) in self {
+            if !test(key, value) {
+                return false
+            }
+        }
+        
+        return true
+        
+    }
+    
+    /**
+    *  Checks if test returns true for any element of self
+    *  @param test Function to call for each element
+    *  @return True if call returns true for any element of self
+    */
+    func any (test: (KeyType, ValueType) -> (Bool)) -> Bool {
+        
+        for (key, value) in self {
+            if test(key, value) {
+                return true
+            }
+        }
+        
+        return false
+        
+    }
+    
     /**
     *  Removes a (key, value) pair from self and returns it as tuple
     *  @return (key, value)

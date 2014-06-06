@@ -28,7 +28,8 @@
     	- [`pop`](#pop)
     	- [`push`](#push)
     	- [`shift`](#shift)
-    	- [`unshift`](#unshift)   
+    	- [`unshift`](#unshift)
+    	- [`groupBy`](#groupby)   
     - [Class Methods](#class-methods)
     	- [`range`](#range)
     - [Operators](#operators)
@@ -249,6 +250,15 @@ var array = [1, 2, 3, 4]
 array.unshift(0)
 println(array)
 // → [0, 1, 2, 3, 4]
+```
+
+##### `groupBy` #####
+```
+let group = array.groupBy(groupingFunction: {
+    (value: Int) -> Bool in
+    return value > 3
+})
+// → [true: [5, 6], false: [1, 2, 3]]
 ```
 
 ### Class Methods ###

@@ -137,7 +137,7 @@ extension Array {
                 }
             }
         }
-
+        
         return -1
 
     }
@@ -245,28 +245,11 @@ extension Array {
     *  Returns the max value in the current array
     *  @return Max value
     */
-    func max <T: Comparable> () -> T {
+    func max <U: Comparable> () -> U {
 
-        //  Find a better way to do this
-
-        var max = self.first() as? T
-
-        for i in 1..count {
-
-            if let current = self.get(i) as? T {
-
-                if current > max {
-                    max = current
-                }
-
-            }
-
-        }
-
-        //  The max is not compatible with T
-        assert(max)
-
-        return max!
+        return maxElement(map {
+            return $0 as U
+        })
 
     }
 
@@ -274,28 +257,11 @@ extension Array {
     *  Returns the min value in the current array
     *  @return Min value
     */
-    func min <T: Comparable> () -> T {
-
-        //  Find a better way to do this
-
-        var min = self.first() as? T
-
-        for i in 1..count {
-
-            if let current = self.get(i) as? T {
-
-                if current < min {
-                    min = current
-                }
-
-            }
-
-        }
-
-        //  The max is not compatible with T
-        assert(min)
-
-        return min!
+    func min <U: Comparable> () -> U {
+        
+        return minElement(map {
+            return $0 as U
+        })
 
     }
 
@@ -394,6 +360,39 @@ extension Array {
         return result
     }
     
+    /**
+    *  Creates a dictionary composed of keys generated from the results of running each element of self through groupingFunction. The corresponding value of each key is an array of the elements responsible for generating the key.
+    *  @param groupingFunction
+    *  @return Grouped dictionary
+    */
+    func groupBy <U> (groupingFunction group: (T) -> (U)) -> Dictionary<U, Array<T>> {
+
+        var result = Dictionary<U, Array<T>>();
+        
+        for item in self {
+            
+            let groupKey = group(item)
+            var array: Array<T>? = nil
+            
+            //  This is the first object for groupKey
+            if !result.has(groupKey) {
+                array = Array<T>()
+            } else {
+                array = result[groupKey]
+            }
+            
+            var finalArray = array!
+            
+            finalArray.push(item)
+            
+            result[groupKey] = finalArray
+            
+        }
+        
+        return result
+        
+    }
+
     /**
     *  Removes the last element from self and returns it
     *  @return The removed element

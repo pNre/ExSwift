@@ -177,6 +177,16 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssert(arr.unique() as Array<Int> == [1, 2, 3])
     }
 
+    func testGroupBy() {
+        let group = array.groupBy(groupingFunction: {
+            (value: Int) -> Bool in
+            return value > 3
+        })
+
+        XCTAssert(Array(group.keys) == [false, true])
+        XCTAssert(Array(group[true]!) == [4, 5])
+        XCTAssert(Array(group[false]!) == [1, 2, 3])
+    }
     /*
     func testPerformanceExample() {
         // This is an example of a performance test case.

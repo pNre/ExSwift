@@ -61,4 +61,39 @@ class ExSwiftDictionaryTests: XCTestCase {
         XCTAssertNotNil(value)
     }
     
+    func testGroupBy() {
+        let group = [
+            "A": 2,
+            "B": 4,
+            "C": 5
+        ]
+        
+        let g = group.groupBy(groupingFunction: {
+            (key: String, value: Int) -> Bool in
+            return (value % 2 == 0)
+        })
+        
+        XCTAssert(Array(g.keys) == [false, true])
+        XCTAssert(Array(g[true]!) == [2, 4])
+        XCTAssert(Array(g[false]!) == [5])
+    }
+
+    func testAny() {
+        let any = dictionary.any {
+            (key: String, value: Int) -> Bool in
+            return value % 2 == 0
+        }
+
+        XCTAssertTrue(any)
+    }
+
+    func testAll() {
+        let all = dictionary.all {
+            (key: String, value: Int) -> Bool in
+            return value % 2 == 0
+        }
+        
+        XCTAssertFalse(all)
+    }
+    
 }
