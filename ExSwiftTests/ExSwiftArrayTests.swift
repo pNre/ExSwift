@@ -197,19 +197,6 @@ class ExtensionsArrayTests: XCTestCase {
     func testImplode () {
         XCTAssert(["A", "B", "C"].implode("A") == "AABAC")
     }
-    
-    func testPluck () {
-
-        let values = [
-            ["Name": "Bob", "Score": 6],
-            ["Name": "Tim", "Score": 8]
-        ]
-
-        let result = values.pluck("Score") as Int[]
-
-        println(result)
-        
-    }
 
     /*
     func testPerformanceExample() {
