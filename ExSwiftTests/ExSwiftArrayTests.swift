@@ -188,6 +188,15 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssert(Array(group[false]!) == [1, 2, 3])
     }
 
+    func testCountBy() {
+        let group = array.countBy(groupingFunction: {
+            (value: Int) -> Bool in
+            return value > 3
+        })
+
+        XCTAssert(group == [true: 2, false: 3])
+    }
+
     func testReduceRight () {
         let list = [[0, 1], [2, 3], [4, 5]];
         let flat = list.reduceRight(Array<Int>(), { return $0 + $1 });
@@ -197,13 +206,5 @@ class ExtensionsArrayTests: XCTestCase {
     func testImplode () {
         XCTAssert(["A", "B", "C"].implode("A") == "AABAC")
     }
-
-    /*
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-
-        }
-    }*/
 
 }
