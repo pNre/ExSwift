@@ -15,7 +15,7 @@ extension Range {
     *  @param call Function to call
     */
     func times (call: () -> ()) {
-        self.each { (current: T) -> () in
+        each { (current: T) -> () in
             call()
         }
     }
@@ -25,9 +25,9 @@ extension Range {
     *  @param call Function to call
     */
     func times (call: (T) -> ()) {
-        self.each (call)
+        each (call)
     }
-    
+
     /**
     *  Calls a function foreach element in the range
     *  @param call Function to call

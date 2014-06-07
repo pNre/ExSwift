@@ -187,6 +187,15 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssert(Array(group[true]!) == [4, 5])
         XCTAssert(Array(group[false]!) == [1, 2, 3])
     }
+    
+    func testCountBy() {
+        let group = array.countBy(groupingFunction: {
+            (value: Int) -> Bool in
+            return value > 3
+        })
+        
+        XCTAssert(group == [true: 2, false: 3])
+    }
 
     func testReduceRight () {
         let list = [[0, 1], [2, 3], [4, 5]];
@@ -197,20 +206,17 @@ class ExtensionsArrayTests: XCTestCase {
     func testImplode () {
         XCTAssert(["A", "B", "C"].implode("A") == "AABAC")
     }
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     
-    func testPluck () {
+=======
+=======
+>>>>>>> FETCH_HEAD
+=======
+>>>>>>> FETCH_HEAD
 
-        let values = [
-            ["Name": "Bob", "Score": 6],
-            ["Name": "Tim", "Score": 8]
-        ]
-
-        let result = values.pluck("Score") as Int[]
-
-        println(result)
-        
-    }
-
+>>>>>>> FETCH_HEAD
     /*
     func testPerformanceExample() {
         // This is an example of a performance test case.

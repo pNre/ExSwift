@@ -3,6 +3,7 @@
 
 - [Dictionary](#dictionary)
     - [Instance Methods](#instance-methods)
+    	- [`difference`](#difference)
     	- [`has`](#has)
     	- [`isEmpty`](#isempty)
     	- [`map`](#map)
@@ -12,11 +13,24 @@
     	- [`merge`](#merge)
     	- [`shift`](#shift) 
     	- [`groupBy`](#groupby) 
+    	- [`countBy`](#countby)
     	- [`all`](#all) 
     	- [`any`](#any) 
     	- [`reduce`](#reduce) 
     	
 ### Instance Methods ###
+
+#### `difference` ####
+```swift
+let dictionary1 = [ "A": 1, "B": 2, "C": 3 ]
+let dictionary2 = [ "A": 1 ]
+
+let diff1 = dictionary1.difference(dictionary2)
+// → [C: 3, B: 2]
+
+let diff2 = dictionary1 - dictionary2
+// → [C: 3, B: 2]
+```
 
 #### `has` ####
 ```swift
@@ -92,6 +106,23 @@ let g = group.groupBy(groupingFunction: {
 })
 
 // → [false: [5], true: [2, 4]]
+```
+
+#### `countBy`####
+
+```swift
+let group = [
+    "A": 2,
+    "B": 4,
+    "C": 5
+]
+
+let g = group.countBy(groupingFunction: {
+    (key: String, value: Int) -> Bool in
+    return (value % 2 == 0)
+})
+
+// → [false: 1, true: 2]
 ```
 
 #### `any` ####

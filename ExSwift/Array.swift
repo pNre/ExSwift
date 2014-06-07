@@ -358,26 +358,43 @@ extension Array {
     */
     func groupBy <U> (groupingFunction group: (T) -> (U)) -> Dictionary<U, Array<T>> {
 
-        var result = Dictionary<U, Array<T>>();
+        var result = Dictionary<U, T[]>();
         
         for item in self {
             
             let groupKey = group(item)
-            var array: Array<T>? = nil
+            var array: T[]? = nil
             
             //  This is the first object for groupKey
             if !result.has(groupKey) {
-                array = Array<T>()
+                result[groupKey] = [item]
             } else {
-                array = result[groupKey]
+                result[groupKey] = (result[groupKey]! as T[]) + [item]
             }
+
+        }
+        
+        return result
+        
+    }
+    
+    /**
+    *  Similar to groupBy, but instead of returning a list of values, returns the number of values for each group
+    *  @param groupingFunction
+    *  @return Grouped dictionary
+    */
+    func countBy <U> (groupingFunction group: (T) -> (U)) -> Dictionary<U, Int> {
+        
+        var result = Dictionary<U, Int>();
+        
+        for item in self {
+            let groupKey = group(item)
             
-            var finalArray = array!
-            
-            finalArray.push(item)
-            
-            result[groupKey] = finalArray
-            
+            if !result.has(groupKey) {
+                result[groupKey] = 1
+            } else {
+                result[groupKey] = result[groupKey]! + 1
+            }
         }
         
         return result
@@ -401,7 +418,7 @@ extension Array {
     /**
     *  self.reduce from right to left
     */
-    func reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U {
+    func reduceRight <U> (initial: U, combine: (U, Element) -> U) -> U {
         return self.reverse().reduce(initial, combine: combine)
     }
 

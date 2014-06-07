@@ -21,8 +21,10 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
 		- [Operators](#operators-1)
     - [Range](#range)
     	- [Instance Methods](#instance-methods-4)
+    	- [Operators](#operators-2)
     - [Dictionary](#dictionary)
     	- [Instance Methods](#instance-methods-5)
+    	- [Operators](#operators-3)
 
 ### Array ###
 Examples in [Examples/Array.md](Examples/Array.md)
@@ -57,6 +59,7 @@ Name | Signature
 **`shift`**|`shift() -> T`
 **`unshift`**|`unshift(newElement: T)`
 **`groupBy`**|`groupBy <U> (groupingFunction group: (T) -> (U)) -> Dictionary<U, Array<T>>`
+**`countBy`**|`countBy <U> (groupingFunction group: (T) -> (U)) -> Dictionary<U, Int>`
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 
@@ -69,9 +72,9 @@ Name | Signatures
 ##### Operators #####
 Name | Signature | Function
 ---- | --------- | --------
-`-`|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Difference
-`&`|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Intersection
-<code>&#124;</code>|`<T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Union
+`-`|`- <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Difference
+`&`|`& <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Intersection
+<code>&#124;</code>|<code>&#124; <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T></code>|Union
 `[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> Array<T>`|Returns the sub-array from index *x* to index *y*
 
 ### Int ###
@@ -151,6 +154,7 @@ Examples in [Examples/Dictionary.md](Examples/Dictionary.md)
 
 Name | Signatures
 ---- | ----------
+**`difference`**|`difference <V: Equatable> (dictionaries: Dictionary<KeyType, V>...) -> Dictionary<KeyType, V>?`
 **`has`**|`has (key: KeyType) -> Bool`
 **`isEmpty`**|`isEmpty () -> Bool`
 **`map`**|`map(mapFunction map: (KeyType, ValueType) -> (KeyType, ValueType)) -> Dictionary<KeyType, ValueType>`
@@ -160,9 +164,15 @@ Name | Signatures
 **`merge`**|`merge (dictionaries: Dictionary<KeyType, ValueType>...) -> Dictionary<KeyType, ValueType>`
 **`shift`**|`shift () -> (KeyType, ValueType)`
 **`groupBy`**|`groupBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Array<ValueType>>`
+**`countBy`**|`countBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Int>`
 **`any`**|`any (test: (KeyType, ValueType) -> (Bool)) -> Bool`
 **`all`**|`all (test: (KeyType, ValueType) -> (Bool)) -> Bool`
 **`reduce`**|`reduce <U> (initial: U, combine: (U, Element) -> U) -> U`
+
+##### Operators #####
+Name | Signature | Function
+---- | --------- | --------
+`-`|`- <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V>`|Difference
 
 ### To Do ###
 * Compile as library as soon as XCode 6 stops crashing.

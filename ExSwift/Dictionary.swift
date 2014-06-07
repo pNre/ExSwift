@@ -10,7 +10,39 @@ import Foundation
 import Swift
 
 extension Dictionary {
-
+    
+    /**
+    *  Computes the difference between self and the input dictionaries
+    *  @param dictionaries Dictionaries to subtract
+    *  @return Difference between self and the input dictionaries
+    */
+    func difference <V: Equatable> (dictionaries: Dictionary<KeyType, V>...) -> Dictionary<KeyType, V>? {
+        
+        //  Checks if self's elements are compatbile with V
+        if !self.all( { return $1 is V } ) {
+            return nil
+        }
+        
+        var result = Dictionary<KeyType, V>()
+        
+        //  Cast everything to V
+        for (key, value) in self {
+            result[key] = value as? V
+        }
+        
+        //  Difference
+        for dictionary in dictionaries {
+            for (key, value) in dictionary {
+                if result.has(key) && result[key] == value {
+                    result.removeValueForKey(key)
+                }
+            }
+        }
+        
+        return result
+        
+    }
+    
     /**
      *  Checks if the specified key exists in the dictionary
      *  @param key Key to check
@@ -127,25 +159,45 @@ extension Dictionary {
     */
     func groupBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Array<ValueType>> {
         
-        var result = Dictionary<T, Array<ValueType>>();
+        var result = Dictionary<T, ValueType[]>();
         
         for (key, value) in self {
             
             let groupKey = group(key, value)
-            var array: Array<ValueType>? = nil
+            var array: ValueType[]? = nil
             
             //  This is the first object for groupKey
             if !result.has(groupKey) {
-                array = Array<ValueType>()
+                result[groupKey] = [value]
             } else {
-                array = result[groupKey]
+                result[groupKey] = result[groupKey]! + [value]
             }
             
-            var finalArray = array!
-
-            finalArray.push(value)
+        }
+        
+        return result
+        
+    }
+    
+    /**
+    *  Similar to groupBy, but instead of returning a list of values, returns the number of values for each group
+    *  @param groupingFunction
+    *  @return Grouped dictionary
+    */
+    func countBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Int> {
+        
+        var result = Dictionary<T, Int>();
+        
+        for (key, value) in self {
             
-            result[groupKey] = finalArray
+            let groupKey = group(key, value)
+
+            //  This is the first object for groupKey
+            if !result.has(groupKey) {
+                result[groupKey] = 1
+            } else {
+                result[groupKey] = result[groupKey]! + 1
+            }
             
         }
         
@@ -206,3 +258,12 @@ extension Dictionary {
     }
     
 }
+
+/**
+*  Shorthand for the difference
+*/
+
+@infix func - <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
+    return first.difference(second)!
+}
+

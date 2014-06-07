@@ -30,6 +30,7 @@
     	- [`shift`](#shift)
     	- [`unshift`](#unshift)
     	- [`groupBy`](#groupby)   
+    	- [`countBy`](#countby)   
     	- [`reduceRight`](#reduceright)   
     	- [`implode`](#implode)
     - [Class Methods](#class-methods)
@@ -256,11 +257,22 @@ println(array)
 
 ##### `groupBy` #####
 ```
+let array = array = [1, 2, 3, 4, 5]
 let group = array.groupBy(groupingFunction: {
     (value: Int) -> Bool in
     return value > 3
 })
 // → [true: [5, 6], false: [1, 2, 3]]
+```
+
+##### `countBy` #####
+```
+let array = array = [1, 2, 3, 4, 5]
+let group = array.countBy(groupingFunction: {
+    (value: Int) -> Bool in
+    return value > 3
+})
+// → [true: 2, false: 3]
 ```
 
 ##### `reduceRight` #####

@@ -77,7 +77,22 @@ class ExSwiftDictionaryTests: XCTestCase {
         XCTAssert(Array(g[true]!) == [2, 4])
         XCTAssert(Array(g[false]!) == [5])
     }
-
+    
+    func testCountBy() {
+        let group = [
+            "A": 2,
+            "B": 4,
+            "C": 5
+        ]
+        
+        let g = group.countBy(groupingFunction: {
+            (key: String, value: Int) -> Bool in
+            return (value % 2 == 0)
+        })
+        
+        XCTAssert(g == [false: 1, true: 2])
+    }
+    
     func testAny() {
         let any = dictionary.any {
             (key: String, value: Int) -> Bool in
@@ -97,7 +112,6 @@ class ExSwiftDictionaryTests: XCTestCase {
     }
     
     func testReduce () {
-        
         let reduced = dictionary.reduce(Dictionary<Int, String>(), {
             (var initial: Dictionary<Int, String>, couple: (String, Int)) in
             initial.updateValue(couple.0, forKey: couple.1)
@@ -105,7 +119,13 @@ class ExSwiftDictionaryTests: XCTestCase {
         })
         
         XCTAssert(reduced == [2: "B", 3: "C", 1: "A"])
+    }
+    
+    func testDifference () {
+        let dictionary1 = [ "A": 1, "B": 2, "C": 3 ]
+        let dictionary2 = [ "A": 1 ]
         
+        XCTAssert(dictionary1 - dictionary2 == ["C": 3, "B": 2])
     }
 
 }
