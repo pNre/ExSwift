@@ -16,7 +16,7 @@ class ExtensionsArrayTests: XCTestCase {
         super.setUp()
         array = [1, 2, 3, 4, 5]
     }
-    
+
     func testReject () {
         var odd = array.reject({
             return $0 % 2 == 0
@@ -27,90 +27,90 @@ class ExtensionsArrayTests: XCTestCase {
 
     func testEach() {
         var result = Array<Int>()
-        
+
         array.each({
             result.append($0)
         })
-        
+
         XCTAssert(result == array)
-        
+
         result.removeAll(keepCapacity: true)
-        
+
         array.each({
             (index: Int, item: Int) in
             result.append(index)
         })
-        
+
         XCTAssert(result == array.map( { return $0 - 1 } ))
     }
-    
+
     func testRange() {
         XCTAssert(Array<Int>.range(0..2) == [0, 1])
         XCTAssert(Array<Int>.range(0...2) == [0, 1, 2])
     }
-    
+
     func testContains() {
         XCTAssertFalse(array.contains("A"))
         XCTAssertFalse(array.contains(6))
         XCTAssertTrue(array.contains(5))
     }
-    
+
     func testFirst() {
         XCTAssertEqual(1, array.first()!)
     }
-    
+
     func testLast() {
         XCTAssertEqual(5, array.last()!)
     }
-    
+
     func testDifference() {
         var diff1 = array.difference([3, 4])
         var diff2 = array - [3, 4]
         var diff3 = array.difference([3], [5])
-        
+
         XCTAssert(diff1 == [1, 2, 5])
         XCTAssert(diff2 == [1, 2, 5])
         XCTAssert(diff3 == [1, 2, 4])
     }
-    
+
     func testIndexOf() {
         XCTAssertEqual(0, array.indexOf(1))
         XCTAssertEqual(-1, array.indexOf(6))
         XCTAssertEqual(3, array.indexOf(4))
     }
-    
+
     func testIntersection() {
         XCTAssert(array.intersection([]) == [])
         XCTAssert(array.intersection([1]) == [1])
         XCTAssert(array.intersection([1, 2], [1, 2], [1, 3]) == [1])
     }
-    
+
     func testUnion() {
         XCTAssert(array.union([1]) == array)
         XCTAssert(array.union([]) == array)
         XCTAssert(array.union([6]) == [1, 2, 3, 4, 5, 6])
     }
-    
+
     func testZip() {
         var zip1 = [1, 2].zip(["A", "B"])
-        
+
         var a = zip1[0][0] as Int
         var b = zip1[0][1] as String
-        
+
         XCTAssertEqual(1, a)
         XCTAssertEqual("A", b)
-        
+
         a = zip1[1][0] as Int
         b = zip1[1][1] as String
-        
+
         XCTAssertEqual(2, a)
         XCTAssertEqual("B", b)
     }
-    
+
     func testSample() {
         var singleSample = array.sample()
         var longerSample = array.sample(size: 2)
-        
+
         XCTAssertEqual(1, singleSample.count)
         XCTAssertEqual(2, longerSample.count)
     }
@@ -139,7 +139,7 @@ class ExtensionsArrayTests: XCTestCase {
     func testMin() {
         XCTAssertEqual(1, array.min() as Int)
     }
-    
+
     func testTake() {
         XCTAssert(array.take(3) == [1, 2, 3])
         XCTAssert(array.take(0) == [])
@@ -168,7 +168,7 @@ class ExtensionsArrayTests: XCTestCase {
     func testRemove() {
         array.append(array.last()!)
         array.remove(array.last()!)
-        
+
         XCTAssert(array == [1, 2, 3, 4])
     }
 
@@ -187,15 +187,6 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssert(Array(group[true]!) == [4, 5])
         XCTAssert(Array(group[false]!) == [1, 2, 3])
     }
-    
-    func testCountBy() {
-        let group = array.countBy(groupingFunction: {
-            (value: Int) -> Bool in
-            return value > 3
-        })
-        
-        XCTAssert(group == [true: 2, false: 3])
-    }
 
     func testReduceRight () {
         let list = [[0, 1], [2, 3], [4, 5]];
@@ -206,22 +197,12 @@ class ExtensionsArrayTests: XCTestCase {
     func testImplode () {
         XCTAssert(["A", "B", "C"].implode("A") == "AABAC")
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
-=======
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
 
->>>>>>> FETCH_HEAD
     /*
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {
-            
+
         }
     }*/
 
