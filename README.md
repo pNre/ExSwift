@@ -38,6 +38,7 @@ Name | Signature
 **`get`**|`get (index: Int) -> T?`
 **`remove`**|`remove <U: Equatable> (element: U)`
 **`take`**|`take (n: Int) -> Array<T>`
+**`tail`**|`tail (n: Int) -> Array<T>`
 **`contains`**|`contains <T: Equatable> (item: T) -> Bool`
 **`difference`**|`difference <T: Equatable> (values: Array<T>...) -> Array<T>`
 **`intersection`**|`func intersection <U: Equatable> (values: Array<U>...) -> Array<T>`
@@ -90,6 +91,8 @@ Name | Signatures
 **`isOdd`**|`idOdd () -> Bool`
 **`upTo`**|`upTo (limit: Int, call: (Int) -> ())`
 **`downTo`**|`downTo (limit: Int, call: (Int) -> ())`
+**`clamp`**|`clamp (range: Range<Int>) -> Int`
+**`isIn`**|`isIn (range: Range<Int>, strict: Bool = false) -> Bool`
 
 ##### Class Methods #####
 

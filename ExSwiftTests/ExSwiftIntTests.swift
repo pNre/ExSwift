@@ -87,13 +87,11 @@ class ExSwiftIntTests: XCTestCase {
     }
     
     func testUpTo() {
-        
         var result = Array<Int>()
         
         5.upTo(10, { result.append($0) })
      
         XCTAssert(result == Array(5...10))
-        
     }
     
     func testDownTo() {
@@ -104,5 +102,22 @@ class ExSwiftIntTests: XCTestCase {
         
         XCTAssert(result == [3, 2, 1, 0])
         
+    }
+    
+    func testClamp () {
+        XCTAssertEqual(5.clamp(0...4), 4)
+        XCTAssertEqual(3.clamp(0...4), 3)
+        XCTAssertEqual(1.clamp(2...4), 2)
+    }
+    
+    func testIn () {
+        XCTAssertTrue(2.isIn(0..3))
+        XCTAssertFalse(2.isIn(0..3, strict: true))
+        
+        XCTAssertTrue(0.isIn(0..3))
+        XCTAssertFalse(0.isIn(0..3, strict: true))
+        
+        XCTAssertTrue(2.isIn(0...2))
+        XCTAssertFalse(2.isIn(0...2, strict: true))
     }
 }

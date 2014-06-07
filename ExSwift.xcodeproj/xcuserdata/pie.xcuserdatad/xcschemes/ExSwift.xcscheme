@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1EE9FE55193E2112003B6F4F"
-               BuildableName = "ExSwift.app"
+               BlueprintIdentifier = "1E11AF831943222D006BCE48"
+               BuildableName = "ExSwift.framework"
                BlueprintName = "ExSwift"
                ReferencedContainer = "container:ExSwift.xcodeproj">
             </BuildableReference>
@@ -32,22 +32,13 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1EE9FE62193E2112003B6F4F"
+               BlueprintIdentifier = "1E11AF8E1943222D006BCE48"
                BuildableName = "ExSwiftTests.xctest"
                BlueprintName = "ExSwiftTests"
                ReferencedContainer = "container:ExSwift.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1EE9FE55193E2112003B6F4F"
-            BuildableName = "ExSwift.app"
-            BlueprintName = "ExSwift"
-            ReferencedContainer = "container:ExSwift.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -58,15 +49,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1EE9FE55193E2112003B6F4F"
-            BuildableName = "ExSwift.app"
-            BlueprintName = "ExSwift"
-            ReferencedContainer = "container:ExSwift.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -76,15 +58,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1EE9FE55193E2112003B6F4F"
-            BuildableName = "ExSwift.app"
-            BlueprintName = "ExSwift"
-            ReferencedContainer = "container:ExSwift.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

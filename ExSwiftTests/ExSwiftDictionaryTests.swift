@@ -110,7 +110,7 @@ class ExSwiftDictionaryTests: XCTestCase {
         
         XCTAssertFalse(all)
     }
-    
+
     func testReduce () {
         let reduced = dictionary.reduce(Dictionary<Int, String>(), {
             (var initial: Dictionary<Int, String>, couple: (String, Int)) in

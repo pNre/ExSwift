@@ -328,11 +328,19 @@ extension Array {
     }
     
     /**
-    *  Returns first n elements from self
+    *  Returns the first n elements from self
     *  @return First n elements
     */
     func take (n: Int) -> Array<T> {
         return self[0..n]
+    }
+
+    /**
+    *  Returns the last n elements from self
+    *  @return Last n elements
+    */
+    func tail (n: Int) -> Array<T> {
+        return self[(count - n)..count]
     }
 
     /**
@@ -477,15 +485,18 @@ extension Array {
     static func range <U: ForwardIndex> (range: Range<U>) -> Array<U> {
         return Array<U>(range)
     }
-    
+
     /**
     *  Returns a subarray in the given range
     *  @return Subarray or nil if the index is out of bounds
     */
-    subscript (range: Range<Int>) -> Array<T> {
+    subscript (range: Range<Int>) -> T[] {
         var subarray = Array<T>()
-            
-        for var i = range.startIndex; i < range.endIndex; i++ {
+
+        let min = range.startIndex.clamp(0...count)
+        let max = range.endIndex.clamp(0...count)
+
+        for var i = min; i < max; i++ {
             subarray += [self[i]]
         }
         

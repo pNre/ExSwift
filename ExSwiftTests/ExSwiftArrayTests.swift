@@ -145,6 +145,11 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssert(array.take(0) == [])
     }
 
+    func testTail () {
+        XCTAssert(array.tail(3) == [3, 4, 5])
+        XCTAssert(array.tail(0) == [])
+    }
+    
     func testPop() {
         XCTAssertEqual(5, array.pop())
         XCTAssert(array == [1, 2, 3, 4])

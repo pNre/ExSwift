@@ -6,10 +6,12 @@
     - [Instance Methods](#instance-methods)
     	- [`times`](#times)
     	- [`after`](#after)
-    	- [`isEven`](#isEven)
-    	- [`isOdd`](#isOdd)
-    	- [`upTo`](#upTo)
-    	- [`downTo`](#downTo)
+    	- [`isEven`](#iseven)
+    	- [`isOdd`](#isodd)
+    	- [`upTo`](#upto)
+    	- [`downTo`](#downto)
+    	- [`clamp`](#clamp)
+    	- [`isIn`](#isin)
     - [Class Methods](#class-methods)
     	- [`random`](#random)
 
@@ -57,6 +59,24 @@ f()
 ```
 5.downTo(0, { println($0) })
 // → 5 4 3 2 1 0
+```
+
+##### `clamp` #####
+```
+5.clamp(0...4)
+// → 4
+
+1.clamp(2...4)
+// → 2
+```
+
+##### `isIn` #####
+```
+2.isIn(0..3)
+// → true
+
+2.isIn(0..3, strict: true)
+// → false
 ```
 
 ### Class Methods ###

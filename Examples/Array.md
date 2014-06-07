@@ -9,6 +9,7 @@
     	- [`get`](#get)
     	- [`remove`](#remove)
     	- [`take`](#take)
+    	- [`tail`](#tail)
     	- [`contains`](#contains)
     	- [`difference`](#difference)
     	- [`intersection`](#intersection)
@@ -80,6 +81,12 @@ println(array)
 ```
 [1, 2, 3, 4].take(2)
 // → [1, 2]
+```
+
+##### `tail` #####
+```
+[1, 2, 3, 4, 5].tail(3)
+// → [3, 4, 5]
 ```
 
 ##### `contains` #####
