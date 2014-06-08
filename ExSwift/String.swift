@@ -22,16 +22,7 @@ extension String {
     *  @return Substring
     */
     subscript (range: Range<Int>) -> String? {
-        if let chars = Array(unicodeScalars).get(range) {
-        
-            return chars.reduce(String(), combine: {
-                (substring: String, char: UnicodeScalar) -> String in
-                return substring + String(char)
-            })
-
-        }
-        
-        return nil
+        return Array(self).get(range)?.reduce(String(), +)
     }
 
     /**
@@ -39,13 +30,11 @@ extension String {
     *  @return Unicode char as String or nil if the index is out of bounds
     */
     subscript (index: Int) -> String? {
-    
-        if let char = Array(unicodeScalars).get(index) {
+        if let char = Array(self).get(index) {
             return String(char)
         }
         
         return nil
-
     }
 
     /**

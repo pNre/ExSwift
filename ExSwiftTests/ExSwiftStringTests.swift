@@ -19,18 +19,18 @@ class ExSwiftStringTests: XCTestCase {
     }
 
     func testSubscript() {
-        var string = "∆Test😗"
-        
+        let string = "∆Test😗"
+
         XCTAssertEqual("∆", string[0]!)
         XCTAssertEqual("T", string[1]!)
         XCTAssertEqual("😗", string[string.length - 1]!)
         XCTAssertEqual("Test😗", string[1..6]!)
     }
-    
+
     func testRepeat () {
         
         XCTAssertEqual("AAA", "A" * 3)
-        
+
     }
 
     func testExplode () {
@@ -39,5 +39,5 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssert(string.explode(" ") == ["A", "B", "C"])
         
     }
-    
+
 }
