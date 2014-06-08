@@ -22,12 +22,12 @@ class ExSwiftDictionaryTests: XCTestCase {
     }
 
     func testMapValues() {
-        let mapped = dictionary.mapValues(mapFunction: { return $1 + 1 })
+        let mapped = dictionary.mapValues(mapFunction: { (key: String, value: Int) -> Int in return value + 1 })
         XCTAssert(mapped == ["A": 2, "B": 3, "C": 4])
     }
     
     func testMap() {
-        let mapped = dictionary.map(mapFunction: { return ($0 + "A", $1 + 1) })
+        let mapped = dictionary.map(mapFunction: { (key: String, value: Int) -> (String, Int) in return (key + "A", value + 1) })
         XCTAssert(mapped == ["AA": 2, "BA": 3, "CA": 4])
     }
     
@@ -124,8 +124,28 @@ class ExSwiftDictionaryTests: XCTestCase {
     func testDifference () {
         let dictionary1 = [ "A": 1, "B": 2, "C": 3 ]
         let dictionary2 = [ "A": 1 ]
+        let dictionary3 = [ "B": 2, "C": 3 ]
         
+        XCTAssert(dictionary1.difference(dictionary2, dictionary3) == [:])
         XCTAssert(dictionary1 - dictionary2 == ["C": 3, "B": 2])
     }
+    
+    func testUnion () {
+        let dictionary1 = [ "A": 1, "B": 2, "C": 3 ]
+        let dictionary2 = [ "A": 1 ]
+        let dictionary3 = [ "D": 4 ]
+        
+        XCTAssert(dictionary1.union(dictionary2, dictionary3) == [ "A": 1, "B": 2, "C": 3, "D": 4 ])
+        XCTAssert(dictionary1 | dictionary2 == dictionary1)
+    }
+    
+    func testIntersection () {
+        let dictionary1 = [ "A": 1, "B": 2, "C": 3 ]
+        let dictionary2 = [ "A": 1 ]
+        let dictionary3 = [ "D": 4 ]
 
+        XCTAssert(dictionary1.intersection(dictionary2) == ["A": 1])
+        XCTAssert(dictionary1.intersection(dictionary3) == [:])
+        XCTAssert(dictionary1 & dictionary1 == dictionary1)
+    }
 }

@@ -173,11 +173,13 @@ Examples in [Examples/Dictionary.md](Examples/Dictionary.md)
 
 Name | Signatures
 ---- | ----------
-**`difference`**|`difference <V: Equatable> (dictionaries: Dictionary<KeyType, V>...) -> Dictionary<KeyType, V>?`
+**`difference`**|`difference <V: Equatable> (dictionaries: Dictionary<KeyType, V>...) -> Dictionary<KeyType, V>`
+**`union`**|`union (dictionaries: Dictionary<KeyType, ValueType>...) -> Dictionary<KeyType, ValueType>`
+**`intersection`**|`intersection <K, V where K: Equatable, V: Equatable> (dictionaries: Dictionary<K, V>...) -> Dictionary<K, V>`
 **`has`**|`has (key: KeyType) -> Bool`
 **`isEmpty`**|`isEmpty () -> Bool`
-**`map`**|`map(mapFunction map: (KeyType, ValueType) -> (KeyType, ValueType)) -> Dictionary<KeyType, ValueType>`
-**`mapValues`**|`mapValues(mapFunction map: (KeyType, ValueType) -> (ValueType)) -> Dictionary<KeyType, ValueType>`
+**`map`**|`map <K, V> (mapFunction map: (KeyType, ValueType) -> (K, V)) -> Dictionary<K, V>`
+**`mapValues`**|`mapValues <V> (mapFunction map: (KeyType, ValueType) -> (V)) -> Dictionary<KeyType, V>`
 **`each`**|`each(eachFunction each: (KeyType, ValueType) -> ())`
 **`filter`**|`filter(testFunction test: (KeyType, ValueType) -> Bool) -> Dictionary<KeyType, ValueType>`
 **`merge`**|`merge (dictionaries: Dictionary<KeyType, ValueType>...) -> Dictionary<KeyType, ValueType>`
@@ -192,6 +194,7 @@ Name | Signatures
 Name | Signature | Function
 ---- | --------- | --------
 `-`|`- <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V>`|Difference
+<code>&#124;</code>|<code>&#124; <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V></code>|Union
 
 ## ExSwift ##
 Examples in [Examples/ExSwift.md](Examples/ExSwift.md)

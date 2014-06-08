@@ -16,18 +16,15 @@ extension Dictionary {
     *  @param dictionaries Dictionaries to subtract
     *  @return Difference between self and the input dictionaries
     */
-    func difference <V: Equatable> (dictionaries: Dictionary<KeyType, V>...) -> Dictionary<KeyType, V>? {
-        
-        //  Checks if self's elements are compatbile with V
-        if !self.all( { return $1 is V } ) {
-            return nil
-        }
-        
+    func difference <V: Equatable> (dictionaries: Dictionary<KeyType, V>...) -> Dictionary<KeyType, V> {
+
+        //  Cast everything to V
         var result = Dictionary<KeyType, V>()
         
-        //  Cast everything to V
-        for (key, value) in self {
-            result[key] = value as? V
+        each {
+            if let item = $1 as? V {
+                result[$0] = item
+            }
         }
         
         //  Difference
@@ -44,14 +41,57 @@ extension Dictionary {
     }
     
     /**
+    *  Computes the union between self and the input dictionaries
+    *  @param dictionaries Dictionaries to join
+    *  @return Union between self and the input dictionaries
+    */
+    func union (dictionaries: Dictionary<KeyType, ValueType>...) -> Dictionary<KeyType, ValueType> {
+
+        var result = self
+        
+        //  Union
+        dictionaries.each { (dictionary) -> Void in
+            dictionary.each { (key, value) -> Void in
+                result.updateValue(value, forKey: key)
+                return
+            }
+        }
+
+        return result
+        
+    }
+    
+    /**
+    *  Computes the intersection between self and the input dictionaries
+    *  @param values Dictionaries to intersect
+    *  @return Dictionary of (key, value) couples present in all the dictionaries + self
+    */
+    func intersection <K, V where K: Equatable, V: Equatable> (dictionaries: Dictionary<K, V>...) -> Dictionary<K, V> {
+        
+        //  Converts self from <KeyType, ValueType> to <K, V>
+        let filtered = self.filter({
+            (item: KeyType, value: ValueType) -> Bool in
+            return (item is K) && (value is V)
+        }).map({
+            (item: KeyType, value: ValueType) -> (K, V) in
+            return (item as K, value as V)
+        })
+
+        //  Intersection self & dictionaries...
+        return filtered.filter({
+            (item: K, value: V) -> Bool in
+            dictionaries.all { $0.has(item) && $0[item] == value }
+        })
+
+    }
+
+    /**
      *  Checks if the specified key exists in the dictionary
      *  @param key Key to check
      *  @return true if the key exists
      */
     func has (key: KeyType) -> Bool {
-
         return indexForKey(key) != nil
-
     }
     
     /**
@@ -60,9 +100,9 @@ extension Dictionary {
      *  @param mapFunction
      *  @return Mapped dictionary
      */
-    func mapValues (mapFunction map: (KeyType, ValueType) -> (ValueType)) -> Dictionary<KeyType, ValueType> {
+    func mapValues <V> (mapFunction map: (KeyType, ValueType) -> (V)) -> Dictionary<KeyType, V> {
 
-        var mapped = Dictionary<KeyType, ValueType>()
+        var mapped = Dictionary<KeyType, V>()
 
         self.each({
             mapped[$0] = map($0, $1)
@@ -78,9 +118,9 @@ extension Dictionary {
      *  @param mapFunction
      *  @return Mapped dictionary
      */
-    func map (mapFunction map: (KeyType, ValueType) -> (KeyType, ValueType)) -> Dictionary<KeyType, ValueType> {
+    func map <K, V> (mapFunction map: (KeyType, ValueType) -> (K, V)) -> Dictionary<K, V> {
 
-        var mapped = Dictionary<KeyType, ValueType>()
+        var mapped = Dictionary<K, V>()
 
         self.each({
             let (_key, _value) = map($0, $1)
@@ -264,6 +304,19 @@ extension Dictionary {
 */
 
 @infix func - <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
-    return first.difference(second)!
+    return first.difference(second)
 }
 
+/**
+*  Shorthand for the intersection
+*/
+@infix func & <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
+    return first.intersection(second)
+}
+
+/**
+*  Shorthand for the union
+*/
+@infix func | <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
+    return first.union(second)
+}

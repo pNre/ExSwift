@@ -33,7 +33,7 @@ extension String {
         if let char = Array(self).get(index) {
             return String(char)
         }
-        
+
         return nil
     }
 
@@ -48,7 +48,7 @@ extension String {
             return element == separator
         })
     }
-    
+
     /**
     *  Random string
     *  @param length String length, 0 -> random length
@@ -64,12 +64,12 @@ extension String {
         var result = String()
         let max = charset.length - 1
         
-        for i in 0..len {
+        len.times {
             result += charset[Int.random(min: 0, max: max)]!
         }
-        
+
         return result
-        
+
     }
     
 }

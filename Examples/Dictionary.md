@@ -4,6 +4,8 @@
 - [Dictionary](#dictionary)
     - [Instance Methods](#instance-methods)
     	- [`difference`](#difference)
+    	- [`union`](#union)
+    	- [`intersection`](#intersection)
     	- [`has`](#has)
     	- [`isEmpty`](#isempty)
     	- [`map`](#map)
@@ -30,6 +32,32 @@ let diff1 = dictionary1.difference(dictionary2)
 
 let diff2 = dictionary1 - dictionary2
 // → [C: 3, B: 2]
+```
+
+#### `union` ####
+```swift
+let dictionary1 = [ "A": 1, "B": 2, "C": 3 ]
+let dictionary2 = [ "A": 1 ]
+let dictionary3 = [ "D": 4 ]
+        
+dictionary1.union(dictionary2, dictionary3)
+// → [ "A": 1, "B": 2, "C": 3, "D": 4 ]
+
+dictionary1 | dictionary2
+// → [ "A": 1, "B": 2, "C": 3 ]
+```
+
+#### `intersection` ####
+```swift
+let dictionary1 = [ "A": 1, "B": 2, "C": 3 ]
+let dictionary2 = [ "A": 1 ]
+let dictionary3 = [ "D": 4 ]
+        
+dictionary1.intersection(dictionary2)
+// → [ "A": 1 ]
+
+dictionary1 & dictionary3
+// → [:]
 ```
 
 #### `has` ####

@@ -37,6 +37,19 @@ extension Range {
             call(i)
         }
     }
+    
+    /**
+    *  Calls a function foreach element in the range
+    *  @param call Function to call
+    */
+    static func random (from: Int, to: Int) -> Range<Int> {
+        
+        let lowerBound = Int.random(min: from, max: to)
+        let upperBound = Int.random(min: lowerBound, max: to)
+        
+        return lowerBound...upperBound
+
+    }
 
 }
 

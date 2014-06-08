@@ -39,5 +39,12 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssert(string.explode(" ") == ["A", "B", "C"])
         
     }
+    
+    func testRandom () {
+
+        XCTAssertLessThanOrEqual(String.random().length, 16)
+        XCTAssertEqual(String.random(length: 12).length, 12)
+        
+    }
 
 }
