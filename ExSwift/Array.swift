@@ -54,7 +54,7 @@ extension Array {
     */
     func intersection <U: Equatable> (values: Array<U>...) -> Array<T> {
 
-        var result: Array<T> = self as Array<T>
+        var result = self
         var intersection = Array<T>()
 
         for (i, value) in enumerate(values) {
@@ -68,7 +68,7 @@ extension Array {
 
             //  find common elements and save them in first set
             //  to intersect in the next loop
-            for item in value {
+            value.each { (item: U) -> Void in
                 if result.contains(item) {
                     intersection.append(item as T)
                 }
@@ -358,7 +358,7 @@ extension Array {
 
         return result
     }
-    
+
     /**
     *  Creates a dictionary composed of keys generated from the results of running each element of self through groupingFunction. The corresponding value of each key is an array of the elements responsible for generating the key.
     *  @param groupingFunction
@@ -404,7 +404,7 @@ extension Array {
                 result[groupKey] = result[groupKey]! + 1
             }
         }
-        
+    
         return result
         
     }

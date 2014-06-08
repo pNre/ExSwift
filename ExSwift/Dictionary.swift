@@ -293,7 +293,7 @@ extension Dictionary {
     mutating func shift () -> (KeyType, ValueType) {
         let key: KeyType! = Array(keys).first()
         let value: ValueType! = removeValueForKey(key)
-        
+
         return (key, value)
     }
     
