@@ -4,8 +4,8 @@
 
 - [String](#string)
 	- [Properties](#properties)
-    - [Instance Methods](#instance-methods)
     	- [`length`](#length)
+    - [Instance Methods](#instance-methods)
     	- [`explode`](#explode)
     - [Class Methods](#class-methods)
     	- [`random`](#random)
