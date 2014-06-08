@@ -41,23 +41,7 @@ extension Int {
             call(i)
         }
     }
-    
-    /**
-    *  Creates a function that executes call only after being called n times
-    *  @param call Function to call after self times
-    *  @return Newly constructed function
-    */
-    func after <T> (call: () -> T) -> (() -> T?) {
-        var times = self
-        return {
-            if times-- <= 0 {
-                return call()
-            }
-            
-            return nil
-        }
-    }
-    
+
     /**
     *  Checks if a number is even
     *  @return True if self is even

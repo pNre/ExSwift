@@ -27,6 +27,9 @@
 		1E11AFBB1943225B006BCE48 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFB01943225B006BCE48 /* Range.swift */; };
 		1E11AFBC1943225B006BCE48 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFB11943225B006BCE48 /* String.swift */; };
 		1E11AFBD1943225B006BCE48 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFB11943225B006BCE48 /* String.swift */; };
+		1EA5F68A194387CA00E8A40F /* ExSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5F689194387CA00E8A40F /* ExSwiftTests.swift */; };
+		1ED536841943863100BDA94E /* ExSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED536831943863100BDA94E /* ExSwift.swift */; };
+		1ED536851943863100BDA94E /* ExSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED536831943863100BDA94E /* ExSwift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,8 @@
 		1E11AFAF1943225B006BCE48 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		1E11AFB01943225B006BCE48 /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
 		1E11AFB11943225B006BCE48 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		1EA5F689194387CA00E8A40F /* ExSwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwiftTests.swift; sourceTree = "<group>"; };
+		1ED536831943863100BDA94E /* ExSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwift.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +104,7 @@
 		1E11AF861943222D006BCE48 /* ExSwift */ = {
 			isa = PBXGroup;
 			children = (
+				1ED536831943863100BDA94E /* ExSwift.swift */,
 				1E11AFAC1943225B006BCE48 /* Array.swift */,
 				1E11AFAD1943225B006BCE48 /* Dictionary.swift */,
 				1E11AFAE1943225B006BCE48 /* Float.swift */,
@@ -128,6 +134,7 @@
 				1E11AFA319432236006BCE48 /* ExSwiftIntTests.swift */,
 				1E11AFA419432236006BCE48 /* ExSwiftRangeTests.swift */,
 				1E11AFA519432236006BCE48 /* ExSwiftStringTests.swift */,
+				1EA5F689194387CA00E8A40F /* ExSwiftTests.swift */,
 				1E11AF941943222D006BCE48 /* Supporting Files */,
 			);
 			path = ExSwiftTests;
@@ -251,6 +258,7 @@
 			files = (
 				1E11AFBC1943225B006BCE48 /* String.swift in Sources */,
 				1E11AFB21943225B006BCE48 /* Array.swift in Sources */,
+				1ED536841943863100BDA94E /* ExSwift.swift in Sources */,
 				1E11AFB41943225B006BCE48 /* Dictionary.swift in Sources */,
 				1E11AFB61943225B006BCE48 /* Float.swift in Sources */,
 				1E11AFB81943225B006BCE48 /* Int.swift in Sources */,
@@ -270,9 +278,11 @@
 				1E11AFA819432236006BCE48 /* ExSwiftFloatTests.swift in Sources */,
 				1E11AFBD1943225B006BCE48 /* String.swift in Sources */,
 				1E11AFA719432236006BCE48 /* ExSwiftDictionaryTests.swift in Sources */,
+				1ED536851943863100BDA94E /* ExSwift.swift in Sources */,
 				1E11AFAB19432236006BCE48 /* ExSwiftStringTests.swift in Sources */,
 				1E11AFB91943225B006BCE48 /* Int.swift in Sources */,
 				1E11AFA919432236006BCE48 /* ExSwiftIntTests.swift in Sources */,
+				1EA5F68A194387CA00E8A40F /* ExSwiftTests.swift in Sources */,
 				1E11AFB71943225B006BCE48 /* Float.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,6 +469,7 @@
 				1E11AF9C1943222D006BCE48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1E11AF9D1943222D006BCE48 /* Build configuration list for PBXNativeTarget "ExSwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -467,6 +478,7 @@
 				1E11AF9F1943222D006BCE48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -4,7 +4,7 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
 
 ## Contents ##
 
-- [ExSwift](#exswift)
+- [ExSwift extensions](#extensions)
 	- [Array](#array)
     	- [Instance Methods](#instance-methods)
 		- [Class Methods](#class-methods)
@@ -26,7 +26,14 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
     	- [Instance Methods](#instance-methods-5)
     	- [Operators](#operators-3)
 
+- [ExSwift](#extswift-1)
+	- [Class Methods](#class-methods-4)
+
+## Extensions ##
+
 ### Array ###
+--
+
 Examples in [Examples/Array.md](Examples/Array.md)
 
 ##### Instance Methods #####
@@ -79,6 +86,7 @@ Name | Signature | Function
 `[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> Array<T>`|Returns the sub-array from index *x* to index *y*
 
 ### Int ###
+--
 Examples in [Examples/Int.md](Examples/Int.md)
 
 ##### Instance Methods #####
@@ -86,7 +94,6 @@ Examples in [Examples/Int.md](Examples/Int.md)
 Name | Signatures
 ---- | ----------
 **`times`**|`times <T> (call: (Int) -> T)`<br>`times <T> (call: () -> T)`<br>`times (call: () -> ())`
-**`after`**|`after <T> (call: () -> T) -> (() -> T?)`
 **`isEven`**|`isEven () -> Bool`
 **`isOdd`**|`idOdd () -> Bool`
 **`upTo`**|`upTo (limit: Int, call: (Int) -> ())`
@@ -102,6 +109,7 @@ Name | Signatures
 
 
 ### Float ###
+--
 ##### Instance Methods #####
 
 Name | Signature
@@ -115,6 +123,7 @@ Name | Signatures | Usage
 **`random`**|`random(min: Float = 0, max: Float) -> Float`|`Float.random(min: 1, max: 1000)`
 
 ### String ###
+--
 Examples in [Examples/String.md](Examples/String.md)
 
 ##### Instance Methods #####
@@ -138,6 +147,7 @@ Name | Signature
 `S * n`|`* (first: String, second: Int) -> String`
 
 ### Range ###
+--
 ##### Instance Methods #####
 
 Name | Signatures | Usage
@@ -151,6 +161,7 @@ Name | Signature|Function
 `=`|`== <U: ForwardIndex> (first: Range<U>, second: Range<U>) -> Bool`|Compares 2 ranges
 
 ### Dictionary ###
+--
 Examples in [Examples/Dictionary.md](Examples/Dictionary.md)
 
 ##### Instance Methods #####
@@ -177,7 +188,20 @@ Name | Signature | Function
 ---- | --------- | --------
 `-`|`- <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V>`|Difference
 
+## ExSwift ##
+Examples in [Examples/ExSwift.md](Examples/ExSwift.md)
+
+##### Class Methods #####
+
+Name | Signatures
+---- | ----------
+**`after`**|`after <P, T> (n: Int, call: P -> T) -> (P -> T?)`<br>`func after <T> (n: Int, call: () -> T) -> (() -> T?)`
+**`once`**|`once <P, T> (call: P -> T) -> (P -> T?)`<br>`once <T> (n: Int, call: () -> T) -> (() -> T?)`
+**`partial`**|`partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T?)`
+**`bind`**|`bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (() -> T)`
+
 ### To Do ###
+--
 * Compile as library as soon as XCode 6 stops crashing.
 * Benchmark
 * ...

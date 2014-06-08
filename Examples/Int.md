@@ -5,7 +5,6 @@
 - [Int](#int)
     - [Instance Methods](#instance-methods)
     	- [`times`](#times)
-    	- [`after`](#after)
     	- [`isEven`](#iseven)
     	- [`isOdd`](#isodd)
     	- [`upTo`](#upto)
@@ -24,17 +23,6 @@
 
 2.times({ println("Hello") })
 // → Hello Hello
-```
-
-##### `after` #####
-```
-let f = 2.after({ println("Ciao") })
-f()
-// → 
-f()
-// → 
-f()
-// → Ciao
 ```
 
 ##### `isEven` #####

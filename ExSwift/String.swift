@@ -11,6 +11,13 @@ import Foundation
 extension String {
     
     /**
+    *  String length
+    */
+    var length: Int {
+        return countElements(self)
+    }
+
+    /**
     *  Returns the substring in the given range
     *  @return Substring
     */
@@ -40,17 +47,7 @@ extension String {
         return nil
 
     }
-    
-    /**
-    *  String length in terms of unicode chars
-    *  @return Length
-    */
-    func length () -> Int {
 
-        return Array(unicodeScalars).count
-        
-    }
-    
     /**
     *  Returns an array of strings, each of which is a substring of self formed by splitting it on separator
     *  @param separator
@@ -76,7 +73,7 @@ extension String {
         }
         
         var result = String()
-        let max = charset.length() - 1
+        let max = charset.length - 1
         
         for i in 0..len {
             result += charset[Int.random(min: 0, max: max)]!

@@ -11,11 +11,11 @@ import XCTest
 class ExSwiftStringTests: XCTestCase {
 
     func testLength() {
-        XCTAssertEqual(0, "".length())
-        XCTAssertEqual(1, "A".length())
-        XCTAssertEqual(1, "😱".length())
-        XCTAssertEqual(1, "∞".length())
-        XCTAssertEqual(3, "∞aA".length())
+        XCTAssertEqual(0, "".length)
+        XCTAssertEqual(1, "A".length)
+        XCTAssertEqual(1, "😱".length)
+        XCTAssertEqual(1, "∞".length)
+        XCTAssertEqual(3, "∞aA".length)
     }
 
     func testSubscript() {
@@ -23,7 +23,7 @@ class ExSwiftStringTests: XCTestCase {
         
         XCTAssertEqual("∆", string[0]!)
         XCTAssertEqual("T", string[1]!)
-        XCTAssertEqual("😗", string[string.length() - 1]!)
+        XCTAssertEqual("😗", string[string.length - 1]!)
         XCTAssertEqual("Test😗", string[1..6]!)
     }
     
