@@ -3,6 +3,7 @@
 ### Contents ###
 
 - [String](#string)
+	- [Properties](#properties)
     - [Instance Methods](#instance-methods)
     	- [`length`](#length)
     	- [`explode`](#explode)
@@ -12,14 +13,18 @@
     	- [Subscript](#subscript)
     	- [Subscript with range](#subscript-with-range)
     	- [Multiplication](#multiplication)
-    	
-### Instance Methods ###
 
+
+### Properties ###
+--
 ##### `length` #####
 ```
-"Hi".length() 
+"Hi".length
 // → 2
 ```
+
+### Instance Methods ###
+--
 
 ##### `explode` #####
 ```
@@ -29,7 +34,7 @@ string.explode(" ")
 ```
 
 ### Class Methods ###
-
+--
 ##### `random` #####
 ```
 String.random(length: 5)
@@ -37,6 +42,7 @@ String.random(length: 5)
 ```
 
 ### Operators ###
+--
 #### Subscript ####
 ```
 let str = "Hello"

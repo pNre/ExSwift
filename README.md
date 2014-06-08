@@ -16,6 +16,7 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
     	- [Instance Methods](#instance-methods-2)
     	- [Class Methods](#class-methods-2)
     - [String](#string)
+    	- [Properties](#properties)
     	- [Instance Methods](#instance-methods-3)
 		- [Class Methods](#class-methods-3)
 		- [Operators](#operators-1)
@@ -26,7 +27,7 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
     	- [Instance Methods](#instance-methods-5)
     	- [Operators](#operators-3)
 
-- [ExSwift](#extswift-1)
+- [ExSwift](#exswift-1)
 	- [Class Methods](#class-methods-4)
 
 ## Extensions ##
@@ -126,11 +127,15 @@ Name | Signatures | Usage
 --
 Examples in [Examples/String.md](Examples/String.md)
 
+##### Properties #####
+Name |
+---- |
+**`length`**|
+
 ##### Instance Methods #####
 
 Name | Signature
 ---- | ---------
-**`length`**|`length () -> Int`
 **`explode`**|`explode (separator: Character) -> String[]`
 
 ##### Class Methods #####
