@@ -148,4 +148,14 @@ class ExSwiftDictionaryTests: XCTestCase {
         XCTAssert(dictionary1.intersection(dictionary3) == [:])
         XCTAssert(dictionary1 & dictionary1 == dictionary1)
     }
+    
+    func testPick () {
+        let dictionary = [1: "A", 2: "B", 3: "C"]
+        
+        let pick1 = dictionary.pick([1, 3])
+        let pick2 = dictionary.pick(1, 3)
+        let pick3 = dictionary.pick()
+        
+        XCTAssert(pick1 == [1: "A", 3: "C"])
+    }
 }

@@ -40,35 +40,37 @@ Examples in [Examples/Array.md](Examples/Array.md)
 
 Name | Signature
 ---- | ---------
-**`first`**|`first () -> T?`
-**`last`**|`last () -> T?`
-**`get`**|`get (index: Int) -> T?`
+**`first`**|`first () -> Element?`
+**`last`**|`last () -> Element?`
+**`get`**|`get (index: Int) -> Element?`
 **`remove`**|`remove <U: Equatable> (element: U)`
-**`take`**|`take (n: Int) -> Array<T>`
-**`tail`**|`tail (n: Int) -> Array<T>`
-**`contains`**|`contains <T: Equatable> (item: T) -> Bool`
+**`at`**|`at (indexes: Int...) -> Array`
+**`take`**|`take (n: Int) -> Array`
+**`tail`**|`tail (n: Int) -> Array`
+**`skip`**|`skip (n: Int) -> Array`
+**`contains`**|`contains <T: Equatable> (item: T...) -> Bool`
 **`difference`**|`difference <T: Equatable> (values: Array<T>...) -> Array<T>`
-**`intersection`**|`func intersection <U: Equatable> (values: Array<U>...) -> Array<T>`
-**`union`**|`func union <U: Equatable> (values: Array<U>...) -> Array<T>`
+**`intersection`**|`func intersection <U: Equatable> (values: Array<U>...) -> Array`
+**`union`**|`func union <U: Equatable> (values: Array<U>...) -> Array`
 **`unique`**|`unique <T: Equatable> () -> Array<T>`
 **`indexOf`**|`func indexOf <T: Equatable> (item: T) -> Int`
 **`zip`**|`zip (arrays: Array<Any>...) -> Array<Array<Any?>>`
 **`shuffle`**|`shuffle ()`
-**`shuffled`**|`shuffled () -> Array<T>`
+**`shuffled`**|`shuffled () -> Array`
 **`sample`** *(random)*|`sample (size n: Int = 1) -> Array<T>`
 **`max`**|`max <T: Comparable> () -> T`
 **`min`**|`min <T: Comparable> () -> T`
-**`each`**|`each (call: (T) -> ())`<br>`each (call: (Int, T) -> ())`
-**`eachRight`**|`eachRight (call: (T) -> ())`<br>`eachRight (call: (Int, T) -> ())`
-**`any`**|`any (call: (T) -> Bool) -> Bool`
-**`all`**|`all (call: (T) -> Bool) -> Bool`
-**`reject`**|`reject (exclude: (T -> Bool)) -> Array<T>`
-**`pop`**|`pop() -> T`
-**`push`**|`push(newElement: T)`
-**`shift`**|`shift() -> T`
-**`unshift`**|`unshift(newElement: T)`
-**`groupBy`**|`groupBy <U> (groupingFunction group: (T) -> (U)) -> Dictionary<U, Array<T>>`
-**`countBy`**|`countBy <U> (groupingFunction group: (T) -> (U)) -> Dictionary<U, Int>`
+**`each`**|`each (call: (Element) -> ())`<br>`each (call: (Int, Element) -> ())`
+**`eachRight`**|`eachRight (call: (Element) -> ())`<br>`eachRight (call: (Int, Element) -> ())`
+**`any`**|`any (call: (Element) -> Bool) -> Bool`
+**`all`**|`all (call: (Element) -> Bool) -> Bool`
+**`reject`**|`reject (exclude: (Element -> Bool)) -> Array`
+**`pop`**|`pop() -> Element`
+**`push`**|`push(newElement: Element)`
+**`shift`**|`shift() -> Element`
+**`unshift`**|`unshift(newElement: Element)`
+**`groupBy`**|`groupBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Array>`
+**`countBy`**|`countBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Int>`
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 
@@ -85,7 +87,8 @@ Name | Signature | Function
 `-`|`- <T: Equatable> (first: Array<T>, second: T) -> Array<T>`|Element removal
 `&`|`& <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Intersection
 <code>&#124;</code>|<code>&#124; <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T></code>|Union
-`[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> Array<T>`|Returns the sub-array from index *x* to index *y*
+`[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> Array`|Returns the sub-array from index *x* to index *y*
+`[[x, y, z]]`|`subscript(indexes: Int...) -> Array`|Returns the items at *x*, *y*, *z*
 
 ## Int ##
 Examples in [Examples/Int.md](Examples/Int.md)
@@ -99,7 +102,7 @@ Name | Signatures
 **`isOdd`**|`idOdd () -> Bool`
 **`upTo`**|`upTo (limit: Int, call: (Int) -> ())`
 **`downTo`**|`downTo (limit: Int, call: (Int) -> ())`
-**`clamp`**|`clamp (range: Range<Int>) -> Int`
+**`clamp`**|`clamp (range: Range<Int>) -> Int`<br>`clamp (min: Int, max: Int) -> Int`
 **`isIn`**|`isIn (range: Range<Int>, strict: Bool = false) -> Bool`
 **`explode`**|`explode () -> Array<Int>`
 
@@ -189,11 +192,13 @@ Name | Signatures
 **`any`**|`any (test: (KeyType, ValueType) -> (Bool)) -> Bool`
 **`all`**|`all (test: (KeyType, ValueType) -> (Bool)) -> Bool`
 **`reduce`**|`reduce <U> (initial: U, combine: (U, Element) -> U) -> U`
+**`pick`**|`pick (keys: KeyType[]) -> Dictionary`<br>`pick (keys: KeyType...) -> Dictionary`
 
 #### Operators ####
 Name | Signature | Function
 ---- | --------- | --------
 `-`|`- <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V>`|Difference
+`&`|`& <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V>`|Intersection
 <code>&#124;</code>|<code>&#124; <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V></code>|Union
 
 # Utilities #
@@ -208,7 +213,7 @@ Name | Signatures
 **`partial`**|`partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T?)`
 **`bind`**|`bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (() -> T)`
 
-### To Do ###
+# To Do #
 --
 * Compile as library as soon as XCode 6 stops crashing.
 * Benchmark

@@ -22,7 +22,7 @@ extension String {
     *  @return Substring
     */
     subscript (range: Range<Int>) -> String? {
-        return Array(self).get(range)?.reduce(String(), +)
+        return Array(self).get(range).reduce(String(), +)
     }
 
     /**

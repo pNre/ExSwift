@@ -8,8 +8,10 @@
     	- [`last`](#last)
     	- [`get`](#get)
     	- [`remove`](#remove)
+    	- [`at`](#at)
     	- [`take`](#take)
     	- [`tail`](#tail)
+    	- [`skip`](#skip)
     	- [`contains`](#contains)
     	- [`difference`](#difference)
     	- [`intersection`](#intersection)
@@ -78,6 +80,17 @@ println(array)
 // → [2, 3, 4]
 ```
 
+##### `at` #####
+```
+let array = [1, 2, 3, 4]
+
+array.at(1, 3)
+// → [2, 4]
+
+array[1, 0, 3]
+// → [2, 1, 4]
+```
+
 ##### `take` #####
 ```
 [1, 2, 3, 4].take(2)
@@ -90,6 +103,12 @@ println(array)
 // → [3, 4, 5]
 ```
 
+##### `skip` #####
+```
+[1, 2, 3, 4, 5].skip(3)
+// → [4, 5]
+```
+
 ##### `contains` #####
 ```
 [1, 2, 3, 4].contains(2)  
@@ -97,6 +116,9 @@ println(array)
 
 [1, 2, 3, 4].contains(20) 
 // → false
+
+[1, 2, 3, 4].contains(3, 4) 
+// → true
 ```
 
 ##### `difference` #####
@@ -296,11 +318,30 @@ let group = array.countBy(groupingFunction: {
 // → [true: 2, false: 3]
 ```
 
-##### `reduceRight` #####
+##### `reduce` #####
+Different from the standerd `reduce`. Assumes the elements type `Element` as return type and `self.first()` as initial value.
+
 ```
-let list = [[0, 1], [2, 3], [4, 5]];
+let list = [5, 5, 2, 3]
+list.reduce(+)
+// → 15
+```
+
+##### `reduceRight` #####
+With initial argument:
+
+```
+let list = [[0, 1], [2, 3], [4, 5]]
 list.reduceRight(Array<Int>(), { return $0 + $1 });
 // → [4, 5, 2, 3, 0, 1]
+```
+
+*Without* initial argument:
+
+```
+let list = ["A", "B", "C"]
+list.reduceRight(+)
+// → "CAB"
 ```
 
 ##### `implode` #####

@@ -285,6 +285,19 @@ extension Dictionary {
     func reduce <U> (initial: U, combine: (U, Element) -> U) -> U {
         return Swift.reduce(self, initial, combine)
     }
+
+    /**
+     *  Return a copy of self, filtered to only have values for the whitelisted keys
+     */
+    func pick (keys: KeyType[]) -> Dictionary {
+        return filter { (key: KeyType, _) -> Bool in
+            return keys.contains(key)
+        }
+    }
+
+    func pick (keys: KeyType...) -> Dictionary {
+        return pick(reinterpretCast(keys) as KeyType[])
+    }
     
     /**
     *  Removes a (key, value) pair from self and returns it as tuple

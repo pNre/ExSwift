@@ -19,6 +19,7 @@
     	- [`all`](#all) 
     	- [`any`](#any) 
     	- [`reduce`](#reduce) 
+    	- [`pick`](#pick) 
     	
 ### Instance Methods ###
 
@@ -41,10 +42,10 @@ let dictionary2 = [ "A": 1 ]
 let dictionary3 = [ "D": 4 ]
         
 dictionary1.union(dictionary2, dictionary3)
-// → [ "A": 1, "B": 2, "C": 3, "D": 4 ]
+// → [ A: 1, B: 2, C: 3, D: 4 ]
 
 dictionary1 | dictionary2
-// → [ "A": 1, "B": 2, "C": 3 ]
+// → [ A: 1, B: 2, C: 3 ]
 ```
 
 #### `intersection` ####
@@ -54,7 +55,7 @@ let dictionary2 = [ "A": 1 ]
 let dictionary3 = [ "D": 4 ]
         
 dictionary1.intersection(dictionary2)
-// → [ "A": 1 ]
+// → [ A: 1 ]
 
 dictionary1 & dictionary3
 // → [:]
@@ -90,7 +91,7 @@ dictionary.each({ println($0, $1); return })
 let dictionary = [ "A": 1, "B": 2, "C": 3 ]
 let mapped = dictionary.map(mapFunction: { return ($0 + "!", $1 + 1) })
 println(mapped) 
-// → ["A!": 2, "B!": 3, "C!": 4]
+// → [A!: 2, B!: 3, C!: 4]
 ```
 
 #### `mapValues` ####
@@ -98,7 +99,7 @@ println(mapped)
 let dictionary = [ "A": 1, "B": 2, "C": 3 ]
 let mapped = dictionary.mapValues(mapFunction: { return $1 + 1 })
 println(mapped) 
-// → ["A": 2, "B": 3, "C": 4]
+// → [A: 2, B: 3, C: 4]
 ```
 
 #### `filter` ####
@@ -108,7 +109,7 @@ let filtered = dictionary.filter {
     (key: String, Value: Int) in return key != "A"
 }
 println(filtered) 
-// → ["B": 2, "C": 3]
+// → [B: 2, C: 3]
 ```
 
 #### `merge` ####
@@ -116,7 +117,7 @@ println(filtered)
 let dictionary = [ "A": 1, "B": 2, "C": 3 ]
 let merged = dictionary.merge( ["D": 4] )
 println(merged) 
-// → [ "A": 1, "B": 2, "C": 3, "D": 4 ]
+// → [ A: 1, B: 2, C: 3, D: 4 ]
 ```
 
 #### `groupBy`####
@@ -181,5 +182,12 @@ let reduced = dictionary.reduce(Dictionary<Int, String>(), {
     initial.updateValue(couple.0, forKey: couple.1)
     return initial
 })
-// → [2: "B", 3: "C", 1: "A"]
+// → [2: B, 3: C, 1: A]
+```
+
+#### `pick` ####
+```swift
+let dictionary = [1: "A", 2: "B", 3: "C"]
+dictionary.pick(1, 3)
+// → [3: C, 1: A]
 ```

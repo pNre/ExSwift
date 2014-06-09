@@ -37,7 +37,7 @@ extension Range {
             call(i)
         }
     }
-    
+
     /**
     *  Calls a function foreach element in the range
     *  @param call Function to call

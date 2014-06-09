@@ -79,7 +79,7 @@ extension Int {
 
         Array(limit...self).reverse().each(call)
     }
-    
+
     /**
      *  Computes the value of self clamped to a range defined by the first argument
      */
@@ -93,6 +93,10 @@ extension Int {
         
         return self
         
+    }
+    
+    func clamp (min: Int, max: Int) -> Int {
+        return clamp(min...max)
     }
 
     /**
@@ -118,7 +122,7 @@ extension Int {
                 result.append(toInt)
             }
         }
-        
+    
         return result
     }
 

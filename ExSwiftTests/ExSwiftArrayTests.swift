@@ -64,6 +64,7 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertFalse(array.contains("A"))
         XCTAssertFalse(array.contains(6))
         XCTAssertTrue(array.contains(5))
+        XCTAssertTrue(array.contains(3, 4) )
     }
 
     func testFirst() {
@@ -155,6 +156,11 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssert(array.take(3) == [1, 2, 3])
         XCTAssert(array.take(0) == [])
     }
+    
+    func testSkip() {
+        XCTAssert(array.skip(3) == [4, 5])
+        XCTAssert(array.skip(0) == array)
+    }
 
     func testTail () {
         XCTAssert(array.tail(3) == [3, 4, 5])
@@ -217,13 +223,22 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testReduceRight () {
-        let list = [[0, 1], [2, 3], [4, 5]];
-        let flat = list.reduceRight(Array<Int>(), { return $0 + $1 });
-        XCTAssert(flat == [4, 5, 2, 3, 0, 1])
+        let list = [[1, 1], [2, 3], [4, 5]]
+        let flat = list.reduceRight(Array<Int>(), { return $0 + $1 })
+        
+        XCTAssert(flat == [4, 5, 2, 3, 1, 1])
+        XCTAssertEqual(4 + 5 + 2 + 3 + 1 + 1, flat.reduce(+))
+        
+        XCTAssert(["A", "B", "C"].reduceRight(+) == "CBA")
     }
 
     func testImplode () {
         XCTAssert(["A", "B", "C"].implode("A") == "AABAC")
+    }
+    
+    func testAt () {
+        XCTAssert(array.at(0, 2) == [1, 3])
+        XCTAssert(array[0, 2, 1] as Int[] == [1, 3, 2])
     }
 
 }

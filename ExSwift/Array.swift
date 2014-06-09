@@ -15,8 +15,8 @@ extension Array {
      *  @param item The item to search for
      *  @return true if self contains item
      */
-    func contains <T: Equatable> (item: T) -> Bool {
-        return indexOf(item) >= 0
+    func contains <T: Equatable> (items: T...) -> Bool {
+        return items.all { self.indexOf($0) >= 0 }
     }
 
     /**
@@ -52,10 +52,10 @@ extension Array {
     *  @param values Arrays to intersect
     *  @return Array of unique values present in all the values arrays + self
     */
-    func intersection <U: Equatable> (values: Array<U>...) -> Array<T> {
+    func intersection <U: Equatable> (values: Array<U>...) -> Array {
 
         var result = self
-        var intersection = Array<T>()
+        var intersection = Array()
 
         for (i, value) in enumerate(values) {
 
@@ -63,14 +63,14 @@ extension Array {
             //  self n values[0], (self n values[0]) n values[1], ...
             if (i > 0) {
                 result = intersection
-                intersection = Array<T>()
+                intersection = Array()
             }
 
             //  find common elements and save them in first set
             //  to intersect in the next loop
             value.each { (item: U) -> Void in
                 if result.contains(item) {
-                    intersection.append(item as T)
+                    intersection.append(item as Element)
                 }
             }
 
@@ -85,14 +85,14 @@ extension Array {
     *  @param values Arrays
     *  @return Union array of unique values
     */
-    func union <U: Equatable> (values: Array<U>...) -> Array<T> {
+    func union <U: Equatable> (values: Array<U>...) -> Array {
 
-        var result: Array<T> = self as Array<T>
+        var result = self
 
         for array in values {
             for value in array {
                 if !result.contains(value) {
-                    result.append(value as T)
+                    result.append(value as Element)
                 }
             }
         }
@@ -105,7 +105,7 @@ extension Array {
     *  Gets the first element of the array
     *  @return First element of the array
     */
-    func first () -> T? {
+    func first () -> Element? {
         if count > 0 {
             return self[0]
         }
@@ -116,7 +116,7 @@ extension Array {
     *  Gets the last element of the array
     *  @return Last element of the array
     */
-    func last () -> T? {
+    func last () -> Element? {
         if count > 0 {
             return self[count - 1]
         }
@@ -129,7 +129,7 @@ extension Array {
     *  @return Index of the matched item or -1
     */
     func indexOf <U: Equatable> (item: U) -> Int {
-        if item is T {
+        if item is Element {
             if let found = find(reinterpretCast(self) as Array<U>, item) {
                 return found
             }
@@ -145,7 +145,7 @@ extension Array {
     *  @param index
     *  @return Object at index in array, nil if index is out of bounds
     */
-    func get (index: Int) -> T? {
+    func get (index: Int) -> Element? {
         return index < count ? self[index] : nil
     }
     
@@ -154,16 +154,11 @@ extension Array {
     *  @param range
     *  @return Subarray in range
     */
-    func get (range: Range<Int>) -> Array<T>? {
-        var subarray = Array<T>()
-        
-        for var i = range.startIndex; i < range.endIndex; i++ {
-            subarray += [self[i]]
-        }
-        
-        return subarray
+
+    func get (range: Range<Int>) -> Array {
+        return self[range]
     }
-    
+
     /**
     *  Creates an array of grouped elements, the first of which contains the first elements of the given arrays, the 2nd contains the 2nd elements of the given arrays, and so on
     *  @param arrays Arrays to zip
@@ -207,8 +202,8 @@ extension Array {
     *  Creates an array of shuffled values
     *  @return Shuffled copy of self
     */
-    func shuffled () -> Array<T> {
-        var shuffled = self.copy()
+    func shuffled () -> Array {
+        var shuffled = self
 
         //  Fisher-Yates shuffle
         for i in 0..self.count {
@@ -227,7 +222,7 @@ extension Array {
     *  @param n Length
     *  @return Random subarray of length n
     */
-    func sample (size n: Int = 1) -> Array<T> {
+    func sample (size n: Int = 1) -> Array {
         let index = Int.random(max: count - n)
         return self[index..(n + index)]
     }
@@ -260,7 +255,7 @@ extension Array {
     *  Iterates on self
     *  @param call Function to call for each element
     */
-    func each (call: (T) -> ()) {
+    func each (call: (Element) -> ()) {
 
         for item in self {
             call(item)
@@ -272,7 +267,7 @@ extension Array {
     *  Iterates on self with index
     *  @param call Function to call for each element
     */
-    func each (call: (Int, T) -> ()) {
+    func each (call: (Int, Element) -> ()) {
         
         for (index, item) in enumerate(self) {
             call(index, item)
@@ -284,7 +279,7 @@ extension Array {
      *  each from R to L
      *  @param call Function to call for each element
      */
-    func eachRight (call: (T) -> ()) {
+    func eachRight (call: (Element) -> ()) {
         self.reverse().each(call)
     }
     
@@ -292,7 +287,7 @@ extension Array {
      *  each from R to L
      *  @param call Function to call for each element
      */
-    func eachRight (call: (Int, T) -> ()) {
+    func eachRight (call: (Int, Element) -> ()) {
         for (index, item) in enumerate(self.reverse()) {
             call(count - index - 1, item)
         }
@@ -303,18 +298,14 @@ extension Array {
     *  @param call Function to call for each element
     *  @return True if call returns true for any element of self
     */
-    func any (call: (T) -> Bool) -> Bool {
-
+    func any (call: (Element) -> Bool) -> Bool {
         for item in self {
-
             if call(item) {
                 return true
             }
-
         }
 
         return false
-
     }
 
     /**
@@ -322,24 +313,20 @@ extension Array {
     *  @param call Function to call for each element
     *  @return True if call returns true for all the elements in self
     */
-    func all (call: (T) -> Bool) -> Bool {
-
+    func all (call: (Element) -> Bool) -> Bool {
         for item in self {
-
             if !call(item) {
                 return false
             }
-
         }
 
         return true
-
     }
 
     /**
     *  Opposite of filter
     */
-    func reject (exclude: (T -> Bool)) -> Array<T> {
+    func reject (exclude: (Element -> Bool)) -> Array {
         return filter {
             return !exclude($0)
         }
@@ -349,7 +336,7 @@ extension Array {
     *  Returns the first n elements from self
     *  @return First n elements
     */
-    func take (n: Int) -> Array<T> {
+    func take (n: Int) -> Array {
         return self[0..n]
     }
 
@@ -357,10 +344,18 @@ extension Array {
     *  Returns the last n elements from self
     *  @return Last n elements
     */
-    func tail (n: Int) -> Array<T> {
+    func tail (n: Int) -> Array {
         return self[(count - n)..count]
     }
 
+    /**
+    *  Returns the last count - n elements
+    *  @return Last count - n elements
+    */
+    func skip (n: Int) -> Array {
+        return self[n..count]
+    }
+    
     /**
     *  Returns a new array by removing duplicate values in self
     *  @return Unique array
@@ -382,9 +377,9 @@ extension Array {
     *  @param groupingFunction
     *  @return Grouped dictionary
     */
-    func groupBy <U> (groupingFunction group: (T) -> (U)) -> Dictionary<U, Array<T>> {
+    func groupBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Array> {
 
-        var result = Dictionary<U, T[]>();
+        var result = Dictionary<U, Element[]>();
         
         for item in self {
             
@@ -395,7 +390,7 @@ extension Array {
             if !result.has(groupKey) {
                 result[groupKey] = [item]
             } else {
-                result[groupKey] = (result[groupKey]! as T[]) + [item]
+                result[groupKey] = (result[groupKey]! as Element[]) + [item]
             }
 
         }
@@ -409,7 +404,7 @@ extension Array {
     *  @param groupingFunction
     *  @return Grouped dictionary
     */
-    func countBy <U> (groupingFunction group: (T) -> (U)) -> Dictionary<U, Int> {
+    func countBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Int> {
         
         var result = Dictionary<U, Int>();
         
@@ -442,24 +437,45 @@ extension Array {
     }
     
     /**
+    *  self.reduce with initial value self.first()
+    */
+    func reduce (combine: (Element, Element) -> Element) -> Element {
+        return skip(1).reduce(first()!, combine: combine)
+    }
+    
+    /**
     *  self.reduce from right to left
     */
     func reduceRight <U> (initial: U, combine: (U, Element) -> U) -> U {
-        return self.reverse().reduce(initial, combine: combine)
+        return reverse().reduce(initial, combine: combine)
+    }
+    
+    /**
+    *  self.reduceRight with initial value self.last()
+    */
+    func reduceRight (combine: (Element, Element) -> Element) -> Element {
+        return reverse().reduce(combine)
+    }
+
+    /**
+     *  Creates an array of elements from the specified indexes of self
+     */
+    func at (indexes: Int...) -> Array {
+        return indexes.map { self[$0] }
     }
 
     /**
     *  Removes the last element from self and returns it
     *  @return The removed element
     */
-    mutating func pop () -> T {
+    mutating func pop () -> Element {
         return self.removeLast()
     }
     
     /**
     *  Same as append
     */
-    mutating func push (newElement: T) {
+    mutating func push (newElement: Element) {
         return self.append(newElement)
     }
     
@@ -467,14 +483,14 @@ extension Array {
     *  Returns the first element of self and removes it
     *  @return The removed element
     */
-    mutating func shift () -> T {
+    mutating func shift () -> Element {
         return self.removeAtIndex(0)
     }
 
     /**
     *  Prepends objects to the front of self
     */
-    mutating func unshift (newElement: T) {
+    mutating func unshift (newElement: Element) {
         self.insert(newElement, atIndex: 0)
     }
 
@@ -488,7 +504,7 @@ extension Array {
         removeAll(keepCapacity: true)
         
         anotherSelf.each {
-            (index: Int, current: T) in
+            (index: Int, current: Element) in
             if current as U != element {
                 self.append(current)
             }
@@ -508,19 +524,20 @@ extension Array {
     *  Returns a subarray in the given range
     *  @return Subarray or nil if the index is out of bounds
     */
-    subscript (range: Range<Int>) -> T[] {
-        var subarray = Array<T>()
+    subscript (var range: Range<Int>) -> Array {
+        //  Fix out of bounds indexes
+        (range.startIndex, range.endIndex) = (range.startIndex.clamp(0, max: range.startIndex), range.endIndex.clamp(range.endIndex, max: count))
 
-        let min = range.startIndex.clamp(0...count)
-        let max = range.endIndex.clamp(0...count)
-
-        for var i = min; i < max; i++ {
-            subarray += [self[i]]
-        }
-        
-        return subarray
+        return Array(self[range] as Slice<T>)
     }
 
+    /**
+    *  Same as `at`
+    */
+    subscript (indexes: Int...) -> Array {
+        return at(reinterpretCast(indexes))
+    }
+    
 }
 
 /**
