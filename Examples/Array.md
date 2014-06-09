@@ -23,6 +23,7 @@
     	- [`max`](#max)
     	- [`min`](#min)
     	- [`each`](#each)
+    	- [`eachRight`](#eachright)
     	- [`any`](#any)
     	- [`all`](#all)
     	- [`reject`](#reject)
@@ -194,6 +195,19 @@ println(array)
 // → (0, A) (1, B) (2, C)
 ```
 
+##### `eachRight` #####
+```
+[1, 2, 3, 4].eachRight {
+    (item: Int) in println(item)
+}
+// → 4 3 2 1
+
+["A", "B", "C"].eachRight {
+    (index: Int, item: String) in println(index, item)
+}
+// → (2, A) (1, B) (0, C)
+```
+
 ##### `any` #####
 ```
 [1, 2, 3, 4].any {
@@ -309,6 +323,9 @@ Array<Int>.range(0..3)
 ```
 [1, 2] - [2, 4]
 // → [1]
+
+[1, 2] - 1
+// → [2]
 ```
 
 #### And ####

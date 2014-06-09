@@ -130,7 +130,7 @@ extension Dictionary {
         return mapped
         
     }
-    
+
     /**
      *  Loops trough each (key, value) pair in self
      *  @param eachFunction
@@ -285,7 +285,7 @@ extension Dictionary {
     func reduce <U> (initial: U, combine: (U, Element) -> U) -> U {
         return Swift.reduce(self, initial, combine)
     }
-
+    
     /**
     *  Removes a (key, value) pair from self and returns it as tuple
     *  @return (key, value)
@@ -296,7 +296,6 @@ extension Dictionary {
 
         return (key, value)
     }
-    
 }
 
 /**

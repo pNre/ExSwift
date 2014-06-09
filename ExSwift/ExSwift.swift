@@ -91,7 +91,7 @@ struct ExSwift {
         }
         
     }
-    
+
     /**
     *  Creates a function that, when called, invokes function with `parameters`
     *  @param function Function to call

@@ -27,17 +27,16 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
     	- [Instance Methods](#instance-methods-5)
     	- [Operators](#operators-3)
 
-- [ExSwift](#exswift-1)
+- [Utilities](#utilities)
 	- [Class Methods](#class-methods-4)
 
-## Extensions ##
+# Extensions #
 
-### Array ###
---
+## Array ##
 
 Examples in [Examples/Array.md](Examples/Array.md)
 
-##### Instance Methods #####
+#### Instance Methods ####
 
 Name | Signature
 ---- | ---------
@@ -60,6 +59,7 @@ Name | Signature
 **`max`**|`max <T: Comparable> () -> T`
 **`min`**|`min <T: Comparable> () -> T`
 **`each`**|`each (call: (T) -> ())`<br>`each (call: (Int, T) -> ())`
+**`eachRight`**|`eachRight (call: (T) -> ())`<br>`eachRight (call: (Int, T) -> ())`
 **`any`**|`any (call: (T) -> Bool) -> Bool`
 **`all`**|`all (call: (T) -> Bool) -> Bool`
 **`reject`**|`reject (exclude: (T -> Bool)) -> Array<T>`
@@ -72,25 +72,25 @@ Name | Signature
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 
-##### Class Methods #####
+#### Class Methods ####
 
 Name | Signatures
 ---- | ----------
 **`range`**|`range <U: ForwardIndex> (range: Range<U>) -> Array<U>`
 
-##### Operators #####
+#### Operators ####
 Name | Signature | Function
 ---- | --------- | --------
 `-`|`- <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Difference
+`-`|`- <T: Equatable> (first: Array<T>, second: T) -> Array<T>`|Element removal
 `&`|`& <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Intersection
 <code>&#124;</code>|<code>&#124; <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T></code>|Union
 `[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> Array<T>`|Returns the sub-array from index *x* to index *y*
 
-### Int ###
---
+## Int ##
 Examples in [Examples/Int.md](Examples/Int.md)
 
-##### Instance Methods #####
+#### Instance Methods ####
 
 Name | Signatures
 ---- | ----------
@@ -101,75 +101,75 @@ Name | Signatures
 **`downTo`**|`downTo (limit: Int, call: (Int) -> ())`
 **`clamp`**|`clamp (range: Range<Int>) -> Int`
 **`isIn`**|`isIn (range: Range<Int>, strict: Bool = false) -> Bool`
+**`explode`**|`explode () -> Array<Int>`
 
-##### Class Methods #####
+#### Class Methods ####
 
 Name | Signatures
 ---- | ----------
 **`random`**|`random(min: Int = 0, max: Int) -> Int`
 
 
-### Float ###
---
-##### Instance Methods #####
+## Float ##
+
+#### Instance Methods ####
 
 Name | Signature
 ---- | ---------
 **`abs`**|`abs () -> Float`
 
-##### Class Methods #####
+#### Class Methods ####
 
 Name | Signatures | Usage
 ---- | ---------- | -----
 **`random`**|`random(min: Float = 0, max: Float) -> Float`|`Float.random(min: 1, max: 1000)`
 
-### String ###
---
+## String ##
+
 Examples in [Examples/String.md](Examples/String.md)
 
-##### Properties #####
+#### Properties ####
 Name |
 ---- |
 **`length`**|
 
-##### Instance Methods #####
+#### Instance Methods ####
 
 Name | Signature
 ---- | ---------
 **`explode`**|`explode (separator: Character) -> String[]`
 
-##### Class Methods #####
+#### Class Methods ####
 
 Name | Signature
 ---- | ---------
 **`random`**|`func random (var length len: Int = 0, charset: String = "...") -> String`
 
-##### Operators #####
+#### Operators ####
 Name | Signature
 ---- | ---------
 `[x]`|`subscript(index: Int) -> String?`
 `[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> String`
 `S * n`|`* (first: String, second: Int) -> String`
 
-### Range ###
---
-##### Instance Methods #####
+## Range ##
+#### Instance Methods ####
 
 Name | Signatures | Usage
 ---- | ---------- | -------
 **`times`**|`times (call: (T) -> ())`<br>`times (call: () -> ())`|`(2..4).times({ (index: Int) in println(index) })`<br>`(2..4).times({ println("Hi") })`
 **`each`**|`each (call: (T) -> ())`|`(2..4).each({ (index: Int) in println(index) })`
 
-##### Operators #####
+#### Operators ####
 Name | Signature|Function
 ---- | ---------|--------
 `=`|`== <U: ForwardIndex> (first: Range<U>, second: Range<U>) -> Bool`|Compares 2 ranges
 
-### Dictionary ###
---
+## Dictionary ##
+
 Examples in [Examples/Dictionary.md](Examples/Dictionary.md)
 
-##### Instance Methods #####
+#### Instance Methods ####
 
 Name | Signatures
 ---- | ----------
@@ -190,16 +190,16 @@ Name | Signatures
 **`all`**|`all (test: (KeyType, ValueType) -> (Bool)) -> Bool`
 **`reduce`**|`reduce <U> (initial: U, combine: (U, Element) -> U) -> U`
 
-##### Operators #####
+#### Operators ####
 Name | Signature | Function
 ---- | --------- | --------
 `-`|`- <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V>`|Difference
 <code>&#124;</code>|<code>&#124; <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V></code>|Union
 
-## ExSwift ##
+# Utilities #
 Examples in [Examples/ExSwift.md](Examples/ExSwift.md)
 
-##### Class Methods #####
+#### Class Methods ####
 
 Name | Signatures
 ---- | ----------

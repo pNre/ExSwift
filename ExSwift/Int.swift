@@ -105,7 +105,23 @@ extension Int {
 
         return range.startIndex <= self && self <= range.endIndex - 1
     }
-    
+
+    /**
+    *  Returns an array of digits in self
+    */
+    func explode () -> Array<Int> {
+        var result = Int[]()
+        
+        for char in String(self) {
+            let string = String(char)
+            if let toInt = string.toInt() {
+                result.append(toInt)
+            }
+        }
+        
+        return result
+    }
+
     /**
     *  Returns a random integer between min and max (inclusive)
     *  @return Random integer

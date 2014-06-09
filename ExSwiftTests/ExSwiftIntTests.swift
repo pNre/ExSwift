@@ -89,7 +89,7 @@ class ExSwiftIntTests: XCTestCase {
         XCTAssertEqual(3.clamp(0...4), 3)
         XCTAssertEqual(1.clamp(2...4), 2)
     }
-    
+
     func testIn () {
         XCTAssertTrue(2.isIn(0..3))
         XCTAssertFalse(2.isIn(0..3, strict: true))
@@ -100,4 +100,10 @@ class ExSwiftIntTests: XCTestCase {
         XCTAssertTrue(2.isIn(0...2))
         XCTAssertFalse(2.isIn(0...2, strict: true))
     }
+
+    func testExplode () {
+        let result = 362.explode()
+        XCTAssert(result == [3, 6, 2])
+    }
 }
+

@@ -279,7 +279,25 @@ extension Array {
         }
         
     }
+
+    /**
+     *  each from R to L
+     *  @param call Function to call for each element
+     */
+    func eachRight (call: (T) -> ()) {
+        self.reverse().each(call)
+    }
     
+    /**
+     *  each from R to L
+     *  @param call Function to call for each element
+     */
+    func eachRight (call: (Int, T) -> ()) {
+        for (index, item) in enumerate(self.reverse()) {
+            call(count - index - 1, item)
+        }
+    }
+
     /**
     *  Checks if call returns true for any element of self
     *  @param call Function to call for each element
@@ -503,6 +521,13 @@ extension Array {
         return subarray
     }
 
+}
+
+/**
+*  Remove and element from the array
+*/
+@infix func - <T: Equatable> (first: Array<T>, second: T) -> Array<T> {
+    return first - [second]
 }
 
 /**

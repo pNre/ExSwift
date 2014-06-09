@@ -11,6 +11,7 @@
     	- [`downTo`](#downto)
     	- [`clamp`](#clamp)
     	- [`isIn`](#isin)
+    	- [`explode`](#explode)
     - [Class Methods](#class-methods)
     	- [`random`](#random)
 
@@ -65,6 +66,12 @@
 
 2.isIn(0..3, strict: true)
 // → false
+```
+
+##### `explode` #####
+```
+567.explode()
+// → [5, 6, 7]
 ```
 
 ### Class Methods ###

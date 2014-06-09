@@ -44,6 +44,17 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssert(result == array.map( { return $0 - 1 } ))
     }
 
+    func testEachRight() {
+        var result = Int[]()
+        
+        array.eachRight { (index: Int, value: Int) -> Void in
+            result += value
+        }
+
+        XCTAssert(result.first() == array.last())
+        XCTAssert(result.last() == array.first())
+    }
+
     func testRange() {
         XCTAssert(Array<Int>.range(0..2) == [0, 1])
         XCTAssert(Array<Int>.range(0...2) == [0, 1, 2])
@@ -173,7 +184,10 @@ class ExtensionsArrayTests: XCTestCase {
     func testRemove() {
         array.append(array.last()!)
         array.remove(array.last()!)
-
+        
+        let diff = (array - 1)
+        
+        XCTAssert(diff == [2, 3, 4])
         XCTAssert(array == [1, 2, 3, 4])
     }
 
