@@ -146,7 +146,17 @@ extension Array {
     *  @return Object at index in array, nil if index is out of bounds
     */
     func get (index: Int) -> Element? {
-        return index < count ? self[index] : nil
+        var _index = (index % count)
+        
+        if _index < 0 {
+            _index = count + _index
+            
+            if index % count == 0 {
+                _index--
+            }
+        }
+        
+        return _index < count ? self[_index] : nil
     }
     
     /**

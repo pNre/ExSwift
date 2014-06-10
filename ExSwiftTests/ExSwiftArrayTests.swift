@@ -245,4 +245,10 @@ class ExtensionsArrayTests: XCTestCase {
         let array = [5, [6, [7]], 8]
         XCTAssert(array.flatten() as Int[] == [5, 6, 7, 8])
     }
+    
+    func testGet () {
+        XCTAssertEqual(1, array.get(0)!)
+        XCTAssertEqual(array.get(-1)!, array.last()!)
+        XCTAssertEqual(array.get(array.count)!, array.first()!)
+    }
 }
