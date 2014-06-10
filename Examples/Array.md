@@ -37,6 +37,7 @@
     	- [`countBy`](#countby)   
     	- [`reduceRight`](#reduceright)   
     	- [`implode`](#implode)
+    	- [`flatten`](#flatten)
     - [Class Methods](#class-methods)
     	- [`range`](#range)
     - [Operators](#operators)
@@ -348,6 +349,13 @@ list.reduceRight(+)
 ```
 ["A", "B", "C"].implode("_")
 // → A_B_C
+```
+
+##### `flatten` #####
+```
+let array = [5, [6, [7]], 8]
+array.flatten() as Int[]
+// → [5, 6, 7, 8]
 ```
 
 ### Class Methods ###

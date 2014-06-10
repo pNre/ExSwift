@@ -25,4 +25,24 @@ extension NSArray {
         
         return result
     }
+    
+    /**
+    *  Flattens the nested NSArray self to a swift array of OutType objects
+    */
+    func flatten <OutType> () -> OutType[] {
+
+        var result = OutType[]()
+        
+        for item: AnyObject in self {
+            if let converted = bridgeFromObjectiveC(item, OutType.self) {
+                result.append(converted)
+            } else if item is NSArray {
+                result += (item as NSArray).flatten() as OutType[]
+            }
+        }
+        
+        return result
+        
+    }
+
 }

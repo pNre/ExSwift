@@ -463,6 +463,27 @@ extension Array {
     func at (indexes: Int...) -> Array {
         return indexes.map { self[$0] }
     }
+    
+    /**
+     *  Flattens the nested Array self to an array of OutType objects
+     */
+    func flatten <OutType> () -> OutType[] {
+        
+        var result = OutType[]()
+        
+        for item in self {
+            if item is OutType {
+                result.append(item as OutType)
+            } else if let bridged = bridgeFromObjectiveC(reinterpretCast(item), OutType.self) {
+                result.append(bridged)
+            } else if item is NSArray {
+                result += (item as NSArray).flatten() as OutType[]
+            }
+        }
+        
+        return result
+        
+    }
 
     /**
     *  Removes the last element from self and returns it

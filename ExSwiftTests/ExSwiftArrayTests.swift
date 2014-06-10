@@ -240,5 +240,9 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssert(array.at(0, 2) == [1, 3])
         XCTAssert(array[0, 2, 1] as Int[] == [1, 3, 2])
     }
-
+    
+    func testFlatten () {
+        let array = [5, [6, [7]], 8]
+        XCTAssert(array.flatten() as Int[] == [5, 6, 7, 8])
+    }
 }

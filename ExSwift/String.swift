@@ -77,6 +77,17 @@ extension String {
         
         return nil
     }
+    
+    /**
+    *  self with capitalized first character
+    */
+    func capitalized () -> String? {
+        if length == 0 {
+            return nil
+        }
+        
+        return self[0]!.uppercaseString + self[1..length]!
+    }
 
     /**
     *  Random string

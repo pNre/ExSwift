@@ -75,5 +75,11 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertTrue(string.matches("N")?.isEmpty)
 
     }
+    
+    func testCapitalized () {
+        XCTAssertNil("".capitalized()?)
+        XCTAssert("abcdef".capitalized()! == "Abcdef")
+        XCTAssert("Abcdef".capitalized()! == "Abcdef")
+    }
 
 }

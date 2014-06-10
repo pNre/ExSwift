@@ -112,17 +112,17 @@ struct ExSwift {
      */
     static func regex (pattern: String, ignoreCase: Bool = false) -> NSRegularExpression? {
         
-        var options: NSRegularExpressionOptions? = nil
+        var options: NSRegularExpressionOptions = NSRegularExpressionOptions.DotMatchesLineSeparators
         
         if ignoreCase {
-            options = NSRegularExpressionOptions.CaseInsensitive
+            options = NSRegularExpressionOptions.CaseInsensitive | options
         }
         
         var error: NSError? = nil
-        let regex = NSRegularExpression.regularExpressionWithPattern(pattern, options: options!, error: &error)
+        let regex = NSRegularExpression.regularExpressionWithPattern(pattern, options: options, error: &error)
 
         return (error == nil) ? regex : nil
 
     }
-    
+
 }

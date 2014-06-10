@@ -9,6 +9,7 @@
     	- [`explode`](#explode)
     	- [`at`](#at)
     	- [`matches`](#matches)
+    	- [`capitalized`](#capitalized)
     - [Class Methods](#class-methods)
     	- [`random`](#random)
     - [Operators](#operators)
@@ -54,6 +55,12 @@ let range = matches[0].rangeAtIndex(0)
 
 string[range.location..(range.location + range.length)]
 // → 31
+```
+
+##### `capitalized` #####
+```
+"hello".capitalized()
+// → Hello
 ```
 
 ### Class Methods ###

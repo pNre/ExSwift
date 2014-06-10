@@ -75,6 +75,7 @@ Name | Signature
 **`countBy`**|`countBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Int>`
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
+**`flatten`**|`flatten <OutType> () -> OutType[]`
 
 #### Class Methods ####
 
@@ -146,6 +147,7 @@ Name | Signature
 **`explode`**|`explode (separator: Character) -> String[]`
 **`at`**|`at (indexes: Int...) -> String[]`
 **`matches`**|`matches (pattern: String, ignoreCase: Bool = false) -> NSTextCheckingResult[]?`
+**`capitalized`**|`capitalized () -> String?`
 
 #### Class Methods ####
 
@@ -160,7 +162,7 @@ Name | Signature
 `[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> String`
 `[x, y, z]`|`subscript (indexes: Int...) -> String[]`
 `S * n`|`* (first: String, second: Int) -> String`
-`~=`|`~= (string: String, pattern: String)`<br>`~= (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool`
+`~=`|`~= (string: String, pattern: String) -> Bool`<br>`~= (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool`
 
 ## Range ##
 #### Instance Methods ####
@@ -217,6 +219,7 @@ Examples in [Examples/NSArray.md](Examples/NSArray.md)
 Name | Signatures
 ---- | ----------
 **`cast`**|`cast <OutType> () -> OutType[]`
+**`flatten`**|`flatten <OutType> () -> OutType[]`
 
 # Utilities #
 Examples in [Examples/ExSwift.md](Examples/ExSwift.md)
