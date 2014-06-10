@@ -7,12 +7,15 @@
     	- [`length`](#length)
     - [Instance Methods](#instance-methods)
     	- [`explode`](#explode)
+    	- [`at`](#at)
+    	- [`matches`](#matches)
     - [Class Methods](#class-methods)
     	- [`random`](#random)
     - [Operators](#operators)
     	- [Subscript](#subscript)
     	- [Subscript with range](#subscript-with-range)
     	- [Multiplication](#multiplication)
+    	- [Match](#match)
 
 
 ### Properties ###
@@ -31,6 +34,26 @@
 let string = "A B C"
 string.explode(" ")
 // → ["A", "B", "C"]
+```
+
+##### `at` #####
+```
+"ABCD".at(0, 2)
+// → ["A", "C"]
+
+"ABCD"[0, 1]
+// → ["A", "B"]
+```
+
+##### `matches` #####
+```
+let string = "AB[31]"
+
+let matches = string.matches("\\d+")!
+let range = matches[0].rangeAtIndex(0)
+
+string[range.location..(range.location + range.length)]
+// → 31
 ```
 
 ### Class Methods ###
@@ -65,4 +88,18 @@ println(str[0...2])
 ```
 println("A" * 3)
 // → AAA
+```
+
+#### Match ####
+```
+let string = "ABcd"
+
+string ~= "D$"
+// → false
+
+string ~= (pattern: "D$", ignoreCase: true)
+// → true
+
+string ~= "^A"
+// → true
 ```

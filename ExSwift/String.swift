@@ -26,6 +26,13 @@ extension String {
     }
 
     /**
+    *  Same as `at`
+    */
+    subscript (indexes: Int...) -> String[] {
+        return at(reinterpretCast(indexes))
+    }
+
+    /**
     *  Returns the unicode char at position index in the string
     *  @return Unicode char as String or nil if the index is out of bounds
     */
@@ -35,6 +42,13 @@ extension String {
         }
 
         return nil
+    }
+    
+    /**
+    *  Creates an array of chars from the specified indexes of self
+    */
+    func at (indexes: Int...) -> String[] {
+        return indexes.map { self[$0]! }
     }
 
     /**
@@ -47,6 +61,21 @@ extension String {
             (element: Character) -> Bool in
             return element == separator
         })
+    }
+
+    /**
+     *  Finds any match in self for pattern
+     *  @param pattern Pattern to match
+     *  @param ignoreCase True for case insensitive matching
+     *  @return Matches
+    */
+    func matches (pattern: String, ignoreCase: Bool = false) -> NSTextCheckingResult[]? {
+
+        if let regex = ExSwift.regex(pattern, ignoreCase: ignoreCase) {
+            return regex.matchesInString(self, options: nil, range: NSMakeRange(0, length)) as? NSTextCheckingResult[]
+        }
+        
+        return nil
     }
 
     /**
@@ -86,3 +115,20 @@ extension String {
     
     return result
 }
+
+/**
+ *  Pattern matching with a regex
+ */
+@infix func ~= (string: String, pattern: String) -> Bool {
+    return string ~= (pattern: pattern, ignoreCase: false)
+}
+
+//  This version also allowes to specify case sentitivity
+@infix func ~= (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool {
+    if let matches = ExSwift.regex(options.pattern, ignoreCase: options.ignoreCase)?.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length)) {
+        return matches > 0
+    }
+    
+    return false
+}
+

@@ -26,6 +26,8 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
     - [Dictionary](#dictionary)
     	- [Instance Methods](#instance-methods-5)
     	- [Operators](#operators-3)
+    - [NSArray](#nsarray)
+    	- [Instance Methods](#instance-methods-6)
 
 - [Utilities](#utilities)
 	- [Class Methods](#class-methods-4)
@@ -120,6 +122,7 @@ Name | Signatures
 Name | Signature
 ---- | ---------
 **`abs`**|`abs () -> Float`
+**`sqrt`**|`sqrt () -> Float`
 
 #### Class Methods ####
 
@@ -141,6 +144,8 @@ Name |
 Name | Signature
 ---- | ---------
 **`explode`**|`explode (separator: Character) -> String[]`
+**`at`**|`at (indexes: Int...) -> String[]`
+**`matches`**|`matches (pattern: String, ignoreCase: Bool = false) -> NSTextCheckingResult[]?`
 
 #### Class Methods ####
 
@@ -153,7 +158,9 @@ Name | Signature
 ---- | ---------
 `[x]`|`subscript(index: Int) -> String?`
 `[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> String`
+`[x, y, z]`|`subscript (indexes: Int...) -> String[]`
 `S * n`|`* (first: String, second: Int) -> String`
+`~=`|`~= (string: String, pattern: String)`<br>`~= (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool`
 
 ## Range ##
 #### Instance Methods ####
@@ -200,6 +207,16 @@ Name | Signature | Function
 `-`|`- <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V>`|Difference
 `&`|`& <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V>`|Intersection
 <code>&#124;</code>|<code>&#124; <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V></code>|Union
+
+## NSArray ##
+
+Examples in [Examples/NSArray.md](Examples/NSArray.md)
+
+#### Instance Methods ####
+
+Name | Signatures
+---- | ----------
+**`cast`**|`cast <OutType> () -> OutType[]`
 
 # Utilities #
 Examples in [Examples/ExSwift.md](Examples/ExSwift.md)

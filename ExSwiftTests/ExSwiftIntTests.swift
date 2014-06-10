@@ -105,5 +105,6 @@ class ExSwiftIntTests: XCTestCase {
         let result = 362.explode()
         XCTAssert(result == [3, 6, 2])
     }
+
 }
 

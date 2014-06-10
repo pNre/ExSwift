@@ -107,4 +107,22 @@ struct ExSwift {
 
     }
     
+    /**
+     *  Returns a NSRegularExpression object given a pattern
+     */
+    static func regex (pattern: String, ignoreCase: Bool = false) -> NSRegularExpression? {
+        
+        var options: NSRegularExpressionOptions? = nil
+        
+        if ignoreCase {
+            options = NSRegularExpressionOptions.CaseInsensitive
+        }
+        
+        var error: NSError? = nil
+        let regex = NSRegularExpression.regularExpressionWithPattern(pattern, options: options!, error: &error)
+
+        return (error == nil) ? regex : nil
+
+    }
+    
 }

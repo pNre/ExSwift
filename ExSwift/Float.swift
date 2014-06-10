@@ -12,10 +12,16 @@ extension Float {
     
     /**
     *  Returns the absolute value of self
-    *  @return Absolute value
     */
     func abs () -> Float {
         return fabsf(self)
+    }
+    
+    /**
+    *  Returns the squared root of self
+    */
+    func sqrt () -> Float {
+        return sqrtf(self)
     }
     
     /**
@@ -29,3 +35,4 @@ extension Float {
     }
     
 }
+

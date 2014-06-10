@@ -46,5 +46,34 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual(String.random(length: 12).length, 12)
         
     }
+    
+    func testAt () {
+        let array1 = "ABCD".at(0, 2)
+        let array2 = "ABCD"[0, 1]
+        
+        XCTAssert(array1 == ["A", "C"])
+        XCTAssert(array2 == ["A", "B"])
+    }
+    
+    func testMatchingOperator () {
+        let string_T = "ABcd"
+
+        XCTAssertTrue(string_T ~= "^A")
+        
+        XCTAssertTrue(string_T ~= (pattern: "D$", ignoreCase: true))
+        XCTAssertFalse(string_T ~= "D$")
+    }
+
+    func testMatches () {
+
+        let string = "AB[31]"
+
+        let matches = string.matches("\\d+")!
+        let range = matches[0].rangeAtIndex(0)
+
+        XCTAssert(string[range.location..(range.location + range.length)] == "31")
+        XCTAssertTrue(string.matches("N")?.isEmpty)
+
+    }
 
 }

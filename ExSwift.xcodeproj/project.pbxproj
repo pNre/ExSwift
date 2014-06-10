@@ -27,13 +27,23 @@
 		1E11AFBB1943225B006BCE48 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFB01943225B006BCE48 /* Range.swift */; };
 		1E11AFBC1943225B006BCE48 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFB11943225B006BCE48 /* String.swift */; };
 		1E11AFBD1943225B006BCE48 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFB11943225B006BCE48 /* String.swift */; };
+		1E5C39EA194703CD0067137A /* NSArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC241FB1946E91B0047109A /* NSArray.swift */; };
 		1EA5F68A194387CA00E8A40F /* ExSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5F689194387CA00E8A40F /* ExSwiftTests.swift */; };
+		1EC241FC1946E91B0047109A /* NSArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC241FB1946E91B0047109A /* NSArray.swift */; };
+		1EC241FE1946E92E0047109A /* ExSwiftNSArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC241FD1946E92E0047109A /* ExSwiftNSArrayTests.swift */; };
 		1ED536841943863100BDA94E /* ExSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED536831943863100BDA94E /* ExSwift.swift */; };
 		1ED536851943863100BDA94E /* ExSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED536831943863100BDA94E /* ExSwift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		1E11AF911943222D006BCE48 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E11AF831943222D006BCE48;
+			remoteInfo = ExSwift;
+		};
+		1EC241FF1946E98F0047109A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
 			proxyType = 1;
@@ -61,6 +71,8 @@
 		1E11AFB01943225B006BCE48 /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
 		1E11AFB11943225B006BCE48 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		1EA5F689194387CA00E8A40F /* ExSwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwiftTests.swift; sourceTree = "<group>"; };
+		1EC241FB1946E91B0047109A /* NSArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSArray.swift; sourceTree = "<group>"; };
+		1EC241FD1946E92E0047109A /* ExSwiftNSArrayTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwiftNSArrayTests.swift; sourceTree = "<group>"; };
 		1ED536831943863100BDA94E /* ExSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwift.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +123,7 @@
 				1E11AFAF1943225B006BCE48 /* Int.swift */,
 				1E11AFB01943225B006BCE48 /* Range.swift */,
 				1E11AFB11943225B006BCE48 /* String.swift */,
+				1EC241FB1946E91B0047109A /* NSArray.swift */,
 				1E11AF891943222D006BCE48 /* ExSwift.h */,
 				1E11AF871943222D006BCE48 /* Supporting Files */,
 			);
@@ -135,6 +148,7 @@
 				1E11AFA419432236006BCE48 /* ExSwiftRangeTests.swift */,
 				1E11AFA519432236006BCE48 /* ExSwiftStringTests.swift */,
 				1EA5F689194387CA00E8A40F /* ExSwiftTests.swift */,
+				1EC241FD1946E92E0047109A /* ExSwiftNSArrayTests.swift */,
 				1E11AF941943222D006BCE48 /* Supporting Files */,
 			);
 			path = ExSwiftTests;
@@ -192,6 +206,7 @@
 			);
 			dependencies = (
 				1E11AF921943222D006BCE48 /* PBXTargetDependency */,
+				1EC242001946E98F0047109A /* PBXTargetDependency */,
 			);
 			name = ExSwiftTests;
 			productName = ExSwiftTests;
@@ -256,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EC241FC1946E91B0047109A /* NSArray.swift in Sources */,
 				1E11AFBC1943225B006BCE48 /* String.swift in Sources */,
 				1E11AFB21943225B006BCE48 /* Array.swift in Sources */,
 				1ED536841943863100BDA94E /* ExSwift.swift in Sources */,
@@ -270,10 +286,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E5C39EA194703CD0067137A /* NSArray.swift in Sources */,
 				1E11AFAA19432236006BCE48 /* ExSwiftRangeTests.swift in Sources */,
 				1E11AFBB1943225B006BCE48 /* Range.swift in Sources */,
 				1E11AFB51943225B006BCE48 /* Dictionary.swift in Sources */,
 				1E11AFA619432236006BCE48 /* ExSwiftArrayTests.swift in Sources */,
+				1EC241FE1946E92E0047109A /* ExSwiftNSArrayTests.swift in Sources */,
 				1E11AFB31943225B006BCE48 /* Array.swift in Sources */,
 				1E11AFA819432236006BCE48 /* ExSwiftFloatTests.swift in Sources */,
 				1E11AFBD1943225B006BCE48 /* String.swift in Sources */,
@@ -294,6 +312,11 @@
 			isa = PBXTargetDependency;
 			target = 1E11AF831943222D006BCE48 /* ExSwift */;
 			targetProxy = 1E11AF911943222D006BCE48 /* PBXContainerItemProxy */;
+		};
+		1EC242001946E98F0047109A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E11AF831943222D006BCE48 /* ExSwift */;
+			targetProxy = 1EC241FF1946E98F0047109A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
