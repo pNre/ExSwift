@@ -8,6 +8,8 @@
 
 import Foundation
 
+operator infix =~ {}
+
 struct ExSwift {
 
     /**

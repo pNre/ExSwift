@@ -164,7 +164,7 @@ Name | Signature
 `[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> String`
 `[x, y, z]`|`subscript (indexes: Int...) -> String[]`
 `S * n`|`* (first: String, second: Int) -> String`
-`~=`|`~= (string: String, pattern: String) -> Bool`<br>`~= (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool`
+`=~`|`=~ (string: String, pattern: String) -> Bool`<br>`=~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool`
 
 ## Range ##
 #### Instance Methods ####
@@ -203,7 +203,7 @@ Name | Signatures
 **`any`**|`any (test: (KeyType, ValueType) -> (Bool)) -> Bool`
 **`all`**|`all (test: (KeyType, ValueType) -> (Bool)) -> Bool`
 **`reduce`**|`reduce <U> (initial: U, combine: (U, Element) -> U) -> U`
-**`pick`**|`pick (keys: KeyType[]) -> Dictionary`<br>`pick (keys: KeyType...) -> Dictionary`
+**`pick`, `at`**|`pick (keys: KeyType[]) -> Dictionary`<br>`pick (keys: KeyType...) -> Dictionary`<br>`at (keys: KeyType...) -> Dictionary`
 
 #### Operators ####
 Name | Signature | Function
@@ -237,6 +237,7 @@ Name | Signatures
 
 # To Do #
 * Xcode project for both iOS & OS X
+* Review code comments
 * Example project
 * Installation instructions
 * Benchmark

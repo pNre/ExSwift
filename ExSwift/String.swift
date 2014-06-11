@@ -130,12 +130,12 @@ extension String {
 /**
  *  Pattern matching with a regex
  */
-@infix func ~= (string: String, pattern: String) -> Bool {
-    return string ~= (pattern: pattern, ignoreCase: false)
+@infix func =~ (string: String, pattern: String) -> Bool {
+    return string =~ (pattern: pattern, ignoreCase: false)
 }
 
 //  This version also allowes to specify case sentitivity
-@infix func ~= (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool {
+@infix func =~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool {
     if let matches = ExSwift.regex(options.pattern, ignoreCase: options.ignoreCase)?.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length)) {
         return matches > 0
     }

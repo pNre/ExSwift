@@ -59,10 +59,10 @@ class ExSwiftStringTests: XCTestCase {
     func testMatchingOperator () {
         let string_T = "ABcd"
 
-        XCTAssertTrue(string_T ~= "^A")
+        XCTAssertTrue(string_T =~ "^A")
         
-        XCTAssertTrue(string_T ~= (pattern: "D$", ignoreCase: true))
-        XCTAssertFalse(string_T ~= "D$")
+        XCTAssertTrue(string_T =~ (pattern: "D$", ignoreCase: true))
+        XCTAssertFalse(string_T =~ "D$")
     }
 
     func testMatches () {

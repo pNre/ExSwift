@@ -101,12 +101,12 @@ println("A" * 3)
 ```
 let string = "ABcd"
 
-string ~= "D$"
+string =~ "D$"
 // → false
 
-string ~= (pattern: "D$", ignoreCase: true)
+string =~ (pattern: "D$", ignoreCase: true)
 // → true
 
-string ~= "^A"
+string =~ "^A"
 // → true
 ```

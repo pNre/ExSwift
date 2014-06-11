@@ -19,7 +19,7 @@
     	- [`all`](#all) 
     	- [`any`](#any) 
     	- [`reduce`](#reduce) 
-    	- [`pick`](#pick) 
+    	- [`pick`, `at`](#pick)
     	
 ### Instance Methods ###
 
@@ -185,7 +185,7 @@ let reduced = dictionary.reduce(Dictionary<Int, String>(), {
 // → [2: B, 3: C, 1: A]
 ```
 
-#### `pick` ####
+#### `pick`, `at` ####
 ```swift
 let dictionary = [1: "A", 2: "B", 3: "C"]
 dictionary.pick(1, 3)

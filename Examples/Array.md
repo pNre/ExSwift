@@ -46,7 +46,7 @@
     	- [Or](#or)
     	- [Subscript with Range](#subscript-with-range)
     	- [Times](#times)
-    	- [Implode](#implode)
+    	- [Implode](#implode-1)
     	
 ### Instance Methods ###
 

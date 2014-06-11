@@ -295,6 +295,13 @@ extension Dictionary {
     }
     
     /**
+    *  Equivalent to pick
+    */
+    func at (indexes: KeyType...) -> Dictionary {
+        return pick(indexes)
+    }
+
+    /**
     *  Removes a (key, value) pair from self and returns it as tuple
     *  @return (key, value)
     */
