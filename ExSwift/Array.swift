@@ -389,7 +389,7 @@ extension Array {
     */
     func groupBy <U> (groupingFunction group: (Element) -> U) -> Dictionary<U, Array> {
 
-        var result = Dictionary<U, Element[]>();
+        var result = Dictionary<U, Element[]>()
         
         for item in self {
             
@@ -400,7 +400,6 @@ extension Array {
                 result[groupKey] = elem + [item]
             } else {
                 result[groupKey] = [item]
-                
             }
         }
         
@@ -414,7 +413,7 @@ extension Array {
     */
     func countBy <U> (groupingFunction group: (Element) -> U) -> Dictionary<U, Int> {
         
-        var result = Dictionary<U, Int>();
+        var result = Dictionary<U, Int>()
         
         for item in self {
             let groupKey = group(item)

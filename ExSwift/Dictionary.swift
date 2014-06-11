@@ -197,26 +197,23 @@ extension Dictionary {
     *  @param groupingFunction
     *  @return Grouped dictionary
     */
-    func groupBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Array<ValueType>> {
+    func groupBy <T> (groupingFunction group: (KeyType, ValueType) -> T) -> Dictionary<T, Array<ValueType>> {
         
-        var result = Dictionary<T, ValueType[]>();
+        var result = Dictionary<T, ValueType[]>()
         
         for (key, value) in self {
             
             let groupKey = group(key, value)
-            var array: ValueType[]? = nil
             
-            //  This is the first object for groupKey
-            if !result.has(groupKey) {
-                result[groupKey] = [value]
+            // If element has already been added to dictionary, append to it. If not, create one.
+            if let elem = result[groupKey] {
+                result[groupKey] = elem + [value]
             } else {
-                result[groupKey] = result[groupKey]! + [value]
+                result[groupKey] = [value]
             }
-            
         }
         
         return result
-        
     }
     
     /**
@@ -226,23 +223,21 @@ extension Dictionary {
     */
     func countBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Int> {
         
-        var result = Dictionary<T, Int>();
+        var result = Dictionary<T, Int>()
         
         for (key, value) in self {
             
             let groupKey = group(key, value)
-
-            //  This is the first object for groupKey
-            if !result.has(groupKey) {
-                result[groupKey] = 1
-            } else {
-                result[groupKey] = result[groupKey]! + 1
-            }
             
+            // If element has already been added to dictionary, append to it. If not, create one.
+            if let elem = result[groupKey] {
+                result[groupKey] = elem + 1
+            } else {
+                result[groupKey] = 1
+            }
         }
         
         return result
-        
     }
     
     /**
