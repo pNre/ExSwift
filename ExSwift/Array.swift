@@ -387,26 +387,24 @@ extension Array {
     *  @param groupingFunction
     *  @return Grouped dictionary
     */
-    func groupBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Array> {
+    func groupBy <U> (groupingFunction group: (Element) -> U) -> Dictionary<U, Array> {
 
         var result = Dictionary<U, Element[]>();
         
         for item in self {
             
             let groupKey = group(item)
-            var array: T[]? = nil
             
-            //  This is the first object for groupKey
-            if !result.has(groupKey) {
-                result[groupKey] = [item]
+            // If element has already been added to dictionary, append to it. If not, create one.
+            if let elem = result[groupKey] {
+                result[groupKey] = elem + [item]
             } else {
-                result[groupKey] = (result[groupKey]! as Element[]) + [item]
+                result[groupKey] = [item]
+                
             }
-
         }
         
         return result
-        
     }
     
     /**
@@ -414,22 +412,21 @@ extension Array {
     *  @param groupingFunction
     *  @return Grouped dictionary
     */
-    func countBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Int> {
+    func countBy <U> (groupingFunction group: (Element) -> U) -> Dictionary<U, Int> {
         
         var result = Dictionary<U, Int>();
         
         for item in self {
             let groupKey = group(item)
             
-            if !result.has(groupKey) {
-                result[groupKey] = 1
+            if let elem = result[groupKey] {
+                result[groupKey] = elem + 1
             } else {
-                result[groupKey] = result[groupKey]! + 1
+                result[groupKey] = 1
             }
         }
     
         return result
-        
     }
     
     /**
