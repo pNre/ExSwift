@@ -125,6 +125,7 @@ class ExtensionsArrayTests: XCTestCase {
 
         XCTAssertEqual(1, singleSample.count)
         XCTAssertEqual(2, longerSample.count)
+        XCTAssert(array.sample(size: array.count) == array)
     }
 
     func testSubscriptRange() {
@@ -234,6 +235,7 @@ class ExtensionsArrayTests: XCTestCase {
 
     func testImplode () {
         XCTAssert(["A", "B", "C"].implode("A") == "AABAC")
+        XCTAssert((["A", "B", "C"] * ",") == "A,B,C")
     }
     
     func testAt () {
@@ -250,5 +252,10 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(1, array.get(0)!)
         XCTAssertEqual(array.get(-1)!, array.last()!)
         XCTAssertEqual(array.get(array.count)!, array.first()!)
+    }
+
+    func testDuplicationOperator () {
+        let _3times = (array * 3)
+        XCTAssert(_3times == (array + array + array))
     }
 }

@@ -140,12 +140,10 @@ extension Array {
         return -1
     }
     
-    /**
-    *  Gets the object at the specified index if exists
-    *  @param index
-    *  @return Object at index in array, nil if index is out of bounds
-    */
-    func get (index: Int) -> Element? {
+    /*
+     *  Fixes out of bounds values integers
+     */
+    func relativeIndex (index: Int) -> Int {
         var _index = (index % count)
         
         if _index < 0 {
@@ -156,6 +154,16 @@ extension Array {
             }
         }
         
+        return _index
+    }
+    
+    /**
+    *  Gets the object at the specified index if exists
+    *  @param index
+    *  @return Object at index in array, nil if index is out of bounds
+    */
+    func get (index: Int) -> Element? {
+        var _index = relativeIndex(index)
         return _index < count ? self[_index] : nil
     }
     
@@ -233,6 +241,10 @@ extension Array {
     *  @return Random subarray of length n
     */
     func sample (size n: Int = 1) -> Array {
+        if n >= count {
+            return self
+        }
+        
         let index = Int.random(max: count - n)
         return self[index..(n + index)]
     }
@@ -467,7 +479,7 @@ extension Array {
      *  Creates an array of elements from the specified indexes of self
      */
     func at (indexes: Int...) -> Array {
-        return indexes.map { self[$0] }
+        return indexes.map { self.get($0)! }
     }
     
     /**
@@ -564,7 +576,7 @@ extension Array {
     subscript (indexes: Int...) -> Array {
         return at(reinterpretCast(indexes))
     }
-    
+
 }
 
 /**
@@ -593,4 +605,23 @@ extension Array {
 */
 @infix func | <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
     return first.union(second)
+}
+/**
+*  Array duplication
+*/
+@infix func * <ItemType> (array: ItemType[], n: Int) -> ItemType[] {
+    var result = ItemType[]()
+    
+    n.times {
+        result += array
+    }
+    
+    return result
+}
+
+/**
+*  Array items concatenation à la Ruby
+*/
+@infix func * (array: String[], separator: String) -> String {
+    return array.implode(separator)!
 }
