@@ -236,7 +236,8 @@ Name | Signatures
 **`bind`**|`bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (() -> T)`
 
 # To Do #
---
-* Compile as library as soon as XCode 6 stops crashing.
+* Xcode project for both iOS & OS X
+* Example project
+* Installation instructions
 * Benchmark
 * ...

@@ -45,24 +45,26 @@
     	- [And](#and)
     	- [Or](#or)
     	- [Subscript with Range](#subscript-with-range)
+    	- [Times](#times)
+    	- [Implode](#implode)
     	
 ### Instance Methods ###
 
-##### `first` #####
+#### `first` ####
 ```
 let array = [1, 2, 3, 4]
 array.first() 
 // → 1
 ```
 
-##### `last` #####
+#### `last` ####
 ```
 let array = [1, 2, 3, 4]
 array.last() 
 // → 4
 ```
 
-##### `get` #####
+#### `get` ####
 ```
 let array = [1, 2, 3, 4]
 
@@ -73,7 +75,14 @@ array.get(0..2)
 // → [0, 1]
 ```
 
-##### `remove` #####
+`get` also supports negative indexes:
+
+```
+array.get(-1)
+// → 4
+```
+
+#### `remove` ####
 ```
 let array = [1, 2, 3, 4]
 array.remove(1)
@@ -81,7 +90,7 @@ println(array)
 // → [2, 3, 4]
 ```
 
-##### `at` #####
+#### `at` ####
 ```
 let array = [1, 2, 3, 4]
 
@@ -92,25 +101,32 @@ array[1, 0, 3]
 // → [2, 1, 4]
 ```
 
-##### `take` #####
+`at` also supports negative indexes:
+
+```
+array.at(-1, -3)
+// → [4, 2]
+```
+
+#### `take` ####
 ```
 [1, 2, 3, 4].take(2)
 // → [1, 2]
 ```
 
-##### `tail` #####
+#### `tail` ####
 ```
 [1, 2, 3, 4, 5].tail(3)
 // → [3, 4, 5]
 ```
 
-##### `skip` #####
+#### `skip` ####
 ```
 [1, 2, 3, 4, 5].skip(3)
 // → [4, 5]
 ```
 
-##### `contains` #####
+#### `contains` ####
 ```
 [1, 2, 3, 4].contains(2)  
 // → true
@@ -122,7 +138,7 @@ array[1, 0, 3]
 // → true
 ```
 
-##### `difference` #####
+#### `difference` ####
 ```
 [1, 2, 3, 4].difference([2, 3])	
 // → [1, 4]
@@ -131,7 +147,7 @@ array[1, 0, 3]
 // → [1, 4]
 ```
 
-##### `intersection` #####
+#### `intersection` ####
 ```
 [1, 2, 3, 4].intersection([2, 3])	
 // → [2, 3]
@@ -140,7 +156,7 @@ array[1, 0, 3]
 // → [2, 3]
 ```
 
-##### `union` #####
+#### `union` ####
 ```
 [1, 2, 3, 4].union([5, 6])	
 // → [1, 2, 3, 4, 5, 6]
@@ -149,13 +165,13 @@ array[1, 0, 3]
 // → [1, 2, 3, 4]
 ```
 
-##### `unique` #####
+#### `unique` ####
 ```
 [1, 1, 3, 3, 4].unique() as Array<Int>
 // → [1, 3, 4]
 ```
 
-##### `indexOf` #####
+#### `indexOf` ####
 ```
 [1, 2, 3, 4].indexOf(3)
 // → 2
@@ -164,13 +180,13 @@ array[1, 0, 3]
 // → -1
 ```
 
-##### `zip` #####
+#### `zip` ####
 ```
 [1, 2].zip(["A", "B"])
 // → [[1, "A"], [2, "B"]]
 ```
 
-##### `shuffle` #####
+#### `shuffle` ####
 ```
 let array = [1, 2, 3, 4]
 array.shuffle()
@@ -178,13 +194,13 @@ println(array)
 // → [3, 2, 4, 1]
 ```
 
-##### `shuffled` #####
+#### `shuffled` ####
 ```
 [1, 2, 3, 4].shuffled()
 // → [2, 4, 3, 1]
 ```
 
-##### `sample` #####
+#### `sample` ####
 ```
 [1, 2, 3, 4].sample()
 // → [2]
@@ -193,19 +209,19 @@ println(array)
 // → [3, 4]
 ```
 
-##### `max` #####
+#### `max` ####
 ```
 [1, 2, 3, 4].max() as Int
 // → [4]
 ```
 
-##### `min` #####
+#### `min` ####
 ```
 [1, 2, 3, 4].min() as Int
 // → [1]
 ```
 
-##### `each` #####
+#### `each` ####
 ```
 [1, 2, 3, 4].each {
     (item: Int) in println(item)
@@ -218,7 +234,7 @@ println(array)
 // → (0, A) (1, B) (2, C)
 ```
 
-##### `eachRight` #####
+#### `eachRight` ####
 ```
 [1, 2, 3, 4].eachRight {
     (item: Int) in println(item)
@@ -231,7 +247,7 @@ println(array)
 // → (2, A) (1, B) (0, C)
 ```
 
-##### `any` #####
+#### `any` ####
 ```
 [1, 2, 3, 4].any {
     return $0 % 2 == 0
@@ -244,7 +260,7 @@ println(array)
 // → false
 ```
 
-##### `all` #####
+#### `all` ####
 ```
 [1, 2, 3, 4].all {
     return $0 < 5
@@ -257,7 +273,7 @@ println(array)
 // → false
 ```
 
-##### `reject` #####
+#### `reject` ####
 ```
 [1, 2, 3, 4].reject {
     return $0 % 2 == 0
@@ -265,7 +281,7 @@ println(array)
 // → [1, 3]
 ```
 
-##### `pop` #####
+#### `pop` ####
 ```
 var array = [1, 2, 3, 4]
 array.pop()
@@ -274,7 +290,7 @@ println(array)
 // → [1, 2, 3]
 ```
 
-##### `push` #####
+#### `push` ####
 ```
 var array = [1, 2, 3, 4]
 array.push(5)
@@ -282,7 +298,7 @@ println(array)
 // → [1, 2, 3, 4, 5]
 ```
 
-##### `shift` #####
+#### `shift` ####
 ```
 var array = [1, 2, 3, 4]
 array.shift()
@@ -291,7 +307,7 @@ println(array)
 // → [2, 3, 4]
 ```
 
-##### `unshift` #####
+#### `unshift` ####
 ```
 var array = [1, 2, 3, 4]
 array.unshift(0)
@@ -299,7 +315,7 @@ println(array)
 // → [0, 1, 2, 3, 4]
 ```
 
-##### `groupBy` #####
+#### `groupBy` ####
 ```
 let array = array = [1, 2, 3, 4, 5]
 let group = array.groupBy(groupingFunction: {
@@ -309,7 +325,7 @@ let group = array.groupBy(groupingFunction: {
 // → [true: [5, 6], false: [1, 2, 3]]
 ```
 
-##### `countBy` #####
+#### `countBy` ####
 ```
 let array = array = [1, 2, 3, 4, 5]
 let group = array.countBy(groupingFunction: {
@@ -319,7 +335,7 @@ let group = array.countBy(groupingFunction: {
 // → [true: 2, false: 3]
 ```
 
-##### `reduce` #####
+#### `reduce` ####
 Different from the standerd `reduce`. Assumes the elements type `Element` as return type and `self.first()` as initial value.
 
 ```
@@ -328,7 +344,7 @@ list.reduce(+)
 // → 15
 ```
 
-##### `reduceRight` #####
+#### `reduceRight` ####
 With initial argument:
 
 ```
@@ -345,13 +361,13 @@ list.reduceRight(+)
 // → "CAB"
 ```
 
-##### `implode` #####
+#### `implode` ####
 ```
 ["A", "B", "C"].implode("_")
 // → A_B_C
 ```
 
-##### `flatten` #####
+#### `flatten` ####
 ```
 let array = [5, [6, [7]], 8]
 array.flatten() as Int[]
@@ -360,7 +376,7 @@ array.flatten() as Int[]
 
 ### Class Methods ###
 
-##### `range` #####
+#### `range` ####
 ```
 Array<Int>.range(0..3)
 // → [0, 1, 2]
@@ -399,4 +415,18 @@ Union
 let a = [1, 2, 3]
 println(a[1...2])
 // → [2, 3]
+```
+
+#### Times ####
+```
+let a = [1, 2, 3]
+a * 3
+// → [1, 2, 3, 1, 2, 3, 1, 2, 3]
+```
+
+#### Implode ####
+```
+let a = ["Hello", "World"]
+a * ", "
+// → "Hello, World"
 ```
