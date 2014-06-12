@@ -110,6 +110,9 @@ Name | Signatures
 **`clamp`**|`clamp (range: Range<Int>) -> Int`<br>`clamp (min: Int, max: Int) -> Int`
 **`isIn`**|`isIn (range: Range<Int>, strict: Bool = false) -> Bool`
 **`explode`**|`explode () -> Array<Int>`
+**`abs`**|`abs () -> Int`
+**`gcd`**|`gcd (n: Int) -> Int`
+**`lcm`**|`lcm (n: Int) -> Int`
 
 #### Class Methods ####
 
@@ -149,7 +152,8 @@ Name | Signature
 **`explode`**|`explode (separator: Character) -> String[]`
 **`at`**|`at (indexes: Int...) -> String[]`
 **`matches`**|`matches (pattern: String, ignoreCase: Bool = false) -> NSTextCheckingResult[]?`
-**`capitalized`**|`capitalized () -> String?`
+**`capitalized`**|`capitalized () -> String`
+**`insert`**|`insert (index: Int, _ string: String) -> String`
 
 #### Class Methods ####
 
@@ -164,7 +168,8 @@ Name | Signature
 `[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> String`
 `[x, y, z]`|`subscript (indexes: Int...) -> String[]`
 `S * n`|`* (first: String, second: Int) -> String`
-`=~`|`=~ (string: String, pattern: String) -> Bool`<br>`=~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool`
+`=~`|`=~ (string: String, pattern: String) -> Bool`<br>`=~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool`<br>`=~ (strings: String[], pattern: String) -> Bool`<br>`=~ (strings: String[], options: (pattern: String, ignoreCase: Bool)) -> Bool`
+<code>&#124;~</code>|<code>&#124;~ (string: String, pattern: String) -> Bool</code><br><code>&#124;~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool</code>
 
 ## Range ##
 #### Instance Methods ####

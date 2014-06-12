@@ -105,6 +105,21 @@ class ExSwiftIntTests: XCTestCase {
         let result = 362.explode()
         XCTAssert(result == [3, 6, 2])
     }
-
+    
+    func testGCD () {
+        XCTAssertEqual(3, 3.gcd(6))
+        XCTAssertEqual(3, 6.gcd(3))
+        XCTAssertEqual(2, 6124.gcd(342))
+        XCTAssertEqual(2, 342.gcd(6124))
+    }
+    
+    func testAbs () {
+        XCTAssertEqual(1, (-1).abs())
+    }
+    
+    func testLCM () {
+        XCTAssertEqual(12, 3.lcm(4))
+        XCTAssertEqual(12, 4.lcm(3))
+    }
 }
 

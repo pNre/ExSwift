@@ -12,6 +12,9 @@
     	- [`clamp`](#clamp)
     	- [`isIn`](#isin)
     	- [`explode`](#explode)
+    	- [`abs`](#abs)
+    	- [`gcd`](#gcd)
+    	- [`lcm`](#lcm)
     - [Class Methods](#class-methods)
     	- [`random`](#random)
 
@@ -72,6 +75,24 @@
 ```
 567.explode()
 // → [5, 6, 7]
+```
+
+##### `abs` #####
+```
+(-10).abs()
+// → 10
+```
+
+##### `gcd` #####
+```
+6.gcd(3)
+// → 3
+```
+
+##### `lcm` #####
+```
+3.lcm(4)
+// → 12
 ```
 
 ### Class Methods ###

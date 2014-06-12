@@ -9,6 +9,7 @@
 import Foundation
 
 operator infix =~ {}
+operator infix |~ {}
 
 struct ExSwift {
 

@@ -84,7 +84,6 @@ extension Int {
      *  Computes the value of self clamped to a range defined by the first argument
      */
     func clamp (range: Range<Int>) -> Int {
-    
         if self > range.endIndex - 1 {
             return range.endIndex - 1
         } else if self < range.startIndex {
@@ -92,7 +91,6 @@ extension Int {
         }
         
         return self
-        
     }
     
     func clamp (min: Int, max: Int) -> Int {
@@ -111,7 +109,7 @@ extension Int {
     }
 
     /**
-    *  Returns an array of digits in self
+    *  Returns an array of integers where each element is a digit of self
     */
     func explode () -> Array<Int> {
         var result = Int[]()
@@ -125,7 +123,28 @@ extension Int {
     
         return result
     }
-
+    
+    /**
+     * Absolute value
+     */
+    func abs () -> Int {
+        return Swift.abs(self)
+    }
+    
+    /**
+    *  Greatest common divisor of `self` and `n`
+    */
+    func gcd (n: Int) -> Int {
+        return n == 0 ? self : n.gcd(self % n)
+    }
+    
+    /**
+    *  Least common multiple of `self` and `n`
+    */
+    func lcm (n: Int) -> Int {
+        return (self * n).abs() / gcd(n)
+    }
+    
     /**
     *  Returns a random integer between min and max (inclusive)
     *  @return Random integer

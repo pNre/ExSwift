@@ -56,17 +56,34 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssert(array2 == ["A", "B"])
     }
     
-    func testMatchingOperator () {
-        let string_T = "ABcd"
+    func testMatchingOperators () {
+        //  String
+        let string = "ABcd"
 
-        XCTAssertTrue(string_T =~ "^A")
+        XCTAssertTrue(string =~ "^A")
         
-        XCTAssertTrue(string_T =~ (pattern: "D$", ignoreCase: true))
-        XCTAssertFalse(string_T =~ "D$")
+        XCTAssertTrue(string =~ (pattern: "D$", ignoreCase: true))
+        XCTAssertFalse(string =~ "D$")
+        
+        //  String[] all
+        let strings = [string, string, string]
+        
+        XCTAssertTrue(strings =~ "^A")
+        
+        XCTAssertTrue(strings =~ (pattern: "D$", ignoreCase: true))
+        XCTAssertFalse(strings =~ "D$")
+        
+        //  String[] any
+        let strings_2 = [string, "BC", "DE"]
+        
+        XCTAssertTrue(strings |~ "^A")
+        
+        XCTAssertTrue(strings |~ (pattern: "D$", ignoreCase: true))
+        XCTAssertFalse(strings |~ "D$")
+        
     }
 
     func testMatches () {
-
         let string = "AB[31]"
 
         let matches = string.matches("\\d+")!
@@ -74,13 +91,16 @@ class ExSwiftStringTests: XCTestCase {
 
         XCTAssert(string[range.location..(range.location + range.length)] == "31")
         XCTAssertTrue(string.matches("N")?.isEmpty)
-
     }
     
     func testCapitalized () {
-        XCTAssertNil("".capitalized()?)
-        XCTAssert("abcdef".capitalized()! == "Abcdef")
-        XCTAssert("Abcdef".capitalized()! == "Abcdef")
+        XCTAssert("".capitalized() == "")
+        XCTAssert("abcdef".capitalized() == "Abcdef")
+        XCTAssert("Abcdef".capitalized() == "Abcdef")
+    }
+
+    func testInsert () {
+        XCTAssert("abcdef".insert(3, "X") == "abcXdef")
     }
 
 }

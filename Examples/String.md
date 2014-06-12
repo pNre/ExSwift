@@ -10,6 +10,7 @@
     	- [`at`](#at)
     	- [`matches`](#matches)
     	- [`capitalized`](#capitalized)
+    	- [`insert`](#insert)
     - [Class Methods](#class-methods)
     	- [`random`](#random)
     - [Operators](#operators)
@@ -63,6 +64,12 @@ string[range.location..(range.location + range.length)]
 // → Hello
 ```
 
+##### `insert` #####
+```
+"abcdef".insert(3, "X")
+// → abcXdef
+```
+
 ### Class Methods ###
 --
 ##### `random` #####
@@ -98,6 +105,9 @@ println("A" * 3)
 ```
 
 #### Match ####
+
+#####String#####
+
 ```
 let string = "ABcd"
 
@@ -108,5 +118,21 @@ string =~ (pattern: "D$", ignoreCase: true)
 // → true
 
 string =~ "^A"
+// → true
+```
+
+#####All the elements in array#####
+```
+let string = "ABcd"
+
+let strings = [string, string, string]
+strings =~ "^A"
+// → true
+```
+
+#####Any element in array#####
+```
+let strings = ["ABCD", "492", "no"]
+strings |~ "^A"
 // → true
 ```

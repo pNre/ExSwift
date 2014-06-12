@@ -79,14 +79,21 @@ extension String {
     }
     
     /**
-    *  self with capitalized first character
+    *  `self` with capitalized first character
     */
-    func capitalized () -> String? {
+    func capitalized () -> String {
         if length == 0 {
-            return nil
+            return self
         }
         
         return self[0]!.uppercaseString + self[1..length]!
+    }
+    
+    /**
+    *  Inserts `string` before the character at the given `index`
+    */
+    func insert (index: Int, _ string: String) -> String {
+        return self[0..index]! + string + self[index..length]!
     }
 
     /**
@@ -143,3 +150,20 @@ extension String {
     return false
 }
 
+//  Match against all the alements in an array of String
+@infix func =~ (strings: String[], pattern: String) -> Bool {
+    return strings.all { $0 =~ (pattern: pattern, ignoreCase: false) }
+}
+
+@infix func =~ (strings: String[], options: (pattern: String, ignoreCase: Bool)) -> Bool {
+    return strings.all { $0 =~ options }
+}
+
+//  Match against any element in an array of String
+@infix func |~ (strings: String[], pattern: String) -> Bool {
+    return strings.any { $0 =~ (pattern: pattern, ignoreCase: false) }
+}
+
+@infix func |~ (strings: String[], options: (pattern: String, ignoreCase: Bool)) -> Bool {
+    return strings.any { $0 =~ options }
+}
