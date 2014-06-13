@@ -36,7 +36,7 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
 
 ## Array ##
 
-Examples in the [Wiki](/wiki/Array)
+Examples in the [[Wiki|Array]]
 
 #### Instance Methods ####
 
