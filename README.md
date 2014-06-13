@@ -52,10 +52,10 @@ Name | Signature
 **`skip`**|`skip (n: Int) -> Array`
 **`contains`**|`contains <T: Equatable> (item: T...) -> Bool`
 **`difference`**|`difference <T: Equatable> (values: Array<T>...) -> Array<T>`
-**`intersection`**|`func intersection <U: Equatable> (values: Array<U>...) -> Array`
-**`union`**|`func union <U: Equatable> (values: Array<U>...) -> Array`
+**`intersection`**|`intersection <U: Equatable> (values: Array<U>...) -> Array`
+**`union`**|`union <U: Equatable> (values: Array<U>...) -> Array`
 **`unique`**|`unique <T: Equatable> () -> Array<T>`
-**`indexOf`**|`func indexOf <T: Equatable> (item: T) -> Int`
+**`indexOf`**|`indexOf <T: Equatable> (item: T) -> Int`
 **`zip`**|`zip (arrays: Array<Any>...) -> Array<Array<Any?>>`
 **`shuffle`**|`shuffle ()`
 **`shuffled`**|`shuffled () -> Array`
