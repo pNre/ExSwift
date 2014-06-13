@@ -51,6 +51,7 @@ Name | Signature
 **`takeWhile`**|`takeWhile (condition: (Element) -> Bool) -> Array`
 **`tail`**|`tail (n: Int) -> Array`
 **`skip`**|`skip (n: Int) -> Array`
+**`skipWhile`**|`skipWhile (condition: (Element) -> Bool) -> Array`
 **`contains`**|`contains <T: Equatable> (item: T...) -> Bool`
 **`difference`**|`difference <T: Equatable> (values: Array<T>...) -> Array<T>`
 **`intersection`**|`func intersection <U: Equatable> (values: Array<U>...) -> Array`

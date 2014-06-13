@@ -13,6 +13,7 @@
     	- [`takeWhile`](#takeWhile)
     	- [`tail`](#tail)
     	- [`skip`](#skip)
+    	- [`skipWhile`](#skipWhile)
     	- [`contains`](#contains)
     	- [`difference`](#difference)
     	- [`intersection`](#intersection)
@@ -131,6 +132,12 @@ array.at(-1, -3)
 ```
 [1, 2, 3, 4, 5].skip(3)
 // → [4, 5]
+```
+
+#### `skipWhile` ####
+```
+[1, 2, 3, 4, 5, 2].skipWhile { $0 < 4 }
+// → [4, 5, 2]
 ```
 
 #### `contains` ####
