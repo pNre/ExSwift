@@ -10,8 +10,10 @@
     	- [`remove`](#remove)
     	- [`at`](#at)
     	- [`take`](#take)
+    	- [`takeWhile`](#takeWhile)
     	- [`tail`](#tail)
     	- [`skip`](#skip)
+    	- [`skipWhile`](#skipWhile)
     	- [`contains`](#contains)
     	- [`difference`](#difference)
     	- [`intersection`](#intersection)
@@ -114,6 +116,12 @@ array.at(-1, -3)
 // → [1, 2]
 ```
 
+#### `takeWhile` ####
+```
+[1, 2, 3, 4, 5, 2].takeWhile { $0 < 4 }
+// → [1, 2, 3]
+```
+
 #### `tail` ####
 ```
 [1, 2, 3, 4, 5].tail(3)
@@ -124,6 +132,12 @@ array.at(-1, -3)
 ```
 [1, 2, 3, 4, 5].skip(3)
 // → [4, 5]
+```
+
+#### `skipWhile` ####
+```
+[1, 2, 3, 4, 5, 2].skipWhile { $0 < 4 }
+// → [4, 5, 2]
 ```
 
 #### `contains` ####

@@ -363,6 +363,26 @@ extension Array {
     }
 
     /**
+    *  Returns the elements of the array up until an element does not meet the condition
+    *  @param condition A function which returns a boolean if an element satisfies a given condition or not.
+    *  @return Elements of the array up until an element does not meet the condition
+    */
+    func takeWhile (condition: (Element) -> Bool) -> Array {
+        
+        var lastTrue = -1
+        
+        for (index, value) in enumerate(self) {
+            if condition(value) {
+                lastTrue = index
+            } else {
+                break
+            }
+        }
+        
+        return self.take(lastTrue+1)
+    }
+
+    /**
     *  Returns the last n elements from self
     *  @return Last n elements
     */
@@ -376,6 +396,26 @@ extension Array {
     */
     func skip (n: Int) -> Array {
         return self[n..count]
+    }
+    
+    /**
+    *  Skips the elements of the array up until the condition returns false
+    *  @param condition A function which returns a boolean if an element satisfies a given condition or not
+    *  @return Elements of the array starting with the element which does not meet the condition
+    */
+    func skipWhile (condition: (Element) -> Bool) -> Array {
+        
+        var lastTrue = -1
+        
+        for (index, value) in enumerate(self) {
+            if condition(value) {
+                lastTrue = index
+            } else {
+                break
+            }
+        }
+        
+        return self.skip(lastTrue+1)
     }
     
     /**
