@@ -487,7 +487,7 @@ extension Array {
      *          and its elements are instances of C, nil otherwise
      */
     func implode <C: ExtensibleCollection> (separator: C) -> C? {
-        if self.first() is C {
+        if Element.self is C.Type {
             return Swift.join(separator, reinterpretCast(self) as Array<C>)
         }
         
