@@ -363,6 +363,26 @@ extension Array {
     }
 
     /**
+    *  Returns the elements of the array up until an element does not meet the condition
+    *  @param condition A function which returns a boolean if an element satisfies a given condition or not.
+    *  @return Elements of the array up until an element does not meet the condition
+    */
+    func takeWhile (condition: (Element) -> Bool) -> Array {
+        
+        var lastTrue = 0
+        
+        for (index, value) in enumerate(self) {
+            if condition(value) {
+                lastTrue = index
+            } else {
+                break
+            }
+        }
+        
+        return self[0...lastTrue]
+    }
+
+    /**
     *  Returns the last n elements from self
     *  @return Last n elements
     */

@@ -10,6 +10,7 @@
     	- [`remove`](#remove)
     	- [`at`](#at)
     	- [`take`](#take)
+    	- [`takeWhile`](#takeWhile)
     	- [`tail`](#tail)
     	- [`skip`](#skip)
     	- [`contains`](#contains)
@@ -112,6 +113,12 @@ array.at(-1, -3)
 ```
 [1, 2, 3, 4].take(2)
 // → [1, 2]
+```
+
+#### `takeWhile` ####
+```
+[1, 2, 3, 4, 5, 2].takeWhile { $0 < 4 }
+// → [1, 2, 3]
 ```
 
 #### `tail` ####
