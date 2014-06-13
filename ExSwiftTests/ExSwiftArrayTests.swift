@@ -158,9 +158,23 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssert(array.take(0) == [])
     }
     
+    func testTakeWhile() {
+        let descendingArray = [1,2,3,2,1] // FIXME: Cannot find member 'takeWhile' when comparing the results with == on unbound array. Bug reported.
+        XCTAssert(array.takeWhile { $0 < 3 } == [1 , 2])
+        XCTAssert(descendingArray.takeWhile { $0 < 3 } == [1, 2])
+        XCTAssert(array.takeWhile { $0.isEven() } == [])
+    }
+    
     func testSkip() {
         XCTAssert(array.skip(3) == [4, 5])
         XCTAssert(array.skip(0) == array)
+    }
+    
+    func testSkipWhile() {
+        let descendingArray = [1,2,3,2,1] // FIXME: Cannot find member 'takeWhile' when comparing the results with == on unbound array. Bug reported.
+        XCTAssert(array.skipWhile { $0 < 3 } == [3, 4, 5])
+        XCTAssert(descendingArray.skipWhile { $0 < 3 } == [3, 2, 1])
+        XCTAssert(array.skipWhile { $0.isEven() } == array)
     }
 
     func testTail () {
