@@ -82,11 +82,7 @@ extension String {
     *  `self` with capitalized first character
     */
     func capitalized () -> String {
-        if length == 0 {
-            return self
-        }
-        
-        return self[0]!.uppercaseString + self[1..length]!
+        return capitalizedString
     }
     
     /**
@@ -147,10 +143,10 @@ extension String {
 /**
 *  Repeat a string
 */
-@infix func * (first: String, second: Int) -> String {
+@infix func * (first: String, n: Int) -> String {
     var result = String()
 
-    second.times {
+    n.times {
         result += first
     }
     
