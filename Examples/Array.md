@@ -1,4 +1,5 @@
 #Array
+###Refer to the [Wiki](https://github.com/pNre/ExSwift/wiki/Array) for updated info.
 
 ### Contents ###
 

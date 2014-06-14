@@ -33,7 +33,7 @@ extension String {
     }
 
     /**
-    *  Returns the unicode char at position index in the string
+    *  Returns the char at position `index` in the string
     *  @return Unicode char as String or nil if the index is out of bounds
     */
     subscript (index: Int) -> String? {

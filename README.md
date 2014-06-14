@@ -140,7 +140,7 @@ Name | Signatures | Usage
 
 ## String ##
 
-Examples in [Examples/String.md](Examples/String.md)
+Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/String)
 
 #### Properties ####
 Name |

@@ -1,5 +1,7 @@
 #String
 
+###Refer to the [Wiki](https://github.com/pNre/ExSwift/wiki/String) for updated info.
+
 ### Contents ###
 
 - [String](#string)
