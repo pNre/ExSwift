@@ -156,6 +156,9 @@ Name | Signature
 **`matches`**|`matches (pattern: String, ignoreCase: Bool = false) -> NSTextCheckingResult[]?`
 **`capitalized`**|`capitalized () -> String`
 **`insert`**|`insert (index: Int, _ string: String) -> String`
+**`ltrimmed`**|`ltrimmed () -> String`
+**`rtrimmed`**|`rtrimmed () -> String`
+**`trimmed`**|`trimmed () -> String`
 
 #### Class Methods ####
 
@@ -243,6 +246,7 @@ Name | Signatures
 **`bind`**|`bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (() -> T)`
 
 # To Do #
+* Wiki
 * Xcode project for both iOS & OS X
 * Review code comments
 * Example project

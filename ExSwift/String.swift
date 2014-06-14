@@ -97,6 +97,29 @@ extension String {
     }
 
     /**
+     * Strip whitespace from the beginning of a string.
+     */
+    func ltrimmed () -> String {
+        let range = rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet().invertedSet)
+        return self[range.startIndex..endIndex]
+    }
+    
+    /**
+    * Strip whitespace from the end of a string.
+    */
+    func rtrimmed () -> String {
+        let range = rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet().invertedSet, options: NSStringCompareOptions.BackwardsSearch)
+        return self[startIndex..range.endIndex]
+    }
+    
+    /**
+    * Strip whitespace from the beginning and end of a string.
+    */
+    func trimmed () -> String {
+        return ltrimmed().rtrimmed()
+    }
+    
+    /**
     *  Random string
     *  @param length String length, 0 -> random length
     *  @param charset Chars to use in the random string costruction

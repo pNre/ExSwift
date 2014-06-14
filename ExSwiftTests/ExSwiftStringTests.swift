@@ -103,4 +103,23 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssert("abcdef".insert(3, "X") == "abcXdef")
     }
 
+    func testTrimmed () {
+        XCTAssert("t e".trimmed() == "t e")
+        XCTAssert(" AB".trimmed() == "AB")
+        XCTAssert("\n ABC   ".trimmed() == "ABC")
+    }
+    
+    func testLTrimmed () {
+        XCTAssert("ab ".ltrimmed() == "ab ")
+        XCTAssert("ab".ltrimmed() == "ab")
+        XCTAssert(" AB".ltrimmed() == "AB")
+        XCTAssert("\n ABC   ".ltrimmed() == "ABC    ")
+    }
+    
+    func testRTrimmed () {
+        XCTAssert("t e".rtrimmed() == "t e")
+        XCTAssert(" AB".rtrimmed() == " AB")
+        XCTAssert("AB ".rtrimmed() == "AB")
+        XCTAssert("\n ABC   ".rtrimmed() == "\n ABC")
+    }
 }
