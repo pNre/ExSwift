@@ -1,5 +1,7 @@
 #Int
 
+###Refer to the [Wiki](https://github.com/pNre/ExSwift/wiki/Int) for updated info.
+
 ### Contents ###
 
 - [Int](#int)
@@ -11,7 +13,7 @@
     	- [`downTo`](#downto)
     	- [`clamp`](#clamp)
     	- [`isIn`](#isin)
-    	- [`explode`](#explode)
+    	- [`digits`](#digits)
     	- [`abs`](#abs)
     	- [`gcd`](#gcd)
     	- [`lcm`](#lcm)
@@ -71,9 +73,9 @@
 // → false
 ```
 
-##### `explode` #####
+##### `digits` #####
 ```
-567.explode()
+567.digits()
 // → [5, 6, 7]
 ```
 

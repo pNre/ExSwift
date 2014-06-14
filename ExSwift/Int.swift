@@ -37,9 +37,7 @@ extension Int {
     *  @param call Function to call
     */
     func times <T> (call: (Int) -> T) {
-        for i in 0..self {
-            call(i)
-        }
+        (0..self).each { index in call(index); return }
     }
 
     /**
@@ -70,8 +68,8 @@ extension Int {
     }
     
     /**
-    *  Iterates call, passing in integer values from self down to and including limit.
-    */
+     * Iterates call, passing in integer values from self down to and including limit.
+     */
     func downTo (limit: Int, call: (Int) -> ()) {
         if limit > self {
             return
@@ -81,7 +79,7 @@ extension Int {
     }
 
     /**
-     *  Computes the value of self clamped to a range defined by the first argument
+     * Computes the value of self clamped to a range defined by `range`
      */
     func clamp (range: Range<Int>) -> Int {
         if self > range.endIndex - 1 {
@@ -109,9 +107,9 @@ extension Int {
     }
 
     /**
-    *  Returns an array of integers where each element is a digit of self
-    */
-    func explode () -> Array<Int> {
+     * Returns an array of integers where each element is a digit of `self`
+     */
+    func digits () -> Array<Int> {
         var result = Int[]()
         
         for char in String(self) {
@@ -146,7 +144,7 @@ extension Int {
     }
     
     /**
-    *  Returns a random integer between min and max (inclusive)
+    *  Returns a random integer between `min` and `max` (inclusive).
     *  @return Random integer
     */
     static func random(min: Int = 0, max: Int) -> Int {

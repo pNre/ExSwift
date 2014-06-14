@@ -102,7 +102,7 @@ class ExSwiftIntTests: XCTestCase {
     }
 
     func testExplode () {
-        let result = 362.explode()
+        let result = 362.digits()
         XCTAssert(result == [3, 6, 2])
     }
     

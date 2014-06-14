@@ -98,7 +98,8 @@ Name | Signature | Function
 `[[x, y, z]]`|`subscript(indexes: Int...) -> Array`|Returns the items at *x*, *y*, *z*
 
 ## Int ##
-Examples in [Examples/Int.md](Examples/Int.md)
+
+Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/Int)
 
 #### Instance Methods ####
 
@@ -111,7 +112,7 @@ Name | Signatures
 **`downTo`**|`downTo (limit: Int, call: (Int) -> ())`
 **`clamp`**|`clamp (range: Range<Int>) -> Int`<br>`clamp (min: Int, max: Int) -> Int`
 **`isIn`**|`isIn (range: Range<Int>, strict: Bool = false) -> Bool`
-**`explode`**|`explode () -> Array<Int>`
+**`digits`**|`digits () -> Array<Int>`
 **`abs`**|`abs () -> Int`
 **`gcd`**|`gcd (n: Int) -> Int`
 **`lcm`**|`lcm (n: Int) -> Int`
