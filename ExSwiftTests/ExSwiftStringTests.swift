@@ -113,7 +113,7 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssert("ab ".ltrimmed() == "ab ")
         XCTAssert("ab".ltrimmed() == "ab")
         XCTAssert(" AB".ltrimmed() == "AB")
-        XCTAssert("\n ABC   ".ltrimmed() == "ABC    ")
+        XCTAssert("\n ABC   ".ltrimmed() == "ABC   ")
     }
     
     func testRTrimmed () {
