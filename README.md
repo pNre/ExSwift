@@ -126,6 +126,8 @@ Name | Signatures
 
 ## Float ##
 
+Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/Float)
+
 #### Instance Methods ####
 
 Name | Signature
@@ -135,9 +137,9 @@ Name | Signature
 
 #### Class Methods ####
 
-Name | Signatures | Usage
----- | ---------- | -----
-**`random`**|`random(min: Float = 0, max: Float) -> Float`|`Float.random(min: 1, max: 1000)`
+Name | Signatures
+---- | ---------- 
+**`random`**|`random(min: Float = 0, max: Float) -> Float`
 
 ## String ##
 
