@@ -60,6 +60,9 @@ Name | Signature
 **`indexOf`**|`indexOf <T: Equatable> (item: T) -> Int`
 **`lastIndexOf`**|`lastIndexOf <T: Equatable> (item: T) -> Int`
 **`zip`**|`zip (arrays: Array<Any>...) -> Array<Array<Any?>>`
+**`partition`**|`partition (n: Int, step: Int, pad: Element[]?) -> Array<Array<Element>>`
+**`partitionAll`**|`partition (n: Int, step: Int) -> Array<Array<Element>>`
+**`partitionBy`**|`partition <T: Equatable> (cond: (Element) -> T) -> Array<Array<Element>>`
 **`shuffle`**|`shuffle ()`
 **`shuffled`**|`shuffled () -> Array`
 **`sample`** *(random)*|`sample (size n: Int = 1) -> Array<T>`

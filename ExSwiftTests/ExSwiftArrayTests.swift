@@ -119,6 +119,26 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual("B", b)
     }
 
+    func testPartition() {
+        XCTAssertEqual(array.partition(2), [[1, 2], [3, 4]])
+        XCTAssertEqual(array.partition(2, step: 1), [[1, 2], [2, 3], [3, 4], [4, 5]])
+        XCTAssertEqual(array.partition(2, step: 1, pad: nil), [[1, 2], [2, 3], [3, 4], [4, 5], [5]])
+        XCTAssertEqual(array.partition(2, step: 1, pad: [6,7,8]), [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]])
+        
+        XCTAssertEqual([1, 2, 3, 4, 5, 6].partition(2, step: 4), [[1, 2], [5, 6]])
+        XCTAssertEqual(array.partition(10)[0].count, 0)
+    }
+    
+    func testPartitionAll() {
+        XCTAssertEqual(array.partitionAll(2, step: 1), [[1, 2], [2, 3], [3, 4], [4, 5], [5]])
+    }
+    
+    func testPartitionBy() {
+        XCTAssertEqual(array.partitionBy { $0 > 10 }, [[1, 2, 3, 4, 5]])
+        XCTAssertEqual([1, 2, 4, 3, 5, 6].partitionBy { $0.isEven() }, [[1], [2, 4], [3, 5], [6]])
+        XCTAssertEqual([1, 7, 3, 6, 10, 12].partitionBy { $0 % 3 }, [[1, 7], [3, 6], [10], [12]])
+    }
+    
     func testSample() {
         var singleSample = array.sample()
         var longerSample = array.sample(size: 2)

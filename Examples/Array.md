@@ -22,6 +22,9 @@
     	- [`unique`](#unique)
     	- [`indexOf`](#indexof)
     	- [`zip`](#zip)
+        - [`partition`](#partition)
+        - [`partitionAll`](#partitionAll)
+        - [`partitionBy`](#partitionBy)
     	- [`shuffle`](#shuffle)
     	- [`shuffled`](#shuffled)
     	- [`sample`](#sample)
@@ -199,6 +202,38 @@ array.at(-1, -3)
 ```
 [1, 2].zip(["A", "B"])
 // → [[1, "A"], [2, "B"]]
+```
+
+#### `partition` ####
+```
+[1, 2, 3, 4, 5].partition(2)
+// → [[1, 2], [3, 4]]
+[1, 2, 3, 4, 5].partition(10)
+// → [[]]
+[1, 2, 3, 4, 5].partition(2, step: 1)
+// → [[1, 2], [2, 3], [3, 4], [4, 5]]
+[1, 2, 3, 4, 5].partition(2, step: 1, pad: nil)
+// → [[1, 2], [2, 3], [3, 4], [4, 5], [5]]
+[1, 2, 3, 4, 5].partition(2, step: 1, pad: [6,7,8])
+// → [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]
+[1, 2, 3, 4, 5, 6].partition(2, step: 4)
+// → [[1, 2], [5, 6]]
+```
+
+#### `partitionAll` ####
+```
+[1, 2, 3, 4, 5].partitionAll(2, step: 1)
+// → [[1, 2], [2, 3], [3, 4], [4, 5], [5]]
+[1, 2, 3, 4, 5].partitionAll(10)
+// → [[1, 2, 3, 4, 5]]
+```
+
+#### `partitionBy` ####
+```
+[1, 2, 4, 3, 5, 6].partitionBy { $0.isEven() }
+// → [[1], [2, 4], [3, 5], [6]]
+[1, 7, 3, 6, 10, 12].partitionBy { $0 % 3 }
+// → [[1, 7], [3, 6], [10], [12]]
 ```
 
 #### `shuffle` ####

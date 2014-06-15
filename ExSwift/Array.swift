@@ -222,7 +222,113 @@ extension Array {
         }
 
         return result
-
+    }
+    
+    /**
+    *  Produces an array of arrays, each containing n elements.
+    *  If the final partition is not n elements long it is dropped.
+    *  @param n The number of elements in each partition.
+    *  @return Array partitioned into n element arrays.
+    */
+    func partition (n: Int) -> Array<Array<Element>> {
+        return self.partition(n, step: n)
+    }
+    
+    /**
+    *  Produces an array of arrays, each containing n elements, each offset by step.
+    *  If the final partition is not n elements long it is dropped.
+    *  @param n The number of elements in each partition.
+    *  @param step The number of elements to progress between each partition.
+    *  @return Array partitioned into n element arrays, starting step elements apart.
+    */
+    func partition (var n: Int, var step: Int) -> Array<Array<Element>> {
+        
+        var result = Array<Array<Element>>()
+        if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
+        if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
+        if n > count { return [[]] }
+        
+        for i in (0...count-n).by(step) {
+            result += self[i..(i+n)]
+        }
+        
+        return result
+    }
+    
+    /**
+    *  Produces an array of arrays, each containing n elements, each offset by step.
+    *  @param n The number of elements in each partition.
+    *  @param step The number of elements to progress between each partition.
+    *  @param pad An array of elements to pad the last partition if it is not long enough to
+    *             contain n elements. If nil is passed or there are not enough pad elements
+    *             the last partition may less than n elements long.
+    *  @return Array partitioned into n element arrays, starting step elements apart.
+    */
+    func partition (var n: Int, var step: Int, pad: Element[]?) -> Array<Array<Element>> {
+        
+        var result = Array<Array<Element>>()
+        if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
+        if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
+        
+        for i in (0..count).by(step) {
+            result += self[i..(i+n)]
+        }
+        
+        // Get last element of result array, if its length is smaller than the given n append
+        // elements from the pad array until it's the correct length or we're out of padding.
+        if let lastElement = result.last() {
+            let remain = n - lastElement.count
+            
+            if let padding = pad {
+                result[result.count-1] += padding[0..remain] as Element[]
+            }
+        }
+        
+        return result
+    }
+    
+    /**
+    *  Produces an array of arrays, each containing n elements, each offset by step.
+    *  @param n The number of elements in each partition.
+    *  @param step The number of elements to progress between each partition.
+    *  @return Array partitioned into n element arrays, starting step elements apart.
+    */
+    func partitionAll (n: Int) -> Array<Array<Element>> {
+        return self.partition(n, step: n, pad: nil)
+    }
+    
+    /**
+    *  Produces an array of arrays, each containing n elements, each offset by step.
+    *  @param n The number of elements in each partition.
+    *  @param step The number of elements to progress between each partition.
+    *  @return Array partitioned into n element arrays, starting step elements apart.
+    */
+    func partitionAll (n: Int, step: Int) -> Array<Array<Element>> {
+        return self.partition(n, step: step, pad: nil)
+    }
+    
+    /**
+    *  Applies cond to each element in array, splitting it each time cond returns a new value.
+    *  @param cond Function which takes an element and produces an equatable result.
+    *  @return Array partitioned in order, splitting via results of cond.
+    */
+    func partitionBy <T: Equatable> (cond: (Element) -> T) -> Array<Array<Element>> {
+        
+        var result = Array<Array<Element>>()
+        var lastValue: T? = nil
+        
+        for item in self {
+            let value = cond(item)
+            
+            if value == lastValue? {
+                result[result.count-1] += item
+            } else {
+                result.append([item])
+                lastValue = value
+            }
+        }
+        
+        return result
     }
 
     /**
