@@ -140,6 +140,27 @@ extension Array {
         return -1
     }
     
+    /**
+    *  Gets the index at which the last occurrence of item is found
+    *  @param item The item to search for
+    *  @return Index of the matched item or -1
+    */
+    func lastIndexOf <U: Equatable> (item: U) -> Int {
+        if item is Element {
+            for (index, obj) in enumerate(self.reverse()) {
+                if let object = obj as? U {
+                    if item == object {
+                        return count - index - 1
+                    }
+                }
+            }
+            
+            return -1
+        }
+        
+        return -1
+    }
+    
     /*
      *  Fixes out of bounds values integers
      */

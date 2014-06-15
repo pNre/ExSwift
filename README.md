@@ -58,6 +58,7 @@ Name | Signature
 **`union`**|`union <U: Equatable> (values: Array<U>...) -> Array`
 **`unique`**|`unique <T: Equatable> () -> Array<T>`
 **`indexOf`**|`indexOf <T: Equatable> (item: T) -> Int`
+**`lastIndexOf`**|`lastIndexOf <T: Equatable> (item: T) -> Int`
 **`zip`**|`zip (arrays: Array<Any>...) -> Array<Array<Any?>>`
 **`shuffle`**|`shuffle ()`
 **`shuffled`**|`shuffled () -> Array`
@@ -134,6 +135,7 @@ Name | Signature
 ---- | ---------
 **`abs`**|`abs () -> Float`
 **`sqrt`**|`sqrt () -> Float`
+**`digits`**|`digits () -> (integerPart: Int[], fractionalPart: Int[])`
 
 #### Class Methods ####
 

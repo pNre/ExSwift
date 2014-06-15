@@ -25,6 +25,30 @@ extension Float {
     }
     
     /**
+    * Returns couple of Integer arrays: integer and fractional part of `self`
+    */
+    func digits () -> (integerPart: Int[], fractionalPart: Int[]) {
+        var first: Int[]? = nil
+        var current = Int[]()
+        
+        for char in String(self) {
+            let string = String(char)
+            if let toInt = string.toInt() {
+                current.append(toInt)
+            } else if string == "." {
+                first = current
+                current.removeAll(keepCapacity: true)
+            }
+        }
+        
+        if let integer = first {
+            return (integer, current)
+        }
+        
+        return (current, [0])
+    }
+    
+    /**
     *  Returns a random float between min and max (inclusive)
     *  @return Random float
     */

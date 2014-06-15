@@ -272,4 +272,12 @@ class ExtensionsArrayTests: XCTestCase {
         let _3times = (array * 3)
         XCTAssert(_3times == (array + array + array))
     }
+    
+    func testLastIndexOf () {
+        let array = [5, 1, 2, 3, 2, 1]
+        XCTAssertEqual(array.count - 2, array.lastIndexOf(2))
+        XCTAssertEqual(array.count - 1, array.lastIndexOf(1))
+        XCTAssertEqual(0, array.lastIndexOf(5))
+        XCTAssertEqual(-1, array.lastIndexOf(20))
+    }
 }
