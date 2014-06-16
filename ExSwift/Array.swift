@@ -225,29 +225,20 @@ extension Array {
     }
     
     /**
-    *  Produces an array of arrays, each containing n elements.
-    *  If the final partition is not n elements long it is dropped.
-    *  @param n The number of elements in each partition.
-    *  @return Array partitioned into n element arrays.
-    */
-    func partition (n: Int) -> Array<Array<Element>> {
-        return self.partition(n, step: n)
-    }
-    
-    /**
     *  Produces an array of arrays, each containing n elements, each offset by step.
     *  If the final partition is not n elements long it is dropped.
     *  @param n The number of elements in each partition.
-    *  @param step The number of elements to progress between each partition.
+    *  @param step The number of elements to progress between each partition.  Set to n if not supplied.
     *  @return Array partitioned into n element arrays, starting step elements apart.
     */
-    func partition (var n: Int, var step: Int) -> Array<Array<Element>> {
+    func partition (var n: Int, var step: Int? = nil) -> Array<Array<Element>> {
         var result = Array<Array<Element>>()
+        if !step?   { step = n } // If no step is supplied move n each step.
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
         if n > count { return [[]] }
         
-        for i in (0...count-n).by(step) {
+        for i in (0...count-n).by(step!) {
             result += self[i..(i+n)]
         }
         
@@ -257,18 +248,19 @@ extension Array {
     /**
     *  Produces an array of arrays, each containing n elements, each offset by step.
     *  @param n The number of elements in each partition.
-    *  @param step The number of elements to progress between each partition.
+    *  @param step The number of elements to progress between each partition.  Set to n if not supplied.
     *  @param pad An array of elements to pad the last partition if it is not long enough to
     *             contain n elements. If nil is passed or there are not enough pad elements
     *             the last partition may less than n elements long.
     *  @return Array partitioned into n element arrays, starting step elements apart.
     */
-    func partition (var n: Int, var step: Int, pad: Element[]?) -> Array<Array<Element>> {
+    func partition (var n: Int, var step: Int? = nil, pad: Element[]?) -> Array<Array<Element>> {
         var result = Array<Array<Element>>()
+        if !step?   { step = n } // If no step is supplied move n each step.
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
         
-        for i in (0..count).by(step) {
+        for i in (0..count).by(step!) {
             var end = i+n
             if end > count { end = count }
             result += self[i..end]
@@ -286,25 +278,16 @@ extension Array {
     /**
     *  Produces an array of arrays, each containing n elements, each offset by step.
     *  @param n The number of elements in each partition.
-    *  @param step The number of elements to progress between each partition.
+    *  @param step The number of elements to progress between each partition.  Set to n if not supplied.
     *  @return Array partitioned into n element arrays, starting step elements apart.
     */
-    func partitionAll (n: Int) -> Array<Array<Element>> {
-        return self.partitionAll(n, step: n)
-    }
-    
-    /**
-    *  Produces an array of arrays, each containing n elements, each offset by step.
-    *  @param n The number of elements in each partition.
-    *  @param step The number of elements to progress between each partition.
-    *  @return Array partitioned into n element arrays, starting step elements apart.
-    */
-    func partitionAll (var n: Int, var step: Int) -> Array<Array<Element>> {
+    func partitionAll (var n: Int, var step: Int? = nil) -> Array<Array<Element>> {
         var result = Array<Array<Element>>()
+        if !step?   { step = n } // If no step is supplied move n each step.
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
         
-        for i in (0..count).by(step) {
+        for i in (0..count).by(step!) {
             result += self[i..i+n]
         }
         
