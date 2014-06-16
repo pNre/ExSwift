@@ -86,9 +86,9 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testIndexOf() {
-        XCTAssertEqual(0, array.indexOf(1))
-        XCTAssertEqual(-1, array.indexOf(6))
-        XCTAssertEqual(3, array.indexOf(4))
+        XCTAssertEqual(0, array.indexOf(1)!)
+        XCTAssertEqual(3, array.indexOf(4)!)
+        XCTAssertNil(array.indexOf(6))
     }
 
     func testIntersection() {
@@ -275,9 +275,9 @@ class ExtensionsArrayTests: XCTestCase {
     
     func testLastIndexOf () {
         let array = [5, 1, 2, 3, 2, 1]
-        XCTAssertEqual(array.count - 2, array.lastIndexOf(2))
-        XCTAssertEqual(array.count - 1, array.lastIndexOf(1))
-        XCTAssertEqual(0, array.lastIndexOf(5))
-        XCTAssertEqual(-1, array.lastIndexOf(20))
+        XCTAssertEqual(array.count - 2, array.lastIndexOf(2)!)
+        XCTAssertEqual(array.count - 1, array.lastIndexOf(1)!)
+        XCTAssertEqual(0, array.lastIndexOf(5)!)
+        XCTAssertNil(array.lastIndexOf(20))
     }
 }
