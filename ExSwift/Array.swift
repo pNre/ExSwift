@@ -634,7 +634,8 @@ extension Array {
     /**
     *  Same as `at`
     */
-    subscript (indexes: Int...) -> Array {
+    subscript (first: Int, second:Int, rest: Int...) -> Array {
+        let indexes = [first, second] + rest
         return at(reinterpretCast(indexes))
     }
 

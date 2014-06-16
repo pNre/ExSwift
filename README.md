@@ -96,7 +96,7 @@ Name | Signature | Function
 `* Int`|`* <ItemType> (array: ItemType[], n: Int) -> ItemType[]`|Returns a new array built by concatenating int copies of self
 `* String`|`* (array: String[], separator: String) -> String`|Equivalent to `array.implode(String)`
 `[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> Array`|Returns the sub-array from index *x* to index *y*
-`[[x, y, z]]`|`subscript(indexes: Int...) -> Array`|Returns the items at *x*, *y*, *z*
+`[x, y, ...]`|`subscript(first: Int, second: Int, rest: Int...) -> Array`|Returns the items at *x*, *y*
 
 ## Int ##
 
