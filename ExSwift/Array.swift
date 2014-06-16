@@ -134,7 +134,7 @@ extension Array {
                 return found
             }
 
-            return nil;
+            return nil
         }
 
         return nil
@@ -147,12 +147,8 @@ extension Array {
     */
     func lastIndexOf <U: Equatable> (item: U) -> Int? {
         if item is Element {
-            for (index, obj) in enumerate(self.reverse()) {
-                if let object = obj as? U {
-                    if item == object {
-                        return count - index - 1
-                    }
-                }
+            if let index = reverse().indexOf(item) {
+                return count - index - 1
             }
             
             return nil
