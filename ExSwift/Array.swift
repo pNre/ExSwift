@@ -126,26 +126,26 @@ extension Array {
     /**
     *  Gets the index at which the first occurrence of item is found
     *  @param item The item to search for
-    *  @return Index of the matched item or -1
+    *  @return Index of the matched item or nil
     */
-    func indexOf <U: Equatable> (item: U) -> Int {
+    func indexOf <U: Equatable> (item: U) -> Int? {
         if item is Element {
             if let found = find(reinterpretCast(self) as Array<U>, item) {
                 return found
             }
 
-            return -1
+            return nil;
         }
 
-        return -1
+        return nil
     }
     
     /**
     *  Gets the index at which the last occurrence of item is found
     *  @param item The item to search for
-    *  @return Index of the matched item or -1
+    *  @return Index of the matched item or nil
     */
-    func lastIndexOf <U: Equatable> (item: U) -> Int {
+    func lastIndexOf <U: Equatable> (item: U) -> Int? {
         if item is Element {
             for (index, obj) in enumerate(self.reverse()) {
                 if let object = obj as? U {
@@ -155,10 +155,10 @@ extension Array {
                 }
             }
             
-            return -1
+            return nil
         }
         
-        return -1
+        return nil
     }
     
     /*
