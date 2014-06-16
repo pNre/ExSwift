@@ -33,6 +33,13 @@
 		1EC241FE1946E92E0047109A /* ExSwiftNSArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC241FD1946E92E0047109A /* ExSwiftNSArrayTests.swift */; };
 		1ED536841943863100BDA94E /* ExSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED536831943863100BDA94E /* ExSwift.swift */; };
 		1ED536851943863100BDA94E /* ExSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED536831943863100BDA94E /* ExSwift.swift */; };
+		1ED8FC30194EF9E1004F829A /* ExSwiftDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFA119432236006BCE48 /* ExSwiftDictionaryTests.swift */; };
+		1ED8FC31194EF9E1004F829A /* ExSwiftFloatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFA219432236006BCE48 /* ExSwiftFloatTests.swift */; };
+		1ED8FC32194EF9E1004F829A /* ExSwiftIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFA319432236006BCE48 /* ExSwiftIntTests.swift */; };
+		1ED8FC33194EF9E1004F829A /* ExSwiftRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFA419432236006BCE48 /* ExSwiftRangeTests.swift */; };
+		1ED8FC34194EF9E1004F829A /* ExSwiftStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFA519432236006BCE48 /* ExSwiftStringTests.swift */; };
+		1ED8FC35194EF9E1004F829A /* ExSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EA5F689194387CA00E8A40F /* ExSwiftTests.swift */; };
+		1ED8FC36194EF9E1004F829A /* ExSwiftNSArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC241FD1946E92E0047109A /* ExSwiftNSArrayTests.swift */; };
 		2E8CE8F0194ECF2A008B9919 /* ExSwift-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E8CE8EF194ECF2A008B9919 /* ExSwift-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EC02FC3194ED0D500619CB5 /* ExSwift-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8CE8EB194ECF2A008B9919 /* ExSwift-iOS.framework */; };
 		2EC02FC9194ED0F000619CB5 /* ExSwiftArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFA019432236006BCE48 /* ExSwiftArrayTests.swift */; };
@@ -476,6 +483,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ED8FC30194EF9E1004F829A /* ExSwiftDictionaryTests.swift in Sources */,
+				1ED8FC31194EF9E1004F829A /* ExSwiftFloatTests.swift in Sources */,
+				1ED8FC32194EF9E1004F829A /* ExSwiftIntTests.swift in Sources */,
+				1ED8FC33194EF9E1004F829A /* ExSwiftRangeTests.swift in Sources */,
+				1ED8FC34194EF9E1004F829A /* ExSwiftStringTests.swift in Sources */,
+				1ED8FC35194EF9E1004F829A /* ExSwiftTests.swift in Sources */,
+				1ED8FC36194EF9E1004F829A /* ExSwiftNSArrayTests.swift in Sources */,
 				2EC02FDA194ED14100619CB5 /* NSArray.swift in Sources */,
 				2EC02FC9194ED0F000619CB5 /* ExSwiftArrayTests.swift in Sources */,
 				2EC02FD5194ED14100619CB5 /* Dictionary.swift in Sources */,
@@ -789,6 +803,7 @@
 				2EC02FC8194ED0D500619CB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
