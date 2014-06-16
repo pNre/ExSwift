@@ -139,8 +139,14 @@ class ExtensionsArrayTests: XCTestCase {
         test = array.partition(2, step: 1, pad: nil)
         XCTAssert(compareNestedArray(test, with: [[1, 2], [2, 3], [3, 4], [4, 5], [5]]))
         
+        test = array.partition(4, step: 1, pad: nil)
+        XCTAssert(compareNestedArray(test, with: [[1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5]]))
+        
         test = array.partition(2, step: 1, pad: [6,7,8])
         XCTAssert(compareNestedArray(test, with: [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]))
+        
+        test = array.partition(4, step: 3, pad: [6])
+        XCTAssert(compareNestedArray(test, with: [[1, 2, 3, 4], [4, 5, 6]]))
         
         test = [1, 2, 3, 4, 5, 6].partition(2, step: 4)
         XCTAssert(compareNestedArray(test, with: [[1, 2], [5, 6]]))
@@ -152,6 +158,9 @@ class ExtensionsArrayTests: XCTestCase {
     func testPartitionAll() {
         var test = array.partitionAll(2, step: 1)
         XCTAssert(compareNestedArray(test, with: [[1, 2], [2, 3], [3, 4], [4, 5], [5]]))
+        
+        test = array.partitionAll(4, step: 1)
+        XCTAssert(compareNestedArray(test, with: [[1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5], [4, 5], [5]]))
     }
     
     func testPartitionBy() {

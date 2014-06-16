@@ -242,7 +242,6 @@ extension Array {
     *  @return Array partitioned into n element arrays, starting step elements apart.
     */
     func partition (var n: Int, var step: Int) -> Array<Array<Element>> {
-        
         var result = Array<Array<Element>>()
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
@@ -265,23 +264,20 @@ extension Array {
     *  @return Array partitioned into n element arrays, starting step elements apart.
     */
     func partition (var n: Int, var step: Int, pad: Element[]?) -> Array<Array<Element>> {
-        
         var result = Array<Array<Element>>()
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
         
         for i in (0..count).by(step) {
-            result += self[i..(i+n)]
+            var end = i+n
+            if end > count { end = count }
+            result += self[i..end]
+            if end != i+n { break }
         }
         
-        // Get last element of result array, if its length is smaller than the given n append
-        // elements from the pad array until it's the correct length or we're out of padding.
-        if let lastElement = result.last() {
-            let remain = n - lastElement.count
-            
-            if let padding = pad {
-                result[result.count-1] += padding[0..remain] as Element[]
-            }
+        if let padding = pad {
+            let remaining = count % n
+            result[result.count-1] += padding[0..remaining] as Element[]
         }
         
         return result
@@ -294,7 +290,7 @@ extension Array {
     *  @return Array partitioned into n element arrays, starting step elements apart.
     */
     func partitionAll (n: Int) -> Array<Array<Element>> {
-        return self.partition(n, step: n, pad: nil)
+        return self.partitionAll(n, step: n)
     }
     
     /**
@@ -303,8 +299,16 @@ extension Array {
     *  @param step The number of elements to progress between each partition.
     *  @return Array partitioned into n element arrays, starting step elements apart.
     */
-    func partitionAll (n: Int, step: Int) -> Array<Array<Element>> {
-        return self.partition(n, step: step, pad: nil)
+    func partitionAll (var n: Int, var step: Int) -> Array<Array<Element>> {
+        var result = Array<Array<Element>>()
+        if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
+        if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
+        
+        for i in (0..count).by(step) {
+            result += self[i..i+n]
+        }
+        
+        return result
     }
     
     /**
@@ -313,7 +317,6 @@ extension Array {
     *  @return Array partitioned in order, splitting via results of cond.
     */
     func partitionBy <T: Equatable> (cond: (Element) -> T) -> Array<Array<Element>> {
-        
         var result = Array<Array<Element>>()
         var lastValue: T? = nil
         
