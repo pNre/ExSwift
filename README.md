@@ -182,12 +182,21 @@ Name | Signature
 <code>&#124;~</code>|<code>&#124;~ (string: String, pattern: String) -> Bool</code><br><code>&#124;~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool</code>
 
 ## Range ##
+
+Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/Range)
+
 #### Instance Methods ####
 
-Name | Signatures | Usage
----- | ---------- | -------
-**`times`**|`times (call: (T) -> ())`<br>`times (call: () -> ())`|`(2..4).times({ (index: Int) in println(index) })`<br>`(2..4).times({ println("Hi") })`
-**`each`**|`each (call: (T) -> ())`|`(2..4).each({ (index: Int) in println(index) })`
+Name | Signatures
+---- | ----------
+**`times`**|`times (call: (T) -> ())`<br>`times (call: () -> ())`
+**`each`**|`each (call: (T) -> ())`
+
+#### Class Methods ####
+
+Name | Signature
+---- | ---------
+**`random`**|`random (from: Int, to: Int) -> Range<Int>`
 
 #### Operators ####
 Name | Signature|Function

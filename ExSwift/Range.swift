@@ -39,8 +39,7 @@ extension Range {
     }
 
     /**
-    *  Calls a function foreach element in the range
-    *  @param call Function to call
+     * Returns `Range` with random bounds between `min` and `max` (inclusive).
     */
     static func random (from: Int, to: Int) -> Range<Int> {
         
