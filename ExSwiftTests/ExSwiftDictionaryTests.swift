@@ -43,11 +43,6 @@ class ExSwiftDictionaryTests: XCTestCase {
         XCTAssertFalse(dictionary.isEmpty())
     }
 
-    func testMerge() {
-        let a = dictionary.merge([ "D": 4 ])
-        XCTAssertEqualObjects(a, ["A": 1, "B": 2, "C": 3, "D": 4])
-    }
-
     func testShift() {
         let (key, value) = dictionary.shift()
         

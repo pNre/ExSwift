@@ -164,32 +164,11 @@ extension Dictionary {
     }
     
     /**
-     *  Returns true if self contains no keys
+     *  Returns `true` if self doesn't contain any key, `false` otherwise.
      *  @return True if self is empty
      */
     func isEmpty () -> Bool {
         return Array(self.keys).isEmpty
-    }
-    
-    /**
-    *  Returns a new dictionary containing the contents of self and 
-    *  the contents of all the dictionaries passed as parameters
-    *  @param dictionaries Dictionaries to merge with self
-    *  @return Merge result
-    */
-    func merge (dictionaries: Dictionary<KeyType, ValueType>...) -> Dictionary<KeyType, ValueType> {
-
-        var result = Dictionary<KeyType, ValueType>()
-        let allDictionaries = [self] + dictionaries
-
-        for dictionary in allDictionaries {
-            for (key, value) in dictionary {
-                result[key] = value
-            }
-        }
-        
-        return result
-
     }
 
     /**
@@ -217,7 +196,7 @@ extension Dictionary {
     }
     
     /**
-    *  Similar to groupBy, but instead of returning a list of values, returns the number of values for each group
+    *  Similar to groupBy. Instead of returning a list of values, returns the number of values for each group
     *  @param groupingFunction
     *  @return Grouped dictionary
     */

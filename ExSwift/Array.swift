@@ -156,30 +156,27 @@ extension Array {
         
         return nil
     }
-    
-    /*
-     *  Fixes out of bounds values integers
-     */
-    func relativeIndex (index: Int) -> Int {
-        var _index = (index % count)
-        
-        if _index < 0 {
-            _index = count + _index
-            
-            if index % count == 0 {
-                _index--
-            }
-        }
-        
-        return _index
-    }
-    
+
     /**
     *  Gets the object at the specified index if exists
     *  @param index
     *  @return Object at index in array, nil if index is out of bounds
     */
     func get (index: Int) -> Element? {
+        
+        /*
+        *  Fixes out of bounds values integers
+        */
+        func relativeIndex (index: Int) -> Int {
+            var _index = (index % count)
+            
+            if _index < 0 {
+                _index = count + _index
+            }
+            
+            return _index
+        }
+        
         var _index = relativeIndex(index)
         return _index < count ? self[_index] : nil
     }

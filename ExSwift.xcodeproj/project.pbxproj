@@ -84,6 +84,55 @@
 			remoteGlobalIDString = 1E11AF831943222D006BCE48;
 			remoteInfo = ExSwift;
 		};
+		1ED35AF71951DD32006E7B72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E11AF831943222D006BCE48;
+			remoteInfo = ExSwift;
+		};
+		1ED35B041951DFD6006E7B72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E8CE8EA194ECF29008B9919;
+			remoteInfo = "ExSwift-iOS";
+		};
+		1ED35B061951DFD9006E7B72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E11AF831943222D006BCE48;
+			remoteInfo = ExSwift;
+		};
+		1ED35B081951DFE1006E7B72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E8CE8EA194ECF29008B9919;
+			remoteInfo = "ExSwift-iOS";
+		};
+		1ED35B0A1951DFEB006E7B72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E11AF831943222D006BCE48;
+			remoteInfo = ExSwift;
+		};
+		1ED35B0C1951DFEC006E7B72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E8CE8EA194ECF29008B9919;
+			remoteInfo = "ExSwift-iOS";
+		};
+		1ED35B0E1951DFEC006E7B72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E11AF831943222D006BCE48;
+			remoteInfo = ExSwift;
+		};
 		2EC02FC4194ED0D500619CB5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
@@ -315,6 +364,10 @@
 				1E11AF921943222D006BCE48 /* PBXTargetDependency */,
 				1EC242001946E98F0047109A /* PBXTargetDependency */,
 				1ED35AF61951DD32006E7B72 /* PBXTargetDependency */,
+				1ED35AF81951DD32006E7B72 /* PBXTargetDependency */,
+				1ED35B071951DFD9006E7B72 /* PBXTargetDependency */,
+				1ED35B0B1951DFEB006E7B72 /* PBXTargetDependency */,
+				1ED35B0F1951DFEC006E7B72 /* PBXTargetDependency */,
 			);
 			name = ExSwiftTests;
 			productName = ExSwiftTests;
@@ -351,6 +404,9 @@
 			);
 			dependencies = (
 				2EC02FC5194ED0D500619CB5 /* PBXTargetDependency */,
+				1ED35B051951DFD6006E7B72 /* PBXTargetDependency */,
+				1ED35B091951DFE1006E7B72 /* PBXTargetDependency */,
+				1ED35B0D1951DFEC006E7B72 /* PBXTargetDependency */,
 			);
 			name = "ExSwift-iOS Tests";
 			productName = "ExSwift-iOS Tests";
@@ -528,6 +584,41 @@
 			target = 1E11AF831943222D006BCE48 /* ExSwift */;
 			targetProxy = 1ED35AF51951DD32006E7B72 /* PBXContainerItemProxy */;
 		};
+		1ED35AF81951DD32006E7B72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E11AF831943222D006BCE48 /* ExSwift */;
+			targetProxy = 1ED35AF71951DD32006E7B72 /* PBXContainerItemProxy */;
+		};
+		1ED35B051951DFD6006E7B72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E8CE8EA194ECF29008B9919 /* ExSwift-iOS */;
+			targetProxy = 1ED35B041951DFD6006E7B72 /* PBXContainerItemProxy */;
+		};
+		1ED35B071951DFD9006E7B72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E11AF831943222D006BCE48 /* ExSwift */;
+			targetProxy = 1ED35B061951DFD9006E7B72 /* PBXContainerItemProxy */;
+		};
+		1ED35B091951DFE1006E7B72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E8CE8EA194ECF29008B9919 /* ExSwift-iOS */;
+			targetProxy = 1ED35B081951DFE1006E7B72 /* PBXContainerItemProxy */;
+		};
+		1ED35B0B1951DFEB006E7B72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E11AF831943222D006BCE48 /* ExSwift */;
+			targetProxy = 1ED35B0A1951DFEB006E7B72 /* PBXContainerItemProxy */;
+		};
+		1ED35B0D1951DFEC006E7B72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2E8CE8EA194ECF29008B9919 /* ExSwift-iOS */;
+			targetProxy = 1ED35B0C1951DFEC006E7B72 /* PBXContainerItemProxy */;
+		};
+		1ED35B0F1951DFEC006E7B72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E11AF831943222D006BCE48 /* ExSwift */;
+			targetProxy = 1ED35B0E1951DFEC006E7B72 /* PBXContainerItemProxy */;
+		};
 		2EC02FC5194ED0D500619CB5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2E8CE8EA194ECF29008B9919 /* ExSwift-iOS */;
@@ -629,7 +720,7 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = ExSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -648,7 +739,7 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = ExSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

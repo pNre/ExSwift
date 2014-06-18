@@ -209,7 +209,7 @@ Name | Signature|Function
 
 ## Dictionary ##
 
-Examples in [Examples/Dictionary.md](Examples/Dictionary.md)
+Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/Dictionary)
 
 #### Instance Methods ####
 
