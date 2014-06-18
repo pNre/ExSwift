@@ -22,6 +22,7 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
 		- [Operators](#operators-1)
     - [Range](#range)
     	- [Instance Methods](#instance-methods-4)
+    	- [Class Methods](#class-methods-4)
     	- [Operators](#operators-2)
     - [Dictionary](#dictionary)
     	- [Instance Methods](#instance-methods-5)
@@ -82,6 +83,9 @@ Name | Signature
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 **`flatten`**|`flatten <OutType> () -> OutType[]`
+**`partition`**|`partition (var n: Int, var step: Int? = nil) -> Array<Array<Element>>`<br>`partition (var n: Int, var step: Int? = nil, pad: Element[]?) -> Array<Array<Element>>`
+**`partitionAll`**|`partitionAll (var n: Int, var step: Int? = nil) -> Array<Array<Element>>`
+**`partitionBy`**|`partitionBy <T: Equatable> (cond: (Element) -> T) -> Array<Array<Element>>`
 
 #### Class Methods ####
 
