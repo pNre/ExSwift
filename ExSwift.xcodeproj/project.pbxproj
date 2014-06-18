@@ -77,6 +77,13 @@
 			remoteGlobalIDString = 1E11AF831943222D006BCE48;
 			remoteInfo = ExSwift;
 		};
+		1ED35AF51951DD32006E7B72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E11AF831943222D006BCE48;
+			remoteInfo = ExSwift;
+		};
 		2EC02FC4194ED0D500619CB5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1E11AF7B1943222D006BCE48 /* Project object */;
@@ -307,6 +314,7 @@
 			dependencies = (
 				1E11AF921943222D006BCE48 /* PBXTargetDependency */,
 				1EC242001946E98F0047109A /* PBXTargetDependency */,
+				1ED35AF61951DD32006E7B72 /* PBXTargetDependency */,
 			);
 			name = ExSwiftTests;
 			productName = ExSwiftTests;
@@ -514,6 +522,11 @@
 			isa = PBXTargetDependency;
 			target = 1E11AF831943222D006BCE48 /* ExSwift */;
 			targetProxy = 1EC241FF1946E98F0047109A /* PBXContainerItemProxy */;
+		};
+		1ED35AF61951DD32006E7B72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E11AF831943222D006BCE48 /* ExSwift */;
+			targetProxy = 1ED35AF51951DD32006E7B72 /* PBXContainerItemProxy */;
 		};
 		2EC02FC5194ED0D500619CB5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
