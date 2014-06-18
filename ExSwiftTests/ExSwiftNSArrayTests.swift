@@ -14,12 +14,12 @@ class ExSwiftNSArrayTests: XCTestCase {
     
     func testCast() {
         //  Any NSNumber is always converted to Bool or Int
-        XCTAssert(array.cast() as Int[] == [10, 0])
-        XCTAssert(array.cast() as Bool[] == [true, false])
+        XCTAssertEqualObjects(array.cast() as Int[], [10, 0])
+        XCTAssertEqualObjects(array.cast() as Bool[], [true, false])
     }
 
     func testFlatten () {
         let array = [5, [6, ["A", 7]], 8]
-        XCTAssert(array.flatten() as Int[] == [5, 6, 7, 8])
+        XCTAssertEqualObjects(array.flatten() as Int[], [5, 6, 7, 8])
     }
 }

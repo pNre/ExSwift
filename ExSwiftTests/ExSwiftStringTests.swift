@@ -37,7 +37,7 @@ class ExSwiftStringTests: XCTestCase {
     func testExplode () {
         
         let string = "A B C"
-        XCTAssert(string.explode(" ") == ["A", "B", "C"])
+        XCTAssertEqualObjects(string.explode(" "), ["A", "B", "C"])
         
     }
     
@@ -52,8 +52,8 @@ class ExSwiftStringTests: XCTestCase {
         let array1 = "ABCD".at(0, 2)
         let array2 = "ABCD"[0, 1]
         
-        XCTAssert(array1 == ["A", "C"])
-        XCTAssert(array2 == ["A", "B"])
+        XCTAssertEqualObjects(array1, ["A", "C"])
+        XCTAssertEqualObjects(array2, ["A", "B"])
     }
     
     func testMatchingOperators () {
@@ -89,37 +89,37 @@ class ExSwiftStringTests: XCTestCase {
         let matches = string.matches("\\d+")!
         let range = matches[0].rangeAtIndex(0)
 
-        XCTAssert(string[range.location..(range.location + range.length)] == "31")
+        XCTAssertEqualObjects(string[range.location..(range.location + range.length)], "31")
         XCTAssertTrue(string.matches("N")?.isEmpty)
     }
     
     func testCapitalized () {
-        XCTAssert("".capitalized() == "")
-        XCTAssert("abcdef".capitalized() == "Abcdef")
-        XCTAssert("Abcdef".capitalized() == "Abcdef")
+        XCTAssertEqualObjects("".capitalized(), "")
+        XCTAssertEqualObjects("abcdef".capitalized(), "Abcdef")
+        XCTAssertEqualObjects("Abcdef".capitalized(), "Abcdef")
     }
 
     func testInsert () {
-        XCTAssert("abcdef".insert(3, "X") == "abcXdef")
+        XCTAssertEqualObjects("abcdef".insert(3, "X"), "abcXdef")
     }
 
     func testTrimmed () {
-        XCTAssert("t e".trimmed() == "t e")
-        XCTAssert(" AB".trimmed() == "AB")
-        XCTAssert("\n ABC   ".trimmed() == "ABC")
+        XCTAssertEqualObjects("t e".trimmed(), "t e")
+        XCTAssertEqualObjects(" AB".trimmed(), "AB")
+        XCTAssertEqualObjects("\n ABC   ".trimmed(), "ABC")
     }
     
     func testLTrimmed () {
-        XCTAssert("ab ".ltrimmed() == "ab ")
-        XCTAssert("ab".ltrimmed() == "ab")
-        XCTAssert(" AB".ltrimmed() == "AB")
-        XCTAssert("\n ABC   ".ltrimmed() == "ABC   ")
+        XCTAssertEqualObjects("ab ".ltrimmed(), "ab ")
+        XCTAssertEqualObjects("ab".ltrimmed(), "ab")
+        XCTAssertEqualObjects(" AB".ltrimmed(), "AB")
+        XCTAssertEqualObjects("\n ABC   ".ltrimmed(), "ABC   ")
     }
     
     func testRTrimmed () {
-        XCTAssert("t e".rtrimmed() == "t e")
-        XCTAssert(" AB".rtrimmed() == " AB")
-        XCTAssert("AB ".rtrimmed() == "AB")
-        XCTAssert("\n ABC   ".rtrimmed() == "\n ABC")
+        XCTAssertEqualObjects("t e".rtrimmed(), "t e")
+        XCTAssertEqualObjects(" AB".rtrimmed(), " AB")
+        XCTAssertEqualObjects("AB ".rtrimmed(), "AB")
+        XCTAssertEqualObjects("\n ABC   ".rtrimmed(), "\n ABC")
     }
 }

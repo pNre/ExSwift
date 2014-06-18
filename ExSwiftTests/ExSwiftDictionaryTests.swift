@@ -22,22 +22,18 @@ class ExSwiftDictionaryTests: XCTestCase {
     }
 
     func testMapValues() {
-        let mapped = dictionary.mapValues(mapFunction: { (key: String, value: Int) -> Int in return value + 1 })
-        XCTAssert(mapped == ["A": 2, "B": 3, "C": 4])
+        let mapped = dictionary.mapValues(mapFunction: { key, value -> Int in return value + 1 })
+        XCTAssertEqualObjects(mapped, ["A": 2, "B": 3, "C": 4])
     }
     
     func testMap() {
-        let mapped = dictionary.map(mapFunction: { (key: String, value: Int) -> (String, Int) in return (key + "A", value + 1) })
-        XCTAssert(mapped == ["AA": 2, "BA": 3, "CA": 4])
+        let mapped = dictionary.map(mapFunction: { key, value -> (String, Int) in return (key + "A", value + 1) })
+        XCTAssertEqualObjects(mapped, ["AA": 2, "BA": 3, "CA": 4])
     }
     
     func testFilter() {
-        let filtered = dictionary.filter {
-            (key: String, Value: Int) in
-            return key != "A"
-        }
-        
-        XCTAssert(filtered == ["B": 2, "C": 3])
+        let filtered = dictionary.filter { key, _ in return key != "A" }
+        XCTAssertEqualObjects(filtered, ["B": 2, "C": 3])
     }
 
     func testIsEmpty() {
@@ -49,8 +45,7 @@ class ExSwiftDictionaryTests: XCTestCase {
 
     func testMerge() {
         let a = dictionary.merge([ "D": 4 ])
-        
-        XCTAssert(a == ["A": 1, "B": 2, "C": 3, "D": 4])
+        XCTAssertEqualObjects(a, ["A": 1, "B": 2, "C": 3, "D": 4])
     }
 
     func testShift() {
@@ -69,13 +64,13 @@ class ExSwiftDictionaryTests: XCTestCase {
         ]
         
         let g = group.groupBy(groupingFunction: {
-            (key: String, value: Int) -> Bool in
+            _, value -> Bool in
             return (value % 2 == 0)
         })
         
-        XCTAssert(Array(g.keys) == [false, true])
-        XCTAssert(Array(g[true]!) == [2, 4])
-        XCTAssert(Array(g[false]!) == [5])
+        XCTAssertEqualObjects(Array(g.keys), [false, true])
+        XCTAssertEqualObjects(Array(g[true]!), [2, 4])
+        XCTAssertEqualObjects(Array(g[false]!), [5])
     }
     
     func testCountBy() {
@@ -86,16 +81,16 @@ class ExSwiftDictionaryTests: XCTestCase {
         ]
         
         let g = group.countBy(groupingFunction: {
-            (key: String, value: Int) -> Bool in
+            _, value -> Bool in
             return (value % 2 == 0)
         })
         
-        XCTAssert(g == [false: 1, true: 2])
+        XCTAssertEqualObjects(g, [false: 1, true: 2])
     }
     
     func testAny() {
         let any = dictionary.any {
-            (key: String, value: Int) -> Bool in
+            _, value -> Bool in
             return value % 2 == 0
         }
 
@@ -104,7 +99,7 @@ class ExSwiftDictionaryTests: XCTestCase {
 
     func testAll() {
         let all = dictionary.all {
-            (key: String, value: Int) -> Bool in
+            _, value -> Bool in
             return value % 2 == 0
         }
         
@@ -118,7 +113,7 @@ class ExSwiftDictionaryTests: XCTestCase {
             return initial
         })
         
-        XCTAssert(reduced == [2: "B", 3: "C", 1: "A"])
+        XCTAssertEqualObjects(reduced, [2: "B", 3: "C", 1: "A"])
     }
     
     func testDifference () {
@@ -126,8 +121,8 @@ class ExSwiftDictionaryTests: XCTestCase {
         let dictionary2 = [ "A": 1 ]
         let dictionary3 = [ "B": 2, "C": 3 ]
         
-        XCTAssert(dictionary1.difference(dictionary2, dictionary3) == [:])
-        XCTAssert(dictionary1 - dictionary2 == ["C": 3, "B": 2])
+        XCTAssertEqualObjects(dictionary1.difference(dictionary2, dictionary3), [:])
+        XCTAssertEqualObjects(dictionary1 - dictionary2, ["C": 3, "B": 2])
     }
     
     func testUnion () {
@@ -135,8 +130,8 @@ class ExSwiftDictionaryTests: XCTestCase {
         let dictionary2 = [ "A": 1 ]
         let dictionary3 = [ "D": 4 ]
         
-        XCTAssert(dictionary1.union(dictionary2, dictionary3) == [ "A": 1, "B": 2, "C": 3, "D": 4 ])
-        XCTAssert(dictionary1 | dictionary2 == dictionary1)
+        XCTAssertEqualObjects(dictionary1.union(dictionary2, dictionary3), [ "A": 1, "B": 2, "C": 3, "D": 4 ])
+        XCTAssertEqualObjects(dictionary1 | dictionary2, dictionary1)
     }
     
     func testIntersection () {
@@ -144,9 +139,9 @@ class ExSwiftDictionaryTests: XCTestCase {
         let dictionary2 = [ "A": 1 ]
         let dictionary3 = [ "D": 4 ]
 
-        XCTAssert(dictionary1.intersection(dictionary2) == ["A": 1])
-        XCTAssert(dictionary1.intersection(dictionary3) == [:])
-        XCTAssert(dictionary1 & dictionary1 == dictionary1)
+        XCTAssertEqualObjects(dictionary1.intersection(dictionary2), ["A": 1])
+        XCTAssertEqualObjects(dictionary1.intersection(dictionary3), [:])
+        XCTAssertEqualObjects(dictionary1 & dictionary1, dictionary1)
     }
     
     func testPick () {
@@ -154,8 +149,9 @@ class ExSwiftDictionaryTests: XCTestCase {
         
         let pick1 = dictionary.pick([1, 3])
         let pick2 = dictionary.pick(1, 3)
-        let pick3 = dictionary.pick()
-        
-        XCTAssert(pick1 == [1: "A", 3: "C"])
+
+        XCTAssertEqualObjects(pick1, [1: "A", 3: "C"])
+        XCTAssertEqualObjects(pick2, pick1)
+        XCTAssertEqualObjects(dictionary.pick(), [:])
     }
 }

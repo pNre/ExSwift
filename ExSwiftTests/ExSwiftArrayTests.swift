@@ -22,7 +22,7 @@ class ExtensionsArrayTests: XCTestCase {
             return $0 % 2 == 0
         })
 
-        XCTAssert(odd == [1, 3, 5])
+        XCTAssertEqualObjects(odd, [1, 3, 5])
     }
 
     func testEach() {
@@ -32,7 +32,7 @@ class ExtensionsArrayTests: XCTestCase {
             result.append($0)
         })
 
-        XCTAssert(result == array)
+        XCTAssertEqualObjects(result, array)
 
         result.removeAll(keepCapacity: true)
 
@@ -41,7 +41,7 @@ class ExtensionsArrayTests: XCTestCase {
             result.append(index)
         })
 
-        XCTAssert(result == array.map( { return $0 - 1 } ))
+        XCTAssertEqualObjects(result, array.map({ return $0 - 1 }) as Int[])
     }
 
     func testEachRight() {
@@ -51,13 +51,13 @@ class ExtensionsArrayTests: XCTestCase {
             result += value
         }
 
-        XCTAssert(result.first() == array.last())
-        XCTAssert(result.last() == array.first())
+        XCTAssertEqualObjects(result.first(), array.last())
+        XCTAssertEqualObjects(result.last(), array.first())
     }
 
     func testRange() {
-        XCTAssert(Array<Int>.range(0..2) == [0, 1])
-        XCTAssert(Array<Int>.range(0...2) == [0, 1, 2])
+        XCTAssertEqualObjects(Array<Int>.range(0..2), [0, 1])
+        XCTAssertEqualObjects(Array<Int>.range(0...2), [0, 1, 2])
     }
 
     func testContains() {
@@ -76,13 +76,9 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testDifference() {
-        var diff = array.difference([3, 4])
-        XCTAssert(diff == [1, 2, 5])
-
-        diff = array - [3, 4]
-        XCTAssert(diff == [1, 2, 5])
-
-        XCTAssert(array.difference([3], [5]) == [1, 2, 4])
+        XCTAssertEqualObjects(array.difference([3, 4]), [1, 2, 5])
+        XCTAssertEqualObjects(array - [3, 4], [1, 2, 5])
+        XCTAssertEqualObjects(array.difference([3], [5]), [1, 2, 4])
     }
 
     func testIndexOf() {
@@ -92,14 +88,14 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testIntersection() {
-        XCTAssert(array.intersection([]) == [])
-        XCTAssert(array.intersection([1]) == [1])
-        XCTAssert(array.intersection([1, 2], [1, 2], [1, 3]) == [1])
+        XCTAssertEqualObjects(array.intersection([]), [])
+        XCTAssertEqualObjects(array.intersection([1]), [1])
+        XCTAssertEqualObjects(array.intersection([1, 2], [1, 2], [1, 3]), [1])
     }
 
     func testUnion() {
         XCTAssertEqualObjects(array.union([1]), array)
-        XCTAssertEqualObjects(array.union([]), array)
+        XCTAssertEqualObjects(array.union(Int[]()), array)
         XCTAssertEqualObjects(array.union([6]), [1, 2, 3, 4, 5, 6])
     }
 
@@ -171,29 +167,26 @@ class ExtensionsArrayTests: XCTestCase {
     }
     
     func testSample() {
-        var singleSample = array.sample()
-        var longerSample = array.sample(size: 2)
-
-        XCTAssertEqual(1, singleSample.count)
-        XCTAssertEqual(2, longerSample.count)
-        XCTAssert(array.sample(size: array.count) == array)
+        XCTAssertEqual(1, array.sample().count)
+        XCTAssertEqual(2, array.sample(size: 2).count)
+        XCTAssertEqualObjects(array.sample(size: array.count), array)
     }
 
     func testSubscriptRange() {
-        XCTAssert(array[0..0] == [])
-        XCTAssert(array[0..1] == [1])
-        XCTAssert(array[0..2] == [1, 2])
+        XCTAssertEqualObjects(array[0..0], [])
+        XCTAssertEqualObjects(array[0..1], [1])
+        XCTAssertEqualObjects(array[0..2], [1, 2])
     }
 
     func testShuffled() {
-        var shuffled = array.shuffled()
-        XCTAssert(shuffled.difference(array) == [])
+        let shuffled = array.shuffled()
+        XCTAssertEqualObjects(shuffled.difference(array), [])
     }
 
     func testShuffle() {
         var toShuffle = array.copy()
         toShuffle.shuffle()
-        XCTAssert(toShuffle.difference(array) == [])
+        XCTAssertEqualObjects(toShuffle.difference(array), [])
     }
 
     func testMax() {
@@ -205,37 +198,35 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testTake() {
-        XCTAssert(array.take(3) == [1, 2, 3])
-        XCTAssert(array.take(0) == [])
+        XCTAssertEqualObjects(array.take(3), [1, 2, 3])
+        XCTAssertEqualObjects(array.take(0), [])
     }
     
     func testTakeWhile() {
-        let descendingArray = [1, 2, 3, 2, 1] // FIXME: Cannot find member 'takeWhile' when comparing the results with == on unbound array. Bug reported.
-        XCTAssert(array.takeWhile { $0 < 3 } == [1 , 2])
-        XCTAssert(descendingArray.takeWhile { $0 < 3 } == [1, 2])
-        XCTAssert(array.takeWhile { $0.isEven() } == [])
+        XCTAssertEqualObjects(array.takeWhile { $0 < 3 }, [1 , 2])
+        XCTAssertEqualObjects([1, 2, 3, 2, 1].takeWhile { $0 < 3 }, [1, 2])
+        XCTAssertEqualObjects(array.takeWhile { $0.isEven() }, [])
     }
     
     func testSkip() {
-        XCTAssert(array.skip(3) == [4, 5])
-        XCTAssert(array.skip(0) == array)
+        XCTAssertEqualObjects(array.skip(3), [4, 5])
+        XCTAssertEqualObjects(array.skip(0), array)
     }
     
     func testSkipWhile() {
-        let descendingArray = [1, 2, 3, 2, 1] // FIXME: Cannot find member 'takeWhile' when comparing the results with == on unbound array. Bug reported.
-        XCTAssert(array.skipWhile { $0 < 3 } == [3, 4, 5])
-        XCTAssert(descendingArray.skipWhile { $0 < 3 } == [3, 2, 1])
-        XCTAssert(array.skipWhile { $0.isEven() } == array)
+        XCTAssertEqualObjects(array.skipWhile { $0 < 3 }, [3, 4, 5])
+        XCTAssertEqualObjects([1, 2, 3, 2, 1].skipWhile { $0 < 3 }, [3, 2, 1])
+        XCTAssertEqualObjects(array.skipWhile { $0.isEven() }, array)
     }
 
     func testTail () {
-        XCTAssert(array.tail(3) == [3, 4, 5])
-        XCTAssert(array.tail(0) == [])
+        XCTAssertEqualObjects(array.tail(3), [3, 4, 5])
+        XCTAssertEqualObjects(array.tail(0), [])
     }
     
     func testPop() {
         XCTAssertEqual(5, array.pop())
-        XCTAssert(array == [1, 2, 3, 4])
+        XCTAssertEqualObjects(array, [1, 2, 3, 4])
     }
 
     func testPush() {
@@ -245,7 +236,7 @@ class ExtensionsArrayTests: XCTestCase {
 
     func testShift() {
         XCTAssertEqual(1, array.shift())
-        XCTAssert(array == [2, 3, 4, 5])
+        XCTAssertEqualObjects(array, [2, 3, 4, 5])
     }
 
     func testUnshift() {
@@ -257,15 +248,13 @@ class ExtensionsArrayTests: XCTestCase {
         array.append(array.last()!)
         array.remove(array.last()!)
         
-        let diff = (array - 1)
-        
-        XCTAssert(diff == [2, 3, 4])
-        XCTAssert(array == [1, 2, 3, 4])
+        XCTAssertEqualObjects((array - 1), [2, 3, 4])
+        XCTAssertEqualObjects(array, [1, 2, 3, 4])
     }
 
     func testUnique() {
         let arr = [1, 1, 1, 2, 3]
-        XCTAssert(arr.unique() as Array<Int> == [1, 2, 3])
+        XCTAssertEqualObjects(arr.unique() as Int[], [1, 2, 3])
     }
 
     func testGroupBy() {
@@ -274,9 +263,9 @@ class ExtensionsArrayTests: XCTestCase {
             return value > 3
         })
 
-        XCTAssert(Array(group.keys) == [false, true])
-        XCTAssert(Array(group[true]!) == [4, 5])
-        XCTAssert(Array(group[false]!) == [1, 2, 3])
+        XCTAssertEqualObjects(Array(group.keys), [false, true])
+        XCTAssertEqualObjects(Array(group[true]!), [4, 5])
+        XCTAssertEqualObjects(Array(group[false]!), [1, 2, 3])
     }
 
     func testCountBy() {
@@ -285,32 +274,34 @@ class ExtensionsArrayTests: XCTestCase {
             return value > 3
         })
 
-        XCTAssert(group == [true: 2, false: 3])
+        XCTAssertEqualObjects(group, [true: 2, false: 3])
     }
 
     func testReduceRight () {
         let list = [[1, 1], [2, 3], [4, 5]]
         let flat = list.reduceRight(Array<Int>(), { return $0 + $1 })
         
-        XCTAssert(flat == [4, 5, 2, 3, 1, 1])
+        XCTAssertEqualObjects(flat, [4, 5, 2, 3, 1, 1])
         XCTAssertEqual(4 + 5 + 2 + 3 + 1 + 1, flat.reduce(+))
         
-        XCTAssert(["A", "B", "C"].reduceRight(+) == "CBA")
+        XCTAssertEqualObjects(["A", "B", "C"].reduceRight(+), "CBA")
     }
 
     func testImplode () {
-        XCTAssert(["A", "B", "C"].implode("A") == "AABAC")
-        XCTAssert((["A", "B", "C"] * ",") == "A,B,C")
+        let array = ["A", "B", "C"]
+        let imploded = array.implode("A")
+        XCTAssertEqualObjects(imploded!, "AABAC")
+        XCTAssertEqualObjects(array * ",", "A,B,C")
     }
     
     func testAt () {
-        XCTAssert(array.at(0, 2) == [1, 3])
-        XCTAssert(array[0, 2, 1] as Int[] == [1, 3, 2])
+        XCTAssertEqualObjects(array.at(0, 2), [1, 3])
+        XCTAssertEqualObjects(array[0, 2, 1] as Int[], [1, 3, 2])
     }
     
     func testFlatten () {
         let array = [5, [6, [7]], 8]
-        XCTAssert(array.flatten() as Int[] == [5, 6, 7, 8])
+        XCTAssertEqualObjects(array.flatten() as Int[], [5, 6, 7, 8])
     }
     
     func testGet () {
@@ -320,8 +311,7 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testDuplicationOperator () {
-        let _3times = (array * 3)
-        XCTAssert(_3times == (array + array + array))
+        XCTAssertEqualObjects(array * 3, (array + array + array))
     }
     
     func testLastIndexOf () {

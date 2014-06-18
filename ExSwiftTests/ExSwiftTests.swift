@@ -62,7 +62,7 @@ class ExSwiftTests: XCTestCase {
         
         let helloWorld = ExSwift.bind(concat, "Hello", "World")
         
-        XCTAssert(helloWorld() == "Hello World")
+        XCTAssertEqualObjects(helloWorld(), "Hello World")
     }
     
 }
