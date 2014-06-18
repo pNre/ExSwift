@@ -61,9 +61,9 @@ Name | Signature
 **`indexOf`**|`indexOf <T: Equatable> (item: T) -> Int?`
 **`lastIndexOf`**|`lastIndexOf <T: Equatable> (item: T) -> Int?`
 **`zip`**|`zip (arrays: Array<Any>...) -> Array<Array<Any?>>`
-**`partition`**|`partition (n: Int, step: Int, pad: Element[]?) -> Array<Array<Element>>`
-**`partitionAll`**|`partition (n: Int, step: Int) -> Array<Array<Element>>`
-**`partitionBy`**|`partition <T: Equatable> (cond: (Element) -> T) -> Array<Array<Element>>`
+**`partition`**|`partition (var n: Int, var step: Int? = nil) -> Array<Array<Element>>`<br>`partition (var n: Int, var step: Int? = nil, pad: Element[]?) -> Array<Array<Element>>`
+**`partitionAll`**|`partitionAll (var n: Int, var step: Int? = nil) -> Array<Array<Element>>`
+**`partitionBy`**|`partitionBy <T: Equatable> (cond: (Element) -> T) -> Array<Array<Element>>`
 **`shuffle`**|`shuffle ()`
 **`shuffled`**|`shuffled () -> Array`
 **`sample`** *(random)*|`sample (size n: Int = 1) -> Array<T>`
@@ -83,9 +83,6 @@ Name | Signature
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 **`flatten`**|`flatten <OutType> () -> OutType[]`
-**`partition`**|`partition (var n: Int, var step: Int? = nil) -> Array<Array<Element>>`<br>`partition (var n: Int, var step: Int? = nil, pad: Element[]?) -> Array<Array<Element>>`
-**`partitionAll`**|`partitionAll (var n: Int, var step: Int? = nil) -> Array<Array<Element>>`
-**`partitionBy`**|`partitionBy <T: Equatable> (cond: (Element) -> T) -> Array<Array<Element>>`
 
 #### Class Methods ####
 
