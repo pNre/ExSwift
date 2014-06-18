@@ -119,6 +119,67 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual("B", b)
     }
 
+    // If made generic instead of Int it produces the compiler error:
+    // Segfault "While emitting IR SIL function"
+    func compareNestedArray (first: Array<Array<Int>>, with second: Array<Array<Int>>) -> Bool {
+        if first.count != second.count { return false }
+        for i in 0..first.count {
+            if first[i] != second[i] { return false }
+        }
+        return true
+    }
+    
+    func testPartition() {
+        var test = array.partition(2)
+        XCTAssert(compareNestedArray(test, with: [[1, 2], [3, 4]]))
+        
+        test = array.partition(2, step: 1)
+        XCTAssert(compareNestedArray(test, with: [[1, 2], [2, 3], [3, 4], [4, 5]]))
+        
+        test = array.partition(2, step: 1, pad: nil)
+        XCTAssert(compareNestedArray(test, with: [[1, 2], [2, 3], [3, 4], [4, 5], [5]]))
+        
+        test = array.partition(4, step: 1, pad: nil)
+        XCTAssert(compareNestedArray(test, with: [[1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5]]))
+        
+        test = array.partition(2, step: 1, pad: [6,7,8])
+        XCTAssert(compareNestedArray(test, with: [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]))
+        
+        test = array.partition(4, step: 3, pad: [6])
+        XCTAssert(compareNestedArray(test, with: [[1, 2, 3, 4], [4, 5, 6]]))
+        
+        test = array.partition(2, pad: [6])
+        XCTAssert(compareNestedArray(test, with: [[1, 2], [3, 4], [5, 6]]))
+        
+        test = [1, 2, 3, 4, 5, 6].partition(2, step: 4)
+        XCTAssert(compareNestedArray(test, with: [[1, 2], [5, 6]]))
+        
+        test = array.partition(10)
+        XCTAssert(compareNestedArray(test, with: [[]]))
+    }
+    
+    func testPartitionAll() {
+        var test = array.partitionAll(2, step: 1)
+        XCTAssert(compareNestedArray(test, with: [[1, 2], [2, 3], [3, 4], [4, 5], [5]]))
+        
+        test = array.partitionAll(2)
+        XCTAssert(compareNestedArray(test, with: [[1, 2], [3, 4], [5]]))
+        
+        test = array.partitionAll(4, step: 1)
+        XCTAssert(compareNestedArray(test, with: [[1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5], [4, 5], [5]]))
+    }
+    
+    func testPartitionBy() {
+        var test = array.partitionBy { $0 > 10 }
+        XCTAssert(compareNestedArray(test, with: [[1, 2, 3, 4, 5]]))
+        
+        test = [1, 2, 4, 3, 5, 6].partitionBy { $0 % 2 == 0 }
+        XCTAssert(compareNestedArray(test, with: [[1], [2, 4], [3, 5], [6]]))
+        
+        test = [1, 7, 3, 6, 10, 12].partitionBy { $0 % 3 }
+        XCTAssert(compareNestedArray(test, with: [[1, 7], [3, 6], [10], [12]]))
+    }
+    
     func testSample() {
         var singleSample = array.sample()
         var longerSample = array.sample(size: 2)
