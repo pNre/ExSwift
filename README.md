@@ -31,7 +31,7 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
     	- [Instance Methods](#instance-methods-6)
 
 - [Utilities](#utilities)
-	- [Class Methods](#class-methods-4)
+	- [Class Methods](#class-methods-5)
 
 # Extensions #
 
