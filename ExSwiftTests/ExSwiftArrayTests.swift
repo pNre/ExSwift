@@ -76,13 +76,12 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testDifference() {
-        var diff1 = array.difference([3, 4])
-        var diff2 = array - [3, 4]
-        var diff3 = array.difference([3], [5])
+        XCTAssert(array.difference([3, 4]) == [1, 2, 5])
 
-        XCTAssert(diff1 == [1, 2, 5])
-        XCTAssert(diff2 == [1, 2, 5])
-        XCTAssert(diff3 == [1, 2, 4])
+        let diff = array - [3, 4]
+        XCTAssert(diff == [1, 2, 5])
+
+        XCTAssert(array.difference([3], [5]) == [1, 2, 4])
     }
 
     func testIndexOf() {

@@ -245,7 +245,7 @@ Name | Signature | Function
 
 ## NSArray ##
 
-Examples in [Examples/NSArray.md](Examples/NSArray.md)
+Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/NSArray)
 
 #### Instance Methods ####
 
