@@ -11,14 +11,15 @@ import Foundation
 operator infix =~ {}
 operator infix |~ {}
 
-struct ExSwift {
+class Ex: ExSwift { }
+class ExSwift {
 
     /**
-    *  Creates a function that executes call only after being called n times
+    *  Returns a function `f: (P...) -> T?` that executes `call` only after being called `n` times.
     *  @param call Function to call after n times
     *  @return New function
     */
-    static func after <P, T> (n: Int, call: (P...) -> T) -> ((P...) -> T?) {
+    class func after <P, T> (n: Int, call: (P...) -> T) -> ((P...) -> T?) {
         var times = n
         return {
             (params: (P...)) -> T? in
@@ -32,7 +33,7 @@ struct ExSwift {
     }
 
     //  Wrapper for a zero params after
-    static func after <T> (n: Int, call: Void -> T) -> (Void -> T?) {
+    class func after <T> (n: Int, call: Void -> T) -> (Void -> T?) {
         let f = ExSwift.after(n, call: {
             (params: (Any?...)) -> T? in
             return call()
@@ -44,11 +45,11 @@ struct ExSwift {
     }
 
     /**
-    *  Creates a function that executes call only once
+    *  Returns a function `f: (P...) -> T?` that executes `call` once.
     *  @param call Function to call once
     *  @return New function
     */
-    static func once <P, T> (call: (P...) -> T) -> ((P...) -> T?) {
+    class func once <P, T> (call: (P...) -> T) -> ((P...) -> T?) {
         
         var executed = false
         
@@ -69,7 +70,7 @@ struct ExSwift {
     }
     
     //  Wrapper for a zero params once
-    static func once <T> (call: Void -> T) -> (Void -> T?) {
+    class func once <T> (call: Void -> T) -> (Void -> T?) {
         let f = ExSwift.once {
             (params: Any?...) -> T? in
             return call()
@@ -86,7 +87,7 @@ struct ExSwift {
      *  @param parameters Parameters to prepend
      *  @return New function
     */
-    static func partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T) {
+    class func partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T) {
         
         return {
             (params: P...) -> T in
@@ -101,7 +102,7 @@ struct ExSwift {
     *  @param parameters Parameters
     *  @return New function
     */
-    static func bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (Void -> T) {
+    class func bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (Void -> T) {
         
         return {
             Void -> T in
@@ -113,7 +114,7 @@ struct ExSwift {
     /**
      *  Returns a NSRegularExpression object given a pattern
      */
-    static func regex (pattern: String, ignoreCase: Bool = false) -> NSRegularExpression? {
+    class func regex (pattern: String, ignoreCase: Bool = false) -> NSRegularExpression? {
         
         var options: NSRegularExpressionOptions = NSRegularExpressionOptions.DotMatchesLineSeparators
         

@@ -252,7 +252,8 @@ Name | Signatures
 **`flatten`**|`flatten <OutType> () -> OutType[]`
 
 # Utilities #
-Examples in [Examples/ExSwift.md](Examples/ExSwift.md)
+
+Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/ExSwift)
 
 #### Class Methods ####
 
@@ -264,8 +265,8 @@ Name | Signatures
 **`bind`**|`bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (() -> T)`
 
 # To Do #
-* Wiki
-* Xcode project for both iOS & OS X
+* ~~Wiki~~
+* ~~Xcode project for both iOS & OS X~~
 * Review code comments
 * Example project
 * Installation instructions
