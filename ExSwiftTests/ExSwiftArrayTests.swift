@@ -116,54 +116,27 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testPartition() {
-        var test = array.partition(2)
-        XCTAssertEqualObjects(test, [[1, 2], [3, 4]])
- 
-        test = array.partition(2, step: 1)
-        XCTAssertEqualObjects(test, [[1, 2], [2, 3], [3, 4], [4, 5]])
-        
-        test = array.partition(2, step: 1, pad: nil)
-        XCTAssertEqualObjects(test, [[1, 2], [2, 3], [3, 4], [4, 5], [5]])
-        
-        test = array.partition(4, step: 1, pad: nil)
-        XCTAssertEqualObjects(test, [[1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5]])
-        
-        test = array.partition(2, step: 1, pad: [6,7,8])
-        XCTAssertEqualObjects(test, [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]])
-        
-        test = array.partition(4, step: 3, pad: [6])
-        XCTAssertEqualObjects(test, [[1, 2, 3, 4], [4, 5, 6]])
-        
-        test = array.partition(2, pad: [6])
-        XCTAssertEqualObjects(test, [[1, 2], [3, 4], [5, 6]])
-        
-        test = [1, 2, 3, 4, 5, 6].partition(2, step: 4)
-        XCTAssertEqualObjects(test, [[1, 2], [5, 6]])
-        
-        test = array.partition(10)
-        XCTAssertEqualObjects(test, [[]])
+        XCTAssertEqualObjects(array.partition(2), [[1, 2], [3, 4]])
+        XCTAssertEqualObjects(array.partition(2, step: 1), [[1, 2], [2, 3], [3, 4], [4, 5]])
+        XCTAssertEqualObjects(array.partition(2, step: 1, pad: nil), [[1, 2], [2, 3], [3, 4], [4, 5], [5]])
+        XCTAssertEqualObjects(array.partition(4, step: 1, pad: nil), [[1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5]])
+        XCTAssertEqualObjects(array.partition(2, step: 1, pad: [6,7,8]), [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]])
+        XCTAssertEqualObjects(array.partition(4, step: 3, pad: [6]), [[1, 2, 3, 4], [4, 5, 6]])
+        XCTAssertEqualObjects(array.partition(2, pad: [6]), [[1, 2], [3, 4], [5, 6]])
+        XCTAssertEqualObjects([1, 2, 3, 4, 5, 6].partition(2, step: 4), [[1, 2], [5, 6]])
+        XCTAssertEqualObjects(array.partition(10), [[]])
     }
     
     func testPartitionAll() {
-        var test = array.partitionAll(2, step: 1)
-        XCTAssertEqualObjects(test, [[1, 2], [2, 3], [3, 4], [4, 5], [5]])
-        
-        test = array.partitionAll(2)
-        XCTAssertEqualObjects(test, [[1, 2], [3, 4], [5]])
-        
-        test = array.partitionAll(4, step: 1)
-        XCTAssertEqualObjects(test, [[1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5], [4, 5], [5]])
+        XCTAssertEqualObjects(array.partitionAll(2, step: 1), [[1, 2], [2, 3], [3, 4], [4, 5], [5]])
+        XCTAssertEqualObjects(array.partitionAll(2), [[1, 2], [3, 4], [5]])
+        XCTAssertEqualObjects(array.partitionAll(4, step: 1), [[1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5], [4, 5], [5]])
     }
     
     func testPartitionBy() {
-        var test = array.partitionBy { $0 > 10 }
-        XCTAssertEqualObjects(test, [[1, 2, 3, 4, 5]])
-        
-        test = [1, 2, 4, 3, 5, 6].partitionBy { $0 % 2 == 0 }
-        XCTAssertEqualObjects(test, [[1], [2, 4], [3, 5], [6]])
-        
-        test = [1, 7, 3, 6, 10, 12].partitionBy { $0 % 3 }
-        XCTAssertEqualObjects(test, [[1, 7], [3, 6], [10], [12]])
+        XCTAssertEqualObjects(array.partitionBy { $0 > 10 }, [[1, 2, 3, 4, 5]])
+        XCTAssertEqualObjects([1, 2, 4, 3, 5, 6].partitionBy { $0 % 2 == 0 }, [[1], [2, 4], [3, 5], [6]])
+        XCTAssertEqualObjects([1, 7, 3, 6, 10, 12].partitionBy { $0 % 3 }, [[1, 7], [3, 6], [10], [12]])
     }
     
     func testSample() {
