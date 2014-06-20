@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 pNre. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for ExSwift.
 FOUNDATION_EXPORT double ExSwiftVersionNumber;
