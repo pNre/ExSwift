@@ -139,6 +139,9 @@ Name | Signature
 ---- | ---------
 **`abs`**|`abs () -> Float`
 **`sqrt`**|`sqrt () -> Float`
+**`round`**|`round () -> Float`
+**`ceil`**|`ceil () -> Float`
+**`floor`**|`floor () -> Float`
 **`digits`**|`digits () -> (integerPart: Int[], fractionalPart: Int[])`
 
 #### Class Methods ####
@@ -259,10 +262,11 @@ Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/ExSwift)
 
 Name | Signatures
 ---- | ----------
-**`after`**|`after <P, T> (n: Int, call: P -> T) -> (P -> T?)`<br>`func after <T> (n: Int, call: () -> T) -> (() -> T?)`
-**`once`**|`once <P, T> (call: P -> T) -> (P -> T?)`<br>`once <T> (n: Int, call: () -> T) -> (() -> T?)`
+**`after`**|`after <P, T> (n: Int, function: P -> T) -> (P -> T?)`<br>`func after <T> (n: Int, function: () -> T) -> (() -> T?)`
+**`once`**|`once <P, T> (function: P -> T) -> (P -> T?)`<br>`once <T> (call: Void -> T) -> (Void -> T?)`
 **`partial`**|`partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T?)`
 **`bind`**|`bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (() -> T)`
+**`cached`**|`cached <P, R> (function: (P...) -> R) -> ((P...) -> R)`<br>`cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R)`
 
 # To Do #
 * ~~Wiki~~

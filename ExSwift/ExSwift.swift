@@ -13,43 +13,48 @@ operator infix |~ {}
 
 class Ex: ExSwift { }
 class ExSwift {
-
+    
     /**
-    *  Returns a function `f: (P...) -> T?` that executes `call` only after being called `n` times.
-    *  @param call Function to call after n times
-    *  @return New function
+    *  Creates a wrapper that, executes function only after being called n times
+    *  @param n No. of times the wrapper has to be called before function is invoked
+    *  @param function Function to wrap
+    *  @return Wrapper function
     */
-    class func after <P, T> (n: Int, call: (P...) -> T) -> ((P...) -> T?) {
+    class func after <P, T> (n: Int, function: (P...) -> T) -> ((P...) -> T?) {
         var times = n
         return {
             (params: (P...)) -> T? in
             
             if times-- <= 0 {
-                return call(reinterpretCast(params))
+                return function(reinterpretCast(params))
             }
             
             return nil
         }
     }
-
-    //  Wrapper for a zero params after
-    class func after <T> (n: Int, call: Void -> T) -> (Void -> T?) {
-        let f = ExSwift.after(n, call: {
-            (params: (Any?...)) -> T? in
-            return call()
-        })
-
-        return {
-            return f(nil)?
-        }
-    }
-
+    
     /**
-    *  Returns a function `f: (P...) -> T?` that executes `call` once.
-    *  @param call Function to call once
-    *  @return New function
+    *  Creates a wrapper that, executes function only after being called n times
+    *  @param n No. of times the wrapper has to be called before function is invoked
+    *  @param function Function to wrap
+    *  @return Wrapper function
     */
-    class func once <P, T> (call: (P...) -> T) -> ((P...) -> T?) {
+    class func after <T> (n: Int, function: Void -> T) -> (Void -> T?) {
+        func callAfter (args: Any?...) -> T {
+            return function()
+        }
+        
+        let f = ExSwift.after(n, function: callAfter)
+        
+        return { f(nil)? }
+    }
+    
+    /**
+    *  Creates a wrapper that, when called for the first time (only) invokes function
+    *  @param function Function to wrap
+    *  @return Wrapper function
+    */
+    class func once <P, T> (function: (P...) -> T) -> ((P...) -> T?) {
         
         var executed = false
         
@@ -63,29 +68,31 @@ class ExSwift {
             executed = true
             
             //  From P[] to P...
-            return call(reinterpretCast(params))
+            return function(reinterpretCast(params))
             
         }
         
     }
     
-    //  Wrapper for a zero params once
-    class func once <T> (call: Void -> T) -> (Void -> T?) {
+    /**
+    *  Creates a wrapper that, when called for the first time (only) invokes function
+    *  @param function Function to wrap
+    *  @return Wrapper function
+    */
+    class func once <T> (function: Void -> T) -> (Void -> T?) {
         let f = ExSwift.once {
             (params: Any?...) -> T? in
-            return call()
+            return function()
         }
-
-        return {
-            return f(nil)?
-        }
+        
+        return { f(nil)? }
     }
-
+    
     /**
-     *  Creates a function that, when called, invokes function with any additional partial arguments prepended to those provided to the new function.
-     *  @param function Function to call
-     *  @param parameters Parameters to prepend
-     *  @return New function
+    *  Creates a wrapper that, when called, invokes function with any additional partial arguments prepended to those provided to the new function
+    *  @param function Function to wrap
+    *  @param parameters Arguments to prepend
+    *  @return Wrapper function
     */
     class func partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T) {
         
@@ -95,12 +102,12 @@ class ExSwift {
         }
         
     }
-
+    
     /**
-    *  Creates a function that, when called, invokes function with `parameters`
-    *  @param function Function to call
-    *  @param parameters Parameters
-    *  @return New function
+    *  Creates a wrapper (without any parameter) that, when called, invokes function automatically passing parameters as arguments
+    *  @param function Function to wrap
+    *  @param parameters Arguments to pass to function
+    *  @return Wrapper function
     */
     class func bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (Void -> T) {
         
@@ -108,12 +115,55 @@ class ExSwift {
             Void -> T in
             return function(reinterpretCast(parameters))
         }
-
+        
     }
     
     /**
-     *  Returns a NSRegularExpression object given a pattern
-     */
+    *  Creates a wrapper for function that caches the result of function's invocations.
+    *  @param function Function to cache
+    *  @param hash Parameters based hashing function used to compute the key for each result
+    *  @return Wrapper function
+    */
+    class func cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R) {
+        var cache = NSCache()
+        
+        return {
+            (params: P...) -> R in
+            
+            let paramsList = reinterpretCast(params) as (P...)
+            let bridgedKey : AnyObject? = bridgeToObjectiveC(hash(paramsList))
+            
+            //  If hash doesn't return any value, forget caching
+            if !bridgedKey {
+                return function(paramsList)
+            }
+            
+            if let cachedValue : AnyObject = cache.objectForKey(bridgedKey) {
+                return bridgeFromObjectiveC(cachedValue, R.self)!
+            }
+            
+            let result = function(paramsList)
+            cache.setObject(bridgeToObjectiveC(result), forKey: bridgedKey)
+            
+            return result
+        }
+    }
+    
+    /**
+    *  Creates a wrapper for function that caches the result of function's invocations.
+    *  @param function Function to cache
+    *  @return Wrapper function
+    */
+    class func cached <P, R> (function: (P...) -> R) -> ((P...) -> R) {
+        return cached(function, hash: { (params: P...) -> P in return params[0] })
+    }
+    
+    /**
+    *  Utility method to return an NSRegularExpression object given a pattern.
+    *  @param pattern Regex pattern
+    *  @param ignoreCase If true the NSRegularExpression is created with the NSRegularExpressionOptions.CaseInsensitive flag
+    *  @return NSRegularExpression object
+    */
     class func regex (pattern: String, ignoreCase: Bool = false) -> NSRegularExpression? {
         
         var options: NSRegularExpressionOptions = NSRegularExpressionOptions.DotMatchesLineSeparators
@@ -124,9 +174,9 @@ class ExSwift {
         
         var error: NSError? = nil
         let regex = NSRegularExpression.regularExpressionWithPattern(pattern, options: options, error: &error)
-
+        
         return (error == nil) ? regex : nil
-
+        
     }
-
+    
 }

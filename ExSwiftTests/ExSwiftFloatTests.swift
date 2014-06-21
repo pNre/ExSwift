@@ -35,6 +35,19 @@ class ExSwiftFloatTests: XCTestCase {
         XCTAssertEqualObjects(third.fractionalPart, [0])
     }
 
+    func testFloor () {
+        XCTAssertEqual(2, (2.9).floor())
+    }
+    
+    func testCeil () {
+        XCTAssertEqual(3, (2.9).ceil())
+    }
+    
+    func testRound () {
+        XCTAssertEqual(3, (2.5).round())
+        XCTAssertEqual(2, (2.4).round())
+    }
+    
     func testRandom() {
     }
 

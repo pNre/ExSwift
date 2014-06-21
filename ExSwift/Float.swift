@@ -9,19 +9,25 @@
 import Foundation
 
 extension Float {
-    
-    /**
-    *  Returns the absolute value of self
-    */
+
     func abs () -> Float {
         return fabsf(self)
     }
-    
-    /**
-    *  Returns the squared root of self
-    */
+
     func sqrt () -> Float {
         return sqrtf(self)
+    }
+    
+    func floor () -> Float {
+        return floorf(self)
+    }
+    
+    func ceil () -> Float {
+        return ceilf(self)
+    }
+
+    func round () -> Float {
+        return roundf(self)
     }
     
     /**
