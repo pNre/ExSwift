@@ -121,7 +121,7 @@ class ExSwift {
     /**
     *  Creates a wrapper for function that caches the result of function's invocations.
     *  @param function Function to cache
-    *  @param hash Parameters based hashing function used to compute the key for each result
+    *  @param hash Parameters based hashing function that computes the key used to store each result in the cache
     *  @return Wrapper function
     */
     class func cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R) {

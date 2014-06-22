@@ -65,4 +65,31 @@ class ExSwiftTests: XCTestCase {
         XCTAssertEqualObjects(helloWorld(), "Hello World")
     }
     
+    func testCached () {
+        var calls = 0
+        
+        // Slow Fibonacci
+        var fib: ((Int...) -> Int)!
+        fib = { (params: Int...) -> Int in
+            let n = params[0]
+            
+            calls++
+            
+            if n <= 1 {
+                return n
+            }
+            return fib(n - 1) + fib(n - 2)
+        }
+        
+        let fibonacci = Ex.cached(fib)
+        
+        // This one is computed (fib is called 465 times)
+        fibonacci(12)
+        XCTAssertEqual(465, calls)
+        
+        // The results is taken from the cache (fib is not called)
+        fibonacci(12)
+        XCTAssertEqual(465, calls)
+    }
+    
 }
