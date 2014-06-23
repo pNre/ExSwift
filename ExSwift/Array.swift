@@ -636,13 +636,29 @@ extension Array {
         var result = OutType[]()
         
         for item in self {
+            
             if item is OutType {
                 result.append(item as OutType)
+                continue
             } else if let bridged = bridgeFromObjectiveC(reinterpretCast(item), OutType.self) {
                 result.append(bridged)
+                continue
             } else if item is NSArray {
                 result += (item as NSArray).flatten() as OutType[]
+                continue
             }
+            
+            let m = reflect(item)
+            if m.disposition == MirrorDisposition.IndexContainer {
+                for index in 0..m.count {
+                    let value = m[index].1.value
+                    if value is OutType {
+                        result.append(value as OutType)
+                        continue
+                    }
+                }
+            }
+            
         }
         
         return result
