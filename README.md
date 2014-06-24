@@ -83,6 +83,7 @@ Name | Signature
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 **`flatten`**|`flatten <OutType> () -> OutType[]`
+**`toDictionary`**|`toDictionary <U> (keySelector:(Element) -> U) -> Dictionary<U, Element>`
 
 #### Class Methods ####
 

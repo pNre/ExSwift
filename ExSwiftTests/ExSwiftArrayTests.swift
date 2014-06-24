@@ -11,10 +11,23 @@ import XCTest
 class ExtensionsArrayTests: XCTestCase {
 
     var array: Array<Int> = []
+    var people: Person[] = []
+  
+    class Person {
+        let name: String, age: Int, id: String
+        init(_ name: String, _ age: Int, _ id: String){
+            self.name = name
+            self.age = age
+            self.id = id
+        }
+    }
 
     override func setUp() {
         super.setUp()
         array = [1, 2, 3, 4, 5]
+        people = [Person("bob", 25, "P1"),
+            Person("frank", 45, "P2"),
+            Person("ian", 35, "P3")];
     }
 
     func testReject () {
@@ -23,6 +36,15 @@ class ExtensionsArrayTests: XCTestCase {
         })
 
         XCTAssertEqualObjects(odd, [1, 3, 5])
+    }
+  
+    func testToDictionary () {
+        var dictionary = people.toDictionary { $0.id }
+        
+        XCTAssertEqualObjects(Array(dictionary.keys), ["P3", "P1", "P2"])
+        XCTAssertEqualObjects(dictionary["P1"]?.name, "bob")
+        XCTAssertEqualObjects(dictionary["P2"]?.name, "frank")
+        XCTAssertEqualObjects(dictionary["P3"]?.name, "ian")
     }
 
     func testEach() {
