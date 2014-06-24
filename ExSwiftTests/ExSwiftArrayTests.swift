@@ -25,9 +25,11 @@ class ExtensionsArrayTests: XCTestCase {
     override func setUp() {
         super.setUp()
         array = [1, 2, 3, 4, 5]
-        people = [Person("bob", 25, "P1"),
+        people = [
+            Person("bob", 25, "P1"),
             Person("frank", 45, "P2"),
-            Person("ian", 35, "P3")];
+            Person("ian", 35, "P3")
+        ]
     }
 
     func testSortBy () {

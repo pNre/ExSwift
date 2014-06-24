@@ -11,33 +11,33 @@ import Foundation
 extension Int {
     
     /**
-    *  Calls a function self times
-    *  @param call Function to call
+    *  Calls function self times
+    *  @param function Function to call
     */
-    func times <T> (call: () -> T) {
+    func times <T> (function: () -> T) {
         self.times({
             (index: Int) -> T in
-            return call()
+            return function()
         })
     }
 
     /**
-    *  Calls a function self times (with no return value)
-    *  @param call Function to call
+    *  Calls function self times
+    *  @param function Function to call
     */
-    func times (call: () -> ()) {
+    func times (function: () -> ()) {
         self.times({
             (index: Int) -> () in
-            call()
+            function()
         })
     }
 
     /**
-    *  Calls a function self times
-    *  @param call Function to call
+    *  Calls function self times passing a value from 0 to self on each call
+    *  @param function Function to call
     */
-    func times <T> (call: (Int) -> T) {
-        (0..self).each { index in call(index); return }
+    func times <T> (function: (Int) -> T) {
+        (0..self).each { index in function(index); return }
     }
 
     /**
@@ -57,30 +57,36 @@ extension Int {
     }
 
     /**
-     *  Iterates call, passing in integer values from self up to and including limit.
-     */
-    func upTo (limit: Int, call: (Int) -> ()) {
+    *  Iterates function, passing in integer values from self up to and including limit.
+    *  @param limit Last value to pass
+    *  @param function Function to invoke
+    */
+    func upTo (limit: Int, function: (Int) -> ()) {
         if limit < self {
             return
         }
 
-        (self...limit).each(call)
+        (self...limit).each(function)
     }
     
     /**
-     * Iterates call, passing in integer values from self down to and including limit.
-     */
-    func downTo (limit: Int, call: (Int) -> ()) {
+    *  Iterates function, passing in integer values from self down to and including limit.
+    *  @param limit Last value to pass
+    *  @param function Function to invoke
+    */
+    func downTo (limit: Int, function: (Int) -> ()) {
         if limit > self {
             return
         }
 
-        Array(limit...self).reverse().each(call)
+        Array(limit...self).reverse().each(function)
     }
 
     /**
-     * Computes the value of self clamped to a range defined by `range`
-     */
+    *  Clamps self to range
+    *  @param range Clamping range
+    *  @return Clamped value
+    */
     func clamp (range: Range<Int>) -> Int {
         if self > range.endIndex - 1 {
             return range.endIndex - 1
@@ -91,13 +97,22 @@ extension Int {
         return self
     }
     
+    /**
+    *  Clamps self to a range min...max
+    *  @param min Lower bound
+    *  @param max Upper bound
+    *  @return Clamped value
+    */
     func clamp (min: Int, max: Int) -> Int {
         return clamp(min...max)
     }
 
     /**
-     *  Checks if self is in range
-     */
+    *  Check if self is included in range
+    *  @param range Range
+    *  @param string If true, "<" is used for comparison
+    *  @return true if in range
+    */
     func isIn (range: Range<Int>, strict: Bool = false) -> Bool {
         if strict {
             return range.startIndex < self && self < range.endIndex - 1
@@ -107,9 +122,10 @@ extension Int {
     }
 
     /**
-     * Returns an array of integers where each element is a digit of `self`
-     */
-    func digits () -> Array<Int> {
+    *  Returns a Int[] containing the digits in self
+    *  @return Array of digits
+    */
+    func digits () -> Int[] {
         var result = Int[]()
         
         for char in String(self) {
@@ -123,28 +139,33 @@ extension Int {
     }
     
     /**
-     * Absolute value
-     */
+    *  Absolute value
+    *  @return abs(self)
+    */
     func abs () -> Int {
         return Swift.abs(self)
     }
     
     /**
-    *  Greatest common divisor of `self` and `n`
+    *  Greatest common divisor of self and n
+    *  @param n
+    *  @return GCD
     */
     func gcd (n: Int) -> Int {
         return n == 0 ? self : n.gcd(self % n)
     }
     
     /**
-    *  Least common multiple of `self` and `n`
+    *  Least common multiple of self and n
+    *  @param n
+    *  @return LCM
     */
     func lcm (n: Int) -> Int {
         return (self * n).abs() / gcd(n)
     }
     
     /**
-    *  Returns a random integer between `min` and `max` (inclusive).
+    *  Random integer between min and max (inclusive).
     *  @return Random integer
     */
     static func random(min: Int = 0, max: Int) -> Int {
