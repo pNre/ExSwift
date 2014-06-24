@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-    
+
     /**
     *  String length
     */
@@ -19,21 +19,25 @@ extension String {
 
     /**
     *  Returns the substring in the given range
-    *  @return Substring
+    *  @param range
+    *  @return Substring in range
     */
     subscript (range: Range<Int>) -> String? {
         return Array(self).get(range).reduce(String(), +)
     }
 
     /**
-    *  Same as `at`
+    *  Equivalent to at
+    *  @param indexes
+    *  @return Charaters at the specified indexes (converted to String)
     */
     subscript (indexes: Int...) -> String[] {
         return at(reinterpretCast(indexes))
     }
 
     /**
-    *  Returns the char at position `index` in the string
+    *  Gets the character at the specified index (converted to String)
+    *  @param index
     *  @return Unicode char as String or nil if the index is out of bounds
     */
     subscript (index: Int) -> String? {
@@ -43,9 +47,11 @@ extension String {
 
         return nil
     }
-    
+
     /**
-    *  Creates an array of chars from the specified indexes of self
+    *  Returns the characters at the specified indexes
+    *  @param indexes
+    *  @return Array of characters (as String)
     */
     func at (indexes: Int...) -> String[] {
         return indexes.map { self[$0]! }
@@ -64,57 +70,64 @@ extension String {
     }
 
     /**
-     *  Finds any match in self for pattern
-     *  @param pattern Pattern to match
-     *  @param ignoreCase True for case insensitive matching
-     *  @return Matches
+    *  Finds any match in self for pattern
+    *  @param pattern Pattern to match
+    *  @param ignoreCase True for case insensitive matching
+    *  @return Matches
     */
     func matches (pattern: String, ignoreCase: Bool = false) -> NSTextCheckingResult[]? {
 
         if let regex = ExSwift.regex(pattern, ignoreCase: ignoreCase) {
             return regex.matchesInString(self, options: nil, range: NSMakeRange(0, length)) as? NSTextCheckingResult[]
         }
-        
+
         return nil
     }
-    
+
     /**
-    *  `self` with capitalized first character
+    *  Capitalizes the first character in the string
+    *  @return Capitalized String
     */
     func capitalized () -> String {
         return capitalizedString
     }
-    
+
     /**
-    *  Inserts `string` before the character at the given `index`
+    *  Inserts a substring at the given index
+    *  @param index Where the new string is inserted
+    *  @param string String to insert
+    *  @return String formed with string at the given index
     */
     func insert (index: Int, _ string: String) -> String {
         return self[0..index]! + string + self[index..length]!
     }
 
     /**
-     * Strip whitespace from the beginning of a string.
-     */
+    *  Strip whitespaces from the start of a string
+    *  @return Stripped string
+    */
     func ltrimmed () -> String {
         let range = rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet().invertedSet)
         return self[range.startIndex..endIndex]
     }
-    
+
     /**
-    * Strip whitespace from the end of a string.
+    *  Strip whitespaces from the end of a string
+    *  @return Stripped string
     */
     func rtrimmed () -> String {
         let range = rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet().invertedSet, options: NSStringCompareOptions.BackwardsSearch)
         return self[startIndex..range.endIndex]
     }
-    
+
     /**
-    * Strip whitespace from the beginning and end of a string.
+    *  Strip whitespaces from both the start and the end of a string
+    *  @return Stripped string
     */
     func trimmed () -> String {
         return ltrimmed().rtrimmed()
     }
-    
+
     /**
     *  Random string
     *  @param length String length, 0 -> random length
@@ -122,14 +135,14 @@ extension String {
     *  @return Random string
     */
     static func random (var length len: Int = 0, charset: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") -> String {
-        
+
         if len < 1 {
             len = Int.random(max: 16)
         }
-        
+
         var result = String()
         let max = charset.length - 1
-        
+
         len.times {
             result += charset[Int.random(min: 0, max: max)]!
         }
@@ -137,7 +150,7 @@ extension String {
         return result
 
     }
-    
+
 }
 
 /**
@@ -149,7 +162,7 @@ extension String {
     n.times {
         result += first
     }
-    
+
     return result
 }
 
@@ -165,7 +178,7 @@ extension String {
     if let matches = ExSwift.regex(options.pattern, ignoreCase: options.ignoreCase)?.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length)) {
         return matches > 0
     }
-    
+
     return false
 }
 

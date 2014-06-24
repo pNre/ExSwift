@@ -271,9 +271,9 @@ Name | Signatures
 **`cached`**|`cached <P, R> (function: (P...) -> R) -> ((P...) -> R)`<br>`cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R)`
 
 # To Do #
-* ~~Wiki~~
-* ~~Xcode project for both iOS & OS X~~
-* Review code comments
+* [X] Wiki
+* [X] Xcode project for both iOS & OS X
+* [X] Review code comments
 * Example project
 * Installation instructions
 * Benchmark
