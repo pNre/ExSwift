@@ -664,6 +664,19 @@ extension Array {
         return result
         
     }
+  
+    /**
+    *  Sorts the array by the given comparison function
+    *  @param isOrderedBefore
+    *  @return An array that is sorted by the given function
+    */
+    func sortBy (isOrderedBefore: (T, T) -> Bool) -> Array<T> {
+        var clone = self
+        clone.unshare()
+        clone.sort(isOrderedBefore)
+        return clone
+    }
+
 
     /**
     *  Removes the last element from self and returns it

@@ -83,6 +83,7 @@ Name | Signature
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 **`flatten`**|`flatten <OutType> () -> OutType[]`
+**`sortBy`**|`sortBy (isOrderedBefore: (T, T) -> Bool) -> Array<T> `
 
 #### Class Methods ####
 
