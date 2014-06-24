@@ -17,6 +17,16 @@ class ExtensionsArrayTests: XCTestCase {
         array = [1, 2, 3, 4, 5]
     }
 
+    func testSortBy () {
+        var sourceArray = [2,3,6,5]
+        var sortedArray = sourceArray.sortBy {$0 < $1}
+        
+        // check that the source array as not been mutated
+        XCTAssertEqualObjects(sourceArray, [2, 3, 6, 5])
+        // check that the destination has been sorted
+        XCTAssertEqualObjects(sortedArray, [2, 3, 5, 6])
+    }
+  
     func testReject () {
         var odd = array.reject({
             return $0 % 2 == 0
