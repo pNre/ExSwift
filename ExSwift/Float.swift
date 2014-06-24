@@ -10,28 +10,50 @@ import Foundation
 
 extension Float {
 
+    /**
+    *  Absolute value
+    *  @return fabs(self)
+    */
     func abs () -> Float {
         return fabsf(self)
     }
 
+    /**
+    *  Squared root
+    *  @return sqrtf(self)
+    */
     func sqrt () -> Float {
         return sqrtf(self)
     }
     
+    /**
+    *  Rounds self to the largest integer <= self
+    *  @return floorf(self)
+    */
     func floor () -> Float {
         return floorf(self)
     }
     
+    /**
+    *  Rounds self to the smallest integer >= self
+    *  @return ceilf(self)
+    */
     func ceil () -> Float {
         return ceilf(self)
     }
-
+    
+    /**
+    *  Rounds self to the nearest integer
+    *  @return roundf(self)
+    */
     func round () -> Float {
         return roundf(self)
     }
     
     /**
-    * Returns couple of Integer arrays: integer and fractional part of `self`
+    *  Returns a couple of Int[] arrays containing the digits of
+    *  the integer and the fractional part of self.
+    *  @return (integer, fractional)
     */
     func digits () -> (integerPart: Int[], fractionalPart: Int[]) {
         var first: Int[]? = nil
@@ -55,8 +77,10 @@ extension Float {
     }
     
     /**
-    *  Returns a random float between min and max (inclusive)
-    *  @return Random float
+    *  Random float between min and max (inclusive)
+    *  @param min
+    *  @param max
+    *  @return Random number
     */
     static func random(min: Float = 0, max: Float) -> Float {
         let diff = max - min;

@@ -11,8 +11,10 @@ import Foundation
 extension NSArray {
 
     /**
-     *  Converts the NSArray self to a swift array of OutType objects
-     */
+    *  Converts an NSArray object to an OutType[] array containing 
+    *  the items in the NSArray that can be bridged from their ObjC type to OutType.
+    *  @return Swift Array
+    */
     func cast <OutType> () -> OutType[] {
         var result = OutType[]()
         
@@ -27,7 +29,9 @@ extension NSArray {
     }
     
     /**
-    *  Flattens the nested NSArray self to a swift array of OutType objects
+    *  Flattens a multidimensional NSArray to an OutType[] array containing
+    *  the items in the NSArray that can be bridged from their ObjC type to OutType.
+    *  @return Flattened array
     */
     func flatten <OutType> () -> OutType[] {
 

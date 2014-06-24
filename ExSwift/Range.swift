@@ -11,35 +11,38 @@ import Foundation
 extension Range {
     
     /**
-    *  Calls a function foreach element in the range
+    *  For each element in the range invokes function
     *  @param call Function to call
     */
-    func times (call: () -> ()) {
+    func times (function: () -> ()) {
         each { (current: T) -> () in
-            call()
+            function()
         }
     }
 
     /**
-    *  Calls a function foreach element in the range
-    *  @param call Function to call
+    *  Equivalent to: each
+    *  @param function Function to invoke
     */
-    func times (call: (T) -> ()) {
-        each (call)
+    func times (function: (T) -> ()) {
+        each (function)
     }
 
     /**
-    *  Calls a function foreach element in the range
-    *  @param call Function to call
+    *  For each element in the range invokes function passing the element as argument
+    *  @param function Function to invoke
     */
-    func each (call: (T) -> ()) {
+    func each (function: (T) -> ()) {
         for i in self {
-            call(i)
+            function(i)
         }
     }
 
     /**
-     * Returns `Range` with random bounds between `min` and `max` (inclusive).
+    *  Int Range with random bounds between from and to (inclusive).
+    *  @param from Lower bound
+    *  @param to Upper bound
+    *  @return Random range
     */
     static func random (from: Int, to: Int) -> Range<Int> {
         
@@ -53,7 +56,8 @@ extension Range {
 }
 
 /**
-*  Ranges comparison
+*  Operator == to compare 2 ranges first, second by start & end indexes. If first.startIndex is equal to
+*  second.startIndex and first.endIndex is equal to second.endIndex the ranges are considered equal.
 */
 @infix func == <U: ForwardIndex> (first: Range<U>, second: Range<U>) -> Bool {
     return first.startIndex == second.startIndex &&
