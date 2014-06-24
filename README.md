@@ -84,6 +84,7 @@ Name | Signature
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 **`flatten`**|`flatten <OutType> () -> OutType[]`
 **`sortBy`**|`sortBy (isOrderedBefore: (T, T) -> Bool) -> Array<T> `
+**`toDictionary`**|`toDictionary <U> (keySelector:(Element) -> U) -> Dictionary<U, Element>`
 
 #### Class Methods ####
 
@@ -148,7 +149,7 @@ Name | Signature
 #### Class Methods ####
 
 Name | Signatures
----- | ---------- 
+---- | ----------
 **`random`**|`random(min: Float = 0, max: Float) -> Float`
 
 ## String ##

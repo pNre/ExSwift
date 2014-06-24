@@ -627,6 +627,20 @@ extension Array {
     func at (indexes: Int...) -> Array {
         return indexes.map { self.get($0)! }
     }
+  
+    /**
+    *  Converts the array to a dictionary with the keys supplied via the keySelector
+    *  @param keySelector
+    *  @return A dictionary
+    */
+    func toDictionary <U> (keySelector:(Element) -> U) -> Dictionary<U, Element> {
+        var result: Dictionary<U, Element> = [:]
+        for item in self {
+            let key = keySelector(item)
+            result[key] = item
+        }
+        return result
+    }
     
     /**
      *  Flattens the nested Array self to an array of OutType objects
