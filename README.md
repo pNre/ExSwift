@@ -274,7 +274,6 @@ Name | Signatures
 * [X] Wiki
 * [X] Xcode project for both iOS & OS X
 * [X] Review code comments
-* Example project
-* Installation instructions
-* Benchmark
-* ...
+* [ ] Example project
+* [ ] Installation instructions
+* [ ] Benchmark
