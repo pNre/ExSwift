@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 extension SequenceOf {
 
     func first () -> T? {
@@ -44,5 +45,33 @@ extension SequenceOf {
             }
         }
         return false
+    }
+
+    func take (n:Int) -> SequenceOf<T> {
+        return SequenceOf(TakeSequence(self, n))
+    }
+}
+
+// a sequence adapter that implements the 'take' functionality
+struct TakeSequence<S:Sequence>: Sequence {
+    let sequence:S
+    let n: Int
+
+    init(_ sequence:S, _ n:Int) {
+        self.sequence = sequence
+        self.n = n
+    }
+ 
+    func generate() -> GeneratorOf<S.GeneratorType.Element> {
+        var count = 0
+        var generator = self.sequence.generate()
+        return GeneratorOf<S.GeneratorType.Element> {
+            count++
+            if count > self.n {
+                return nil
+            } else {
+                return generator.next()
+            }
+        }
     }
 }

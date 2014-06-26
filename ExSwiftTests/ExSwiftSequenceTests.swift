@@ -47,4 +47,14 @@ class ExtensionsSequenceTests: XCTestCase {
         XCTAssertTrue(SequenceOf(sequence).contains(1))
         XCTAssertFalse(SequenceOf(sequence).contains(56))
     }
+    
+    func testTake () {
+        var take = SequenceOf(sequence).take(2)
+        XCTAssertEqualObjects(Array(take), [1,2])
+    }
+    
+    func testTakeBeyondSequenceEnd () {
+        var take = SequenceOf(sequence).take(20)
+        XCTAssertEqualObjects(Array(take), [1,2,3,4,5])
+    }
 }
