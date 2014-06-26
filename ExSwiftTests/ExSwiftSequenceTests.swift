@@ -57,4 +57,20 @@ class ExtensionsSequenceTests: XCTestCase {
         var take = SequenceOf(sequence).take(20)
         XCTAssertEqualObjects(Array(take), [1,2,3,4,5])
     }
+    
+    func testTakeWhile () {
+        var take = SequenceOf(sequence).takeWhile { $0 != 3 }
+        XCTAssertEqualObjects(Array(take), [1,2])
+    }
+    
+    func testTakeWhileConditionNeverTrue () {
+        var take = SequenceOf(sequence).takeWhile { $0 == 7 }
+        XCTAssertEqualObjects(Array(take), [])
+    }
+    
+    func testTakeWhileConditionNotMet () {
+        var take = SequenceOf(sequence).takeWhile { $0 != 7 }
+        XCTAssertEqualObjects(Array(take), [1,2,3,4,5])
+    }
+    
 }

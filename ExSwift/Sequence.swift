@@ -50,14 +50,18 @@ extension SequenceOf {
     func take (n:Int) -> SequenceOf<T> {
         return SequenceOf(TakeSequence(self, n))
     }
+    
+    func takeWhile (condition:(T?) -> Bool) -> SequenceOf<T>  {
+        return SequenceOf(TakeWhileSequence(self, condition))
+    }
 }
 
 // a sequence adapter that implements the 'take' functionality
 struct TakeSequence<S:Sequence>: Sequence {
-    let sequence:S
+    let sequence: S
     let n: Int
 
-    init(_ sequence:S, _ n:Int) {
+    init(_ sequence: S, _ n: Int) {
         self.sequence = sequence
         self.n = n
     }
@@ -71,6 +75,33 @@ struct TakeSequence<S:Sequence>: Sequence {
                 return nil
             } else {
                 return generator.next()
+            }
+        }
+    }
+}
+
+// a sequence adapter that implements the 'take' functionality
+struct TakeWhileSequence<S:Sequence>: Sequence {
+    let sequence: S
+    let condition: (S.GeneratorType.Element?) -> Bool
+    
+    init(_ sequence:S, _ condition:(S.GeneratorType.Element?) -> Bool) {
+        self.sequence = sequence
+        self.condition = condition
+    }
+    
+    func generate() -> GeneratorOf<S.GeneratorType.Element> {
+        var generator = self.sequence.generate()
+        var endConditionMet = false
+        return GeneratorOf<S.GeneratorType.Element> {
+            let next: S.GeneratorType.Element? = generator.next()
+            if !endConditionMet {
+                endConditionMet = !self.condition(next)
+            }
+            if endConditionMet {
+                return nil
+            } else {
+                return next
             }
         }
     }
