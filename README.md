@@ -29,6 +29,8 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
     	- [Operators](#operators-3)
     - [NSArray](#nsarray)
     	- [Instance Methods](#instance-methods-6)
+   	- [SequenceOf](#sequenceof)
+    	- [Instance Methods](#instance-methods-7)
 
 - [Utilities](#utilities)
 	- [Class Methods](#class-methods-5)
@@ -255,6 +257,34 @@ Name | Signatures
 ---- | ----------
 **`cast`**|`cast <OutType> () -> OutType[]`
 **`flatten`**|`flatten <OutType> () -> OutType[]`
+
+## SequenceOf ##
+
+The following operations can be performed on sequences and are evaluated lazily. Each operation only takes the data it requires from the source sequence in order to return its result. 
+
+The `Sequence` protocol cannot be extended, hence the following are extensions to `SequenceOf`. They can be used as follows:
+
+```
+var source: Sequence = ...
+var filteredSequence = SequenceOf(source).filter { ... }
+```
+
+#### Instance Methods ####
+
+Name | Signatures
+---- | ----------
+**`first`**|`first () -> T?`
+**`any`**|`any (call: (T) -> Bool) -> Bool`
+**`get`**|`get (index: Int) -> T?`
+**`get`**|`get (range: Range<Int>) -> SequenceOf<T>`
+**`indexOf`**|`indexOf <U: Equatable> (item: U) -> Int?`
+**`filter`**|`filter(include: (T) -> Bool) -> SequenceOf<T>`
+**`reject`**|`reject (exclude: (T -> Bool)) -> SequenceOf<T>`
+**`skipWhile`**|`skipWhile(condition:(T) -> Bool) -> SequenceOf<T>`
+**`skip`**|`skip (n:Int) -> SequenceOf<T>`
+**`contains`**|`contains<T:Equatable> (item: T) -> Bool`
+**`take`**|`take (n:Int) -> SequenceOf<T>`
+**`takeWhile`**|`takeWhile (condition:(T?) -> Bool) -> SequenceOf<T>`
 
 # Utilities #
 
