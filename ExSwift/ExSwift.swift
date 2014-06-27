@@ -11,7 +11,8 @@ import Foundation
 operator infix =~ {}
 operator infix |~ {}
 
-class Ex: ExSwift { }
+typealias Ex = ExSwift
+
 class ExSwift {
     
     /**
