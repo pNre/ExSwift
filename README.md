@@ -80,6 +80,7 @@ Name | Signature
 **`push`**|`push(newElement: Element)`
 **`shift`**|`shift() -> Element`
 **`unshift`**|`unshift(newElement: Element)`
+**`insert`**|`insert (newArray: Array, atIndex: Int)`
 **`groupBy`**|`groupBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Array>`
 **`countBy`**|`countBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Int>`
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`

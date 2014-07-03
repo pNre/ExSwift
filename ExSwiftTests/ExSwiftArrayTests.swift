@@ -328,4 +328,16 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(0, array.lastIndexOf(5)!)
         XCTAssertNil(array.lastIndexOf(20))
     }
+    
+    func testInsert () {
+        array.insert([0, 9], atIndex: 2)
+        XCTAssertEqualObjects(array, [1, 2, 0, 9, 3, 4, 5])
+        
+        //  Out of bounds indexes
+        array.insert([10], atIndex: 10)
+        XCTAssertEqualObjects(array, [1, 2, 0, 9, 3, 4, 5, 10])
+        
+        array.insert([-2], atIndex: -1)
+        XCTAssertEqualObjects(array, [-2, 1, 2, 0, 9, 3, 4, 5, 10])
+    }
 }

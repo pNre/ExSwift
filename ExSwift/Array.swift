@@ -731,6 +731,15 @@ extension Array {
     mutating func unshift (newElement: Element) {
         self.insert(newElement, atIndex: 0)
     }
+    
+    /**
+    *  Inserts an array at index
+    *  @param newArray Array to insert
+    *  @param atIndex Where the array has to be inserted
+    */
+    mutating func insert (newArray: Array, atIndex: Int) {
+        self = self.take(atIndex) + newArray + self.skip(atIndex)
+    }
 
     /**
     *  Deletes all the items in self that are equal to element
@@ -765,6 +774,10 @@ extension Array {
     subscript (var range: Range<Int>) -> Array {
         //  Fix out of bounds indexes
         (range.startIndex, range.endIndex) = (range.startIndex.clamp(0, max: range.startIndex), range.endIndex.clamp(range.endIndex, max: count))
+
+        if range.startIndex > range.endIndex {
+            return []
+        }
 
         return Array(self[range] as Slice<T>)
     }

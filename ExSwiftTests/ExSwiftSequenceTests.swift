@@ -25,7 +25,7 @@ class ExtensionsSequenceTests: XCTestCase {
     
     func testSkip () {
         var skipped = SequenceOf(sequence).skip(2)
-        XCTAssertEqualObjects(Array(skipped), [3,4,5])
+        XCTAssertEqualObjects(Array(skipped), [3, 4, 5])
     }
     
     func testSkipBeyondEnd () {
@@ -35,7 +35,7 @@ class ExtensionsSequenceTests: XCTestCase {
     
     func testSkipWhile () {
         var skipped = SequenceOf(sequence).skipWhile { $0 < 3 }
-        XCTAssertEqualObjects(Array(skipped), [4,5])
+        XCTAssertEqualObjects(Array(skipped), [4, 5])
     }
     
     func testSkipWhileBeyondEnd () {
@@ -55,12 +55,12 @@ class ExtensionsSequenceTests: XCTestCase {
     
     func testTakeBeyondSequenceEnd () {
         var take = SequenceOf(sequence).take(20)
-        XCTAssertEqualObjects(Array(take), [1,2,3,4,5])
+        XCTAssertEqualObjects(Array(take), [1, 2, 3, 4, 5])
     }
     
     func testTakeWhile () {
         var take = SequenceOf(sequence).takeWhile { $0 != 3 }
-        XCTAssertEqualObjects(Array(take), [1,2])
+        XCTAssertEqualObjects(Array(take), [1, 2])
     }
     
     func testTakeWhileConditionNeverTrue () {
@@ -70,7 +70,7 @@ class ExtensionsSequenceTests: XCTestCase {
     
     func testTakeWhileConditionNotMet () {
         var take = SequenceOf(sequence).takeWhile { $0 != 7 }
-        XCTAssertEqualObjects(Array(take), [1,2,3,4,5])
+        XCTAssertEqualObjects(Array(take), [1, 2, 3, 4, 5])
     }
     
     func testIndexOf () {
@@ -85,7 +85,7 @@ class ExtensionsSequenceTests: XCTestCase {
     
     func testGetRange () {
         var subSequence = SequenceOf(sequence).get(1..3)
-        XCTAssertEqualObjects(Array(subSequence), [2,3])
+        XCTAssertEqualObjects(Array(subSequence), [2, 3])
         
         subSequence = SequenceOf(sequence).get(0..0)
         XCTAssertEqualObjects(Array(subSequence), [])
@@ -103,13 +103,13 @@ class ExtensionsSequenceTests: XCTestCase {
     
     func testFilter () {
         var evens = SequenceOf(sequence).filter { $0 % 2 == 0 }
-        XCTAssertEqualObjects(Array(evens), [2,4])
+        XCTAssertEqualObjects(Array(evens), [2, 4])
         
         var odds = SequenceOf(sequence).filter { $0 % 2 == 1 }
-        XCTAssertEqualObjects(Array(odds), [1,3,5])
+        XCTAssertEqualObjects(Array(odds), [1, 3, 5])
         
         var all = SequenceOf(sequence).filter { $0 < 10 }
-        XCTAssertEqualObjects(Array(all), [1,2,3,4,5])
+        XCTAssertEqualObjects(Array(all), [1, 2, 3, 4, 5])
         
         var none = SequenceOf(sequence).filter { $0 > 10 }
         XCTAssertEqualObjects(Array(none), [])
@@ -117,12 +117,12 @@ class ExtensionsSequenceTests: XCTestCase {
     
     func testReject () {
         var rejected = SequenceOf(sequence).reject { $0 == 3 }
-        XCTAssertEqualObjects(Array(rejected), [1,2,4,5])
+        XCTAssertEqualObjects(Array(rejected), [1, 2, 4, 5])
         
         rejected = SequenceOf(sequence).reject { $0 == 1 }
-        XCTAssertEqualObjects(Array(rejected), [2,3,4,5])
+        XCTAssertEqualObjects(Array(rejected), [2, 3, 4, 5])
         
         rejected = SequenceOf(sequence).reject { $0 == 10 }
-        XCTAssertEqualObjects(Array(rejected), [1,2,3,4,5])
+        XCTAssertEqualObjects(Array(rejected), [1, 2, 3, 4, 5])
     }
 }

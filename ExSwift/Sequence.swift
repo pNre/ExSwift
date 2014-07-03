@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 extension SequenceOf {
 
     /**
@@ -160,7 +159,7 @@ extension SequenceOf {
 }
 
 // a sequence adapter that implements the 'filter' functionality
-struct FilterSequence<S:Sequence>: Sequence {
+struct FilterSequence<S: Sequence>: Sequence {
     let sequence: S
     let includeElement: (S.GeneratorType.Element) -> Bool
     
@@ -191,7 +190,7 @@ struct FilterSequence<S:Sequence>: Sequence {
 }
 
 // a sequence adapter that implements the 'take' functionality
-struct TakeSequence<S:Sequence>: Sequence {
+struct TakeSequence<S: Sequence>: Sequence {
     let sequence: S
     let n: Int
 
@@ -215,7 +214,7 @@ struct TakeSequence<S:Sequence>: Sequence {
 }
 
 // a sequence adapter that implements the 'takeWhile' functionality
-struct TakeWhileSequence<S:Sequence>: Sequence {
+struct TakeWhileSequence<S: Sequence>: Sequence {
     let sequence: S
     let condition: (S.GeneratorType.Element?) -> Bool
     
