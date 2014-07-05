@@ -32,7 +32,7 @@ extension String {
     *  @return Charaters at the specified indexes (converted to String)
     */
     subscript (indexes: Int...) -> String[] {
-        return at(reinterpretCast(indexes))
+        return at(indexes)
     }
 
     /**
@@ -54,6 +54,15 @@ extension String {
     *  @return Array of characters (as String)
     */
     func at (indexes: Int...) -> String[] {
+        return indexes.map { self[$0]! }
+    }
+
+    /**
+    *  Returns the characters at the specified indexes
+    *  @param indexes
+    *  @return Array of characters (as String)
+    */
+    func at (indexes: Int[]) -> String[] {
         return indexes.map { self[$0]! }
     }
 

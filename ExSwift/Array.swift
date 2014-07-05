@@ -327,15 +327,7 @@ extension Array {
     func shuffled () -> Array {
         var shuffled = self
         shuffled.unshare()
-
-        //  Fisher-Yates shuffle
-        for i in 0..self.count {
-            let j = Int.random(max: i)
-            if j != i {
-                shuffled[i] = shuffled[j]
-            }
-            shuffled[j] = self[i]
-        }
+        shuffled.shuffle()
 
         return shuffled
     }
