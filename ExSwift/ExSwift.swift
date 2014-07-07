@@ -47,7 +47,7 @@ class ExSwift {
         
         let f = ExSwift.after(n, function: callAfter)
         
-        return { f(nil)? }
+        return { f([nil])? }
     }
     
     /**
@@ -86,7 +86,7 @@ class ExSwift {
             return function()
         }
         
-        return { f(nil)? }
+        return { f([nil])? }
     }
     
     /**
@@ -140,7 +140,7 @@ class ExSwift {
             }
             
             if let cachedValue : AnyObject = cache.objectForKey(bridgedKey) {
-                return bridgeFromObjectiveC(cachedValue, R.self)!
+                return bridgeFromObjectiveC(cachedValue, R.self)
             }
             
             let result = function(paramsList)

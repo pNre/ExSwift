@@ -179,7 +179,7 @@ extension Dictionary {
     */
     func groupBy <T> (groupingFunction group: (KeyType, ValueType) -> T) -> Dictionary<T, Array<ValueType>> {
 
-        var result = Dictionary<T, ValueType[]>()
+        var result = Dictionary<T, Array<ValueType>>()
 
         for (key, value) in self {
 
@@ -269,7 +269,7 @@ extension Dictionary {
     *  @param keys Whitelisted keys
     *  @return Filtered dictionary
     */
-    func pick (keys: KeyType[]) -> Dictionary {
+    func pick (keys: Array<KeyType>) -> Dictionary {
         return filter { (key: KeyType, _) -> Bool in
             return keys.contains(key)
         }
@@ -281,7 +281,7 @@ extension Dictionary {
     *  @return Filtered dictionary
     */
     func pick (keys: KeyType...) -> Dictionary {
-        return pick(reinterpretCast(keys) as KeyType[])
+        return pick(reinterpretCast(keys) as Array<KeyType>)
     }
 
     /**

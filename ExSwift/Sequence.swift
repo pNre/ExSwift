@@ -41,7 +41,7 @@ extension SequenceOf {
     */
     func get (index: Int) -> T? {
         var generator =  self.generate();
-        for _ in 0..(index-1) {
+        for _ in 0..<(index - 1) {
             generator.next()
         }
         return generator.next()
@@ -81,7 +81,7 @@ extension SequenceOf {
     */
     func skip (n:Int) -> SequenceOf<T> {
         var generator =  self.generate();
-        for _ in 0..n {
+        for _ in 0..<n {
             generator.next()
         }
         return SequenceOf(generator)

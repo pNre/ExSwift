@@ -203,7 +203,7 @@ extension Array {
             return array.count
         }.max() as Int
 
-        for i in 0..max {
+        for i in 0..<max {
 
             //  i-th element in self as array + every i-th element in each array in arrays
             result.append([get(i)] + arrays.map {
@@ -222,15 +222,15 @@ extension Array {
     *  @param step The number of elements to progress between each partition.  Set to n if not supplied.
     *  @return Array partitioned into n element arrays, starting step elements apart.
     */
-    func partition (var n: Int, var step: Int? = nil) -> Array<Array<Element>> {
-        var result = Array<Array<Element>>()
+    func partition (var n: Int, var step: Int? = nil) -> Array<Array> {
+        var result = Array<Array>()
         if !step?   { step = n } // If no step is supplied move n each step.
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
         if n > count { return [[]] }
 
         for i in (0...count-n).by(step!) {
-            result += self[i..(i+n)]
+            result += self[i..<(i + n)]
         }
 
         return result
@@ -245,22 +245,22 @@ extension Array {
     *             the last partition may less than n elements long.
     *  @return Array partitioned into n element arrays, starting step elements apart.
     */
-    func partition (var n: Int, var step: Int? = nil, pad: Element[]?) -> Array<Array<Element>> {
-        var result = Array<Array<Element>>()
+    func partition (var n: Int, var step: Int? = nil, pad: Array?) -> Array<Array> {
+        var result = Array<Array>()
         if !step?   { step = n } // If no step is supplied move n each step.
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
 
-        for i in (0..count).by(step!) {
+        for i in (0..<count).by(step!) {
             var end = i+n
             if end > count { end = count }
-            result += self[i..end]
+            result += self[i..<end]
             if end != i+n { break }
         }
 
         if let padding = pad {
             let remaining = count % n
-            result[result.count-1] += padding[0..remaining] as Element[]
+            result[result.count - 1] += padding[0..<remaining] as Array
         }
 
         return result
@@ -272,14 +272,14 @@ extension Array {
     *  @param step The number of elements to progress between each partition.  Set to n if not supplied.
     *  @return Array partitioned into n element arrays, starting step elements apart.
     */
-    func partitionAll (var n: Int, var step: Int? = nil) -> Array<Array<Element>> {
-        var result = Array<Array<Element>>()
+    func partitionAll (var n: Int, var step: Int? = nil) -> Array<Array> {
+        var result = Array<Array>()
         if !step?   { step = n } // If no step is supplied move n each step.
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
 
-        for i in (0..count).by(step!) {
-            result += self[i..i+n]
+        for i in (0..<count).by(step!) {
+            result += self[i..<i + n]
         }
 
         return result
@@ -290,15 +290,15 @@ extension Array {
     *  @param cond Function which takes an element and produces an equatable result.
     *  @return Array partitioned in order, splitting via results of cond.
     */
-    func partitionBy <T: Equatable> (cond: (Element) -> T) -> Array<Array<Element>> {
-        var result = Array<Array<Element>>()
+    func partitionBy <T: Equatable> (cond: (Element) -> T) -> Array<Array> {
+        var result = Array<Array>()
         var lastValue: T? = nil
 
         for item in self {
             let value = cond(item)
 
             if value == lastValue? {
-                result[result.count-1] += item
+                result[result.count - 1] += item
             } else {
                 result.append([item])
                 lastValue = value
@@ -326,7 +326,7 @@ extension Array {
     */
     func shuffled () -> Array {
         var shuffled = self
-        shuffled.unshare()
+        
         shuffled.shuffle()
 
         return shuffled
@@ -343,7 +343,7 @@ extension Array {
         }
 
         let index = Int.random(max: count - n)
-        return self[index..(n + index)]
+        return self[index..<(n + index)]
     }
 
     /**
@@ -458,7 +458,7 @@ extension Array {
     *  @return First n elements
     */
     func take (n: Int) -> Array {
-        return self[0..n]
+        return self[0..<n]
     }
 
     /**
@@ -486,7 +486,7 @@ extension Array {
     *  @return Last n elements
     */
     func tail (n: Int) -> Array {
-        return self[(count - n)..count]
+        return self[(count - n)..<count]
     }
 
     /**
@@ -494,7 +494,7 @@ extension Array {
     *  @return Array from n to the end
     */
     func skip (n: Int) -> Array {
-        return self[n..count]
+        return self[n..<count]
     }
 
     /**
@@ -542,7 +542,7 @@ extension Array {
     */
     func groupBy <U> (groupingFunction group: (Element) -> U) -> Dictionary<U, Array> {
 
-        var result = Dictionary<U, Element[]>()
+        var result = Dictionary<U, Array>()
 
         for item in self {
 
@@ -644,28 +644,28 @@ extension Array {
     *  Flattens the nested Array self to an array of OutType objects
     *  @return Flattened array
     */
-    func flatten <OutType> () -> OutType[] {
+    func flatten <OutType> () -> Array<OutType> {
 
         //  There's still some work to do here
 
-        var result = OutType[]()
+        var result = Array<OutType>()
 
         for item in self {
 
             if item is OutType {
                 result.append(item as OutType)
                 continue
-            } else if let bridged = bridgeFromObjectiveC(reinterpretCast(item), OutType.self) {
+            } else if let bridged = bridgeFromObjectiveCConditional(reinterpretCast(item), OutType.self) {
                 result.append(bridged)
                 continue
             } else if item is NSArray {
-                result += (item as NSArray).flatten() as OutType[]
+                result += (item as NSArray).flatten() as Array<OutType>
                 continue
             }
 
             let m = reflect(item)
             if m.disposition == MirrorDisposition.IndexContainer {
-                for index in 0..m.count {
+                for index in 0..<m.count {
                     let value = m[index].1.value
                     if value is OutType {
                         result.append(value as OutType)
@@ -687,7 +687,6 @@ extension Array {
     */
     func sortBy (isOrderedBefore: (T, T) -> Bool) -> Array<T> {
         var clone = self
-        clone.unshare()
         clone.sort(isOrderedBefore)
         return clone
     }
@@ -738,7 +737,7 @@ extension Array {
     *  @param element Element to remove
     */
     mutating func remove <U: Equatable> (element: U) {
-        let anotherSelf = self.copy()
+        let anotherSelf = self
 
         removeAll(keepCapacity: true)
 
@@ -822,8 +821,8 @@ extension Array {
 *  @param n How many times the array must be repeated
 *  @return Array of repeated values 
 */
-@infix func * <ItemType> (array: ItemType[], n: Int) -> ItemType[] {
-    var result = ItemType[]()
+@infix func * <ItemType> (array: Array<ItemType>, n: Int) -> Array<ItemType> {
+    var result = Array<ItemType>()
 
     n.times {
         result += array
@@ -838,6 +837,6 @@ extension Array {
 *  @param separator Separator to join the array elements
 *  @return Joined string
 */
-@infix func * (array: String[], separator: String) -> String {
+@infix func * (array: Array<String>, separator: String) -> String {
     return array.implode(separator)!
 }

@@ -37,7 +37,7 @@ extension Int {
     *  @param function Function to call
     */
     func times <T> (function: (Int) -> T) {
-        (0..self).each { index in function(index); return }
+        (0..<self).each { index in function(index); return }
     }
 
     /**
@@ -125,8 +125,8 @@ extension Int {
     *  Returns a Int[] containing the digits in self
     *  @return Array of digits
     */
-    func digits () -> Int[] {
-        var result = Int[]()
+    func digits () -> Array<Int> {
+        var result = Array<Int>()
         
         for char in String(self) {
             let string = String(char)

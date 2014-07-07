@@ -31,7 +31,7 @@ extension String {
     *  @param indexes
     *  @return Charaters at the specified indexes (converted to String)
     */
-    subscript (indexes: Int...) -> String[] {
+    subscript (indexes: Int...) -> Array<String> {
         return at(indexes)
     }
 
@@ -53,7 +53,7 @@ extension String {
     *  @param indexes
     *  @return Array of characters (as String)
     */
-    func at (indexes: Int...) -> String[] {
+    func at (indexes: Int...) -> Array<String> {
         return indexes.map { self[$0]! }
     }
 
@@ -62,7 +62,7 @@ extension String {
     *  @param indexes
     *  @return Array of characters (as String)
     */
-    func at (indexes: Int[]) -> String[] {
+    func at (indexes: Array<Int>) -> Array<String> {
         return indexes.map { self[$0]! }
     }
 
@@ -71,7 +71,7 @@ extension String {
     *  @param separator
     *  @return Array of strings
     */
-    func explode (separator: Character) -> String[] {
+    func explode (separator: Character) -> Array<String> {
         return split(self, {
             (element: Character) -> Bool in
             return element == separator
@@ -84,10 +84,10 @@ extension String {
     *  @param ignoreCase True for case insensitive matching
     *  @return Matches
     */
-    func matches (pattern: String, ignoreCase: Bool = false) -> NSTextCheckingResult[]? {
+    func matches (pattern: String, ignoreCase: Bool = false) -> Array<NSTextCheckingResult>? {
 
         if let regex = ExSwift.regex(pattern, ignoreCase: ignoreCase) {
-            return regex.matchesInString(self, options: nil, range: NSMakeRange(0, length)) as? NSTextCheckingResult[]
+            return regex.matchesInString(self, options: nil, range: NSMakeRange(0, length)) as? Array<NSTextCheckingResult>
         }
 
         return nil
@@ -108,7 +108,7 @@ extension String {
     *  @return String formed with string at the given index
     */
     func insert (index: Int, _ string: String) -> String {
-        return self[0..index]! + string + self[index..length]!
+        return self[0..<index]! + string + self[index..<length]!
     }
 
     /**
@@ -116,8 +116,11 @@ extension String {
     *  @return Stripped string
     */
     func ltrimmed () -> String {
-        let range = rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet().invertedSet)
-        return self[range.startIndex..endIndex]
+        if let range = rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet().invertedSet) {
+            return self[range.startIndex..<endIndex]
+        }
+        
+        return self
     }
 
     /**
@@ -125,8 +128,11 @@ extension String {
     *  @return Stripped string
     */
     func rtrimmed () -> String {
-        let range = rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet().invertedSet, options: NSStringCompareOptions.BackwardsSearch)
-        return self[startIndex..range.endIndex]
+        if let range = rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet().invertedSet, options: NSStringCompareOptions.BackwardsSearch) {
+            return self[startIndex..<range.endIndex]
+        }
+        
+        return self
     }
 
     /**
@@ -192,19 +198,19 @@ extension String {
 }
 
 //  Match against all the alements in an array of String
-@infix func =~ (strings: String[], pattern: String) -> Bool {
+@infix func =~ (strings: Array<String>, pattern: String) -> Bool {
     return strings.all { $0 =~ (pattern: pattern, ignoreCase: false) }
 }
 
-@infix func =~ (strings: String[], options: (pattern: String, ignoreCase: Bool)) -> Bool {
+@infix func =~ (strings: Array<String>, options: (pattern: String, ignoreCase: Bool)) -> Bool {
     return strings.all { $0 =~ options }
 }
 
 //  Match against any element in an array of String
-@infix func |~ (strings: String[], pattern: String) -> Bool {
+@infix func |~ (strings: Array<String>, pattern: String) -> Bool {
     return strings.any { $0 =~ (pattern: pattern, ignoreCase: false) }
 }
 
-@infix func |~ (strings: String[], options: (pattern: String, ignoreCase: Bool)) -> Bool {
+@infix func |~ (strings: Array<String>, options: (pattern: String, ignoreCase: Bool)) -> Bool {
     return strings.any { $0 =~ options }
 }

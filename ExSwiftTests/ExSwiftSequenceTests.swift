@@ -11,7 +11,7 @@ import XCTest
 class ExtensionsSequenceTests: XCTestCase {
     
     var sequence = 1...5
-    var emptySequence = 1..1
+    var emptySequence = 1..<1
     
     func testFirst () {
         var first = SequenceOf(sequence).first()
@@ -84,15 +84,15 @@ class ExtensionsSequenceTests: XCTestCase {
     }
     
     func testGetRange () {
-        var subSequence = SequenceOf(sequence).get(1..3)
+        var subSequence = SequenceOf(sequence).get(1..<3)
         XCTAssertEqualObjects(Array(subSequence), [2, 3])
         
-        subSequence = SequenceOf(sequence).get(0..0)
+        subSequence = SequenceOf(sequence).get(0..<0)
         XCTAssertEqualObjects(Array(subSequence), [])
     }
     
     func testGetRangeOutOfBounds () {
-        var subSequence = SequenceOf(sequence).get(10..15)
+        var subSequence = SequenceOf(sequence).get(10..<15)
         XCTAssertEqualObjects(Array(subSequence), [])
     }
     

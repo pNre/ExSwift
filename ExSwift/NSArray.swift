@@ -15,12 +15,12 @@ extension NSArray {
     *  the items in the NSArray that can be bridged from their ObjC type to OutType.
     *  @return Swift Array
     */
-    func cast <OutType> () -> OutType[] {
-        var result = OutType[]()
+    func cast <OutType> () -> Array<OutType> {
+        var result = Array<OutType>()
         
         for item : AnyObject in self {
             //  Keep only objC objects compatible with OutType
-            if let converted = bridgeFromObjectiveC(item, OutType.self) {
+            if var converted = bridgeFromObjectiveCConditional(item, OutType.self) {
                 result.append(converted)
             }
         }
@@ -33,15 +33,15 @@ extension NSArray {
     *  the items in the NSArray that can be bridged from their ObjC type to OutType.
     *  @return Flattened array
     */
-    func flatten <OutType> () -> OutType[] {
+    func flatten <OutType> () -> Array<OutType> {
 
-        var result = OutType[]()
+        var result = Array<OutType>()
         
         for item: AnyObject in self {
-            if let converted = bridgeFromObjectiveC(item, OutType.self) {
+            if let converted = bridgeFromObjectiveCConditional(item, OutType.self) {
                 result.append(converted)
             } else if item is NSArray {
-                result += (item as NSArray).flatten() as OutType[]
+                result += (item as NSArray).flatten() as Array<OutType>
             }
         }
         

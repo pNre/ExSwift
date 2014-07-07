@@ -11,7 +11,7 @@ import XCTest
 class ExtensionsArrayTests: XCTestCase {
 
     var array: Array<Int> = []
-    var people: Person[] = []
+    var people: Array<Person> = []
   
     class Person {
         let name: String, age: Int, id: String
@@ -75,11 +75,11 @@ class ExtensionsArrayTests: XCTestCase {
             result.append(index)
         })
 
-        XCTAssertEqualObjects(result, array.map({ return $0 - 1 }) as Int[])
+        XCTAssertEqualObjects(result, array.map({ return $0 - 1 }) as Array<Int>)
     }
 
     func testEachRight() {
-        var result = Int[]()
+        var result = Array<Int>()
         
         array.eachRight { (index: Int, value: Int) -> Void in
             result += value
@@ -90,7 +90,7 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testRange() {
-        XCTAssertEqualObjects(Array<Int>.range(0..2), [0, 1])
+        XCTAssertEqualObjects(Array<Int>.range(0..<2), [0, 1])
         XCTAssertEqualObjects(Array<Int>.range(0...2), [0, 1, 2])
     }
 
@@ -129,7 +129,7 @@ class ExtensionsArrayTests: XCTestCase {
 
     func testUnion() {
         XCTAssertEqualObjects(array.union([1]), array)
-        XCTAssertEqualObjects(array.union(Int[]()), array)
+        XCTAssertEqualObjects(array.union(Array<Int>()), array)
         XCTAssertEqualObjects(array.union([6]), [1, 2, 3, 4, 5, 6])
     }
 
@@ -180,18 +180,19 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testSubscriptRange() {
-        XCTAssertEqualObjects(array[0..0], [])
-        XCTAssertEqualObjects(array[0..1], [1])
-        XCTAssertEqualObjects(array[0..2], [1, 2])
+        XCTAssertEqualObjects(array[0..<0], [])
+        XCTAssertEqualObjects(array[0..<1], [1])
+        XCTAssertEqualObjects(array[0..<2], [1, 2])
     }
 
     func testShuffled() {
         let shuffled = array.shuffled()
         XCTAssertEqualObjects(shuffled.difference(array), [])
+        XCTAssertNotEqualObjects(shuffled, array)
     }
 
     func testShuffle() {
-        var toShuffle = array.copy()
+        var toShuffle = array
         toShuffle.shuffle()
         XCTAssertEqualObjects(toShuffle.difference(array), [])
     }
@@ -261,7 +262,7 @@ class ExtensionsArrayTests: XCTestCase {
 
     func testUnique() {
         let arr = [1, 1, 1, 2, 3]
-        XCTAssertEqualObjects(arr.unique() as Int[], [1, 2, 3])
+        XCTAssertEqualObjects(arr.unique() as Array<Int>, [1, 2, 3])
     }
 
     func testGroupBy() {
@@ -303,12 +304,12 @@ class ExtensionsArrayTests: XCTestCase {
     
     func testAt () {
         XCTAssertEqualObjects(array.at(0, 2), [1, 3])
-        XCTAssertEqualObjects(array[0, 2, 1] as Int[], [1, 3, 2])
+        XCTAssertEqualObjects(array[0, 2, 1] as Array<Int>, [1, 3, 2])
     }
     
     func testFlatten () {
         let array = [5, [6, [7]], 8]
-        XCTAssertEqualObjects(array.flatten() as Int[], [5, 6, 7, 8])
+        XCTAssertEqualObjects(array.flatten() as Array<Int>, [5, 6, 7, 8])
     }
     
     func testGet () {

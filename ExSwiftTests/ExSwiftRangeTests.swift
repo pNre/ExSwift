@@ -13,7 +13,7 @@ class ExSwiftRangeTests: XCTestCase {
     func testTimes() {
         var count = 0
 
-        (2..4).times({
+        (2..<4).times({
             count++
             return
         })
@@ -34,13 +34,13 @@ class ExSwiftRangeTests: XCTestCase {
 
         var items = Array<Int>()
 
-        (0..2).each({
+        (0..<2).each({
             items.append($0)
         })
 
         XCTAssertEqualObjects(items, [0, 1])
 
-        (0..0).each({ (current: Int) in
+        (0..<0).each({ (current: Int) in
             XCTFail()
             return
         })

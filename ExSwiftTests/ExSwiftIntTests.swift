@@ -91,11 +91,11 @@ class ExSwiftIntTests: XCTestCase {
     }
 
     func testIn () {
-        XCTAssertTrue(2.isIn(0..3))
-        XCTAssertFalse(2.isIn(0..3, strict: true))
+        XCTAssertTrue(2.isIn(0..<3))
+        XCTAssertFalse(2.isIn(0..<3, strict: true))
         
-        XCTAssertTrue(0.isIn(0..3))
-        XCTAssertFalse(0.isIn(0..3, strict: true))
+        XCTAssertTrue(0.isIn(0..<3))
+        XCTAssertFalse(0.isIn(0..<3, strict: true))
         
         XCTAssertTrue(2.isIn(0...2))
         XCTAssertFalse(2.isIn(0...2, strict: true))

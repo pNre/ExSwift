@@ -55,9 +55,9 @@ extension Float {
     *  the integer and the fractional part of self.
     *  @return (integer, fractional)
     */
-    func digits () -> (integerPart: Int[], fractionalPart: Int[]) {
-        var first: Int[]? = nil
-        var current = Int[]()
+    func digits () -> (integerPart: Array<Int>, fractionalPart: Array<Int>) {
+        var first: Array<Int>? = nil
+        var current = Array<Int>()
         
         for char in String(self) {
             let string = String(char)

@@ -24,7 +24,7 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual("∆", string[0]!)
         XCTAssertEqual("T", string[1]!)
         XCTAssertEqual("😗", string[string.length - 1]!)
-        XCTAssertEqual("Test😗", string[1..6]!)
+        XCTAssertEqual("Test😗", string[1..<6]!)
         XCTAssertEqual("😗", string[-1]!)
     }
 
@@ -89,7 +89,7 @@ class ExSwiftStringTests: XCTestCase {
         let matches = string.matches("\\d+")!
         let range = matches[0].rangeAtIndex(0)
 
-        XCTAssertEqualObjects(string[range.location..(range.location + range.length)], "31")
+        XCTAssertEqualObjects(string[range.location..<(range.location + range.length)], "31")
         XCTAssertTrue(string.matches("N")?.isEmpty)
     }
     
