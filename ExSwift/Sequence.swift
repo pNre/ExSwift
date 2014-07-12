@@ -93,7 +93,7 @@ extension SequenceOf {
     *  @return Filtered sequence
     */
     func filter(include: (T) -> Bool) -> SequenceOf<T> {
-        return SequenceOf(FilterSequence(self, include))
+        return SequenceOf(Swift.filter(self, include))
     }
     
     /**
@@ -155,37 +155,6 @@ extension SequenceOf {
     */
     func takeWhile (condition:(T?) -> Bool) -> SequenceOf<T>  {
         return SequenceOf(TakeWhileSequence(self, condition))
-    }
-}
-
-// a sequence adapter that implements the 'filter' functionality
-struct FilterSequence<S: Sequence>: Sequence {
-    let sequence: S
-    let includeElement: (S.GeneratorType.Element) -> Bool
-    
-    init(_ sequence: S, _ includeElement: (S.GeneratorType.Element) -> Bool) {
-        self.sequence = sequence
-        self.includeElement = includeElement
-    }
-    
-    func generate() -> GeneratorOf<S.GeneratorType.Element> {
-        var generator = self.sequence.generate()
-        return GeneratorOf<S.GeneratorType.Element> {
-            var keepSkipping = true
-            var nextItem = generator.next()
-            while keepSkipping {
-                if let unwrappedItem = nextItem {
-                    keepSkipping = !self.includeElement(unwrappedItem)
-                } else {
-                    keepSkipping = false
-                }
-                
-                if (keepSkipping) {
-                    nextItem = generator.next()
-                }
-            }
-            return nextItem
-        }
     }
 }
 
