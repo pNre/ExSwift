@@ -63,3 +63,11 @@ extension Range {
     return first.startIndex == second.startIndex &&
            first.endIndex == second.endIndex
 }
+
+/**
+*  DP2 style open range operator
+*/
+@infix func .. <U> (first: U, second: U) -> Range<U> {
+    return first..<second
+}
+
