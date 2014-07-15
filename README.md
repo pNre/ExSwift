@@ -31,9 +31,12 @@ JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for sta
     	- [Instance Methods](#instance-methods-6)
    	- [SequenceOf](#sequenceof)
     	- [Instance Methods](#instance-methods-7)
+	- [Double](#double)
+		- [Instance Methods](#instance-methods-8)
+		- [Class Methods](#class-methods-5)
 
 - [Utilities](#utilities)
-	- [Class Methods](#class-methods-5)
+	- [Class Methods](#class-methods-6)
 
 # Extensions #
 
@@ -261,7 +264,7 @@ Name | Signatures
 
 ## SequenceOf ##
 
-The following operations can be performed on sequences and are evaluated lazily. Each operation only takes the data it requires from the source sequence in order to return its result. 
+The following operations can be performed on sequences and are evaluated lazily. Each operation only takes the data it requires from the source sequence in order to return its result.
 
 The `Sequence` protocol cannot be extended, hence the following are extensions to `SequenceOf`. They can be used as follows:
 
@@ -286,6 +289,26 @@ Name | Signatures
 **`contains`**|`contains<T:Equatable> (item: T) -> Bool`
 **`take`**|`take (n:Int) -> SequenceOf<T>`
 **`takeWhile`**|`takeWhile (condition:(T?) -> Bool) -> SequenceOf<T>`
+
+## Double ##
+
+Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/Double)
+
+#### Instance Methods ####
+
+Name | Signature
+---- | ---------
+**`abs`**|`abs () -> Double`
+**`sqrt`**|`sqrt () -> Double`
+**`round`**|`round () -> Double`
+**`ceil`**|`ceil () -> Double`
+**`floor`**|`floor () -> Double`
+
+#### Class Methods ####
+
+Name | Signatures
+---- | ----------
+**`random`**|`random(min: Double = 0, max: Double) -> Double`
 
 # Utilities #
 
