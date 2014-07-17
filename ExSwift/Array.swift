@@ -686,11 +686,8 @@ extension Array {
     *  @return An array that is sorted by the given function
     */
     func sortBy (isOrderedBefore: (T, T) -> Bool) -> Array<T> {
-        var clone = self
-        clone.sort(isOrderedBefore)
-        return clone
+        return sorted(isOrderedBefore)
     }
-
 
     /**
     *  Removes the last element from self and returns it
