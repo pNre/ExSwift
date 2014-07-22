@@ -50,6 +50,15 @@
       debugDocumentVersioning = "YES"
       debugXPCServices = "NO"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "1E11AF831943222D006BCE48"
+            BuildableName = "ExSwift.framework"
+            BlueprintName = "ExSwift"
+            ReferencedContainer = "container:ExSwift.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

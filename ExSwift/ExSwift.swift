@@ -125,28 +125,22 @@ class ExSwift {
     *  @param hash Parameters based hashing function that computes the key used to store each result in the cache
     *  @return Wrapper function
     */
-    class func cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R) {
-        var cache = NSCache()
+    class func cached <P: Hashable, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R) {
+        var cache = [P:R]()
         
         return {
             (params: P...) -> R in
             
             let paramsList = reinterpretCast(params) as (P...)
-            let bridgedKey : AnyObject? = bridgeToObjectiveC(hash(paramsList))
+            let key = hash(paramsList)
             
-            //  If hash doesn't return any value, forget caching
-            if !bridgedKey {
-                return function(paramsList)
+            if let cachedValue = cache[key] {
+                return cachedValue
             }
             
-            if let cachedValue : AnyObject = cache.objectForKey(bridgedKey) {
-                return bridgeFromObjectiveC(cachedValue, R.self)
-            }
+            cache[key] = function(paramsList)
             
-            let result = function(paramsList)
-            cache.setObject(bridgeToObjectiveC(result), forKey: bridgedKey)
-            
-            return result
+            return cache[key]!
         }
     }
     
@@ -155,7 +149,7 @@ class ExSwift {
     *  @param function Function to cache
     *  @return Wrapper function
     */
-    class func cached <P, R> (function: (P...) -> R) -> ((P...) -> R) {
+    class func cached <P: Hashable, R> (function: (P...) -> R) -> ((P...) -> R) {
         return cached(function, hash: { (params: P...) -> P in return params[0] })
     }
     

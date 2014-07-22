@@ -86,6 +86,7 @@ Name | Signature
 **`insert`**|`insert (newArray: Array, atIndex: Int)`
 **`groupBy`**|`groupBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Array>`
 **`countBy`**|`countBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Int>`
+**`reduce`**|`reduce (combine: (Element, Element) -> Element) -> Element?`
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 **`flatten`**|`flatten <OutType> () -> OutType[]`

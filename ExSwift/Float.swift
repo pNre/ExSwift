@@ -59,7 +59,7 @@ extension Float {
         var first: Array<Int>? = nil
         var current = Array<Int>()
         
-        for char in String(self) {
+        for char in NSNumber(float: self).stringValue {
             let string = String(char)
             if let toInt = string.toInt() {
                 current.append(toInt)

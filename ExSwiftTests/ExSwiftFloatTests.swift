@@ -21,18 +21,18 @@ class ExSwiftFloatTests: XCTestCase {
     func testDigits () {
         let first = Float(10.214).digits()
         
-        XCTAssertEqualObjects(first.integerPart, [1, 0])
-        XCTAssertEqualObjects(first.fractionalPart[0...1], [2, 1])
+        XCTAssertEqualArrays(first.integerPart, [1, 0])
+        XCTAssertEqualArrays(first.fractionalPart[0...1], [2, 1])
         
         let second = Float(0.123).digits()
         
-        XCTAssertEqualObjects(second.integerPart, [0])
-        XCTAssertEqualObjects(second.fractionalPart[0...1], [1, 2])
+        XCTAssertEqualArrays(second.integerPart, [0])
+        XCTAssertEqualArrays(second.fractionalPart[0...1], [1, 2])
         
         let third = Float(10.0).digits()
         
-        XCTAssertEqualObjects(third.integerPart, [1, 0])
-        XCTAssertEqualObjects(third.fractionalPart, [0])
+        XCTAssertEqualArrays(third.integerPart, [1, 0])
+        XCTAssertEqualArrays(third.fractionalPart, [0])
     }
 
     func testFloor () {

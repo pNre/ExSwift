@@ -23,17 +23,17 @@ class ExSwiftDictionaryTests: XCTestCase {
 
     func testMapValues() {
         let mapped = dictionary.mapValues(mapFunction: { key, value -> Int in return value + 1 })
-        XCTAssertEqualObjects(mapped, ["A": 2, "B": 3, "C": 4])
+        XCTAssertEqualDictionaries(mapped, ["A": 2, "B": 3, "C": 4])
     }
     
     func testMap() {
         let mapped = dictionary.map(mapFunction: { key, value -> (String, Int) in return (key + "A", value + 1) })
-        XCTAssertEqualObjects(mapped, ["AA": 2, "BA": 3, "CA": 4])
+        XCTAssertEqualDictionaries(mapped, ["AA": 2, "BA": 3, "CA": 4])
     }
     
     func testFilter() {
         let filtered = dictionary.filter { key, _ in return key != "A" }
-        XCTAssertEqualObjects(filtered, ["B": 2, "C": 3])
+        XCTAssertEqualDictionaries(filtered, ["B": 2, "C": 3])
     }
 
     func testIsEmpty() {
@@ -63,9 +63,9 @@ class ExSwiftDictionaryTests: XCTestCase {
             return (value % 2 == 0)
         })
         
-        XCTAssertEqualObjects(Array(g.keys), [false, true])
-        XCTAssertEqualObjects(Array(g[true]!), [2, 4])
-        XCTAssertEqualObjects(Array(g[false]!), [5])
+        XCTAssertEqualArrays(Array(g.keys), [false, true])
+        XCTAssertEqualArrays(Array(g[true]!), [2, 4])
+        XCTAssertEqualArrays(Array(g[false]!), [5])
     }
     
     func testCountBy() {
@@ -80,7 +80,7 @@ class ExSwiftDictionaryTests: XCTestCase {
             return (value % 2 == 0)
         })
         
-        XCTAssertEqualObjects(g, [false: 1, true: 2])
+        XCTAssertEqualDictionaries(g, [false: 1, true: 2])
     }
     
     func testAny() {
@@ -108,7 +108,7 @@ class ExSwiftDictionaryTests: XCTestCase {
             return initial
         })
         
-        XCTAssertEqualObjects(reduced, [2: "B", 3: "C", 1: "A"])
+        XCTAssertEqualDictionaries(reduced, [2: "B", 3: "C", 1: "A"])
     }
     
     func testDifference () {
@@ -116,8 +116,8 @@ class ExSwiftDictionaryTests: XCTestCase {
         let dictionary2 = [ "A": 1 ]
         let dictionary3 = [ "B": 2, "C": 3 ]
         
-        XCTAssertEqualObjects(dictionary1.difference(dictionary2, dictionary3), [:])
-        XCTAssertEqualObjects(dictionary1 - dictionary2, ["C": 3, "B": 2])
+        XCTAssertEqualDictionaries(dictionary1.difference(dictionary2, dictionary3), [:])
+        XCTAssertEqualDictionaries(dictionary1 - dictionary2, ["C": 3, "B": 2])
     }
     
     func testUnion () {
@@ -125,8 +125,8 @@ class ExSwiftDictionaryTests: XCTestCase {
         let dictionary2 = [ "A": 1 ]
         let dictionary3 = [ "D": 4 ]
         
-        XCTAssertEqualObjects(dictionary1.union(dictionary2, dictionary3), [ "A": 1, "B": 2, "C": 3, "D": 4 ])
-        XCTAssertEqualObjects(dictionary1 | dictionary2, dictionary1)
+        XCTAssertEqualDictionaries(dictionary1.union(dictionary2, dictionary3), [ "A": 1, "B": 2, "C": 3, "D": 4 ])
+        XCTAssertEqualDictionaries(dictionary1 | dictionary2, dictionary1)
     }
     
     func testIntersection () {
@@ -134,9 +134,9 @@ class ExSwiftDictionaryTests: XCTestCase {
         let dictionary2 = [ "A": 1 ]
         let dictionary3 = [ "D": 4 ]
 
-        XCTAssertEqualObjects(dictionary1.intersection(dictionary2), ["A": 1])
-        XCTAssertEqualObjects(dictionary1.intersection(dictionary3), [:])
-        XCTAssertEqualObjects(dictionary1 & dictionary1, dictionary1)
+        XCTAssertEqualDictionaries(dictionary1.intersection(dictionary2), ["A": 1])
+        XCTAssertEqualDictionaries(dictionary1.intersection(dictionary3), [:])
+        XCTAssertEqualDictionaries(dictionary1 & dictionary1, dictionary1)
     }
     
     func testPick () {
@@ -145,8 +145,8 @@ class ExSwiftDictionaryTests: XCTestCase {
         let pick1 = dictionary.pick([1, 3])
         let pick2 = dictionary.pick(1, 3)
 
-        XCTAssertEqualObjects(pick1, [1: "A", 3: "C"])
-        XCTAssertEqualObjects(pick2, pick1)
-        XCTAssertEqualObjects(dictionary.pick(), [:])
+        XCTAssertEqualDictionaries(pick1, [1: "A", 3: "C"])
+        XCTAssertEqualDictionaries(pick2, pick1)
+        XCTAssertEqualDictionaries(dictionary.pick(), [:])
     }
 }

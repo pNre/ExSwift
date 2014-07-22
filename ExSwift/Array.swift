@@ -229,7 +229,7 @@ extension Array {
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
         if n > count { return [[]] }
 
-        for i in (0...count-n).by(step!) {
+        for i in stride(from: 0, through: count - n, by: step!) {
             result += self[i..<(i + n)]
         }
 
@@ -251,7 +251,7 @@ extension Array {
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
 
-        for i in (0..<count).by(step!) {
+        for i in stride(from: 0, to: count, by: step!) {
             var end = i+n
             if end > count { end = count }
             result += self[i..<end]
@@ -278,7 +278,7 @@ extension Array {
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
 
-        for i in (0..<count).by(step!) {
+        for i in stride(from: 0, to: count, by: step!) {
             result += self[i..<i + n]
         }
 
@@ -599,8 +599,12 @@ extension Array {
     /**
     *  self.reduce with initial value self.first()
     */
-    func reduce (combine: (Element, Element) -> Element) -> Element {
-        return skip(1).reduce(first()!, combine: combine)
+    func reduce (combine: (Element, Element) -> Element) -> Element? {
+        if let firstElement = first() {
+            return skip(1).reduce(firstElement, combine: combine)
+        }
+        
+        return nil
     }
 
     /**
@@ -613,7 +617,7 @@ extension Array {
     /**
     *  self.reduceRight with initial value self.last()
     */
-    func reduceRight (combine: (Element, Element) -> Element) -> Element {
+    func reduceRight (combine: (Element, Element) -> Element) -> Element? {
         return reverse().reduce(combine)
     }
 
@@ -649,15 +653,15 @@ extension Array {
         //  There's still some work to do here
 
         var result = Array<OutType>()
-
+        
         for item in self {
-
+            
             if item is OutType {
                 result.append(item as OutType)
                 continue
-            } else if let bridged = bridgeFromObjectiveCConditional(reinterpretCast(item), OutType.self) {
+            /*} else if let bridged = o.bridgeFromObjectiveCConditional(reinterpretCast(item), OutType.self) {
                 result.append(bridged)
-                continue
+                continue*/
             } else if item is NSArray {
                 result += (item as NSArray).flatten() as Array<OutType>
                 continue
