@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Range {
+public extension Range {
     
     /**
     *  For each element in the range invokes function
@@ -59,7 +59,7 @@ extension Range {
 *  Operator == to compare 2 ranges first, second by start & end indexes. If first.startIndex is equal to
 *  second.startIndex and first.endIndex is equal to second.endIndex the ranges are considered equal.
 */
-@infix func == <U: ForwardIndex> (first: Range<U>, second: Range<U>) -> Bool {
+@infix public func == <U: ForwardIndex> (first: Range<U>, second: Range<U>) -> Bool {
     return first.startIndex == second.startIndex &&
            first.endIndex == second.endIndex
 }
@@ -67,7 +67,7 @@ extension Range {
 /**
 *  DP2 style open range operator
 */
-@infix func .. <U> (first: U, second: U) -> Range<U> {
+@infix public func .. <U> (first: U, second: U) -> Range<U> {
     return first..<second
 }
 

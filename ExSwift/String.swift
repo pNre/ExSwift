@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
 
     /**
     *  String length
@@ -171,7 +171,7 @@ extension String {
 /**
 *  Repeat a string
 */
-@infix func * (first: String, n: Int) -> String {
+@infix public func * (first: String, n: Int) -> String {
     var result = String()
 
     n.times {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NSArray {
+public extension NSArray {
 
     /**
     *  Converts an NSArray object to an OutType[] array containing 

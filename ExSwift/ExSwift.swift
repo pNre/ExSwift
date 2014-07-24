@@ -8,12 +8,12 @@
 
 import Foundation
 
-operator infix =~ {}
-operator infix |~ {}
+public operator infix =~ {}
+public operator infix |~ {}
 
-typealias Ex = ExSwift
+public typealias Ex = ExSwift
 
-class ExSwift {
+public class ExSwift {
     
     /**
     *  Creates a wrapper that, executes function only after being called n times
@@ -21,7 +21,7 @@ class ExSwift {
     *  @param function Function to wrap
     *  @return Wrapper function
     */
-    class func after <P, T> (n: Int, function: (P...) -> T) -> ((P...) -> T?) {
+    public class func after <P, T> (n: Int, function: (P...) -> T) -> ((P...) -> T?) {
         var times = n
         return {
             (params: (P...)) -> T? in
@@ -40,7 +40,7 @@ class ExSwift {
     *  @param function Function to wrap
     *  @return Wrapper function
     */
-    class func after <T> (n: Int, function: Void -> T) -> (Void -> T?) {
+    public class func after <T> (n: Int, function: Void -> T) -> (Void -> T?) {
         func callAfter (args: Any?...) -> T {
             return function()
         }
@@ -55,7 +55,7 @@ class ExSwift {
     *  @param function Function to wrap
     *  @return Wrapper function
     */
-    class func once <P, T> (function: (P...) -> T) -> ((P...) -> T?) {
+    public class func once <P, T> (function: (P...) -> T) -> ((P...) -> T?) {
         
         var executed = false
         
@@ -80,7 +80,7 @@ class ExSwift {
     *  @param function Function to wrap
     *  @return Wrapper function
     */
-    class func once <T> (function: Void -> T) -> (Void -> T?) {
+    public class func once <T> (function: Void -> T) -> (Void -> T?) {
         let f = ExSwift.once {
             (params: Any?...) -> T? in
             return function()
@@ -95,7 +95,7 @@ class ExSwift {
     *  @param parameters Arguments to prepend
     *  @return Wrapper function
     */
-    class func partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T) {
+    public class func partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T) {
         
         return {
             (params: P...) -> T in
@@ -110,7 +110,7 @@ class ExSwift {
     *  @param parameters Arguments to pass to function
     *  @return Wrapper function
     */
-    class func bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (Void -> T) {
+    public class func bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (Void -> T) {
         
         return {
             Void -> T in
@@ -125,7 +125,7 @@ class ExSwift {
     *  @param hash Parameters based hashing function that computes the key used to store each result in the cache
     *  @return Wrapper function
     */
-    class func cached <P: Hashable, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R) {
+    public class func cached <P: Hashable, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R) {
         var cache = [P:R]()
         
         return {
@@ -149,7 +149,7 @@ class ExSwift {
     *  @param function Function to cache
     *  @return Wrapper function
     */
-    class func cached <P: Hashable, R> (function: (P...) -> R) -> ((P...) -> R) {
+    public class func cached <P: Hashable, R> (function: (P...) -> R) -> ((P...) -> R) {
         return cached(function, hash: { (params: P...) -> P in return params[0] })
     }
     
@@ -159,7 +159,7 @@ class ExSwift {
     *  @param ignoreCase If true the NSRegularExpression is created with the NSRegularExpressionOptions.CaseInsensitive flag
     *  @return NSRegularExpression object
     */
-    class func regex (pattern: String, ignoreCase: Bool = false) -> NSRegularExpression? {
+    public class func regex (pattern: String, ignoreCase: Bool = false) -> NSRegularExpression? {
         
         var options: NSRegularExpressionOptions = NSRegularExpressionOptions.DotMatchesLineSeparators
         
