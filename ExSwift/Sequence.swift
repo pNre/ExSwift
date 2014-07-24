@@ -93,7 +93,7 @@ extension SequenceOf {
     *  @return Filtered sequence
     */
     func filter(include: (T) -> Bool) -> SequenceOf<T> {
-        return SequenceOf(Swift.filter(self, include))
+        return SequenceOf(lazy(self).filter(include))
     }
     
     /**
