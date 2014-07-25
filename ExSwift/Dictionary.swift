@@ -9,7 +9,7 @@
 import Foundation
 import Swift
 
-extension Dictionary {
+public extension Dictionary {
 
     /**
     *  Difference of self and the input dictionaries
@@ -309,20 +309,20 @@ extension Dictionary {
 *  Shorthand for the difference
 */
 
-@infix func - <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
+@infix public func - <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
     return first.difference(second)
 }
 
 /**
 *  Shorthand for the intersection
 */
-@infix func & <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
+@infix public func & <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
     return first.intersection(second)
 }
 
 /**
 *  Shorthand for the union
 */
-@infix func | <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
+@infix public func | <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
     return first.union(second)
 }

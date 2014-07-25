@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Array {
+public extension Array {
 
     /**
     *  Checks if self contains the item object
@@ -792,28 +792,28 @@ extension Array {
 /**
 *  Remove and element from the array
 */
-@infix func - <T: Equatable> (first: Array<T>, second: T) -> Array<T> {
+@infix public func - <T: Equatable> (first: Array<T>, second: T) -> Array<T> {
     return first - [second]
 }
 
 /**
 *  Shorthand for the difference
 */
-@infix func - <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
+@infix public func - <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
     return first.difference(second)
 }
 
 /**
 *  Shorthand for the intersection
 */
-@infix func & <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
+@infix public func & <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
     return first.intersection(second)
 }
 
 /**
 *  Shorthand for the union
 */
-@infix func | <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
+@infix public func | <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
     return first.union(second)
 }
 /**
@@ -822,7 +822,7 @@ extension Array {
 *  @param n How many times the array must be repeated
 *  @return Array of repeated values 
 */
-@infix func * <ItemType> (array: Array<ItemType>, n: Int) -> Array<ItemType> {
+@infix public func * <ItemType> (array: Array<ItemType>, n: Int) -> Array<ItemType> {
     var result = Array<ItemType>()
 
     n.times {
@@ -838,6 +838,6 @@ extension Array {
 *  @param separator Separator to join the array elements
 *  @return Joined string
 */
-@infix func * (array: Array<String>, separator: String) -> String {
+@infix public func * (array: Array<String>, separator: String) -> String {
     return array.implode(separator)!
 }

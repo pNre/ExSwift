@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Float {
+public extension Float {
 
     /**
     *  Absolute value

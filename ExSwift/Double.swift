@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Double {
+public extension Double {
     
     /**
     *  Absolute value
