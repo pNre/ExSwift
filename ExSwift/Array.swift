@@ -11,9 +11,9 @@ import Foundation
 public extension Array {
 
     /**
-    *  Checks if self contains the item object
-    *  @param item The item to search for
-    *  @return true if self contains item
+    *  Checks if self contains all the items
+    *  @param item The items to search for
+    *  @return true if self contains all the items
     */
     func contains <T: Equatable> (items: T...) -> Bool {
         return items.all { self.indexOf($0) >= 0 }
