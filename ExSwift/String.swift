@@ -165,6 +165,13 @@ public extension String {
         return result
 
     }
+    
+    /*
+    Create a default NSRegularExpression using the current string as pattern and remembering case.
+    */
+    public func __conversion() -> NSRegularExpression {
+        return ExSwift.regex(self, ignoreCase: false)!
+    }
 
 }
 
@@ -184,8 +191,9 @@ public extension String {
 /**
  *  Pattern matching with a regex
  */
-@infix func =~ (string: String, pattern: String) -> Bool {
-    return string =~ (pattern: pattern, ignoreCase: false)
+@infix func =~ (string: String, regex: NSRegularExpression) -> Bool {
+    let matches = regex.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length))
+    return matches > 0
 }
 
 //  This version also allowes to specify case sentitivity
@@ -199,7 +207,7 @@ public extension String {
 
 //  Match against all the alements in an array of String
 @infix func =~ (strings: Array<String>, pattern: String) -> Bool {
-    return strings.all { $0 =~ (pattern: pattern, ignoreCase: false) }
+    return strings.all { $0 =~ pattern }
 }
 
 @infix func =~ (strings: Array<String>, options: (pattern: String, ignoreCase: Bool)) -> Bool {
@@ -208,7 +216,7 @@ public extension String {
 
 //  Match against any element in an array of String
 @infix func |~ (strings: Array<String>, pattern: String) -> Bool {
-    return strings.any { $0 =~ (pattern: pattern, ignoreCase: false) }
+    return strings.any { $0 =~ pattern }
 }
 
 @infix func |~ (strings: Array<String>, options: (pattern: String, ignoreCase: Bool)) -> Bool {
