@@ -55,6 +55,7 @@ Name | Signature
 **`at`**|`at (indexes: Int...) -> Array`
 **`take`**|`take (n: Int) -> Array`
 **`takeWhile`**|`takeWhile (condition: (Element) -> Bool) -> Array`
+**`takeFirst`**|`takeFirst (condition: (Element) -> Bool) -> Element`
 **`tail`**|`tail (n: Int) -> Array`
 **`skip`**|`skip (n: Int) -> Array`
 **`skipWhile`**|`skipWhile (condition: (Element) -> Bool) -> Array`

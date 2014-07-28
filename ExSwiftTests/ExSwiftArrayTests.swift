@@ -358,4 +358,9 @@ class ExtensionsArrayTests: XCTestCase {
         array.insert([-2], atIndex: -1)
         XCTAssertEqualArrays(array, [-2, 1, 2, 0, 9, 3, 4, 5, 10])
     }
+    
+    func testTakeFirst() {
+        XCTAssertEqual(2, array.takeFirst { $0 % 2 == 0 }!)
+        XCTAssertNil(array.takeFirst { $0 > 10 })
+    }
 }

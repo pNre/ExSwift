@@ -478,9 +478,26 @@ public extension Array {
             }
         }
 
-        return self.take(lastTrue+1)
+        return self.take(lastTrue + 1)
     }
 
+    /**
+    *  Returns the first element in the array to meet the condition
+    *  @param condition A function which returns a boolean if an element satisfies a given condition or not.
+    *  @return The first element in the array to meet the condition
+    */
+    func takeFirst (condition: (Element) -> Bool) -> Element? {
+        
+        for value in self {
+            if condition(value) {
+                return value
+            }
+        }
+        
+        return nil
+        
+    }
+    
     /**
     *  Array with the last n elements of self
     *  @return Last n elements
