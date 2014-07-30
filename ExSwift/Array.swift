@@ -139,6 +139,21 @@ public extension Array {
 
         return nil
     }
+    
+    /**
+    *  Index of the first item that meets the condition
+    *  @param condition A function which returns a boolean if an element satisfies a given condition or not.
+    *  @return Index of the first matched item or nil
+    */
+    func indexOf (condition: Element -> Bool) -> Int? {
+        for (index, element) in enumerate(self) {
+            if condition(element) {
+                return index
+            }
+        }
+        
+        return nil
+    }
 
     /**
     *  Gets the index of the last occurrence of item, if found
@@ -444,7 +459,7 @@ public extension Array {
 
     /**
     *  Opposite of filter
-    *  @param exclude Function invoked to test elements from the exclusion from the array
+    *  @param exclude Function invoked to test elements for the exclusion from the array
     *  @return Filtered array
     */
     func reject (exclude: (Element -> Bool)) -> Array {

@@ -116,9 +116,18 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testIndexOf() {
+        //  Equatable parameter
         XCTAssertEqual(0, array.indexOf(1)!)
         XCTAssertEqual(3, array.indexOf(4)!)
         XCTAssertNil(array.indexOf(6))
+        
+        //  Matching block
+        XCTAssertEqual(1, array.indexOf { item in
+            return item % 2 == 0
+        }!)
+        XCTAssertNil(array.indexOf { item in
+            return item > 10
+        })
     }
 
     func testIntersection() {

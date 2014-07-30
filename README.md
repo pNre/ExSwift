@@ -65,6 +65,7 @@ Name | Signature
 **`union`**|`union <U: Equatable> (values: Array<U>...) -> Array`
 **`unique`**|`unique <T: Equatable> () -> Array<T>`
 **`indexOf`**|`indexOf <T: Equatable> (item: T) -> Int?`
+**`indexOf`**|`indexOf (condition: Element -> Bool) -> Int?`
 **`lastIndexOf`**|`lastIndexOf <T: Equatable> (item: T) -> Int?`
 **`zip`**|`zip (arrays: Array<Any>...) -> Array<Array<Any?>>`
 **`partition`**|`partition (var n: Int, var step: Int? = nil) -> Array<Array<Element>>`<br>`partition (var n: Int, var step: Int? = nil, pad: Element[]?) -> Array<Array<Element>>`
