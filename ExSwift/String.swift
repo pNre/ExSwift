@@ -28,11 +28,13 @@ public extension String {
 
     /**
     *  Equivalent to at
-    *  @param indexes
+    *  @param firstIndex
+    *  @param secondIndex
+    *  @param restOfIndexes
     *  @return Charaters at the specified indexes (converted to String)
     */
-    subscript (indexes: Int...) -> Array<String> {
-        return at(indexes)
+    subscript (firstIndex: Int, secondIndex: Int, restOfIndexes: Int...) -> Array<String> {
+        return at([firstIndex, secondIndex] + restOfIndexes)
     }
 
     /**
