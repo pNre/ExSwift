@@ -16,7 +16,6 @@ extension XCTestCase {
         diff.removeObjectsInArray(second._bridgeToObjectiveC())
         
         XCTAssertTrue(diff.count == 0, "\(first) is not equal to \(second)")
-        //XCTAssertEqual(first._bridgeToObjectiveC(), second._bridgeToObjectiveC())
     }
     
     func XCTAssertNotEqualArrays <S, T> (first: [S], _ second: [T]) {

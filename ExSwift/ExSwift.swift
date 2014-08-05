@@ -188,3 +188,45 @@ public class ExSwift {
     }
     
 }
+
+/**
+*  Internal methods
+*/
+extension ExSwift {
+    
+    /**
+    *  Converts, if possible, and flattens an object from its Objective-C
+    *  representation to the Swift one.
+    *  @param object Object to convert
+    *  @returns Flattenend array of converted values
+    */
+    internal class func bridgeObjCObject <T, S> (object: S) -> [T] {
+        var result = [T]()
+        let reflection = reflect(object)
+        
+        //  object has an Objective-C type
+        if reflection.disposition == .ObjCObject {
+            //  If it is an NSArray, flattening will produce the expected result
+            if let array = object as? NSArray {
+                result += array.flatten()
+            } else if let bridgedValue = ImplicitlyUnwrappedOptional<T>._bridgeFromObjectiveCConditional(reflection.value as NSObject) {
+                //  the object type can be converted to the Swift native type T
+                result.append(bridgedValue)
+            }
+        } else if reflection.disposition == .IndexContainer {
+            //  object is a native Swift array
+            
+            //  recursively convert each item
+            (0..<reflection.count).each {
+                result += Ex.bridgeObjCObject(reflection[$0].1.value)
+            }
+            
+        } else if let obj = object as? T {
+            //  object has type T
+            result.append(obj)
+        }
+        
+        return result
+    }
+    
+}

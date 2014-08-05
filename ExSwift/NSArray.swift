@@ -19,10 +19,7 @@ public extension NSArray {
         var result = Array<OutType>()
         
         for item : AnyObject in self {
-            //  Keep only objC objects compatible with OutType
-            if let iv = item as? OutType {
-                result.append(iv)
-            }
+            result += Ex.bridgeObjCObject(item) as [OutType]
         }
         
         return result
@@ -33,22 +30,15 @@ public extension NSArray {
     *  the items in the NSArray that can be bridged from their ObjC type to OutType.
     *  @return Flattened array
     */
-    func flatten <OutType> () -> Array<OutType> {
-
-        var result = Array<OutType>()
+    func flatten <OutType> () -> [OutType] {
+        var result = [OutType]()
+        let reflection = reflect(self)
         
-        for item: AnyObject in self {
-            let reflection = reflect(item)
-
-            if let iv = item as? OutType {
-                result.append(iv)
-            } else if item is NSArray {
-                result += (item as NSArray).flatten() as Array<OutType>
-            }
+        for i in 0..<reflection.count {
+            result += Ex.bridgeObjCObject(reflection[i].1.value) as [OutType]
         }
         
         return result
-        
     }
 
 }

@@ -714,40 +714,15 @@ public extension Array {
     *  Flattens the nested Array self to an array of OutType objects
     *  @return Flattened array
     */
-    func flatten <OutType> () -> Array<OutType> {
-
-        //  There's still some work to do here
-
-        var result = Array<OutType>()
+    func flatten <OutType> () -> [OutType] {
+        var result = [OutType]()
+        let reflection = reflect(self)
         
-        for item in self {
-            
-            if item is OutType {
-                result.append(item as OutType)
-                continue
-            /*} else if let bridged = o.bridgeFromObjectiveCConditional(reinterpretCast(item), OutType.self) {
-                result.append(bridged)
-                continue*/
-            } else if item is NSArray {
-                result += (item as NSArray).flatten() as Array<OutType>
-                continue
-            }
-
-            let m = reflect(item)
-            if m.disposition == MirrorDisposition.IndexContainer {
-                for index in 0..<m.count {
-                    let value = m[index].1.value
-                    if value is OutType {
-                        result.append(value as OutType)
-                        continue
-                    }
-                }
-            }
-
+        for i in 0..<reflection.count {
+            result += Ex.bridgeObjCObject(reflection[i].1.value) as [OutType]
         }
-
+        
         return result
-
     }
 
     /**
