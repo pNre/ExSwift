@@ -58,7 +58,7 @@ public extension Double {
     */
     static func random(min: Double = 0, max: Double) -> Double {
         let diff = max - min;
-        let rand = Double(arc4random() % (RAND_MAX.asUnsigned() + 1))
+        let rand = Double(arc4random() % (UInt32(RAND_MAX) + 1))
         return ((rand / Double(RAND_MAX)) * diff) + min;
     }
     

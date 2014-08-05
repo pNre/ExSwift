@@ -59,7 +59,7 @@ public extension Range {
 *  Operator == to compare 2 ranges first, second by start & end indexes. If first.startIndex is equal to
 *  second.startIndex and first.endIndex is equal to second.endIndex the ranges are considered equal.
 */
-@infix public func == <U: ForwardIndex> (first: Range<U>, second: Range<U>) -> Bool {
+public func == <U: ForwardIndexType> (first: Range<U>, second: Range<U>) -> Bool {
     return first.startIndex == second.startIndex &&
            first.endIndex == second.endIndex
 }
@@ -67,7 +67,7 @@ public extension Range {
 /**
 *  DP2 style open range operator
 */
-@infix public func .. <U> (first: U, second: U) -> Range<U> {
+public func .. <U : Comparable> (first: U, second: U) -> HalfOpenInterval<U> {
     return first..<second
 }
 

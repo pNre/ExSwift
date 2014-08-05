@@ -130,7 +130,7 @@ public extension Array {
     */
     func indexOf <U: Equatable> (item: U) -> Int? {
         if item is Element {
-            if let found = find(reinterpretCast(self) as Array<U>, item) {
+            if let found = find(unsafeBitCast(self, [U].self), item) {
                 return found
             }
 
@@ -239,13 +239,18 @@ public extension Array {
     */
     func partition (var n: Int, var step: Int? = nil) -> Array<Array> {
         var result = Array<Array>()
-        if !step?   { step = n } // If no step is supplied move n each step.
+        
+        // If no step is supplied move n each step.
+        if step? == nil {
+            step = n
+        }
+        
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
         if n > count { return [[]] }
 
         for i in stride(from: 0, through: count - n, by: step!) {
-            result += self[i..<(i + n)]
+            result += [self[i..<(i + n)]]
         }
 
         return result
@@ -262,15 +267,34 @@ public extension Array {
     */
     func partition (var n: Int, var step: Int? = nil, pad: Array?) -> Array<Array> {
         var result = Array<Array>()
-        if !step?   { step = n } // If no step is supplied move n each step.
-        if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
-        if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
-
+        
+        // If no step is supplied move n each step.
+        if step? == nil {
+            step = n
+        }
+        
+        // Less than 1 results in an infinite loop.
+        if step < 1 {
+            step = 1
+        }
+        
+        // Allow 0 if user wants [[],[],[]] for some reason.
+        if n < 1 {
+            n = 0
+        }
+        
         for i in stride(from: 0, to: count, by: step!) {
-            var end = i+n
-            if end > count { end = count }
-            result += self[i..<end]
-            if end != i+n { break }
+            var end = i + n
+            
+            if end > count {
+                end = count
+            }
+            
+            result += [self[i..end]]
+            
+            if end != i + n {
+                break
+            }
         }
 
         if let padding = pad {
@@ -289,12 +313,17 @@ public extension Array {
     */
     func partitionAll (var n: Int, var step: Int? = nil) -> Array<Array> {
         var result = Array<Array>()
-        if !step?   { step = n } // If no step is supplied move n each step.
+
+        // If no step is supplied move n each step.
+        if step? == nil {
+            step = n
+        }
+        
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
 
         for i in stride(from: 0, to: count, by: step!) {
-            result += self[i..<i + n]
+            result += [self[i..(i + n)]]
         }
 
         return result
@@ -313,7 +342,8 @@ public extension Array {
             let value = cond(item)
 
             if value == lastValue? {
-                result[result.count - 1] += item
+                let index: Int = result.count - 1
+                result[index] += [item]
             } else {
                 result.append([item])
                 lastValue = value
@@ -473,7 +503,7 @@ public extension Array {
     *  @return First n elements
     */
     func take (n: Int) -> Array {
-        return self[0..<n]
+        return self[0..<Swift.max(0, n)]
     }
 
     /**
@@ -526,6 +556,10 @@ public extension Array {
     *  @return Array from n to the end
     */
     func skip (n: Int) -> Array {
+        if n > count {
+            return []
+        }
+        
         return self[n..<count]
     }
 
@@ -620,9 +654,9 @@ public extension Array {
      *  @return Joined object if self is not empty
      *          and its elements are instances of C, nil otherwise
      */
-    func implode <C: ExtensibleCollection> (separator: C) -> C? {
+    func implode <C: ExtensibleCollectionType> (separator: C) -> C? {
         if Element.self is C.Type {
-            return Swift.join(separator, reinterpretCast(self) as Array<C>)
+            return Swift.join(separator, unsafeBitCast(self, [C].self))
         }
 
         return nil
@@ -787,7 +821,7 @@ public extension Array {
     *  @param range
     *  @return Array of integers
     */
-    static func range <U: ForwardIndex> (range: Range<U>) -> Array<U> {
+    static func range <U: ForwardIndexType> (range: Range<U>) -> Array<U> {
         return Array<U>(range)
     }
 
@@ -795,17 +829,34 @@ public extension Array {
     *  Returns a subarray in the given range
     *  @return Subarray or nil if the index is out of bounds
     */
-    subscript (var range: Range<Int>) -> Array {
+    subscript (range: Range<Int>) -> Array {
         //  Fix out of bounds indexes
-        (range.startIndex, range.endIndex) = (range.startIndex.clamp(0, max: range.startIndex), range.endIndex.clamp(range.endIndex, max: count))
-
-        if range.startIndex > range.endIndex {
+        let start = Swift.max(0, range.startIndex)
+        let end = Swift.min(range.endIndex, count)
+        
+        if start > end {
             return []
         }
-
-        return Array(self[range] as Slice<T>)
+            
+        return Array(self[Range(start: start, end: end)] as Slice<T>)
     }
 
+    /**
+    *  Returns a subarray in the given range
+    *  @return Subarray or nil if the index is out of bounds
+    */
+    subscript (interval: HalfOpenInterval<Int>) -> Array {
+        return self[Range(start: interval.start, end: interval.end)]
+    }
+    
+    /**
+    *  Returns a subarray in the given range
+    *  @return Subarray or nil if the index is out of bounds
+    */
+    subscript (interval: ClosedInterval<Int>) -> Array {
+        return self[Range(start: interval.start, end: interval.end - 1)]
+    }
+    
     /**
     *  Same as `at`
     *  @param first First index
@@ -816,7 +867,8 @@ public extension Array {
     *  the default array subscript function
     */
     subscript (first: Int, second: Int, rest: Int...) -> Array {
-        return at(reinterpretCast([first, second] + rest))
+        typealias IntsType = (Int...)
+        return at(unsafeBitCast([first, second] + rest, IntsType.self))
     }
 
 }
@@ -824,28 +876,28 @@ public extension Array {
 /**
 *  Remove and element from the array
 */
-@infix public func - <T: Equatable> (first: Array<T>, second: T) -> Array<T> {
+public func - <T: Equatable> (first: Array<T>, second: T) -> Array<T> {
     return first - [second]
 }
 
 /**
 *  Shorthand for the difference
 */
-@infix public func - <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
+public func - <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
     return first.difference(second)
 }
 
 /**
 *  Shorthand for the intersection
 */
-@infix public func & <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
+public func & <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
     return first.intersection(second)
 }
 
 /**
 *  Shorthand for the union
 */
-@infix public func | <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
+public func | <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
     return first.union(second)
 }
 /**
@@ -854,7 +906,7 @@ public extension Array {
 *  @param n How many times the array must be repeated
 *  @return Array of repeated values 
 */
-@infix public func * <ItemType> (array: Array<ItemType>, n: Int) -> Array<ItemType> {
+public func * <ItemType> (array: Array<ItemType>, n: Int) -> Array<ItemType> {
     var result = Array<ItemType>()
 
     n.times {
@@ -870,6 +922,6 @@ public extension Array {
 *  @param separator Separator to join the array elements
 *  @return Joined string
 */
-@infix public func * (array: Array<String>, separator: String) -> String {
+public func * (array: Array<String>, separator: String) -> String {
     return array.implode(separator)!
 }

@@ -159,7 +159,7 @@ public extension SequenceOf {
 }
 
 // a sequence adapter that implements the 'take' functionality
-public struct TakeSequence<S: Sequence>: Sequence {
+public struct TakeSequence<S: SequenceType>: SequenceType {
     private let sequence: S
     private let n: Int
 
@@ -168,10 +168,10 @@ public struct TakeSequence<S: Sequence>: Sequence {
         self.n = n
     }
  
-    public func generate() -> GeneratorOf<S.GeneratorType.Element> {
+    public func generate() -> GeneratorOf<S.Generator.Element> {
         var count = 0
         var generator = self.sequence.generate()
-        return GeneratorOf<S.GeneratorType.Element> {
+        return GeneratorOf<S.Generator.Element> {
             count++
             if count > self.n {
                 return nil
@@ -183,20 +183,20 @@ public struct TakeSequence<S: Sequence>: Sequence {
 }
 
 // a sequence adapter that implements the 'takeWhile' functionality
-public struct TakeWhileSequence<S: Sequence>: Sequence {
+public struct TakeWhileSequence<S: SequenceType>: SequenceType {
     private let sequence: S
-    private let condition: (S.GeneratorType.Element?) -> Bool
+    private let condition: (S.Generator.Element?) -> Bool
     
-    public init(_ sequence:S, _ condition:(S.GeneratorType.Element?) -> Bool) {
+    public init(_ sequence:S, _ condition:(S.Generator.Element?) -> Bool) {
         self.sequence = sequence
         self.condition = condition
     }
     
-    public func generate() -> GeneratorOf<S.GeneratorType.Element> {
+    public func generate() -> GeneratorOf<S.Generator.Element> {
         var generator = self.sequence.generate()
         var endConditionMet = false
-        return GeneratorOf<S.GeneratorType.Element> {
-            let next: S.GeneratorType.Element? = generator.next()
+        return GeneratorOf<S.Generator.Element> {
+            let next: S.Generator.Element? = generator.next()
             if !endConditionMet {
                 endConditionMet = !self.condition(next)
             }

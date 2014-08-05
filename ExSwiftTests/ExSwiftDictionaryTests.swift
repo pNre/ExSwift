@@ -63,8 +63,8 @@ class ExSwiftDictionaryTests: XCTestCase {
             return (value % 2 == 0)
         })
         
-        XCTAssertEqualArrays(Array(g.keys), [false, true])
-        XCTAssertEqualArrays(Array(g[true]!), [2, 4])
+        XCTAssertTrue(Array(g.keys).difference([false, true]).isEmpty)
+        XCTAssertTrue(Array(g[true]!).difference([2, 4]).isEmpty)
         XCTAssertEqualArrays(Array(g[false]!), [5])
     }
     

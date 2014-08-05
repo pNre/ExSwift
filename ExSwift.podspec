@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ExSwift"
-  s.version      = "0.1.7"
+  s.version      = "0.1.8"
   s.summary      = "JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for standard types and classes."
   s.homepage     = "https://github.com/pNre/ExSwift"
   s.license      = { :type => 'BSD', :file => 'LICENSE' }

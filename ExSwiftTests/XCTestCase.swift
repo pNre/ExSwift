@@ -12,15 +12,19 @@ import XCTest
 extension XCTestCase {
     
     func XCTAssertEqualArrays <S, T> (first: [S], _ second: [T]) {
-        XCTAssertEqual(first.bridgeToObjectiveC(), second.bridgeToObjectiveC())
+        let diff: NSMutableArray = NSMutableArray(array: first._bridgeToObjectiveC())
+        diff.removeObjectsInArray(second._bridgeToObjectiveC())
+        
+        XCTAssertTrue(diff.count == 0, "\(first) is not equal to \(second)")
+        //XCTAssertEqual(first._bridgeToObjectiveC(), second._bridgeToObjectiveC())
     }
     
     func XCTAssertNotEqualArrays <S, T> (first: [S], _ second: [T]) {
-        XCTAssertNotEqual(first.bridgeToObjectiveC(), second.bridgeToObjectiveC())
+        XCTAssertNotEqual(first._bridgeToObjectiveC(), second._bridgeToObjectiveC())
     }
     
     func XCTAssertEqualDictionaries <S, T> (first: [S:T], _ second: [S:T]) {
-        XCTAssertEqual(first.bridgeToObjectiveC(), second.bridgeToObjectiveC())
+        XCTAssertEqual(first._bridgeToObjectiveC(), second._bridgeToObjectiveC())
     }
     
 }

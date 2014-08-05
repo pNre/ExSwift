@@ -16,7 +16,7 @@ class ExSwiftTests: XCTestCase {
         
         XCTAssertNil(f())
         XCTAssertNil(f())
-        XCTAssertTrue(f())
+        XCTAssertTrue(f()!)
         
         var called = false
         

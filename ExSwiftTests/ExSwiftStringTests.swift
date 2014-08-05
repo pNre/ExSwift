@@ -89,10 +89,10 @@ class ExSwiftStringTests: XCTestCase {
         let matches = string.matches("\\d+")!
         let range = matches[0].rangeAtIndex(0)
 
-        let substringRange: Range<Int> = range.location..<(range.location + range.length)
+        let substringRange = range.location..<(range.location + range.length)
         
         XCTAssertEqual(string[substringRange]!, "31")
-        XCTAssertTrue(string.matches("N")?.isEmpty)
+        XCTAssertTrue(string.matches("N")!.isEmpty)
     }
     
     func testCapitalized () {

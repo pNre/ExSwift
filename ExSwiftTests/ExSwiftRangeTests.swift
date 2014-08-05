@@ -11,7 +11,7 @@ import XCTest
 class ExSwiftRangeTests: XCTestCase {
 
     func testTimes() {
-        var count = 0
+        var count: Int = 0
 
         (2..<4).times({
             count++

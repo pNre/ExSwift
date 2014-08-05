@@ -11,6 +11,10 @@ import Swift
 
 public extension Dictionary {
 
+    //  Xcode beta 5 temporary fix
+    typealias KeyType = Key
+    typealias ValueType = Value
+    
     /**
     *  Difference of self and the input dictionaries
     *  @param dictionaries Dictionaries to subtract
@@ -177,17 +181,17 @@ public extension Dictionary {
     *  @param groupingFunction
     *  @return Grouped dictionary
     */
-    func groupBy <T> (groupingFunction group: (KeyType, ValueType) -> T) -> Dictionary<T, Array<ValueType>> {
+    func groupBy <T> (groupingFunction group: (Key, Value) -> T) -> [T: [Value]] {
 
-        var result = Dictionary<T, Array<ValueType>>()
+        var result = [T: [Value]]()
 
         for (key, value) in self {
 
             let groupKey = group(key, value)
-
+            
             // If element has already been added to dictionary, append to it. If not, create one.
             if let elem = result[groupKey] {
-                result[groupKey] = elem + [value]
+                result[groupKey]! += /*elem +*/ [value]
             } else {
                 result[groupKey] = [value]
             }
@@ -280,8 +284,8 @@ public extension Dictionary {
     *  @param keys Whitelisted keys
     *  @return Filtered dictionary
     */
-    func pick (keys: KeyType...) -> Dictionary {
-        return pick(reinterpretCast(keys) as Array<KeyType>)
+    func pick (keys: Key...) -> Dictionary {
+        return pick(unsafeBitCast(keys, [Key].self))
     }
 
     /**
@@ -309,20 +313,20 @@ public extension Dictionary {
 *  Shorthand for the difference
 */
 
-@infix public func - <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
+public func - <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
     return first.difference(second)
 }
 
 /**
 *  Shorthand for the intersection
 */
-@infix public func & <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
+public func & <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
     return first.intersection(second)
 }
 
 /**
 *  Shorthand for the union
 */
-@infix public func | <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
+public func | <K, V: Equatable> (first: Dictionary<K, V>, second: Dictionary<K, V>) -> Dictionary<K, V> {
     return first.union(second)
 }

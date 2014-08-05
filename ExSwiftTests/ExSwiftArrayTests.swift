@@ -10,8 +10,8 @@ import XCTest
 
 class ExtensionsArrayTests: XCTestCase {
 
-    var array: Array<Int> = []
-    var people: Array<(name: String, id: String)> = []
+    var array: [Int] = []
+    var people: [(name: String, id: String)] = []
   
     override func setUp() {
         super.setUp()
@@ -45,7 +45,8 @@ class ExtensionsArrayTests: XCTestCase {
     func testToDictionary () {
         var dictionary = people.toDictionary { $0.id }
         
-        XCTAssertEqualArrays(Array(dictionary.keys), ["P3", "P1", "P2"])
+        XCTAssertTrue(Array(dictionary.keys).difference(["P3", "P1", "P2"]).isEmpty)
+        
         XCTAssertEqual(dictionary["P1"]!.name, "bob")
         XCTAssertEqual(dictionary["P2"]!.name, "frank")
         XCTAssertEqual(dictionary["P3"]!.name, "ian")
@@ -71,12 +72,12 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testEachRight() {
-        var result = Array<Int>()
+        var result = [Int]()
         
-        array.eachRight { (index: Int, value: Int) -> Void in
-            result += value
+        array.eachRight { (index, value) -> () in
+            result += [value]
         }
-
+        
         XCTAssertEqual(result.first()!, array.last()!)
         XCTAssertEqual(result.last()!, array.first()!)
     }
@@ -202,6 +203,7 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqualArrays(array[0..<0], [])
         XCTAssertEqualArrays(array[0..<1], [1])
         XCTAssertEqualArrays(array[0..<2], [1, 2])
+        XCTAssertEqualArrays(array[0...2], [1, 2, 3])
     }
 
     func testShuffled() {

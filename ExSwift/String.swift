@@ -169,7 +169,7 @@ public extension String {
     }
     
     /*
-    Create a default NSRegularExpression using the current string as pattern and remembering case.
+    *  Create a default NSRegularExpression using the current string as pattern and remembering case.
     */
     public func __conversion() -> NSRegularExpression {
         return ExSwift.regex(self, ignoreCase: false)!
@@ -180,7 +180,7 @@ public extension String {
 /**
 *  Repeat a string
 */
-@infix public func * (first: String, n: Int) -> String {
+public func * (first: String, n: Int) -> String {
     var result = String()
 
     n.times {
@@ -193,13 +193,13 @@ public extension String {
 /**
  *  Pattern matching with a regex
  */
-@infix func =~ (string: String, regex: NSRegularExpression) -> Bool {
+public func =~ (string: String, regex: NSRegularExpression) -> Bool {
     let matches = regex.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length))
     return matches > 0
 }
 
 //  This version also allowes to specify case sentitivity
-@infix func =~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool {
+public func =~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool {
     if let matches = ExSwift.regex(options.pattern, ignoreCase: options.ignoreCase)?.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length)) {
         return matches > 0
     }
@@ -208,19 +208,19 @@ public extension String {
 }
 
 //  Match against all the alements in an array of String
-@infix func =~ (strings: Array<String>, pattern: String) -> Bool {
-    return strings.all { $0 =~ pattern }
+public func =~ (strings: Array<String>, pattern: String) -> Bool {
+    return strings.all { $0 =~ (pattern as NSRegularExpression) }
 }
 
-@infix func =~ (strings: Array<String>, options: (pattern: String, ignoreCase: Bool)) -> Bool {
+public func =~ (strings: Array<String>, options: (pattern: String, ignoreCase: Bool)) -> Bool {
     return strings.all { $0 =~ options }
 }
 
 //  Match against any element in an array of String
-@infix func |~ (strings: Array<String>, pattern: String) -> Bool {
-    return strings.any { $0 =~ pattern }
+public func |~ (strings: Array<String>, pattern: String) -> Bool {
+    return strings.any { $0 =~ (pattern as NSRegularExpression) }
 }
 
-@infix func |~ (strings: Array<String>, options: (pattern: String, ignoreCase: Bool)) -> Bool {
+public func |~ (strings: Array<String>, options: (pattern: String, ignoreCase: Bool)) -> Bool {
     return strings.any { $0 =~ options }
 }

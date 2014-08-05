@@ -8,8 +8,9 @@
 
 import Foundation
 
-public operator infix =~ {}
-public operator infix |~ {}
+infix operator =~ {}
+infix operator |~ {}
+infix operator .. {}
 
 public typealias Ex = ExSwift
 
@@ -26,8 +27,10 @@ public class ExSwift {
         return {
             (params: (P...)) -> T? in
             
+            typealias ParamsType = (P...)
+            
             if times-- <= 0 {
-                return function(reinterpretCast(params))
+                return function(unsafeBitCast(params, ParamsType.self))
             }
             
             return nil
@@ -62,6 +65,8 @@ public class ExSwift {
         return {
             (params: (P...)) -> T? in
             
+            typealias ParamsType = (P...)
+            
             if (executed) {
                 return nil
             }
@@ -69,7 +74,7 @@ public class ExSwift {
             executed = true
             
             //  From P[] to P...
-            return function(reinterpretCast(params))
+            return function(unsafeBitCast(params, ParamsType.self))
             
         }
         
@@ -99,7 +104,10 @@ public class ExSwift {
         
         return {
             (params: P...) -> T in
-            return function(reinterpretCast(parameters + params))
+            
+            typealias ParamsType = (P...)
+            
+            return function(unsafeBitCast(parameters + params, ParamsType.self))
         }
         
     }
@@ -114,7 +122,10 @@ public class ExSwift {
         
         return {
             Void -> T in
-            return function(reinterpretCast(parameters))
+            
+            typealias ParamsType = (P...)
+            
+            return function(unsafeBitCast(parameters, ParamsType.self))
         }
         
     }
@@ -131,7 +142,9 @@ public class ExSwift {
         return {
             (params: P...) -> R in
             
-            let paramsList = reinterpretCast(params) as (P...)
+            typealias ParamsType = (P...)
+            
+            let paramsList = unsafeBitCast(params, ParamsType.self)
             let key = hash(paramsList)
             
             if let cachedValue = cache[key] {
