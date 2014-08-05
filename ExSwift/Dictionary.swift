@@ -11,19 +11,15 @@ import Swift
 
 public extension Dictionary {
 
-    //  Xcode beta 5 temporary fix
-    typealias KeyType = Key
-    typealias ValueType = Value
-    
     /**
     *  Difference of self and the input dictionaries
     *  @param dictionaries Dictionaries to subtract
     *  @return Difference of self and the input dictionaries
     */
-    func difference <V: Equatable> (dictionaries: Dictionary<KeyType, V>...) -> Dictionary<KeyType, V> {
+    func difference <V: Equatable> (dictionaries: [Key: V]...) -> [Key: V] {
 
         //  Cast everything to V
-        var result = Dictionary<KeyType, V>()
+        var result = [Key: V]()
 
         each {
             if let item = $1 as? V {
@@ -49,7 +45,7 @@ public extension Dictionary {
     *  @param dictionaries Dictionaries to join
     *  @return Union of self and the input dictionaries
     */
-    func union (dictionaries: Dictionary<KeyType, ValueType>...) -> Dictionary<KeyType, ValueType> {
+    func union (dictionaries: Dictionary...) -> Dictionary {
 
         var result = self
 
@@ -69,14 +65,14 @@ public extension Dictionary {
     *  @param values Dictionaries to intersect
     *  @return Dictionary of (key, value) couples present in all the dictionaries + self
     */
-    func intersection <K, V where K: Equatable, V: Equatable> (dictionaries: Dictionary<K, V>...) -> Dictionary<K, V> {
+    func intersection <K, V where K: Equatable, V: Equatable> (dictionaries: [K: V]...) -> [K: V] {
 
-        //  Converts self from <KeyType, ValueType> to <K, V>
+        //  Converts self from <Key, Value> to <K, V>
         let filtered = self.filter({
-            (item: KeyType, value: ValueType) -> Bool in
+            (item: Key, value: Value) -> Bool in
             return (item is K) && (value is V)
         }).map({
-            (item: KeyType, value: ValueType) -> (K, V) in
+            (item: Key, value: Value) -> (K, V) in
             return (item as K, value as V)
         })
 
@@ -93,7 +89,7 @@ public extension Dictionary {
     *  @param key Key to check
     *  @return true if the key exists
     */
-    func has (key: KeyType) -> Bool {
+    func has (key: Key) -> Bool {
         return indexForKey(key) != nil
     }
 
@@ -103,9 +99,9 @@ public extension Dictionary {
     *  @param mapFunction
     *  @return Mapped dictionary
     */
-    func mapValues <V> (mapFunction map: (KeyType, ValueType) -> (V)) -> Dictionary<KeyType, V> {
+    func mapValues <V> (mapFunction map: (Key, Value) -> (V)) -> [Key: V] {
 
-        var mapped = Dictionary<KeyType, V>()
+        var mapped = [Key: V]()
 
         self.each({
             mapped[$0] = map($0, $1)
@@ -121,9 +117,9 @@ public extension Dictionary {
     *  @param mapFunction
     *  @return Mapped dictionary
     */
-    func map <K, V> (mapFunction map: (KeyType, ValueType) -> (K, V)) -> Dictionary<K, V> {
+    func map <K, V> (mapFunction map: (Key, Value) -> (K, V)) -> [K: V] {
 
-        var mapped = Dictionary<K, V>()
+        var mapped = [K: V]()
 
         self.each({
             let (_key, _value) = map($0, $1)
@@ -138,7 +134,7 @@ public extension Dictionary {
     *  Loops trough each (key, value) pair in self
     *  @param eachFunction Function to inovke on each loop
     */
-    func each (eachFunction each: (KeyType, ValueType) -> ()) {
+    func each (eachFunction each: (Key, Value) -> ()) {
 
         for (key, value) in self {
             each(key, value)
@@ -152,9 +148,9 @@ public extension Dictionary {
     *  @param testFunction Function called to test each key, value
     *  @return Filtered dictionary
     */
-    func filter (testFunction test: (KeyType, ValueType) -> Bool) -> Dictionary<KeyType, ValueType> {
+    func filter (testFunction test: (Key, Value) -> Bool) -> Dictionary {
 
-        var result = Dictionary<KeyType, ValueType>()
+        var result = Dictionary()
 
         for (key, value) in self {
             if test(key, value) {
@@ -205,7 +201,7 @@ public extension Dictionary {
     *  @param groupingFunction Function called to define the grouping key
     *  @return Grouped dictionary
     */
-    func countBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Int> {
+    func countBy <T> (groupingFunction group: (Key, Value) -> (T)) -> Dictionary<T, Int> {
 
         var result = Dictionary<T, Int>()
 
@@ -229,7 +225,7 @@ public extension Dictionary {
     *  @param test Function to call for each element
     *  @return True if call returns true for all the elements in self
     */
-    func all (test: (KeyType, ValueType) -> (Bool)) -> Bool {
+    func all (test: (Key, Value) -> (Bool)) -> Bool {
 
         for (key, value) in self {
             if !test(key, value) {
@@ -246,7 +242,7 @@ public extension Dictionary {
     *  @param test Function to call for each element
     *  @return True if call returns true for any element of self
     */
-    func any (test: (KeyType, ValueType) -> (Bool)) -> Bool {
+    func any (test: (Key, Value) -> (Bool)) -> Bool {
 
         for (key, value) in self {
             if test(key, value) {
@@ -273,8 +269,8 @@ public extension Dictionary {
     *  @param keys Whitelisted keys
     *  @return Filtered dictionary
     */
-    func pick (keys: Array<KeyType>) -> Dictionary {
-        return filter { (key: KeyType, _) -> Bool in
+    func pick (keys: [Key]) -> Dictionary {
+        return filter { (key: Key, _) -> Bool in
             return keys.contains(key)
         }
     }
@@ -293,7 +289,7 @@ public extension Dictionary {
     *  @param keys Keys to get
     *  @return Dictionary with the given keys
     */
-    func at (keys: KeyType...) -> Dictionary {
+    func at (keys: Key...) -> Dictionary {
         return pick(keys)
     }
 
@@ -301,9 +297,9 @@ public extension Dictionary {
     *  Removes a (key, value) pair from self and returns it as tuple
     *  @return (key, value)
     */
-    mutating func shift () -> (KeyType, ValueType) {
-        let key: KeyType! = Array(keys).first()
-        let value: ValueType! = removeValueForKey(key)
+    mutating func shift () -> (Key, Value) {
+        let key: Key! = Array(keys).first()
+        let value: Value! = removeValueForKey(key)
 
         return (key, value)
     }
