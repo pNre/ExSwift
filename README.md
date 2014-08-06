@@ -90,6 +90,7 @@ Name | Signature
 **`countBy`**|`countBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Int>`
 **`reduce`**|`reduce (combine: (Element, Element) -> Element) -> Element?`
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
+**`mapFilter`**|`mapFilter <V> (mapFunction map: (Element) -> (V)?) -> [V]`
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 **`flatten`**|`flatten <OutType> () -> OutType[]`
 **`sortBy`**|`sortBy (isOrderedBefore: (T, T) -> Bool) -> Array<T> `
@@ -153,7 +154,6 @@ Name | Signature
 **`round`**|`round () -> Float`
 **`ceil`**|`ceil () -> Float`
 **`floor`**|`floor () -> Float`
-**`digits`**|`digits () -> (integerPart: Int[], fractionalPart: Int[])`
 
 #### Class Methods ####
 
@@ -169,6 +169,7 @@ Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/String)
 Name |
 ---- |
 **`length`**|
+**`capitalized`**|
 
 #### Instance Methods ####
 
@@ -177,7 +178,6 @@ Name | Signature
 **`explode`**|`explode (separator: Character) -> String[]`
 **`at`**|`at (indexes: Int...) -> String[]`
 **`matches`**|`matches (pattern: String, ignoreCase: Bool = false) -> NSTextCheckingResult[]?`
-**`capitalized`**|`capitalized () -> String`
 **`insert`**|`insert (index: Int, _ string: String) -> String`
 **`ltrimmed`**|`ltrimmed () -> String`
 **`rtrimmed`**|`rtrimmed () -> String`
@@ -233,9 +233,10 @@ Name | Signatures
 **`union`**|`union (dictionaries: Dictionary<KeyType, ValueType>...) -> Dictionary<KeyType, ValueType>`
 **`intersection`**|`intersection <K, V where K: Equatable, V: Equatable> (dictionaries: Dictionary<K, V>...) -> Dictionary<K, V>`
 **`has`**|`has (key: KeyType) -> Bool`
-**`isEmpty`**|`isEmpty () -> Bool`
 **`map`**|`map <K, V> (mapFunction map: (KeyType, ValueType) -> (K, V)) -> Dictionary<K, V>`
+**`mapFilter`**|`mapFilter <K, V> (mapFunction map: (Key, Value) -> (K, V)?) -> [K: V]`
 **`mapValues`**|`mapValues <V> (mapFunction map: (KeyType, ValueType) -> (V)) -> Dictionary<KeyType, V>`
+**`mapFilterValues`**|`mapFilterValues <V> (mapFunction map: (Key, Value) -> V?) -> [Key: V]`
 **`each`**|`each(eachFunction each: (KeyType, ValueType) -> ())`
 **`filter`**|`filter(testFunction test: (KeyType, ValueType) -> Bool) -> Dictionary<KeyType, ValueType>`
 **`merge`**|`merge (dictionaries: Dictionary<KeyType, ValueType>...) -> Dictionary<KeyType, ValueType>`

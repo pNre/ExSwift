@@ -11,8 +11,9 @@ import Foundation
 public extension Range {
     
     /**
-    *  For each element in the range invokes function
-    *  @param call Function to call
+        For each element in the range invokes function.
+        
+        :param: function Function to call
     */
     func times (function: () -> ()) {
         each { (current: T) -> () in
@@ -21,16 +22,18 @@ public extension Range {
     }
 
     /**
-    *  Equivalent to: each
-    *  @param function Function to invoke
+        For each element in the range invokes function passing the element as argument.
+    
+        :param: function Function to invoke
     */
     func times (function: (T) -> ()) {
         each (function)
     }
 
     /**
-    *  For each element in the range invokes function passing the element as argument
-    *  @param function Function to invoke
+        For each element in the range invokes function passing the element as argument.
+    
+        :param: function Function to invoke
     */
     func each (function: (T) -> ()) {
         for i in self {
@@ -39,10 +42,11 @@ public extension Range {
     }
 
     /**
-    *  Int Range with random bounds between from and to (inclusive).
-    *  @param from Lower bound
-    *  @param to Upper bound
-    *  @return Random range
+        Range of Int with random bounds between from and to (inclusive).
+        
+        :param: from Lower bound
+        :param: to Upper bound
+        :returns: Random range
     */
     static func random (from: Int, to: Int) -> Range<Int> {
         

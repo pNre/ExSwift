@@ -26,9 +26,33 @@ class ExSwiftDictionaryTests: XCTestCase {
         XCTAssertEqualDictionaries(mapped, ["A": 2, "B": 3, "C": 4])
     }
     
+    func testMapFilterValues() {
+        let result = dictionary.mapFilterValues { (key, value) -> Int? in
+            if key == "B" {
+                return nil
+            }
+            
+            return value + 1
+        }
+        
+        XCTAssertEqualDictionaries(result, ["A": 2, "C": 4])
+    }
+    
     func testMap() {
         let mapped = dictionary.map(mapFunction: { key, value -> (String, Int) in return (key + "A", value + 1) })
         XCTAssertEqualDictionaries(mapped, ["AA": 2, "BA": 3, "CA": 4])
+    }
+    
+    func testMapFilter() {
+        let mapped = dictionary.mapFilter(mapFunction: { key, value -> (String, String)? in
+            if key == "C" {
+                return ("D", key)
+            }
+            
+            return nil
+        })
+        
+        XCTAssertEqualDictionaries(mapped, ["D": "C"])
     }
     
     func testFilter() {
@@ -36,15 +60,8 @@ class ExSwiftDictionaryTests: XCTestCase {
         XCTAssertEqualDictionaries(filtered, ["B": 2, "C": 3])
     }
 
-    func testIsEmpty() {
-        let e = Dictionary<String, String>()
-
-        XCTAssertTrue(e.isEmpty())
-        XCTAssertFalse(dictionary.isEmpty())
-    }
-
     func testShift() {
-        let (key, value) = dictionary.shift()
+        let (key, value) = dictionary.shift()!
         
         XCTAssertEqual(2, dictionary.count)
         XCTAssertNotNil(key)

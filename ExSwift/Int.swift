@@ -11,55 +11,61 @@ import Foundation
 public extension Int {
     
     /**
-    *  Calls function self times
-    *  @param function Function to call
+        Calls function self times.
+        
+        :param: function Function to call
     */
     func times <T> (function: () -> T) {
-        self.times({
+        times({
             (index: Int) -> T in
             return function()
         })
     }
 
     /**
-    *  Calls function self times
-    *  @param function Function to call
+        Calls function self times.
+    
+        :param: function Function to call
     */
     func times (function: () -> ()) {
-        self.times({
+        times({
             (index: Int) -> () in
             function()
         })
     }
 
     /**
-    *  Calls function self times passing a value from 0 to self on each call
-    *  @param function Function to call
+        Calls function self times passing a value from 0 to self on each call.
+    
+        :param: function Function to call
     */
     func times <T> (function: (Int) -> T) {
         (0..<self).each { index in function(index); return }
     }
 
     /**
-    *  Checks if a number is even
-    *  @return True if self is even
+        Checks if a number is even.
+    
+        :returns: true if self is even
     */
     func isEven () -> Bool {
         return (self % 2) == 0
     }
     
     /**
-    *  Checks if a number is odd
-    *  @return True if self is odd
+        Checks if a number is odd.
+    
+        :returns: true if self is odd
     */
     func isOdd () -> Bool {
-        return !self.isEven()
+        return !isEven()
     }
 
     /**
-    *  Iterates function, passing in integer values from self up to and including limit.
-    *  @param limit Last value to pass
-    *  @param function Function to invoke
+        Iterates function, passing in integer values from self up to and including limit.
+        
+        :param: limit Last value to pass
+        :param: function Function to invoke
     */
     func upTo (limit: Int, function: (Int) -> ()) {
         if limit < self {
@@ -70,9 +76,10 @@ public extension Int {
     }
     
     /**
-    *  Iterates function, passing in integer values from self down to and including limit.
-    *  @param limit Last value to pass
-    *  @param function Function to invoke
+        Iterates function, passing in integer values from self down to and including limit.
+        
+        :param: limit Last value to pass
+        :param: function Function to invoke
     */
     func downTo (limit: Int, function: (Int) -> ()) {
         if limit > self {
@@ -83,35 +90,32 @@ public extension Int {
     }
 
     /**
-    *  Clamps self to range
-    *  @param range Clamping range
-    *  @return Clamped value
+        Clamps self to a specified range.
+    
+        :param: range Clamping range
+        :returns: Clamped value
     */
     func clamp (range: Range<Int>) -> Int {
-        if self > range.endIndex - 1 {
-            return range.endIndex - 1
-        } else if self < range.startIndex {
-            return range.startIndex
-        }
-        
-        return self
+        return clamp(range.startIndex, range.endIndex - 1)
     }
     
     /**
-    *  Clamps self to a range min...max
-    *  @param min Lower bound
-    *  @param max Upper bound
-    *  @return Clamped value
+        Clamps self to a specified range.
+        
+        :param: min Lower bound
+        :param: max Upper bound
+        :returns: Clamped value
     */
-    func clamp (min: Int, max: Int) -> Int {
-        return clamp(min...max)
+    func clamp (min: Int, _ max: Int) -> Int {
+        return Swift.max(min, Swift.min(max, self))
     }
 
     /**
-    *  Check if self is included in range
-    *  @param range Range
-    *  @param string If true, "<" is used for comparison
-    *  @return true if in range
+        Checks if self is included a specified range.
+        
+        :param: range Range
+        :param: string If true, "<" is used for comparison
+        :returns: true if in range
     */
     func isIn (range: Range<Int>, strict: Bool = false) -> Bool {
         if strict {
@@ -120,13 +124,34 @@ public extension Int {
 
         return range.startIndex <= self && self <= range.endIndex - 1
     }
-
+    
     /**
-    *  Returns a Int[] containing the digits in self
-    *  @return Array of digits
+        Checks if self is included in a closed interval.
+    
+        :param: interval Interval to check
+        :returns: true if in the interval
     */
-    func digits () -> Array<Int> {
-        var result = Array<Int>()
+    func isIn (interval: ClosedInterval<Int>) -> Bool {
+        return interval.contains(self)
+    }
+    
+    /**
+        Checks if self is included in an half open interval.
+    
+        :param: interval Interval to check
+        :returns: true if in the interval
+    */
+    func isIn (interval: HalfOpenInterval<Int>) -> Bool {
+        return interval.contains(self)
+    }
+    
+    /**
+        Returns an [Int] containing the digits in self.
+        
+        :return: Array of digits
+    */
+    func digits () -> [Int] {
+        var result = [Int]()
         
         for char in String(self) {
             let string = String(char)
@@ -139,34 +164,40 @@ public extension Int {
     }
     
     /**
-    *  Absolute value
-    *  @return abs(self)
+        Absolute value.
+    
+        :returns: abs(self)
     */
     func abs () -> Int {
         return Swift.abs(self)
     }
     
     /**
-    *  Greatest common divisor of self and n
-    *  @param n
-    *  @return GCD
+        Greatest common divisor of self and n.
+    
+        :param: n
+        :returns: GCD
     */
     func gcd (n: Int) -> Int {
         return n == 0 ? self : n.gcd(self % n)
     }
     
     /**
-    *  Least common multiple of self and n
-    *  @param n
-    *  @return LCM
+        Least common multiple of self and n
+    
+        :param: n
+        :@returns: LCM
     */
     func lcm (n: Int) -> Int {
         return (self * n).abs() / gcd(n)
     }
     
     /**
-    *  Random integer between min and max (inclusive).
-    *  @return Random integer
+        Random integer between min and max (inclusive).
+    
+        :param: min Minimum value to return
+        :param: max Maximum value to return
+        :returns: Random integer
     */
     static func random(min: Int = 0, max: Int) -> Int {
         return Int(arc4random_uniform(UInt32((max - min) + 1))) + min

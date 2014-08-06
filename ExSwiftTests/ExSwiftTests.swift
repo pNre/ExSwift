@@ -32,15 +32,26 @@ class ExSwiftTests: XCTestCase {
 
     func testOnce () {
 
+        //  Test execution
         var test = false
 
-        let f = ExSwift.once { test = !test }
+        let f = Ex.once { test = !test }
         
         f()
         f()
         
         XCTAssertTrue(test)
+        
+        //  Test return value
+        var seq = [1, 2, 3, 4].generate()
 
+        let g = Ex.once { Void -> Int in
+            return seq.next()!
+        }
+        
+        XCTAssertEqual(g(), 1)
+        XCTAssertEqual(g(), 1)
+        
     }
 
     func testPartial () {

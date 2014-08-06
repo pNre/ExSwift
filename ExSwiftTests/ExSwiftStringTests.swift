@@ -96,12 +96,13 @@ class ExSwiftStringTests: XCTestCase {
     }
     
     func testCapitalized () {
-        XCTAssertEqual("".capitalized(), "")
-        XCTAssertEqual("abcdef".capitalized(), "Abcdef")
-        XCTAssertEqual("Abcdef".capitalized(), "Abcdef")
+        XCTAssertEqual("".capitalized, "")
+        XCTAssertEqual("abcdef".capitalized, "Abcdef")
+        XCTAssertEqual("Abcdef".capitalized, "Abcdef")
     }
 
     func testInsert () {
+        XCTAssertEqual("abcdef".insert(10, "X"), "abcdefX")
         XCTAssertEqual("abcdef".insert(3, "X"), "abcXdef")
     }
 

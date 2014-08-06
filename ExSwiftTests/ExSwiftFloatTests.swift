@@ -17,23 +17,6 @@ class ExSwiftFloatTests: XCTestCase {
     func testSqrt() {
         XCTAssertEqual(2, Float(4.0).sqrt())
     }
-    
-    func testDigits () {
-        let first = Float(10.214).digits()
-        
-        XCTAssertEqualArrays(first.integerPart, [1, 0])
-        XCTAssertEqualArrays(first.fractionalPart[0...1], [2, 1])
-        
-        let second = Float(0.123).digits()
-        
-        XCTAssertEqualArrays(second.integerPart, [0])
-        XCTAssertEqualArrays(second.fractionalPart[0...1], [1, 2])
-        
-        let third = Float(10.0).digits()
-        
-        XCTAssertEqualArrays(third.integerPart, [1, 0])
-        XCTAssertEqualArrays(third.fractionalPart, [0])
-    }
 
     func testFloor () {
         XCTAssertEqual(2, Float(2.9).floor())

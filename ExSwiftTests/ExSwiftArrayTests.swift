@@ -199,11 +199,12 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqualArrays(array.sample(size: array.count), array)
     }
 
-    func testSubscriptRange() {
+    func testSubscript() {
         XCTAssertEqualArrays(array[0..<0], [])
         XCTAssertEqualArrays(array[0..<1], [1])
         XCTAssertEqualArrays(array[0..<2], [1, 2])
         XCTAssertEqualArrays(array[0...2], [1, 2, 3])
+        XCTAssertEqualArrays(array[0, 1, 2], [1, 2, 3])
     }
 
     func testShuffled() {
@@ -373,5 +374,17 @@ class ExtensionsArrayTests: XCTestCase {
     func testTakeFirst() {
         XCTAssertEqual(2, array.takeFirst { $0 % 2 == 0 }!)
         XCTAssertNil(array.takeFirst { $0 > 10 })
+    }
+    
+    func testMapFilter() {
+        let m = array.mapFilter { value -> Int? in
+            if value > 3 {
+                return nil
+            }
+            
+            return value + 1
+        }
+        
+        XCTAssertEqualArrays(m, [2, 3, 4])
     }
 }
