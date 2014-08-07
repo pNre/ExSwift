@@ -60,6 +60,10 @@ class ExSwiftDictionaryTests: XCTestCase {
         XCTAssertEqualDictionaries(filtered, ["B": 2, "C": 3])
     }
 
+    func testCount() {
+        XCTAssertEqual(2, dictionary.count({ key, _ in return key != "A" }))
+    }
+
     func testShift() {
         let (key, value) = dictionary.shift()!
         

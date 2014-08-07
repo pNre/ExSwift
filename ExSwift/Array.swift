@@ -673,8 +673,27 @@ public extension Array {
     }
 
     /**
+        Returns the number of elements which meet the condition
+
+        :param: test Function to call for each element
+        :returns: the number of elements meeting the condition
+    */
+    func count (test: (Element) -> Bool) -> Int {
+
+        var result = 0
+
+        for item in self {
+            if test(item) {
+                result++
+            }
+        }
+
+        return result
+    }
+
+    /**
         Joins the array elements with a separator.
-        
+
         :param: separator
         :return: Joined object if self is not empty and its elements are instances of C, nil otherwise
     */
