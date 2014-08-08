@@ -94,7 +94,7 @@ public extension String {
         Returns a string found between the start text and the end text.
         
         :param: Text to start searching from or nil to start at beginning of string
-        :param: Text or Array of [String] to search to, or nil to go to the end of the string
+        :param: Text to search to, array of [String] to get nearest match or nil to go to the end of the string
         :returns: String found between start text and end text
     */
     func textBetween(startText startTextOrNil: String?, endText endTextStringOrArrayOrNil: AnyObject?) -> String? {
