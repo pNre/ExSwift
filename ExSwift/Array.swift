@@ -678,7 +678,7 @@ public extension Array {
         :param: test Function to call for each element
         :returns: the number of elements meeting the condition
     */
-    func count (test: (Element) -> Bool) -> Int {
+    func countWhere (test: (Element) -> Bool) -> Int {
 
         var result = 0
 

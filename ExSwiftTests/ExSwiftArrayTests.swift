@@ -376,8 +376,8 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertNil(array.takeFirst { $0 > 10 })
     }
 
-    func testCount() {
-        XCTAssertEqual(2, array.count({ $0 % 2 == 0 }))
+    func testCountWhere() {
+        XCTAssertEqual(2, array.countWhere { $0 % 2 == 0 })
     }
 
     func testMapFilter() {

@@ -308,7 +308,7 @@ public extension Dictionary {
         :param: test Function to call for each element
         :returns: the number of elements meeting the condition
     */
-    func count (test: (Key, Value) -> (Bool)) -> Int {
+    func countWhere (test: (Key, Value) -> (Bool)) -> Int {
 
         var result = 0
 
