@@ -91,10 +91,10 @@ public extension String {
     }
     
     /**
-        Returns an string found between the start text and the end text.
+        Returns a string found between the start text and the end text.
         
         :param: Text to start searching from or nil to start at beginning of string
-        :param: Text to end the search or nil to go to the end of the string
+        :param: Text or Array of [String] to search to, or nil to go to the end of the string
         :returns: String found between start text and end text
     */
     func textBetween(startText startTextOrNil: String?, endText endTextStringOrArrayOrNil: AnyObject?) -> String? {
@@ -124,9 +124,7 @@ public extension String {
         
         if let start = startLocation {
             
-            println("\(start) \(endObjects)")
             for endText in endObjects {
-                //println("Searching for \(end)")
                 var endRange = text.rangeOfString(endText, options: NSStringCompareOptions.CaseInsensitiveSearch, range: NSMakeRange(start, text.length - start)).location
                 if endRange != NSNotFound {
                     if let end = endLocation {
