@@ -132,8 +132,8 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testIntersection() {
-        var intersection = array.intersection([])
-        XCTAssertEqualArrays(intersection, [])
+        var intersection = array.intersection([Int]())
+        XCTAssertEqualArrays(intersection, [Int]())
         
         intersection = array.intersection([1])
         XCTAssertEqualArrays(intersection, [1])
@@ -336,7 +336,8 @@ class ExtensionsArrayTests: XCTestCase {
     
     func testFlatten () {
         let array = [5, [6, [7]], 8]
-        XCTAssertEqualArrays(array.flatten() as Array<NSNumber>, [5, 6, 7, 8])
+        XCTAssertEqualArrays(array.flatten() as [Int], [5, 6, 7, 8])
+        XCTAssertEqualArrays(array.flattenAny(), [5, 6, 7, 8])
     }
     
     func testGet () {

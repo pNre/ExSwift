@@ -759,7 +759,7 @@ public extension Array {
     }
 
     /**
-        Flattens the nested Array self to an array of OutType objects.
+        Flattens a nested Array self to an array of OutType objects.
     
         :returns: Flattened array
     */
@@ -769,6 +769,25 @@ public extension Array {
         
         for i in 0..<reflection.count {
             result += Ex.bridgeObjCObject(reflection[i].1.value) as [OutType]
+        }
+        
+        return result
+    }
+    
+    /**
+        Flattens a nested Array self to an array of AnyObject.
+    
+        :returns: Flattened array
+    */
+    func flattenAny () -> [AnyObject] {
+        var result = [AnyObject]()
+        
+        for item in self {
+            if let array = item as? NSArray {
+                result += array.flattenAny()
+            } else if let object = item as? NSObject {
+                result.append(object)
+            }
         }
         
         return result

@@ -216,6 +216,7 @@ extension ExSwift {
         
         //  object has an Objective-C type
         if reflection.disposition == .ObjCObject {
+            
             //  If it is an NSArray, flattening will produce the expected result
             if let array = object as? NSArray {
                 result += array.flatten()
@@ -228,7 +229,9 @@ extension ExSwift {
             
             //  recursively convert each item
             (0..<reflection.count).each {
-                result += Ex.bridgeObjCObject(reflection[$0].1.value)
+                let ref = reflection[$0].1
+
+                result += Ex.bridgeObjCObject(ref.value)
             }
             
         } else if let obj = object as? T {

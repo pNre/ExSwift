@@ -25,5 +25,7 @@ class ExSwiftNSArrayTests: XCTestCase {
         XCTAssertEqualArrays(array.flatten() as Array<NSNumber>, [5, 6, 7, 8])
         XCTAssertEqualArrays(array.flatten() as [Int], [5, 6, 7, 8])
         XCTAssertEqualArrays(array.flatten() as [String], ["A"])
+        
+        XCTAssertEqualArrays(array.flattenAny(), [5, 6, "A", 7, 8])
     }
 }
