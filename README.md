@@ -60,20 +60,20 @@ Name | Signature
 **`skip`**|`skip (n: Int) -> Array`
 **`skipWhile`**|`skipWhile (condition: (Element) -> Bool) -> Array`
 **`contains`**|`contains <T: Equatable> (item: T...) -> Bool`
-**`difference`**|`difference <T: Equatable> (values: Array<T>...) -> Array<T>`
-**`intersection`**|`intersection <U: Equatable> (values: Array<U>...) -> Array`
-**`union`**|`union <U: Equatable> (values: Array<U>...) -> Array`
-**`unique`**|`unique <T: Equatable> () -> Array<T>`
+**`difference`**|`difference <T: Equatable> (values: [T]...) -> [T]`
+**`intersection`**|`intersection <U: Equatable> (values: [U]...) -> Array`
+**`union`**|`union <U: Equatable> (values: [U]...) -> Array`
+**`unique`**|`unique <T: Equatable> () -> [T]`
 **`indexOf`**|`indexOf <T: Equatable> (item: T) -> Int?`
 **`indexOf`**|`indexOf (condition: Element -> Bool) -> Int?`
 **`lastIndexOf`**|`lastIndexOf <T: Equatable> (item: T) -> Int?`
-**`zip`**|`zip (arrays: Array<Any>...) -> Array<Array<Any?>>`
-**`partition`**|`partition (var n: Int, var step: Int? = nil) -> Array<Array<Element>>`<br>`partition (var n: Int, var step: Int? = nil, pad: Element[]?) -> Array<Array<Element>>`
-**`partitionAll`**|`partitionAll (var n: Int, var step: Int? = nil) -> Array<Array<Element>>`
-**`partitionBy`**|`partitionBy <T: Equatable> (cond: (Element) -> T) -> Array<Array<Element>>`
+**`zip`**|`zip (arrays: Array<Any>...) -> [[Any?]]`
+**`partition`**|`partition (var n: Int, var step: Int? = nil) -> [Array]`<br>`partition (var n: Int, var step: Int? = nil, pad: Element[]?) -> [Array]`
+**`partitionAll`**|`partitionAll (var n: Int, var step: Int? = nil) -> [Array]`
+**`partitionBy`**|`partitionBy <T: Equatable> (cond: (Element) -> T) -> [Array]`
 **`shuffle`**|`shuffle ()`
 **`shuffled`**|`shuffled () -> Array`
-**`sample`** *(random)*|`sample (size n: Int = 1) -> Array<T>`
+**`sample`** *(random)*|`sample (size n: Int = 1) -> [T]`
 **`max`**|`max <T: Comparable> () -> T`
 **`min`**|`min <T: Comparable> () -> T`
 **`each`**|`each (call: (Element) -> ())`<br>`each (call: (Int, Element) -> ())`
@@ -86,15 +86,16 @@ Name | Signature
 **`shift`**|`shift() -> Element`
 **`unshift`**|`unshift(newElement: Element)`
 **`insert`**|`insert (newArray: Array, atIndex: Int)`
-**`groupBy`**|`groupBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Array>`
-**`countBy`**|`countBy <U> (groupingFunction group: (Element) -> (U)) -> Dictionary<U, Int>`
+**`groupBy`**|`groupBy <U> (groupingFunction group: (Element) -> (U)) -> [U: Array]`
+**`countBy`**|`countBy <U> (groupingFunction group: (Element) -> (U)) -> [U: Int]`
 **`reduce`**|`reduce (combine: (Element, Element) -> Element) -> Element?`
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
 **`mapFilter`**|`mapFilter <V> (mapFunction map: (Element) -> (V)?) -> [V]`
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
-**`flatten`**|`flatten <OutType> () -> OutType[]`
-**`sortBy`**|`sortBy (isOrderedBefore: (T, T) -> Bool) -> Array<T> `
-**`toDictionary`**|`toDictionary <U> (keySelector:(Element) -> U) -> Dictionary<U, Element>`
+**`flatten`**|`flatten <OutType> () -> [OutType]`
+**`flattenAny`**|`flattenAny () -> [AnyObject]`
+**`sortBy`**|`sortBy (isOrderedBefore: (T, T) -> Bool) -> [T]`
+**`toDictionary`**|`toDictionary <U> (keySelector:(Element) -> U) -> [U: Element]`
 
 #### Class Methods ####
 
@@ -109,7 +110,7 @@ Name | Signature | Function
 `-`|`- <T: Equatable> (first: Array<T>, second: T) -> Array<T>`|Element removal
 `&`|`& <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Intersection
 <code>&#124;</code>|<code>&#124; <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T></code>|Union
-`* Int`|`* <ItemType> (array: ItemType[], n: Int) -> ItemType[]`|Returns a new array built by concatenating int copies of self
+`* Int`|`* <ItemType> (array: ItemType[], n: Int) -> [ItemType]`|Returns a new array built by concatenating int copies of self
 `* String`|`* (array: String[], separator: String) -> String`|Equivalent to `array.implode(String)`
 `[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> Array`|Returns the sub-array from index *x* to index *y*
 `[x, y, ...]`|`subscript(first: Int, second: Int, rest: Int...) -> Array`|Returns the items at *x*, *y*
@@ -175,9 +176,9 @@ Name |
 
 Name | Signature
 ---- | ---------
-**`explode`**|`explode (separator: Character) -> String[]`
-**`at`**|`at (indexes: Int...) -> String[]`
-**`matches`**|`matches (pattern: String, ignoreCase: Bool = false) -> NSTextCheckingResult[]?`
+**`explode`**|`explode (separator: Character) -> [String]`
+**`at`**|`at (indexes: Int...) -> [String]`
+**`matches`**|`matches (pattern: String, ignoreCase: Bool = false) -> [NSTextCheckingResult]?`
 **`insert`**|`insert (index: Int, _ string: String) -> String`
 **`ltrimmed`**|`ltrimmed () -> String`
 **`rtrimmed`**|`rtrimmed () -> String`
@@ -194,9 +195,9 @@ Name | Signature
 ---- | ---------
 `[x]`|`subscript(index: Int) -> String?`
 `[x..y]`<br>`[x...y]`|`subscript(range: Range<Int>) -> String`
-`[x, y, z]`|`subscript (indexes: Int...) -> String[]`
+`[x, y, z]`|`subscript (indexes: Int...) -> [String]`
 `S * n`|`* (first: String, second: Int) -> String`
-`=~`|`=~ (string: String, pattern: String) -> Bool`<br>`=~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool`<br>`=~ (strings: String[], pattern: String) -> Bool`<br>`=~ (strings: String[], options: (pattern: String, ignoreCase: Bool)) -> Bool`
+`=~`|`=~ (string: String, pattern: String) -> Bool`<br>`=~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool`<br>`=~ (strings: [String], pattern: String) -> Bool`<br>`=~ (strings: [String], options: (pattern: String, ignoreCase: Bool)) -> Bool`
 <code>&#124;~</code>|<code>&#124;~ (string: String, pattern: String) -> Bool</code><br><code>&#124;~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool</code>
 
 ## Range ##
@@ -229,24 +230,24 @@ Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/Dictionary)
 
 Name | Signatures
 ---- | ----------
-**`difference`**|`difference <V: Equatable> (dictionaries: Dictionary<KeyType, V>...) -> Dictionary<KeyType, V>`
-**`union`**|`union (dictionaries: Dictionary<KeyType, ValueType>...) -> Dictionary<KeyType, ValueType>`
-**`intersection`**|`intersection <K, V where K: Equatable, V: Equatable> (dictionaries: Dictionary<K, V>...) -> Dictionary<K, V>`
-**`has`**|`has (key: KeyType) -> Bool`
-**`map`**|`map <K, V> (mapFunction map: (KeyType, ValueType) -> (K, V)) -> Dictionary<K, V>`
+**`difference`**|`difference <V: Equatable> (dictionaries: [Key: V]...) -> [Key: V]`
+**`union`**|`union (dictionaries: [Key: Value]...) -> [Key: Value]`
+**`intersection`**|`intersection <K, V where K: Equatable, V: Equatable> (dictionaries: [K: V]...) -> [K: V]`
+**`has`**|`has (key: Key) -> Bool`
+**`map`**|`map <K, V> (mapFunction map: (Key, Value) -> (K, V)) -> [K: V]`
 **`mapFilter`**|`mapFilter <K, V> (mapFunction map: (Key, Value) -> (K, V)?) -> [K: V]`
-**`mapValues`**|`mapValues <V> (mapFunction map: (KeyType, ValueType) -> (V)) -> Dictionary<KeyType, V>`
+**`mapValues`**|`mapValues <V> (mapFunction map: (Key, Value) -> (V)) -> [Key: V]`
 **`mapFilterValues`**|`mapFilterValues <V> (mapFunction map: (Key, Value) -> V?) -> [Key: V]`
-**`each`**|`each(eachFunction each: (KeyType, ValueType) -> ())`
-**`filter`**|`filter(testFunction test: (KeyType, ValueType) -> Bool) -> Dictionary<KeyType, ValueType>`
-**`merge`**|`merge (dictionaries: Dictionary<KeyType, ValueType>...) -> Dictionary<KeyType, ValueType>`
-**`shift`**|`shift () -> (KeyType, ValueType)`
-**`groupBy`**|`groupBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Array<ValueType>>`
-**`countBy`**|`countBy <T> (groupingFunction group: (KeyType, ValueType) -> (T)) -> Dictionary<T, Int>`
-**`any`**|`any (test: (KeyType, ValueType) -> (Bool)) -> Bool`
-**`all`**|`all (test: (KeyType, ValueType) -> (Bool)) -> Bool`
+**`each`**|`each(eachFunction each: (Key, Value) -> ())`
+**`filter`**|`filter(testFunction test: (Key, Value) -> Bool) -> [Key: Value]`
+**`merge`**|`merge (dictionaries: [Key: Value]...) -> [Key: Value]`
+**`shift`**|`shift () -> (Key, Value)`
+**`groupBy`**|`groupBy <T> (groupingFunction group: (Key, Value) -> (T)) -> [T: Array<Value>]`
+**`countBy`**|`countBy <T> (groupingFunction group: (Key, Value) -> (T)) -> [T: Int]`
+**`any`**|`any (test: (Key, Value) -> (Bool)) -> Bool`
+**`all`**|`all (test: (Key, Value) -> (Bool)) -> Bool`
 **`reduce`**|`reduce <U> (initial: U, combine: (U, Element) -> U) -> U`
-**`pick`, `at`**|`pick (keys: KeyType[]) -> Dictionary`<br>`pick (keys: KeyType...) -> Dictionary`<br>`at (keys: KeyType...) -> Dictionary`
+**`pick`, `at`**|`pick (keys: [Key]) -> Dictionary`<br>`pick (keys: Key...) -> Dictionary`<br>`at (keys: Key...) -> Dictionary`
 
 #### Operators ####
 Name | Signature | Function
@@ -263,8 +264,9 @@ Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/NSArray)
 
 Name | Signatures
 ---- | ----------
-**`cast`**|`cast <OutType> () -> OutType[]`
-**`flatten`**|`flatten <OutType> () -> OutType[]`
+**`cast`**|`cast <OutType> () -> [OutType]`
+**`flatten`**|`flatten <OutType> () -> [OutType]`
+**`flattenAny`**|`flattenAny () -> [AnyObject]`
 
 ## SequenceOf ##
 
