@@ -301,6 +301,27 @@ public extension Dictionary {
 
     }
 
+
+    /**
+        Returns the number of elements which meet the condition
+
+        :param: test Function to call for each element
+        :returns: the number of elements meeting the condition
+    */
+    func countWhere (test: (Key, Value) -> (Bool)) -> Int {
+
+        var result = 0
+
+        for (key, value) in self {
+            if test(key, value) {
+                result++
+            }
+        }
+
+        return result
+    }
+
+
     /**
         Recombines the [key: value] couples in self trough combine using initial as initial value.
     

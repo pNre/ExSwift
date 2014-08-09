@@ -376,7 +376,11 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(2, array.takeFirst { $0 % 2 == 0 }!)
         XCTAssertNil(array.takeFirst { $0 > 10 })
     }
-    
+
+    func testCountWhere() {
+        XCTAssertEqual(2, array.countWhere { $0 % 2 == 0 })
+    }
+
     func testMapFilter() {
         let m = array.mapFilter { value -> Int? in
             if value > 3 {
