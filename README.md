@@ -88,6 +88,7 @@ Name | Signature
 **`insert`**|`insert (newArray: Array, atIndex: Int)`
 **`groupBy`**|`groupBy <U> (groupingFunction group: (Element) -> (U)) -> [U: Array]`
 **`countBy`**|`countBy <U> (groupingFunction group: (Element) -> (U)) -> [U: Int]`
+**`countWhere`**|`countWhere (test: (Element) -> Bool) -> Int`
 **`reduce`**|`reduce (combine: (Element, Element) -> Element) -> Element?`
 **`reduceRight`**|`reduceRight <U>(initial: U, combine: (U, Element) -> U) -> U`
 **`mapFilter`**|`mapFilter <V> (mapFunction map: (Element) -> (V)?) -> [V]`
@@ -244,6 +245,7 @@ Name | Signatures
 **`shift`**|`shift () -> (Key, Value)`
 **`groupBy`**|`groupBy <T> (groupingFunction group: (Key, Value) -> (T)) -> [T: Array<Value>]`
 **`countBy`**|`countBy <T> (groupingFunction group: (Key, Value) -> (T)) -> [T: Int]`
+**`countWhere`**|`countWhere (test: (Key, Value) -> (Bool)) -> Int`
 **`any`**|`any (test: (Key, Value) -> (Bool)) -> Bool`
 **`all`**|`all (test: (Key, Value) -> (Bool)) -> Bool`
 **`reduce`**|`reduce <U> (initial: U, combine: (U, Element) -> U) -> U`
