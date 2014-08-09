@@ -89,7 +89,65 @@ public extension String {
             return element == separator
         })
     }
-
+    
+    /**
+        Returns a string found between the start text and the end text.
+        
+        :param: Text to start searching from or nil to start at beginning of string
+        :param: Text to search to, array of [String] to get nearest match or nil to go to the end of the string
+        :returns: String found between start text and end text
+    */
+    func textBetween(startText startTextOrNil: String?, endText endTextStringOrArrayOrNil: AnyObject?) -> String? {
+        
+        var stringObject: String?
+        var text = self as NSString
+        var endObjects = [String]()
+        var startLocation: Int?
+        var endLocation: Int?
+        
+        if let array = endTextStringOrArrayOrNil as? [String] {
+            endObjects = array
+        } else if let string = endTextStringOrArrayOrNil as? String {
+            endObjects.append(string)
+        } else if endTextStringOrArrayOrNil == nil {
+            endLocation = text.length
+        }
+        
+        if let startText = startTextOrNil {
+            var startRange = text.rangeOfString(startText)
+            if startRange != NSRangeException {
+                startLocation = startRange.location + startText.length
+            }
+        } else {
+             startLocation = 0
+        }
+        
+        if let start = startLocation {
+            
+            for endText in endObjects {
+                var endRange = text.rangeOfString(endText, options: NSStringCompareOptions.CaseInsensitiveSearch, range: NSMakeRange(start, text.length - start)).location
+                if endRange != NSNotFound {
+                    if let end = endLocation {
+                        if endRange < endLocation {
+                            endLocation = endRange
+                        }
+                    } else {
+                        endLocation = endRange
+                    }
+                    
+                }
+            }
+            
+            if let end = endLocation {
+                stringObject = text.substringWithRange(NSMakeRange(start, end - start))
+            }
+            
+            
+        }
+        
+        return stringObject
+    }
+    
     /**
         Finds any match in self for pattern.
         
