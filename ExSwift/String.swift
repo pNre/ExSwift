@@ -27,7 +27,13 @@ public extension String {
         :returns: Substring in range
     */
     subscript (range: Range<Int>) -> String? {
-        return Array(self).get(range).reduce(String(), +)
+        if range.startIndex < 0 || range.endIndex > self.length {
+            return nil
+        }
+
+        let range = Range(start: advance(startIndex, range.startIndex), end: advance(startIndex, range.endIndex))
+
+        return self[range]
     }
 
     /**
@@ -100,7 +106,8 @@ public extension String {
     func matches (pattern: String, ignoreCase: Bool = false) -> [NSTextCheckingResult]? {
 
         if let regex = ExSwift.regex(pattern, ignoreCase: ignoreCase) {
-            return regex.matchesInString(self, options: nil, range: NSMakeRange(0, length)) as? [NSTextCheckingResult]
+            //  Using map to prevent a possible bug in the compiler
+            return regex.matchesInString(self, options: nil, range: NSMakeRange(0, length)).map { $0 as NSTextCheckingResult }
         }
 
         return nil
@@ -182,13 +189,6 @@ public extension String {
         return result
 
     }
-    
-    /*
-        Create a default NSRegularExpression using the current string as pattern and remembering case.
-    */
-    public func __conversion() -> NSRegularExpression {
-        return ExSwift.regex(self, ignoreCase: false)!
-    }
 
 }
 
@@ -203,6 +203,13 @@ public func * (first: String, n: Int) -> String {
     }
 
     return result
+}
+
+//  Pattern matching using a regular expression
+public func =~ (string: String, pattern: String) -> Bool {
+    let regex = ExSwift.regex(pattern, ignoreCase: false)!
+    let matches = regex.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length))
+    return matches > 0
 }
 
 //  Pattern matching using a regular expression
@@ -221,19 +228,21 @@ public func =~ (string: String, options: (pattern: String, ignoreCase: Bool)) ->
 }
 
 //  Match against all the alements in an array of String
-public func =~ (strings: Array<String>, pattern: String) -> Bool {
-    return strings.all { $0 =~ (pattern as NSRegularExpression) }
+public func =~ (strings: [String], pattern: String) -> Bool {
+    let regex = ExSwift.regex(pattern, ignoreCase: false)!
+    return strings.all { $0 =~ regex }
 }
 
-public func =~ (strings: Array<String>, options: (pattern: String, ignoreCase: Bool)) -> Bool {
+public func =~ (strings: [String], options: (pattern: String, ignoreCase: Bool)) -> Bool {
     return strings.all { $0 =~ options }
 }
 
 //  Match against any element in an array of String
-public func |~ (strings: Array<String>, pattern: String) -> Bool {
-    return strings.any { $0 =~ (pattern as NSRegularExpression) }
+public func |~ (strings: [String], pattern: String) -> Bool {
+    let regex = ExSwift.regex(pattern, ignoreCase: false)!
+    return strings.any { $0 =~ regex }
 }
 
-public func |~ (strings: Array<String>, options: (pattern: String, ignoreCase: Bool)) -> Bool {
+public func |~ (strings: [String], options: (pattern: String, ignoreCase: Bool)) -> Bool {
     return strings.any { $0 =~ options }
 }

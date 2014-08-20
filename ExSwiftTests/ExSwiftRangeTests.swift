@@ -38,7 +38,7 @@ class ExSwiftRangeTests: XCTestCase {
             items.append($0)
         })
 
-        XCTAssertEqualArrays(items, [0, 1])
+        XCTAssertEqual(items, [0, 1])
 
         (0..<0).each({ (current: Int) in
             XCTFail()

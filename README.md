@@ -1,6 +1,6 @@
 # ExSwift
 
-JavaScript (Lo-Dash, Underscore) & Ruby inspired set of Swift extensions for standard types and classes.
+Set of Swift extensions for standard types and classes.
 
 ## Contents ##
 

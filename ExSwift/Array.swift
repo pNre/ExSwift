@@ -112,7 +112,7 @@ public extension Array {
         
         :returns: First element of the array if not empty
     */
-    func first () -> Element? {
+    @availability(*, unavailable, message="use the 'first' property instead") func first () -> Element? {
         return first
     }
 
@@ -121,7 +121,7 @@ public extension Array {
     
         :returns: Last element of the array if not empty
     */
-    func last () -> Element? {
+    @availability(*, unavailable, message="use the 'last' property instead") func last () -> Element? {
         return last
     }
 
@@ -248,8 +248,10 @@ public extension Array {
         var result = [Array]()
         
         // If no step is supplied move n each step.
-        step = step ?? n
-        
+        if step == nil {
+            step = n
+        }
+
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
         if n > count { return [[]] }
@@ -275,8 +277,10 @@ public extension Array {
         var result = [Array]()
         
         // If no step is supplied move n each step.
-        step = step ?? n
-        
+        if step == nil {
+            step = n
+        }
+
         // Less than 1 results in an infinite loop.
         if step < 1 {
             step = 1
@@ -320,8 +324,10 @@ public extension Array {
         var result = [Array]()
 
         // If no step is supplied move n each step.
-        step = step ?? n
-        
+        if step == nil {
+            step = n
+        }
+
         if step < 1 { step = 1 } // Less than 1 results in an infinite loop.
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
 
@@ -731,7 +737,7 @@ public extension Array {
         self.reduce with initial value self.first()
     */
     func reduce (combine: (Element, Element) -> Element) -> Element? {
-        if let firstElement = first() {
+        if let firstElement = first {
             return skip(1).reduce(firstElement, combine: combine)
         }
         
@@ -943,8 +949,8 @@ public extension Array {
         :returns: Array with the items at the specified indexes
     */
     subscript (first: Int, second: Int, rest: Int...) -> Array {
-        typealias IntsType = (Int...)
-        return at(unsafeBitCast([first, second] + rest, IntsType.self))
+        let indexes = [first, second] + rest
+        return indexes.map { self[$0] }
     }
 
 }

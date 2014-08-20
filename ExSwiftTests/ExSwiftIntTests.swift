@@ -34,7 +34,7 @@ class ExSwiftIntTests: XCTestCase {
             indexes.append($0)
         })
         
-        XCTAssertEqualArrays(indexes, [0, 1, 2, 3, 4])
+        XCTAssertEqual(indexes, [0, 1, 2, 3, 4])
         
     }
     
@@ -71,7 +71,7 @@ class ExSwiftIntTests: XCTestCase {
         
         5.upTo(10, { result.append($0) })
      
-        XCTAssertEqualArrays(result, Array(5...10))
+        XCTAssertEqual(result, Array(5...10))
     }
     
     func testDownTo() {
@@ -80,7 +80,7 @@ class ExSwiftIntTests: XCTestCase {
         
         3.downTo(0, { result.append($0) })
         
-        XCTAssertEqualArrays(result, [3, 2, 1, 0])
+        XCTAssertEqual(result, [3, 2, 1, 0])
         
     }
     
@@ -103,7 +103,7 @@ class ExSwiftIntTests: XCTestCase {
 
     func testExplode () {
         let result = 362.digits()
-        XCTAssertEqualArrays(result, [3, 6, 2])
+        XCTAssertEqual(result, [3, 6, 2])
     }
     
     func testGCD () {

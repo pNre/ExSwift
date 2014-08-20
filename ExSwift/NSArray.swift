@@ -15,8 +15,8 @@ public extension NSArray {
         
         :returns: Array of Swift objects
     */
-    func cast <OutType> () -> Array<OutType> {
-        var result = Array<OutType>()
+    func cast <OutType> () -> [OutType] {
+        var result = [OutType]()
         
         for item : AnyObject in self {
             result += Ex.bridgeObjCObject(item) as [OutType]

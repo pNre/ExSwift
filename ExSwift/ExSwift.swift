@@ -25,15 +25,18 @@ public class ExSwift {
     */
     public class func after <P, T> (n: Int, function: (P...) -> T) -> ((P...) -> T?) {
         
-        typealias ParamsType = (P...)
-        
+        typealias Function = [P] -> T
+    
         var times = n
         
         return {
-            (params: ParamsType) -> T? in
+            (params: P...) -> T? in
             
+            //  Workaround for the now illegal (T...) type.
+            let adaptedFunction = unsafeBitCast(function, Function.self)
+        
             if times-- <= 0 {
-                return function(unsafeBitCast(params, ParamsType.self))
+                return adaptedFunction(params)
             }
             
             return nil
@@ -67,17 +70,18 @@ public class ExSwift {
     */
     public class func once <P, T> (function: (P...) -> T) -> ((P...) -> T) {
         
-        typealias ParamsType = (P...)
-        
+        typealias Function = [P] -> T
+    
         var returnValue: T? = nil
         
-        return { (params: ParamsType) -> T in
+        return { (params: P...) -> T in
             
             if returnValue != nil {
                 return returnValue!
             }
             
-            returnValue = function(unsafeBitCast(params, ParamsType.self))
+            let adaptedFunction = unsafeBitCast(function, Function.self)
+            returnValue = adaptedFunction(params)
             
             return returnValue!
 
@@ -110,14 +114,12 @@ public class ExSwift {
         :returns: Wrapper function
     */
     public class func partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T) {
-        
-        typealias ParamsType = (P...)
-        
-        return { (params: ParamsType) -> T in
-            
-            return function(unsafeBitCast(parameters + params, ParamsType.self))
+        typealias Function = [P] -> T
+
+        return { (params: P...) -> T in
+            let adaptedFunction = unsafeBitCast(function, Function.self)
+            return adaptedFunction(parameters + params)
         }
-        
     }
     
     /**
@@ -129,13 +131,12 @@ public class ExSwift {
         :returns: Wrapper function
     */
     public class func bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (Void -> T) {
-        
-        typealias ParamsType = (P...)
-        
+        typealias Function = [P] -> T
+
         return { Void -> T in
-            return function(unsafeBitCast(parameters, ParamsType.self))
+            let adaptedFunction = unsafeBitCast(function, Function.self)
+            return adaptedFunction(parameters)
         }
-        
     }
     
     /**
@@ -146,20 +147,23 @@ public class ExSwift {
         :returns: Wrapper function
     */
     public class func cached <P: Hashable, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R) {
-        typealias ParamsType = (P...)
+        typealias Function = [P] -> R
+        typealias Hash = [P] -> P
         
         var cache = [P:R]()
         
-        return { (params: ParamsType) -> R in
+        return { (params: P...) -> R in
             
-            let paramsList = unsafeBitCast(params, ParamsType.self)
-            let key = hash(paramsList)
+            let adaptedFunction = unsafeBitCast(function, Function.self)
+            let adaptedHash = unsafeBitCast(hash, Hash.self)
+            
+            let key = adaptedHash(params)
             
             if let cachedValue = cache[key] {
                 return cachedValue
             }
             
-            cache[key] = function(paramsList)
+            cache[key] = adaptedFunction(params)
             
             return cache[key]!
         }
@@ -184,14 +188,14 @@ public class ExSwift {
     */
     internal class func regex (pattern: String, ignoreCase: Bool = false) -> NSRegularExpression? {
         
-        var options: NSRegularExpressionOptions = NSRegularExpressionOptions.DotMatchesLineSeparators
+        var options = NSRegularExpressionOptions.DotMatchesLineSeparators.toRaw()
         
         if ignoreCase {
-            options = NSRegularExpressionOptions.CaseInsensitive | options
+            options = NSRegularExpressionOptions.CaseInsensitive.toRaw() | options
         }
         
         var error: NSError? = nil
-        let regex = NSRegularExpression.regularExpressionWithPattern(pattern, options: options, error: &error)
+        let regex = NSRegularExpression.regularExpressionWithPattern(pattern, options: NSRegularExpressionOptions.fromRaw(options)!, error: &error)
         
         return (error == nil) ? regex : nil
         
@@ -215,14 +219,18 @@ extension ExSwift {
         let reflection = reflect(object)
         
         //  object has an Objective-C type
-        if reflection.disposition == .ObjCObject {
+        if let obj = object as? T {
+            //  object has type T
+            result.append(obj)
+        } else if reflection.disposition == .ObjCObject {
             
+            var bridgedValue: T!?
+
             //  If it is an NSArray, flattening will produce the expected result
             if let array = object as? NSArray {
                 result += array.flatten()
-            } else if let bridgedValue = ImplicitlyUnwrappedOptional<T>._bridgeFromObjectiveCConditional(reflection.value as NSObject) {
-                //  the object type can be converted to the Swift native type T
-                result.append(bridgedValue)
+            } else if let bridged = reflection.value as? T {
+                result.append(bridged)
             }
         } else if reflection.disposition == .IndexContainer {
             //  object is a native Swift array
@@ -234,9 +242,6 @@ extension ExSwift {
                 result += Ex.bridgeObjCObject(ref.value)
             }
             
-        } else if let obj = object as? T {
-            //  object has type T
-            result.append(obj)
         }
         
         return result

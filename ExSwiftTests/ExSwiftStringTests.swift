@@ -28,7 +28,7 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual("😗", string[-1]!)
         XCTAssertEqual("hello"[0]!, "h")
         
-        XCTAssertEqualArrays("ABCD"[0, 2], ["A", "C"])
+        XCTAssertEqual("ABCD"[0, 2], ["A", "C"])
     }
 
     func testRepeat () {
@@ -40,7 +40,7 @@ class ExSwiftStringTests: XCTestCase {
     func testExplode () {
         
         let string = "A B C"
-        XCTAssertEqualArrays(string.explode(" "), ["A", "B", "C"])
+        XCTAssertEqual(string.explode(" "), ["A", "B", "C"])
         
     }
     
@@ -53,7 +53,7 @@ class ExSwiftStringTests: XCTestCase {
     
     func testAt () {
         let array1 = "ABCD".at(0, 2)
-        XCTAssertEqualArrays(array1, ["A", "C"])
+        XCTAssertEqual(array1, ["A", "C"])
     }
     
     func testMatchingOperators () {
