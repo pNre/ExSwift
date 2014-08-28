@@ -2,6 +2,12 @@
 
 Set of Swift extensions for standard types and classes.
 
+## Add support ios7
+*  run ```bash generationStaticLibrary.sh ```  
+*  the script can generation a Framework of StaticLibrary  
+*  support Target:  iOS7 and iOS8  
+*  support arch: x86_64(64bit Simulator),armv7,armv7s,arm64
+
 ## Contents ##
 
 - [ExSwift extensions](#extensions)
