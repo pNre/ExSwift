@@ -2,6 +2,10 @@
 
 Set of Swift extensions for standard types and classes.
 
+## iOS 8 ##
+
+Until Xcode 6.1 is released with Swift for both iOS and OS X, to use this library on iOS projects checkout the [iOS branch](https://github.com/pNre/ExSwift/tree/iOS).
+
 ## Contents ##
 
 - [ExSwift extensions](#extensions)
