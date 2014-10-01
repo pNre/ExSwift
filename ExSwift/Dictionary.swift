@@ -9,7 +9,7 @@
 import Foundation
 import Swift
 
-public extension Dictionary {
+internal extension Dictionary {
 
     /**
         Difference of self and the input dictionaries.

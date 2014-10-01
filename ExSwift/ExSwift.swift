@@ -188,15 +188,15 @@ public class ExSwift {
     */
     internal class func regex (pattern: String, ignoreCase: Bool = false) -> NSRegularExpression? {
         
-        var options = NSRegularExpressionOptions.DotMatchesLineSeparators.toRaw()
+        var options = NSRegularExpressionOptions.DotMatchesLineSeparators.rawValue
         
         if ignoreCase {
-            options = NSRegularExpressionOptions.CaseInsensitive.toRaw() | options
+            options = NSRegularExpressionOptions.CaseInsensitive.rawValue | options
         }
-        
+
         var error: NSError? = nil
-        let regex = NSRegularExpression.regularExpressionWithPattern(pattern, options: NSRegularExpressionOptions.fromRaw(options)!, error: &error)
-        
+        let regex = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions(rawValue: options), error: &error)
+            
         return (error == nil) ? regex : nil
         
     }

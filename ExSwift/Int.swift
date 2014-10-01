@@ -15,11 +15,8 @@ public extension Int {
         
         :param: function Function to call
     */
-    func times <T> (function: () -> T) {
-        times({
-            (index: Int) -> T in
-            return function()
-        })
+    func times <T> (function: Void -> T) {
+        (0..<self).each { _ in function(); return }
     }
 
     /**
@@ -27,11 +24,8 @@ public extension Int {
     
         :param: function Function to call
     */
-    func times (function: () -> ()) {
-        times({
-            (index: Int) -> () in
-            function()
-        })
+    func times (function: Void -> Void) {
+        (0..<self).each { _ in function(); return }
     }
 
     /**

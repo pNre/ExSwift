@@ -10,7 +10,7 @@ import XCTest
 
 class ExSwiftNSArrayTests: XCTestCase {
     
-    let array = ["A", 10, "B", "C", false]
+    let array: NSArray = ["A", 10, "B", "C", false]
     
     func testCast() {
         //  Any NSNumber is always converted to Bool or Int

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Array {
+internal extension Array {
     
     private var indexesInterval: HalfOpenInterval<Int> { return HalfOpenInterval<Int>(0, self.count) }
     
@@ -205,7 +205,7 @@ public extension Array {
         :returns: Subarray in range
     */
     func get (range: Range<Int>) -> Array {
-        return self[range]
+        return self[rangeAsArray: range]
     }
 
     /**
@@ -908,10 +908,10 @@ public extension Array {
         :param: range Range of the subarray elements
         :returns: Subarray or nil if the index is out of bounds
     */
-    subscript (range: Range<Int>) -> Array {
+    subscript (#rangeAsArray: Range<Int>) -> Array {
         //  Fix out of bounds indexes
-        let start = Swift.max(0, range.startIndex)
-        let end = Swift.min(range.endIndex, count)
+        let start = Swift.max(0, rangeAsArray.startIndex)
+        let end = Swift.min(rangeAsArray.endIndex, count)
         
         if start > end {
             return []
@@ -927,7 +927,7 @@ public extension Array {
         :returns: Subarray or nil if the index is out of bounds
     */
     subscript (interval: HalfOpenInterval<Int>) -> Array {
-        return self[Range(start: interval.start, end: interval.end)]
+        return self[rangeAsArray: Range(start: interval.start, end: interval.end)]
     }
     
     /**
@@ -937,7 +937,7 @@ public extension Array {
         :returns: Subarray or nil if the index is out of bounds
     */
     subscript (interval: ClosedInterval<Int>) -> Array {
-        return self[Range(start: interval.start, end: interval.end - 1)]
+        return self[rangeAsArray: Range(start: interval.start, end: interval.end + 1)]
     }
     
     /**

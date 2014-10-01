@@ -26,8 +26,13 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual("😗", string[string.length - 1]!)
         XCTAssertEqual("Test😗", string[1..<6]!)
         XCTAssertEqual("😗", string[-1]!)
-        XCTAssertEqual("hello"[0]!, "h")
         
+        if let s = "hello"[0] {
+            XCTAssertEqual(s, "h")
+        } else {
+            XCTFail("string[0]")
+        }
+            
         XCTAssertEqual("ABCD"[0, 2], ["A", "C"])
     }
 

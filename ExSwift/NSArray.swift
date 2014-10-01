@@ -24,7 +24,7 @@ public extension NSArray {
         
         return result
     }
-    
+
     /**
         Flattens a multidimensional NSArray to an OutType[] array 
         containing the items in the NSArray that can be bridged from their ObjC type to OutType.

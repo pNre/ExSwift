@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension SequenceOf {
+internal extension SequenceOf {
 
     /**
         First element of the sequence.

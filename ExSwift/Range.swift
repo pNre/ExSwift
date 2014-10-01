@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Range {
+internal extension Range {
     
     /**
         For each element in the range invokes function.

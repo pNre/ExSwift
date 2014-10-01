@@ -307,8 +307,14 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(flat, [4, 5, 2, 3, 1, 1])
         
         XCTAssertEqual(16, flat.reduce(+)!)
+
+        let strings: [String] = ["A", "B", "C"]
         
-        XCTAssertEqual(["A", "B", "C"].reduceRight(+)!, "CBA")
+        if let reduced = strings.reduceRight(+) {
+            XCTAssertEqual(reduced, "CBA")
+        } else {
+            XCTFail("Error right-reducing an array of String")
+        }
     }
 
     func testImplode () {
@@ -383,5 +389,10 @@ class ExtensionsArrayTests: XCTestCase {
         }
         
         XCTAssertEqual(m, [2, 3, 4])
+    }
+    
+    func testSubscriptConflicts() {
+        let array1 = ["zero", "one", "two", "three"][rangeAsArray: 1...3]
+        let array2 = ["zero", "one", "two", "three"][rangeAsArray: 1..<3]
     }
 }
