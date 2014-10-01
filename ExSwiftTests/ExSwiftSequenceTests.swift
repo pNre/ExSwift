@@ -35,7 +35,7 @@ class ExtensionsSequenceTests: XCTestCase {
     
     func testSkipWhile () {
         var skipped = SequenceOf(sequence).skipWhile { $0 < 3 }
-        XCTAssertEqual(Array(skipped), [4, 5])
+        XCTAssertEqual(Array(skipped), [3, 4, 5])
     }
     
     func testSkipWhileBeyondEnd () {
