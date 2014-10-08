@@ -732,7 +732,21 @@ internal extension Array {
         return mapped
         
     }
-    
+
+    /**
+        Same as map, but with an extra index argument.
+
+        :param: mapFunction
+        :returns: Mapped array
+    */
+    func mapi <U> (transform: (Int, T) -> U) -> [U] {
+        var result = [U]()
+        for (i, e) in enumerate(self) {
+            result.append(transform(i, e))
+        }
+        return result
+    }
+
     /**
         self.reduce with initial value self.first()
     */
