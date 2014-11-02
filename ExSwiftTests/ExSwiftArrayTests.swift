@@ -396,27 +396,27 @@ class ExtensionsArrayTests: XCTestCase {
         let array2 = ["zero", "one", "two", "three"][rangeAsArray: 1..<3]
     }
 
-	func testMinBy() {
-		var minValue: Int?
-		minValue = array.minBy({ -$0 })
-		XCTAssertEqual(minValue!, 5)
-		minValue = array.minBy({ $0 % 4 })
-		XCTAssertEqual(minValue!, 4)
-		minValue = array.minBy({ $0 })
-		XCTAssertEqual(minValue!, 1)
-		minValue = array.minBy({ $0 % 2 })
-		XCTAssertTrue(minValue! == 2 || minValue! == 4) // it's a tie
-	}
+    func testMinBy() {
+        var minValue: Int?
+        minValue = array.minBy({ -$0 })
+        XCTAssertEqual(minValue!, 5)
+        minValue = array.minBy({ $0 % 4 })
+        XCTAssertEqual(minValue!, 4)
+        minValue = array.minBy({ $0 })
+        XCTAssertEqual(minValue!, 1)
+        minValue = array.minBy({ $0 % 2 })
+        XCTAssertTrue(minValue! == 2 || minValue! == 4) // it's a tie
+    }
 
-	func testMaxBy() {
-		var maxValue: Int?
-		maxValue = array.maxBy({ -$0 })
-		XCTAssertEqual(maxValue!, 1)
-		maxValue = array.maxBy({ $0 % 4 })
-		XCTAssertEqual(maxValue!, 3)
-		maxValue = array.maxBy({ $0 })
-		XCTAssertEqual(maxValue!, 5)
-		maxValue = array.maxBy({ $0 % 3 })
-		XCTAssertTrue(maxValue! == 2 || maxValue! == 5) // it's a tie
-	}
+    func testMaxBy() {
+        var maxValue: Int?
+        maxValue = array.maxBy({ -$0 })
+        XCTAssertEqual(maxValue!, 1)
+        maxValue = array.maxBy({ $0 % 4 })
+        XCTAssertEqual(maxValue!, 3)
+        maxValue = array.maxBy({ $0 })
+        XCTAssertEqual(maxValue!, 5)
+        maxValue = array.maxBy({ $0 % 3 })
+        XCTAssertTrue(maxValue! == 2 || maxValue! == 5) // it's a tie
+    }
 }
