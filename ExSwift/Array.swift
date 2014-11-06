@@ -430,6 +430,56 @@ internal extension Array {
     }
 
     /**
+        The value for which call(value) is highest.
+
+        :returns: Max value in terms of call(value)
+    */
+    func maxBy <U: Comparable> (call: (Element) -> (U)) -> Element? {
+
+        if let firstValue = self.first {
+            var maxElement: T = firstValue
+            var maxValue: U = call(firstValue)
+            for i in 1..<self.count {
+                let element: Element = self[i]
+                let value: U = call(element)
+                if value > maxValue {
+                    maxElement = element
+                    maxValue = value
+                }
+            }
+            return maxElement
+        } else {
+            return nil
+        }
+
+    }
+
+    /**
+        The value for which call(value) is lowest.
+
+        :returns: Min value in terms of call(value)
+    */
+    func minBy <U: Comparable> (call: (Element) -> (U)) -> Element? {
+
+        if let firstValue = self.first {
+            var maxElement: T = firstValue
+            var minValue: U = call(firstValue)
+            for i in 1..<self.count {
+                let element: Element = self[i]
+                let value: U = call(element)
+                if value < minValue {
+                    maxElement = element
+                    minValue = value
+                }
+            }
+            return maxElement
+        } else {
+            return nil
+        }
+
+    }
+
+    /**
         Iterates on each element of the array.
     
         :param: call Function to call for each element
