@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12AE194D1A0925E900F51711 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE194B1A0925E900F51711 /* UIColor.swift */; };
+		12AE194F1A0925F500F51711 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE194B1A0925E900F51711 /* UIColor.swift */; };
+		12AE19511A0926F900F51711 /* ExSwiftUIColorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE19501A0926F900F51711 /* ExSwiftUIColorTest.swift */; };
 		1E11AF8A1943222D006BCE48 /* ExSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E11AF891943222D006BCE48 /* ExSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E11AFA719432236006BCE48 /* ExSwiftDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFA119432236006BCE48 /* ExSwiftDictionaryTests.swift */; };
 		1E11AFA819432236006BCE48 /* ExSwiftFloatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFA219432236006BCE48 /* ExSwiftFloatTests.swift */; };
@@ -72,6 +75,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12AE194B1A0925E900F51711 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		12AE19501A0926F900F51711 /* ExSwiftUIColorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwiftUIColorTest.swift; sourceTree = "<group>"; };
 		1E11AF841943222D006BCE48 /* ExSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E11AF881943222D006BCE48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E11AF891943222D006BCE48 /* ExSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExSwift.h; sourceTree = "<group>"; };
@@ -159,6 +164,7 @@
 				3C0AB977195C7FAF0009BDA0 /* Sequence.swift */,
 				1ED536831943863100BDA94E /* ExSwift.swift */,
 				1E11AFAC1943225B006BCE48 /* Array.swift */,
+				12AE194B1A0925E900F51711 /* UIColor.swift */,
 				1E11AFAD1943225B006BCE48 /* Dictionary.swift */,
 				1E48E61D1973ED07006FEEC8 /* Double.swift */,
 				1E11AFAE1943225B006BCE48 /* Float.swift */,
@@ -183,6 +189,7 @@
 		1E11AF931943222D006BCE48 /* ExSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				12AE19501A0926F900F51711 /* ExSwiftUIColorTest.swift */,
 				3C0AB97C195C7FBC0009BDA0 /* ExSwiftSequenceTests.swift */,
 				1E11AFA019432236006BCE48 /* ExSwiftArrayTests.swift */,
 				1E11AFA119432236006BCE48 /* ExSwiftDictionaryTests.swift */,
@@ -427,6 +434,7 @@
 				2EC02FCD194ED10500619CB5 /* Float.swift in Sources */,
 				3C0AB97A195C7FB30009BDA0 /* Sequence.swift in Sources */,
 				2EC02FCA194ED10500619CB5 /* ExSwift.swift in Sources */,
+				12AE194D1A0925E900F51711 /* UIColor.swift in Sources */,
 				2EC02FCE194ED10500619CB5 /* Int.swift in Sources */,
 				2EC02FCF194ED10500619CB5 /* Range.swift in Sources */,
 				2EC02FD0194ED10500619CB5 /* String.swift in Sources */,
@@ -441,12 +449,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ED8FC30194EF9E1004F829A /* ExSwiftDictionaryTests.swift in Sources */,
+				12AE194F1A0925F500F51711 /* UIColor.swift in Sources */,
 				2EB34F111954744D00A8D2AF /* Int.swift in Sources */,
 				2EB34F0E1954744D00A8D2AF /* Array.swift in Sources */,
 				1ED8FC31194EF9E1004F829A /* ExSwiftFloatTests.swift in Sources */,
 				1ED8FC32194EF9E1004F829A /* ExSwiftIntTests.swift in Sources */,
 				2EB34F0F1954744D00A8D2AF /* Dictionary.swift in Sources */,
 				3C0AB97B195C7FB30009BDA0 /* Sequence.swift in Sources */,
+				12AE19511A0926F900F51711 /* ExSwiftUIColorTest.swift in Sources */,
 				1E48E6241973ED22006FEEC8 /* ExSwiftDoubleTests.swift in Sources */,
 				1ED8FC33194EF9E1004F829A /* ExSwiftRangeTests.swift in Sources */,
 				1ED8FC34194EF9E1004F829A /* ExSwiftStringTests.swift in Sources */,
