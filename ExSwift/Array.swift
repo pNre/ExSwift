@@ -678,6 +678,62 @@ internal extension Array {
     }
 
     /**
+        Returns all permutations of a given length within an array
+        
+        :param: length The length of each permutation
+        :returns: All permutations of a given length within an array
+    */
+    func permutation (length: Int) -> [[T]] {
+        assert(length < 12) // any more than this would be pretty nuts
+        var permutations: [[T]] = []
+        for combination in self.combination(length) {
+            for permutation in combination.permutation() {
+                permutations.append(permutation)
+            }
+        }
+        return permutations
+    }
+
+    /**
+        Helper method for the permutation(length:) method
+        It's equivalent to calling permutation(self.count)
+        :returns: The same result as with permutation(self.count)
+    */
+    func permutation () -> [[T]] {
+        if self.count == 0 {
+            return [[]]
+        } else if self.count == 1 {
+            return [[self.first!]]
+        }
+        var result: [T] = []
+        var currentPermutation: [T] = self
+        var permutations: [[T]] = []
+        var currentFactorial: Int = 1
+        var factorials: [Int] = []
+        1.upTo(self.count + 1) { i in
+            currentFactorial *= i
+            factorials.append(currentFactorial)
+        }
+        var i = 1
+        while true {
+            permutations.append(currentPermutation)
+            if i >= factorials[self.count - 1] {
+                break
+            }
+            var swapIndex = 0
+            while i % factorials[swapIndex + 1] == 0 {
+                swapIndex++
+            }
+            var temp = currentPermutation[swapIndex]
+            println(currentPermutation)
+            currentPermutation[swapIndex] = currentPermutation[swapIndex + 1]
+            currentPermutation[swapIndex + 1] = temp
+            i++
+        }
+        return permutations
+    }
+
+    /**
         Creates a dictionary composed of keys generated from the results of
         running each element of self through groupingFunction. The corresponding
         value of each key is an array of the elements responsible for generating the key.
@@ -730,9 +786,9 @@ internal extension Array {
 
     /**
         Returns all of the combinations in the array of the given length
-		
-		:param: length
-		:returns: Combinations
+        
+        :param: length
+        :returns: Combinations
     */
     func combination (length: Int) -> [[Element]] {
         if length < 0 || length > self.count {
