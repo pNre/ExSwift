@@ -678,6 +678,27 @@ internal extension Array {
     }
 
     /**
+        Returns the set of elements for which call(element) is unique
+		
+		:param: call The closure to use to determine uniqueness
+		:returns: The set of elements for which call(element) is unique
+    */
+    func uniqueBy <T: Equatable> (call: (Element) -> (T)) -> [Element] {
+        var result: [Element] = []
+        var uniqueItems: [T] = []
+
+        for item in self {
+            var callResult: T = call(item)
+            if !uniqueItems.contains(callResult) {
+                uniqueItems.append(callResult)
+                result.append(item)
+            }
+        }
+
+        return result
+    }
+
+    /**
         Creates a dictionary composed of keys generated from the results of
         running each element of self through groupingFunction. The corresponding
         value of each key is an array of the elements responsible for generating the key.
