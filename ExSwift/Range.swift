@@ -57,6 +57,13 @@ internal extension Range {
 
     }
 
+	func toArray () -> [T] {
+		var result: [T] = []
+		for i in self {
+			result.append(i)
+		}
+		return result
+	}
 }
 
 /**

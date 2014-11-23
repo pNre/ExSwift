@@ -728,6 +728,38 @@ internal extension Array {
         return result
     }
 
+	/**
+		Returns all of the combinations in the array of the given length
+	*/
+	func combination (length: Int) -> [[Element]] {
+		if length < 0 || length > self.count {
+			return []
+		}
+		var indexes: [Int] = (0..<length).toArray()
+		var combinations: [[Element]] = []
+		var offset = self.count - indexes.count
+		while true {
+			var combination: [Element] = []
+			for index in indexes {
+				combination.append(self[index])
+			}
+			combinations.append(combination)
+			var i = indexes.count - 1
+			while i >= 0 && indexes[i] == i + offset {
+				i--
+			}
+			if i < 0 {
+                break
+			}
+			i++
+			var start = indexes[i-1] + 1
+			for j in (i-1)..<indexes.count {
+				indexes[j] = start + j - i + 1
+			}
+		}
+		return combinations
+	}
+
     /**
         Returns the number of elements which meet the condition
 

@@ -173,6 +173,14 @@ internal extension SequenceOf {
     func takeWhile (condition:(T?) -> Bool) -> SequenceOf<T>  {
         return SequenceOf(TakeWhileSequence(self, condition))
     }
+
+	func toArray () -> [T] {
+		var result: [T] = []
+		for item in self {
+			result.append(item)
+        }
+		return result
+	}
 }
 
 /**

@@ -419,4 +419,15 @@ class ExtensionsArrayTests: XCTestCase {
         maxValue = array.maxBy({ $0 % 3 })
         XCTAssertTrue(maxValue! == 2 || maxValue! == 5) // it's a tie
     }
+
+	func testCombinations() {
+		XCTAssertEqual(array.combination(-1), [])
+		XCTAssertEqual(array.combination(0), [[]])
+		XCTAssertEqual(array.combination(1), [[1], [2], [3], [4], [5]])
+		XCTAssertEqual(array.combination(2), [[1, 2], [1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5], [3, 4], [3, 5], [4, 5]])
+		XCTAssertEqual(array.combination(3), [[1, 2, 3], [1, 2, 4], [1, 2, 5], [1, 3, 4], [1, 3, 5], [1, 4, 5], [2, 3, 4], [2, 3, 5], [2, 4, 5], [3, 4, 5]])
+		XCTAssertEqual(array.combination(4), [[1, 2, 3, 4], [1, 2, 3, 5], [1, 2, 4, 5], [1, 3, 4, 5], [2, 3, 4, 5]])
+		XCTAssertEqual(array.combination(5), [[1, 2, 3, 4, 5]])
+		XCTAssertEqual(array.combination(6), [])
+	}
 }
