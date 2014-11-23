@@ -57,13 +57,18 @@ internal extension Range {
 
     }
 
-	func toArray () -> [T] {
-		var result: [T] = []
-		for i in self {
-			result.append(i)
-		}
-		return result
-	}
+	/**
+		Returns each element of the range in an array
+	
+		:returns: Each element of the range in an array
+	*/
+    func toArray () -> [T] {
+        var result: [T] = []
+        for i in self {
+            result.append(i)
+        }
+        return result
+    }
 }
 
 /**

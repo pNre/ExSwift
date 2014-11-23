@@ -174,6 +174,11 @@ internal extension SequenceOf {
         return SequenceOf(TakeWhileSequence(self, condition))
     }
 
+	/**
+		Returns each element of the sequence in an array
+	
+		:returns: Each element of the sequence in an array
+	*/
 	func toArray () -> [T] {
 		var result: [T] = []
 		for item in self {

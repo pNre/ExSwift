@@ -730,6 +730,9 @@ internal extension Array {
 
     /**
         Returns all of the combinations in the array of the given length
+		
+		:param: length
+		:returns: Combinations
     */
     func combination (length: Int) -> [[Element]] {
         if length < 0 || length > self.count {
