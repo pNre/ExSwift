@@ -679,6 +679,9 @@ internal extension Array {
 
     /**
         Returns the set of elements for which call(element) is unique
+		
+		:param: call The closure to use to determine uniqueness
+		:returns: The set of elements for which call(element) is unique
     */
     func uniqueBy <T: Equatable> (call: (Element) -> (T)) -> [Element] {
         var result: [Element] = []
