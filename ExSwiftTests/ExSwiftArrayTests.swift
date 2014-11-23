@@ -420,10 +420,10 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertTrue(maxValue! == 2 || maxValue! == 5) // it's a tie
     }
 
-	func testUniqueBy() {
-		XCTAssertEqual(array.uniqueBy({$0}), array)
-		XCTAssertEqual(array.uniqueBy({$0 % 2}), [1, 2])
-		XCTAssertEqual(array.uniqueBy({$0 % 3}), [1, 2, 3])
-		XCTAssertEqual(array.uniqueBy({$0 < 3}), [1, 3])
-	}
+    func testUniqueBy() {
+        XCTAssertEqual(array.uniqueBy({$0}), array)
+        XCTAssertEqual(array.uniqueBy({$0 % 2}), [1, 2])
+        XCTAssertEqual(array.uniqueBy({$0 % 3}), [1, 2, 3])
+        XCTAssertEqual(array.uniqueBy({$0 < 3}), [1, 3])
+    }
 }
