@@ -420,6 +420,16 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertTrue(maxValue! == 2 || maxValue! == 5) // it's a tie
     }
 
+    func testRepeatedCombination() {
+        var shortArray = [1, 2, 3]
+        XCTAssertEqual(shortArray.repeatedCombination(-1), [])
+        XCTAssertEqual(shortArray.repeatedCombination(0), [[]])
+        XCTAssertEqual(shortArray.repeatedCombination(1), [[1], [2], [3]])
+        XCTAssertEqual(shortArray.repeatedCombination(2), [[1, 1], [1, 2], [1, 3], [2, 2], [2, 3], [3, 3]])
+            XCTAssertEqual(shortArray.repeatedCombination(3), [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3], [1,3,3],[2,2,2],[2,2,3],[2,3,3],[3,3,3]])
+            XCTAssertEqual(shortArray.repeatedCombination(4), [[1,1,1,1],[1,1,1,2],[1,1,1,3],[1,1,2,2],[1,1,2,3], [1,1,3,3],[1,2,2,2],[1,2,2,3],[1,2,3,3],[1,3,3,3], [2,2,2,2],[2,2,2,3],[2,2,3,3],[2,3,3,3],[3,3,3,3]])
+    }
+
     func testCombinations() {
         XCTAssertEqual(array.combination(-1), [])
         XCTAssertEqual(array.combination(0), [[]])
