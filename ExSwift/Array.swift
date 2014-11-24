@@ -782,6 +782,33 @@ internal extension Array {
         return result
     }
 
+	func eachIndex (call: (Int) -> ()) -> () {
+		(0..<self.count).each({ call($0) })
+	}
+
+	/**
+		Returns a transposed version of the array, where the object at array[i][j] goes to array[j][i].
+    	The array must have two or more dimensions.
+		If it's a jagged array that has empty spaces between elements in the transposition, those empty spaces are "removed" and the element on the right side of the empty space gets squashed next to the element on the left.
+
+		:return: A transposed version of the array, where the object at array[i][j] goes to array[j][i]
+	*/
+	func transposition (array: [[U]]) -> [[U]] { //<U: AnyObject where Element == [U]> () -> [[U]] {
+		var maxWidth: Int = array.map({ $0.count }).max()
+		var transposition: [[T]] = []
+		maxWidth.times {
+			transposition.append([])
+		}
+		(0..<maxWidth).each { i in
+    		array.eachIndex { j in
+				if array[j].count > i {
+					transposition[i].append(array[j][i])
+				}
+    		}
+		}
+		return transposition
+	}
+
     /**
         Joins the array elements with a separator.
 
