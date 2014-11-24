@@ -782,6 +782,15 @@ internal extension Array {
         return result
     }
 
+	/**
+		Replaces each element in the array with object. I.e., it keeps the length the same but makes the element at every index be object
+		
+		:param: object The object to replace each element with
+	*/
+	mutating func fill (object: T) -> () {
+
+    }
+
     /**
         Joins the array elements with a separator.
 
