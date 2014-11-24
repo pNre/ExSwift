@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12168FCA1A22852300ED4105 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12168FC91A22852300ED4105 /* NSDate.swift */; };
+		12168FCB1A22852300ED4105 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12168FC91A22852300ED4105 /* NSDate.swift */; };
+		12168FCD1A2285A900ED4105 /* ExSwiftNSDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12168FCC1A2285A900ED4105 /* ExSwiftNSDateTests.swift */; };
+		12168FCE1A2285A900ED4105 /* ExSwiftNSDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12168FCC1A2285A900ED4105 /* ExSwiftNSDateTests.swift */; };
+		127C7F061A23154A0038B454 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12168FC91A22852300ED4105 /* NSDate.swift */; };
+		127C7F071A23154A0038B454 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12168FC91A22852300ED4105 /* NSDate.swift */; };
 		1E11AF8A1943222D006BCE48 /* ExSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E11AF891943222D006BCE48 /* ExSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E11AFA719432236006BCE48 /* ExSwiftDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFA119432236006BCE48 /* ExSwiftDictionaryTests.swift */; };
 		1E11AFA819432236006BCE48 /* ExSwiftFloatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AFA219432236006BCE48 /* ExSwiftFloatTests.swift */; };
@@ -72,6 +78,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12168FC91A22852300ED4105 /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
+		12168FCC1A2285A900ED4105 /* ExSwiftNSDateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSwiftNSDateTests.swift; sourceTree = "<group>"; };
 		1E11AF841943222D006BCE48 /* ExSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E11AF881943222D006BCE48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E11AF891943222D006BCE48 /* ExSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExSwift.h; sourceTree = "<group>"; };
@@ -166,6 +174,7 @@
 				1E11AFB01943225B006BCE48 /* Range.swift */,
 				1E11AFB11943225B006BCE48 /* String.swift */,
 				1EC241FB1946E91B0047109A /* NSArray.swift */,
+				12168FC91A22852300ED4105 /* NSDate.swift */,
 				1E11AF891943222D006BCE48 /* ExSwift.h */,
 				1E11AF871943222D006BCE48 /* Supporting Files */,
 			);
@@ -193,6 +202,7 @@
 				1E11AFA519432236006BCE48 /* ExSwiftStringTests.swift */,
 				1EA5F689194387CA00E8A40F /* ExSwiftTests.swift */,
 				1EC241FD1946E92E0047109A /* ExSwiftNSArrayTests.swift */,
+				12168FCC1A2285A900ED4105 /* ExSwiftNSDateTests.swift */,
 				1E11AF941943222D006BCE48 /* Supporting Files */,
 			);
 			path = ExSwiftTests;
@@ -388,6 +398,7 @@
 				1E11AFB61943225B006BCE48 /* Float.swift in Sources */,
 				1E11AFB81943225B006BCE48 /* Int.swift in Sources */,
 				1E48E61E1973ED07006FEEC8 /* Double.swift in Sources */,
+				12168FCA1A22852300ED4105 /* NSDate.swift in Sources */,
 				1E11AFBA1943225B006BCE48 /* Range.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				127C7F061A23154A0038B454 /* NSDate.swift in Sources */,
 				1E1DABF5197ECF030070CFBC /* ExSwiftArrayTests.swift in Sources */,
 				1E11AFAA19432236006BCE48 /* ExSwiftRangeTests.swift in Sources */,
 				2EB34F09195473AC00A8D2AF /* Int.swift in Sources */,
@@ -411,6 +423,7 @@
 				2EB34F0C195473AC00A8D2AF /* NSArray.swift in Sources */,
 				2EB34F05195473AC00A8D2AF /* ExSwift.swift in Sources */,
 				2EB34F08195473AC00A8D2AF /* Float.swift in Sources */,
+				12168FCD1A2285A900ED4105 /* ExSwiftNSDateTests.swift in Sources */,
 				1E11AFAB19432236006BCE48 /* ExSwiftStringTests.swift in Sources */,
 				1E11AFA919432236006BCE48 /* ExSwiftIntTests.swift in Sources */,
 				2EB34F0B195473AC00A8D2AF /* String.swift in Sources */,
@@ -432,6 +445,7 @@
 				2EC02FD0194ED10500619CB5 /* String.swift in Sources */,
 				2EC02FCB194ED10500619CB5 /* Array.swift in Sources */,
 				1E48E6201973ED07006FEEC8 /* Double.swift in Sources */,
+				12168FCB1A22852300ED4105 /* NSDate.swift in Sources */,
 				2EC02FCC194ED10500619CB5 /* Dictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				127C7F071A23154A0038B454 /* NSDate.swift in Sources */,
 				1ED8FC30194EF9E1004F829A /* ExSwiftDictionaryTests.swift in Sources */,
 				2EB34F111954744D00A8D2AF /* Int.swift in Sources */,
 				2EB34F0E1954744D00A8D2AF /* Array.swift in Sources */,
@@ -455,6 +470,7 @@
 				2EB34F141954744D00A8D2AF /* NSArray.swift in Sources */,
 				2EB34F0D1954744D00A8D2AF /* ExSwift.swift in Sources */,
 				2EB34F101954744D00A8D2AF /* Float.swift in Sources */,
+				12168FCE1A2285A900ED4105 /* ExSwiftNSDateTests.swift in Sources */,
 				1ED8FC35194EF9E1004F829A /* ExSwiftTests.swift in Sources */,
 				1ED8FC36194EF9E1004F829A /* ExSwiftNSArrayTests.swift in Sources */,
 				2EB34F131954744D00A8D2AF /* String.swift in Sources */,
