@@ -793,7 +793,7 @@ internal extension Array {
 
 		:return: A transposed version of the array, where the object at array[i][j] goes to array[j][i]
 	*/
-	func transposition (array: [[U]]) -> [[U]] { //<U: AnyObject where Element == [U]> () -> [[U]] {
+	func transposition (array: [[T]]) -> [[T]] { //<U: AnyObject where Element == [U]> () -> [[U]] {
 		var maxWidth: Int = array.map({ $0.count }).max()
 		var transposition: [[T]] = []
 		maxWidth.times {
