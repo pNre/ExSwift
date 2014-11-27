@@ -441,6 +441,14 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(array.combination(6), [])
     }
 
+    func testRepeatedPermutations() {
+        var shortArray = [1, 2]
+        XCTAssertEqual(shortArray.repeatedPermutation(0), [])
+        XCTAssertEqual(shortArray.repeatedPermutation(1), [[1], [2]])
+        XCTAssertEqual(shortArray.repeatedPermutation(2), [[1, 1], [1, 2], [2, 1], [2, 2]])
+        XCTAssertEqual(shortArray.repeatedPermutation(3), [[1, 1, 1], [1, 1, 2], [1, 2, 1], [1, 2, 2], [2, 1, 1], [2, 1, 2], [2, 2, 1], [2, 2, 2]])
+    }
+
     func testFill() {
         array.fill(0)
         XCTAssertEqual(array, [0, 0, 0, 0, 0])

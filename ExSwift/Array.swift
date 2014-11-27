@@ -801,6 +801,33 @@ internal extension Array {
     }
 
     /**
+        Returns all of the permutations of this array of a given length, allowing repeats
+        
+        :param: length The length of each permutations
+        :returns All of the permutations of this array of a given length, allowing repeats
+    */
+    func repeatedPermutation(length: Int) -> [[T]] {
+        if length < 1 {
+            return []
+        }
+        var permutationIndexes: [[Int]] = []
+        permutationIndexes.repeatedPermutationHelper([], length: length, arrayLength: self.count, permutationIndexes: &permutationIndexes)
+        return permutationIndexes.map({ $0.map({ i in self[i] }) })
+    }
+
+    func repeatedPermutationHelper(seed: [Int], length: Int, arrayLength: Int, inout permutationIndexes: [[Int]]) {
+        if seed.count == length {
+            permutationIndexes.append(seed)
+            return
+        }
+        for i in (0..<arrayLength) {
+            var newSeed: [Int] = seed
+            newSeed.append(i)
+            self.repeatedPermutationHelper(newSeed, length: length, arrayLength: arrayLength, permutationIndexes: &permutationIndexes)
+        }
+    }
+
+    /**
         Returns the number of elements which meet the condition
 
         :param: test Function to call for each element
