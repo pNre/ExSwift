@@ -397,6 +397,6 @@ public func & <K, V: Equatable> (first: [K: V], second: [K: V]) -> [K: V] {
 /**
     Union operator
 */
-public func | <K, V: Equatable> (first: [K: V], second: [K: V]) -> [K: V] {
+public func | <K: Hashable, V> (first: [K: V], second: [K: V]) -> [K: V] {
     return first.union(second)
 }
