@@ -180,10 +180,19 @@ public extension Int {
         Least common multiple of self and n
     
         :param: n
-        :@returns: LCM
+        :returns: LCM
     */
     func lcm (n: Int) -> Int {
         return (self * n).abs() / gcd(n)
+    }
+    
+    /**
+        Computes the factorial of self
+    
+        :returns: Factorial
+    */
+    func factorial () -> Int {
+        return self == 0 ? 1 : self * (self - 1).factorial()
     }
     
     /**

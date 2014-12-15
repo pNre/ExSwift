@@ -444,12 +444,20 @@ class ExtensionsArrayTests: XCTestCase {
     func testPermutations() {
         1.upTo(array.count) { i in
             var permutations: [[Int]] = self.array.permutation(i)
-            var factorial = 1
-            for j in 1...i {
-                factorial *= j
+
+            //  Uniqueness check
+            for (index, p) in enumerate(permutations) {
+                let right: [[Int]] = permutations[(index + 1)..permutations.count]
+                let testEquality: ([Int] -> Bool) = {
+                    return $0 == p
+                }
+                
+                if right.any(testEquality) {
+                    XCTFail("Duplicate \(i)-permutations")
+                }
             }
-            // this would also benefit from a check to make sure each permutation is unique, but i couldn't figure out how to do that with .unique()
-            XCTAssert(permutations.count == self.array.combination(i).count * factorial)
+
+            XCTAssert(permutations.count == self.array.count.factorial() / (self.array.count - i).factorial())
             var mappedPermutations: [Int] = permutations.map({ (i: [Int]) -> [Int] in i.unique()}).flatten()
             var flattenedPermutations: [Int] = permutations.flatten()
             XCTAssert(mappedPermutations == flattenedPermutations)

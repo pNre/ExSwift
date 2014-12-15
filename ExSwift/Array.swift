@@ -746,7 +746,6 @@ internal extension Array {
                 swapIndex++
             }
             var temp = currentPermutation[swapIndex]
-            println(currentPermutation)
             currentPermutation[swapIndex] = currentPermutation[swapIndex + 1]
             currentPermutation[swapIndex + 1] = temp
             i++
