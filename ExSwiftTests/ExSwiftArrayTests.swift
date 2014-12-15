@@ -100,12 +100,15 @@ class ExtensionsArrayTests: XCTestCase {
     func testDifference() {
         var diff = array.difference([3, 4])
         XCTAssertEqual(diff, [1, 2, 5])
-        
-        diff = array - [3, 4]
-        XCTAssertEqual(diff, [1, 2, 5])
+        XCTAssertEqual(array - [3, 4], [1, 2, 5])
         
         diff = array.difference([3], [5])
         XCTAssertEqual(diff, [1, 2, 4])
+        XCTAssertEqual(array - [3] - [5], [1, 2, 4])
+        
+        diff = array.difference([])
+        XCTAssertEqual(diff, array)
+        XCTAssertEqual(array - [], array)
     }
 
     func testIndexOf() {
@@ -124,25 +127,25 @@ class ExtensionsArrayTests: XCTestCase {
     }
 
     func testIntersection() {
-        var intersection = array.intersection([Int]())
-        XCTAssertEqual(intersection, [Int]())
+        XCTAssertEqual(array.intersection([Int]()), [Int]())
+        XCTAssertEqual(array & [Int](), [Int]())
         
-        intersection = array.intersection([1])
-        XCTAssertEqual(intersection, [1])
+        XCTAssertEqual(array.intersection([1]), [1])
+        XCTAssertEqual(array & [1], [1])
         
-        intersection = array.intersection([1, 2], [1, 2], [1, 3])
-        XCTAssertEqual(intersection, [1])
+        XCTAssertEqual(array.intersection([1, 2], [1, 2], [1, 3]), [1])
+        XCTAssertEqual(array & [1, 2] & [1, 2] & [1, 3], [1])
     }
 
     func testUnion() {
-        var union = array.union([1])
-        XCTAssertEqual(union, array)
+        XCTAssertEqual(array.union([1]), array)
+        XCTAssertEqual(array | [1], array)
+
+        XCTAssertEqual(array.union([Int]()), array)
+        XCTAssertEqual(array | [Int](), array)
         
-        union = array.union(Array<Int>())
-        XCTAssertEqual(union, array)
-        
-        union = array.union([6])
-        XCTAssertEqual(union, [1, 2, 3, 4, 5, 6])
+        XCTAssertEqual(array.union([6]), [1, 2, 3, 4, 5, 6])
+        XCTAssertEqual(array | [6], [1, 2, 3, 4, 5, 6])
     }
 
     func testZip() {
