@@ -9,7 +9,7 @@
 
 import XCTest
 
-class ExSwiftNS: XCTestCase {
+class ExSwiftNSDataTests: XCTestCase {
     
     let dateFormatter = NSDateFormatter()
     var startDate: NSDate?
@@ -20,13 +20,8 @@ class ExSwiftNS: XCTestCase {
         startDate = dateFormatter.dateFromString("30/11/1988 00:00:00")
     }
     
-    override func tearDown() {
-        super.tearDown()
-    }
-    
-    
     // MARK:  NSDate Manipulation
-    
+
     func testAddSeconds() {
         var expectedDate = dateFormatter.dateFromString("30/11/1988 00:00:42")
         var result = startDate?.addSeconds(42)
@@ -140,10 +135,8 @@ class ExSwiftNS: XCTestCase {
         expectedDate = dateFormatter.dateFromString("20/10/1987 22:17:18")
         result = startDate?.add(seconds: -42, minutes: -42, hours: -1, days: -2, weeks: -1 , months: -1, years: -1)
         XCTAssertEqual(expectedDate!, result!, "Date mismatch")
-        
-        
+
     }
-    
     
     // MARK:  Date comparison
     
