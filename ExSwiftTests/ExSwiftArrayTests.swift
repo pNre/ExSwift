@@ -440,30 +440,4 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(array.combination(5), [[1, 2, 3, 4, 5]])
         XCTAssertEqual(array.combination(6), [])
     }
-
-    func testPermutations() {
-        1.upTo(array.count) { i in
-            var permutations: [[Int]] = self.array.permutation(i)
-
-            //  Uniqueness check
-            for (index, p) in enumerate(permutations) {
-                let right: [[Int]] = permutations[(index + 1)..permutations.count]
-                let testEquality: ([Int] -> Bool) = {
-                    return $0 == p
-                }
-                
-                if right.any(testEquality) {
-                    XCTFail("Duplicate \(i)-permutations")
-                }
-            }
-
-            XCTAssert(permutations.count == self.array.count.factorial() / (self.array.count - i).factorial())
-            var mappedPermutations: [Int] = permutations.map({ (i: [Int]) -> [Int] in i.unique()}).flatten()
-            var flattenedPermutations: [Int] = permutations.flatten()
-            XCTAssert(mappedPermutations == flattenedPermutations)
-            XCTAssert(permutations.flatten().all({$0 >= 1 && $0 <= 5}))
-        }
-        XCTAssertEqual(array.permutation(-1), [])
-        XCTAssertEqual(array.permutation(array.count + 1), [])
-    }
 }
