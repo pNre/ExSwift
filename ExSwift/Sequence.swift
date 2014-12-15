@@ -173,6 +173,19 @@ internal extension SequenceOf {
     func takeWhile (condition:(T?) -> Bool) -> SequenceOf<T>  {
         return SequenceOf(TakeWhileSequence(self, condition))
     }
+
+	/**
+		Returns each element of the sequence in an array
+	
+		:returns: Each element of the sequence in an array
+	*/
+	func toArray () -> [T] {
+		var result: [T] = []
+		for item in self {
+			result.append(item)
+        }
+		return result
+	}
 }
 
 /**
