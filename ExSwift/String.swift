@@ -137,7 +137,16 @@ public extension String {
         :returns: Stripped string
     */
     func ltrimmed () -> String {
-        if let range = rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet().invertedSet) {
+        return ltrimmed(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+    
+    /**
+        Strips the specified characters from the beginning of self.
+    
+        :returns: Stripped string
+    */
+    func ltrimmed (set: NSCharacterSet) -> String {
+        if let range = rangeOfCharacterFromSet(set.invertedSet) {
             return self[range.startIndex..<endIndex]
         }
         
@@ -150,7 +159,16 @@ public extension String {
         :returns: Stripped string
     */
     func rtrimmed () -> String {
-        if let range = rangeOfCharacterFromSet(NSCharacterSet.whitespaceAndNewlineCharacterSet().invertedSet, options: NSStringCompareOptions.BackwardsSearch) {
+        return rtrimmed(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+    
+    /**
+        Strips the specified characters from the end of self.
+    
+        :returns: Stripped string
+    */
+    func rtrimmed (set: NSCharacterSet) -> String {
+        if let range = rangeOfCharacterFromSet(set.invertedSet, options: NSStringCompareOptions.BackwardsSearch) {
             return self[startIndex..<range.endIndex]
         }
         

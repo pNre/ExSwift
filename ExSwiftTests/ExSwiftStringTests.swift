@@ -130,4 +130,14 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual("AB ".rtrimmed(), "AB")
         XCTAssertEqual("\n ABC   ".rtrimmed(), "\n ABC")
     }
+    
+    func testLTrimmedForSet () {
+        XCTAssertEqual("ab   ".ltrimmed(NSCharacterSet.alphanumericCharacterSet()), "   ")
+        XCTAssertEqual("  ab".ltrimmed(NSCharacterSet.alphanumericCharacterSet()), "  ab")
+    }
+    
+    func testRTrimmedForSet () {
+        XCTAssertEqual("ab   ".rtrimmed(NSCharacterSet.alphanumericCharacterSet()), "ab   ")
+        XCTAssertEqual("  ab".rtrimmed(NSCharacterSet.alphanumericCharacterSet()), "  ")
+    }
 }
