@@ -196,7 +196,9 @@ Name | Signature
 **`matches`**|`matches (pattern: String, ignoreCase: Bool = false) -> [NSTextCheckingResult]?`
 **`insert`**|`insert (index: Int, _ string: String) -> String`
 **`ltrimmed`**|`ltrimmed () -> String`
+**`ltrimmed`**|`ltrimmed (set: NSCharacterSet) -> String`
 **`rtrimmed`**|`rtrimmed () -> String`
+**`rtrimmed`**|`rtrimmed (set: NSCharacterSet) -> String`
 **`trimmed`**|`trimmed () -> String`
 
 #### Class Methods ####
