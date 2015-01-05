@@ -140,4 +140,14 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual("ab   ".rtrimmed(NSCharacterSet.alphanumericCharacterSet()), "ab   ")
         XCTAssertEqual("  ab".rtrimmed(NSCharacterSet.alphanumericCharacterSet()), "  ")
     }
+
+    func testToDouble() {
+        var d : Double = "7.2".toDouble()!
+        XCTAssertEqual(7.2, d)
+
+        d = "-70.211111".toDouble()!
+        XCTAssertEqual(-70.211111, d)
+
+       XCTAssertNil("a772.2".toDouble())
+    }
 }

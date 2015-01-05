@@ -208,6 +208,24 @@ public extension String {
 
     }
 
+
+    func toDouble() -> Double? {
+        // regex:
+
+        let pattern = "^[-+]?[0-9]*\\.?[0-9]+$"
+
+        if let regex = ExSwift.regex(pattern, ignoreCase: true) {
+            // Using map to prevent a possible bug in the compiler
+            if regex.matchesInString(self, options: nil, range: NSMakeRange(0, length)).isEmpty {
+                return nil
+            }
+
+            return (self as NSString).doubleValue
+        }
+
+        return nil
+    }
+
 }
 
 /**
