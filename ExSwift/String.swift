@@ -227,6 +227,14 @@ public extension String {
         return nil
     }
 
+    func toFloat() -> Float? {
+        if let val = self.toDouble() {
+            return Float(val)
+        }
+
+        return nil
+    }
+
 }
 
 /**

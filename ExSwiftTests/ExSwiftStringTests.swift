@@ -151,4 +151,16 @@ class ExSwiftStringTests: XCTestCase {
 
        XCTAssertNil("a772.2".toDouble())
     }
+
+
+
+    func testToFloat() {
+        var f : Float = "  7.2 ".toFloat()!
+        XCTAssertEqual(Float(7.2), f)
+
+        f = "-70.211111".toFloat()!
+        XCTAssertEqual(Float(-70.211111), f)
+
+        XCTAssertNil("a772.2".toFloat())
+    }
 }
