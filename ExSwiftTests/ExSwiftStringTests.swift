@@ -189,4 +189,43 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertNil("jeff".toBool())
         XCTAssertNil("0".toBool())
     }
+
+    func testToDate() {
+        var d : NSDate = " 2015-08-19 \t ".toDate()!
+
+        var c = NSDateComponents()
+        c.year = 2015
+        c.month = 8
+        c.day = 19
+
+        var gregorian = NSCalendar(identifier:NSGregorianCalendar)!
+        var expected = gregorian.dateFromComponents(c)!
+
+        XCTAssertEqual(expected, d)
+
+        XCTAssertNil("a772.2".toDate())
+        XCTAssertNil("Tuesday".toDate())
+        XCTAssertNil("1973-08-19 03:04:55".toDate())
+    }
+
+    func testToDateTime() {
+        var d : NSDate = " 2015-08-19 03:04:34\t ".toDateTime()!
+
+        var c = NSDateComponents()
+        c.year = 2015
+        c.month = 8
+        c.day = 19
+        c.hour = 3
+        c.minute = 4
+        c.second = 34
+
+        var gregorian = NSCalendar(identifier:NSGregorianCalendar)!
+        var expected = gregorian.dateFromComponents(c)!
+
+        XCTAssertEqual(expected, d)
+
+        XCTAssertNil("a772.2".toDateTime())
+        XCTAssertNil("Tuesday".toDateTime())
+        XCTAssertNil("1973-08-19".toDateTime())
+    }
 }
