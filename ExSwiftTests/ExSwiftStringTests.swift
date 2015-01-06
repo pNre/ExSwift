@@ -177,8 +177,12 @@ class ExSwiftStringTests: XCTestCase {
     func testToBool() {
         var b = "  TrUe ".toBool()!
         XCTAssertEqual(true, b)
+        b = "  yEs ".toBool()!
+        XCTAssertEqual(true, b)
 
         b = "  FALSE ".toBool()!
+        XCTAssertEqual(false, b)
+        b = "  nO ".toBool()!
         XCTAssertEqual(false, b)
 
         XCTAssertNil("".toBool())

@@ -268,7 +268,7 @@ public extension String {
     ///
     func toBool() -> Bool? {
         let text = self.trimmed().lowercaseString
-        if text == "true" || text == "false" {
+        if text == "true" || text == "false" || text == "yes" || text == "no" {
             return (text as NSString).boolValue
         }
 
