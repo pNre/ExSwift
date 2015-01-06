@@ -115,6 +115,7 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual("t e".trimmed(), "t e")
         XCTAssertEqual(" AB".trimmed(), "AB")
         XCTAssertEqual("\n ABC   ".trimmed(), "ABC")
+
     }
     
     func testLTrimmed () {
@@ -142,7 +143,7 @@ class ExSwiftStringTests: XCTestCase {
     }
 
     func testToDouble() {
-        var d : Double = "7.2".toDouble()!
+        var d : Double = "  7.2 ".toDouble()!
         XCTAssertEqual(7.2, d)
 
         d = "-70.211111".toDouble()!

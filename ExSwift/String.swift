@@ -215,8 +215,9 @@ public extension String {
         let pattern = "^[-+]?[0-9]*\\.?[0-9]+$"
 
         if let regex = ExSwift.regex(pattern, ignoreCase: true) {
-            // Using map to prevent a possible bug in the compiler
-            if regex.matchesInString(self, options: nil, range: NSMakeRange(0, length)).isEmpty {
+            let text = self.trimmed()
+            let matches = regex.matchesInString(text, options: nil, range: NSMakeRange(0, countElements(text)))
+            if matches.isEmpty {
                 return nil
             }
 
