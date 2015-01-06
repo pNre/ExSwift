@@ -209,8 +209,12 @@ public extension String {
     }
 
 
+    /**
+        Parses a string containing a double numerical value into an optional double if the string is a well formed number.
+
+        :returns: A double parsed from the string or nil if it cannot be parsed.
+    */
     func toDouble() -> Double? {
-        // regex:
 
         let pattern = "^[-+]?[0-9]*\\.?[0-9]+$"
 
@@ -227,9 +231,45 @@ public extension String {
         return nil
     }
 
+    ///
+    ///    Parses a string containing a float numerical value into an optional float if the string is a well formed number.
+    ///
+    ///    :returns: A float parsed from the string or nil if it cannot be parsed.
+    ///
     func toFloat() -> Float? {
         if let val = self.toDouble() {
             return Float(val)
+        }
+
+        return nil
+    }
+
+    ///
+    ///    Parses a string containing a non-negative integer value into an optional UInt if the string is a well formed number.
+    ///
+    ///    :returns: A UInt parsed from the string or nil if it cannot be parsed.
+    ///
+    func toUInt() -> UInt? {
+        if let val = self.trimmed().toInt() {
+            if val < 0 {
+                return nil
+            }
+            return UInt(val)
+        }
+
+        return nil
+    }
+
+
+    ///
+    /// Parses a string containing a boolean value (true or false) into an optional Bool if the string is a well formed.
+    ///
+    /// :returns: A Bool parsed from the string or nil if it cannot be parsed as a boolean.
+    ///
+    func toBool() -> Bool? {
+        let text = self.trimmed().lowercaseString
+        if text == "true" || text == "false" {
+            return (text as NSString).boolValue
         }
 
         return nil

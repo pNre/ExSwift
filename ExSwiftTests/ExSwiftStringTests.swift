@@ -149,10 +149,11 @@ class ExSwiftStringTests: XCTestCase {
         d = "-70.211111".toDouble()!
         XCTAssertEqual(-70.211111, d)
 
+        d = "42".toDouble()!
+        XCTAssertEqual(42, d)
+
        XCTAssertNil("a772.2".toDouble())
     }
-
-
 
     func testToFloat() {
         var f : Float = "  7.2 ".toFloat()!
@@ -162,5 +163,26 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual(Float(-70.211111), f)
 
         XCTAssertNil("a772.2".toFloat())
+    }
+
+    func testToUInt() {
+        var u : UInt = "  7 ".toUInt()!
+        XCTAssertEqual(UInt(7), u)
+
+        XCTAssertNil("a772.2".toUInt())
+        XCTAssertNil("-772".toUInt())
+        XCTAssertNil("7.5".toUInt())
+    }
+
+    func testToBool() {
+        var b = "  TrUe ".toBool()!
+        XCTAssertEqual(true, b)
+
+        b = "  FALSE ".toBool()!
+        XCTAssertEqual(false, b)
+
+        XCTAssertNil("".toBool())
+        XCTAssertNil("jeff".toBool())
+        XCTAssertNil("0".toBool())
     }
 }
