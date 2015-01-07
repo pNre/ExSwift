@@ -115,6 +115,8 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual("t e".trimmed(), "t e")
         XCTAssertEqual(" AB".trimmed(), "AB")
         XCTAssertEqual("\n ABC   ".trimmed(), "ABC")
+        XCTAssertEqual("".trimmed(), "")
+        XCTAssertEqual(" \t\n\r".trimmed(), "")
     }
     
     func testLTrimmed () {
@@ -122,6 +124,8 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual("ab".ltrimmed(), "ab")
         XCTAssertEqual(" AB".ltrimmed(), "AB")
         XCTAssertEqual("\n ABC   ".ltrimmed(), "ABC   ")
+        XCTAssertEqual("".ltrimmed(), "")
+        XCTAssertEqual(" \t\n\r".ltrimmed(), "")
     }
     
     func testRTrimmed () {
@@ -129,15 +133,19 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual(" AB".rtrimmed(), " AB")
         XCTAssertEqual("AB ".rtrimmed(), "AB")
         XCTAssertEqual("\n ABC   ".rtrimmed(), "\n ABC")
+        XCTAssertEqual("".rtrimmed(), "")
+        XCTAssertEqual(" \t\n\r".rtrimmed(), "")
     }
     
     func testLTrimmedForSet () {
         XCTAssertEqual("ab   ".ltrimmed(NSCharacterSet.alphanumericCharacterSet()), "   ")
         XCTAssertEqual("  ab".ltrimmed(NSCharacterSet.alphanumericCharacterSet()), "  ab")
+        XCTAssertEqual("ab".ltrimmed(NSCharacterSet.alphanumericCharacterSet()), "")
     }
     
     func testRTrimmedForSet () {
         XCTAssertEqual("ab   ".rtrimmed(NSCharacterSet.alphanumericCharacterSet()), "ab   ")
         XCTAssertEqual("  ab".rtrimmed(NSCharacterSet.alphanumericCharacterSet()), "  ")
+        XCTAssertEqual("ab".rtrimmed(NSCharacterSet.alphanumericCharacterSet()), "")
     }
 }
