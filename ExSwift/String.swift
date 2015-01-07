@@ -208,6 +208,99 @@ public extension String {
 
     }
 
+
+    /**
+        Parses a string containing a double numerical value into an optional double if the string is a well formed number.
+
+        :returns: A double parsed from the string or nil if it cannot be parsed.
+    */
+    func toDouble() -> Double? {
+
+        let pattern = "^[-+]?[0-9]*\\.?[0-9]+$"
+
+        if let regex = ExSwift.regex(pattern, ignoreCase: true) {
+            let text = self.trimmed()
+            let matches = regex.matchesInString(text, options: nil, range: NSMakeRange(0, countElements(text)))
+            if matches.isEmpty {
+                return nil
+            }
+
+            return (self as NSString).doubleValue
+        }
+
+        return nil
+    }
+
+    /**
+       Parses a string containing a float numerical value into an optional float if the string is a well formed number.
+
+       :returns: A float parsed from the string or nil if it cannot be parsed.
+    */
+    func toFloat() -> Float? {
+        if let val = self.toDouble() {
+            return Float(val)
+        }
+
+        return nil
+    }
+
+    /**
+        Parses a string containing a non-negative integer value into an optional UInt if the string is a well formed number.
+
+        :returns: A UInt parsed from the string or nil if it cannot be parsed.
+    */
+    func toUInt() -> UInt? {
+        if let val = self.trimmed().toInt() {
+            if val < 0 {
+                return nil
+            }
+            return UInt(val)
+        }
+
+        return nil
+    }
+
+
+    /**
+      Parses a string containing a boolean value (true or false) into an optional Bool if the string is a well formed.
+
+      :returns: A Bool parsed from the string or nil if it cannot be parsed as a boolean.
+    */
+    func toBool() -> Bool? {
+        let text = self.trimmed().lowercaseString
+        if text == "true" || text == "false" || text == "yes" || text == "no" {
+            return (text as NSString).boolValue
+        }
+
+        return nil
+    }
+
+    /**
+      Parses a string containing a date into an optional NSDate if the string is a well formed.
+      The default format is yyyy-MM-dd, but can be overriden.
+
+      :returns: A NSDate parsed from the string or nil if it cannot be parsed as a date.
+    */
+    func toDate(format : String? = "yyyy-MM-dd") -> NSDate? {
+        let text = self.trimmed().lowercaseString
+        var dateFmt = NSDateFormatter()
+        dateFmt.timeZone = NSTimeZone.defaultTimeZone()
+        if let fmt = format {
+            dateFmt.dateFormat = fmt
+        }
+        return dateFmt.dateFromString(text)
+    }
+
+    /**
+      Parses a string containing a date and time into an optional NSDate if the string is a well formed.
+      The default format is yyyy-MM-dd hh-mm-ss, but can be overriden.
+
+      :returns: A NSDate parsed from the string or nil if it cannot be parsed as a date.
+    */
+    func toDateTime(format : String? = "yyyy-MM-dd hh-mm-ss") -> NSDate? {
+        return toDate(format: format)
+    }
+
 }
 
 /**

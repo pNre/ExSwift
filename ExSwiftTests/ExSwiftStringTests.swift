@@ -115,6 +115,7 @@ class ExSwiftStringTests: XCTestCase {
         XCTAssertEqual("t e".trimmed(), "t e")
         XCTAssertEqual(" AB".trimmed(), "AB")
         XCTAssertEqual("\n ABC   ".trimmed(), "ABC")
+
     }
     
     func testLTrimmed () {
@@ -139,5 +140,92 @@ class ExSwiftStringTests: XCTestCase {
     func testRTrimmedForSet () {
         XCTAssertEqual("ab   ".rtrimmed(NSCharacterSet.alphanumericCharacterSet()), "ab   ")
         XCTAssertEqual("  ab".rtrimmed(NSCharacterSet.alphanumericCharacterSet()), "  ")
+    }
+
+    func testToDouble() {
+        var d : Double = "  7.2 ".toDouble()!
+        XCTAssertEqual(7.2, d)
+
+        d = "-70.211111".toDouble()!
+        XCTAssertEqual(-70.211111, d)
+
+        d = "42".toDouble()!
+        XCTAssertEqual(42, d)
+
+       XCTAssertNil("a772.2".toDouble())
+    }
+
+    func testToFloat() {
+        var f : Float = "  7.2 ".toFloat()!
+        XCTAssertEqual(Float(7.2), f)
+
+        f = "-70.211111".toFloat()!
+        XCTAssertEqual(Float(-70.211111), f)
+
+        XCTAssertNil("a772.2".toFloat())
+    }
+
+    func testToUInt() {
+        var u : UInt = "  7 ".toUInt()!
+        XCTAssertEqual(UInt(7), u)
+
+        XCTAssertNil("a772.2".toUInt())
+        XCTAssertNil("-772".toUInt())
+        XCTAssertNil("7.5".toUInt())
+    }
+
+    func testToBool() {
+        var b = "  TrUe ".toBool()!
+        XCTAssertEqual(true, b)
+        b = "  yEs ".toBool()!
+        XCTAssertEqual(true, b)
+
+        b = "  FALSE ".toBool()!
+        XCTAssertEqual(false, b)
+        b = "  nO ".toBool()!
+        XCTAssertEqual(false, b)
+
+        XCTAssertNil("".toBool())
+        XCTAssertNil("jeff".toBool())
+        XCTAssertNil("0".toBool())
+    }
+
+    func testToDate() {
+        var d : NSDate = " 2015-08-19 \t ".toDate()!
+
+        var c = NSDateComponents()
+        c.year = 2015
+        c.month = 8
+        c.day = 19
+
+        var gregorian = NSCalendar(identifier:NSGregorianCalendar)!
+        var expected = gregorian.dateFromComponents(c)!
+
+        XCTAssertEqual(expected, d)
+
+        XCTAssertNil("a772.2".toDate())
+        XCTAssertNil("Tuesday".toDate())
+        XCTAssertNil("1973-08-19 03:04:55".toDate())
+    }
+
+    func testToDateTime() {
+        var d : NSDate = " 2015-08-19 03:04:34\t ".toDateTime()!
+
+        var c = NSDateComponents()
+        c.year = 2015
+        c.month = 8
+        c.day = 19
+        c.hour = 3
+        c.minute = 4
+        c.second = 34
+
+        var gregorian = NSCalendar(identifier:NSGregorianCalendar)!
+        var expected = gregorian.dateFromComponents(c)!
+
+        XCTAssertEqual(expected, d)
+
+        XCTAssertNil("a772.2".toDateTime())
+        XCTAssertNil("Tuesday".toDateTime())
+        XCTAssertNil("1973-08-19".toDateTime())
     }
 }
