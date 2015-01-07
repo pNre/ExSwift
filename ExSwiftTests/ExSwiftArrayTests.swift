@@ -393,6 +393,11 @@ class ExtensionsArrayTests: XCTestCase {
         
         XCTAssertEqual(m, [2, 3, 4])
     }
+
+    func testMapi() {
+        let m = array.mapi({ $0 + 1 })
+        XCTAssertEqual(m, [2, 3, 4, 5])
+    }
     
     func testSubscriptConflicts() {
         let array1 = ["zero", "one", "two", "three"][rangeAsArray: 1...3]
