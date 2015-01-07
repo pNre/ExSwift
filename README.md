@@ -200,6 +200,14 @@ Name | Signature
 **`rtrimmed`**|`rtrimmed () -> String`
 **`rtrimmed`**|`rtrimmed (set: NSCharacterSet) -> String`
 **`trimmed`**|`trimmed () -> String`
+**`rtrimmed`**|`rtrimmed (set: NSCharacterSet) -> String`
+**`toDouble`**|`toDouble() -> Double?`
+**`toFloat`**|`toFloat() -> Float?`
+**`toUInt`**|`toUInt() -> UInt?`
+**`toBool`**|`toBool() -> Bool?`
+**`toDate`**|`toDate(format : String? = "yyyy-MM-dd") -> NSDate?`
+**`toDateTime`**|`toDateTime(format : String? = "yyyy-MM-dd hh-mm-ss") -> NSDate?`
+
 
 #### Class Methods ####
 
