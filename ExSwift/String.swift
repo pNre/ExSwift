@@ -150,7 +150,7 @@ public extension String {
             return self[range.startIndex..<endIndex]
         }
         
-        return self
+        return ""
     }
 
     /**
@@ -172,7 +172,7 @@ public extension String {
             return self[startIndex..<range.endIndex]
         }
         
-        return self
+        return ""
     }
 
     /**
