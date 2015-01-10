@@ -131,4 +131,71 @@ public extension NSDate{
     }
     
     
+    // MARK: Getter
+    
+    public var year : Int {
+    
+        get {
+            return getComponent(.CalendarUnitYear)
+        }
+    }
+    
+    public var month : Int {
+        
+        get {
+            return getComponent(.CalendarUnitMonth)
+        }
+    }
+    
+    public var weekday : Int {
+        
+        get {
+            return getComponent(.CalendarUnitWeekday)
+        }
+    }
+
+    public var weekMonth : Int {
+        
+        get {
+            return getComponent(.CalendarUnitWeekOfMonth)
+        }
+    }
+
+    
+    public var days : Int {
+        
+        get {
+            return getComponent(.CalendarUnitDay)
+        }
+    }
+    
+    public var hours : Int {
+        
+        get {
+            return getComponent(.CalendarUnitHour)
+        }
+    }
+    
+    public var minutes : Int {
+        
+        get {
+            return getComponent(.CalendarUnitMinute)
+        }
+    }
+    
+    public var seconds : Int {
+        
+        get {
+            return getComponent(.CalendarUnitSecond)
+        }
+    }
+    
+    public func getComponent (component : NSCalendarUnit) -> Int {
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(component, fromDate: self)
+        return components.valueForComponent(component)
+    }
+
+    
+    
 }

@@ -159,4 +159,15 @@ class ExSwiftNSDataTests: XCTestCase {
         
     }
     
+    func testGetter() {
+        XCTAssertEqual(1988, startDate!.year, "Year Mismatch")
+        XCTAssertEqual(11, startDate!.month, "Month Mismatch")
+        XCTAssertEqual(30, startDate!.days, "Day Mismatch")
+        XCTAssertEqual(0, startDate!.hours, "Hours Mismatch")
+        XCTAssertEqual(0, startDate!.minutes, "Minutes Mismatch")
+        XCTAssertEqual(0, startDate!.seconds, "Seconds Mismatch")
+        XCTAssertEqual(4, startDate!.weekday, "Weekmonth Mismatch")
+        XCTAssertEqual(5, startDate!.weekMonth, "Weekmonth Mismatch")
+    }
+    
 }
