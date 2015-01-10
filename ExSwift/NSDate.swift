@@ -133,13 +133,19 @@ public extension NSDate{
     
     // MARK: Getter
     
+    /**
+    Date year
+    */
     public var year : Int {
     
         get {
             return getComponent(.CalendarUnitYear)
         }
     }
-    
+
+    /**
+    Date month
+    */
     public var month : Int {
         
         get {
@@ -147,6 +153,9 @@ public extension NSDate{
         }
     }
     
+    /**
+    Date weekday
+    */
     public var weekday : Int {
         
         get {
@@ -154,6 +163,9 @@ public extension NSDate{
         }
     }
 
+    /**
+    Date weekMonth
+    */
     public var weekMonth : Int {
         
         get {
@@ -162,6 +174,9 @@ public extension NSDate{
     }
 
     
+    /**
+    Date days
+    */
     public var days : Int {
         
         get {
@@ -169,6 +184,9 @@ public extension NSDate{
         }
     }
     
+    /**
+    Date hours
+    */
     public var hours : Int {
         
         get {
@@ -176,6 +194,9 @@ public extension NSDate{
         }
     }
     
+    /**
+    Date minuts
+    */
     public var minutes : Int {
         
         get {
@@ -183,6 +204,9 @@ public extension NSDate{
         }
     }
     
+    /**
+    Date seconds
+    */
     public var seconds : Int {
         
         get {
@@ -190,12 +214,16 @@ public extension NSDate{
         }
     }
     
+    /**
+    Returns the value of the NSDate component
+    
+    :param: component NSCalendarUnit
+    :returns: the value of the component
+    */
+
     public func getComponent (component : NSCalendarUnit) -> Int {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components(component, fromDate: self)
         return components.valueForComponent(component)
     }
-
-    
-    
 }
