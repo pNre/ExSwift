@@ -840,6 +840,27 @@ internal extension Array {
     }
     
     /**
+        Creates an array with values and an accumulated result by running accumulated result
+        and each value of self through the mapFunction.
+    
+        :param: initial Initial value for accumulator
+        :param: mapFunction
+        :returns: Accumulated value and mapped array
+    */
+    func mapAccum <U, V> (initial: U, mapFunction map: (U, Element) -> (U, V)) -> (U, [V]) {
+        var mapped = [V]()
+        var acc = initial
+        
+        each { (value: Element) -> Void in
+            let (mappedAcc, mappedValue) = map(acc, value)
+            acc = mappedAcc
+            mapped.append(mappedValue)
+        }
+        
+        return (acc, mapped)
+    }
+    
+    /**
         self.reduce with initial value self.first()
     */
     func reduce (combine: (Element, Element) -> Element) -> Element? {

@@ -394,6 +394,15 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(m, [2, 3, 4])
     }
     
+    func testMapAccum() {
+        let m:(Int, [Int]) = array.mapAccum(0) { acc, value in
+            return (acc + value, value * 2)
+        }
+        
+        XCTAssertEqual(m.0, 15)
+        XCTAssertEqual(m.1, [2, 4, 6, 8, 10])
+    }
+    
     func testSubscriptConflicts() {
         let array1 = ["zero", "one", "two", "three"][rangeAsArray: 1...3]
         let array2 = ["zero", "one", "two", "three"][rangeAsArray: 1..<3]
