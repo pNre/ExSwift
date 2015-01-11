@@ -148,7 +148,7 @@ class ExSwiftNSDataTests: XCTestCase {
         XCTAssertFalse(date.isAfter(date), "Past date should be in the past")
         XCTAssertFalse(pastDate.isAfter(date), "Past date should be in the past")
     }
-    
+
     func testIsBefore(){
         var date = NSDate()
         var futureDate = date.addSeconds(42)
@@ -159,4 +159,69 @@ class ExSwiftNSDataTests: XCTestCase {
         
     }
     
+    // MARK:  Getter
+    
+    func testGetter() {
+        XCTAssertEqual(1988, startDate!.year, "Year Mismatch")
+        XCTAssertEqual(11, startDate!.month, "Month Mismatch")
+        XCTAssertEqual(30, startDate!.days, "Day Mismatch")
+        XCTAssertEqual(0, startDate!.hours, "Hours Mismatch")
+        XCTAssertEqual(0, startDate!.minutes, "Minutes Mismatch")
+        XCTAssertEqual(0, startDate!.seconds, "Seconds Mismatch")
+        XCTAssertEqual(4, startDate!.weekday, "Weekmonth Mismatch")
+        XCTAssertEqual(5, startDate!.weekMonth, "Weekmonth Mismatch")
+    }
+    
+    // MARK: Comparable
+    
+    func testSorting () {
+        var firstDate = startDate!.addSeconds(0)
+        var secondDate = startDate!.addSeconds(42)
+        var thirdDate = startDate!.addSeconds(-42)
+        var fourthDate = startDate!.addSeconds(-84)
+        var fifthDate = startDate!.addSeconds(84)
+        
+        var dates : [NSDate] = [thirdDate, secondDate, firstDate, fourthDate, fifthDate]
+        
+        let expected : [NSDate] = [fifthDate, secondDate, firstDate, thirdDate, fourthDate]
+
+        let expectedReverded = expected.reverse()
+        
+        for i in 0 ... 42 {
+            dates.shuffle()
+        
+            dates.sort( { $0 > $1 } )
+            XCTAssertEqual(expected, dates, "Sort mismatch")
+        
+            dates.sort( { $0 < $1 } )
+            XCTAssertEqual(expectedReverded, dates, "Sort mismatch")
+        }
+    }
+    
+    func testComparable(){
+        var date = startDate!.addSeconds(-42)
+        var anotherDate = startDate!.addSeconds(42)
+        let shouldBeTheSameDate = NSDate(timeInterval: 0, sinceDate: startDate!)
+
+
+        XCTAssertTrue(startDate > date, "Date should be greater")
+        XCTAssertFalse(startDate > anotherDate, "Date shouldn't be greater")
+        XCTAssertFalse(startDate > shouldBeTheSameDate, "Date shouldn't be greater")
+        
+        XCTAssertTrue(startDate < anotherDate, "Date should be lower")
+        XCTAssertFalse(startDate < date, "Date shouldn't be lower")
+        XCTAssertFalse(startDate < shouldBeTheSameDate, "Date shouldn't be lower")
+
+        XCTAssertTrue(startDate >= shouldBeTheSameDate, "Date should be greater or equal")
+        XCTAssertTrue(startDate >= date, "Date should be greater or equal")
+        XCTAssertFalse(startDate >= anotherDate, "Date shouldn't be greater or equal")
+        
+        XCTAssertTrue(startDate <= shouldBeTheSameDate, "Date should be lower or equal")
+        XCTAssertTrue(startDate < anotherDate, "Date should be lower")
+        XCTAssertFalse(startDate <= date, "Date shouldn't be greater or equal")
+        
+        XCTAssertFalse(date == startDate, "Date should mismatch")
+        XCTAssertFalse(anotherDate == startDate, "Date should mismatch")
+        XCTAssertTrue(shouldBeTheSameDate == startDate, "Date shouldn't mismatch")
+    }
 }

@@ -356,6 +356,47 @@ Name | Signatures
 **`bind`**|`bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (() -> T)`
 **`cached`**|`cached <P, R> (function: (P...) -> R) -> ((P...) -> R)`<br>`cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R)`
 
+# NSDate #
+
+#### Properties ####
+Name | Signatures
+---- | ---- 
+**`year`** |`Int`
+**`month`**|`Int`
+**`weekday`** |`Int`
+**`weekMonth`**|`Int`
+**`days`** |`Int`
+**`hours`**|`Int`
+**`minutes`** |`Int`
+**`seconds`**| `Int`
+
+#### Instance Methods ####
+Name | Signatures
+---- | ----------
+**`add`**|`add(seconds:Int=0, minutes:Int = 0, hours:Int = 0, days:Int = 0, weeks:Int = 0, months:Int = 0, years:Int = 0) -> NSDate`
+**`addSeconds`**|`addSeconds (seconds:Int) -> NSDate `
+**`addMinutes`**|`addMinutes (minute:Int) -> NSDate `
+**`addHours`**|`addHours(hours:Int) -> NSDate `
+**`addDays`**|`addDays(days:Int) -> NSDate `
+**`addWeeks`**|`addWeeks(weeks:Int) -> NSDate`
+**`addMonths`**|`addMonths(months:Int) -> NSDate`
+**`addYears`**|`addYears(years:Int) -> NSDate `
+**`isAfter`**|`isAfter(date: NSDate) -> Bool`
+**`isBefore`**|`isBefore(date: NSDate) -> Bool`
+**`getComponent`**|`getComponent (component : NSCalendarUnit) -> Int`
+
+#### Operators ####
+
+Name | Signatures
+---- | ----------
+**`==`**|`==(lhs: NSDate, rhs: NSDate) -> Bool`
+**`<`**|`<(lhs: NSDate, rhs: NSDate) -> Bool`
+**`>`**|`>(lhs: NSDate, rhs: NSDate) -> Bool`
+**`<=`**|`<=(lhs: NSDate, rhs: NSDate) -> Bool`
+**`>=`**|`>=(lhs: NSDate, rhs: NSDate) -> Bool`
+**`==`**|`==(lhs: NSDate, rhs: NSDate) -> Bool`
+
+
 # To Do #
 * [X] Wiki
 * [X] Xcode project for both iOS & OS X

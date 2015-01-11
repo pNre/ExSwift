@@ -131,4 +131,125 @@ public extension NSDate{
     }
     
     
+    // MARK: Getter
+    
+    /**
+    Date year
+    */
+    public var year : Int {
+    
+        get {
+            return getComponent(.CalendarUnitYear)
+        }
+    }
+
+    /**
+    Date month
+    */
+    public var month : Int {
+        
+        get {
+            return getComponent(.CalendarUnitMonth)
+        }
+    }
+    
+    /**
+    Date weekday
+    */
+    public var weekday : Int {
+        
+        get {
+            return getComponent(.CalendarUnitWeekday)
+        }
+    }
+
+    /**
+    Date weekMonth
+    */
+    public var weekMonth : Int {
+        
+        get {
+            return getComponent(.CalendarUnitWeekOfMonth)
+        }
+    }
+
+    
+    /**
+    Date days
+    */
+    public var days : Int {
+        
+        get {
+            return getComponent(.CalendarUnitDay)
+        }
+    }
+    
+    /**
+    Date hours
+    */
+    public var hours : Int {
+        
+        get {
+            return getComponent(.CalendarUnitHour)
+        }
+    }
+    
+    /**
+    Date minuts
+    */
+    public var minutes : Int {
+        
+        get {
+            return getComponent(.CalendarUnitMinute)
+        }
+    }
+    
+    /**
+    Date seconds
+    */
+    public var seconds : Int {
+        
+        get {
+            return getComponent(.CalendarUnitSecond)
+        }
+    }
+    
+    /**
+    Returns the value of the NSDate component
+    
+    :param: component NSCalendarUnit
+    :returns: the value of the component
+    */
+
+    public func getComponent (component : NSCalendarUnit) -> Int {
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(component, fromDate: self)
+
+        return components.valueForComponent(component)
+    }
+}
+
+// MARK: Comparable functions
+
+public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == NSComparisonResult.OrderedSame
+}
+
+public func <(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.compare(rhs) == NSComparisonResult.OrderedAscending
+}
+
+public func >(lhs: NSDate, rhs: NSDate) -> Bool {
+    return !(lhs <= rhs)
+}
+
+public func <=(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs < rhs || lhs == rhs
+}
+
+public func >=(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs > rhs || lhs == rhs
+}
+
+extension NSDate: Comparable {
 }
