@@ -751,9 +751,9 @@ internal extension Array {
 
     /**
         Returns all of the combinations in the array of the given length
-		
-		:param: length
-		:returns: Combinations
+        
+        :param: length
+        :returns: Combinations
     */
     func combination (length: Int) -> [[Element]] {
         if length < 0 || length > self.count {
@@ -801,6 +801,17 @@ internal extension Array {
         }
 
         return result
+    }
+
+    /**
+        Replaces each element in the array with object. I.e., it keeps the length the same but makes the element at every index be object
+        
+        :param: object The object to replace each element with
+    */
+    mutating func fill (object: T) -> () {
+        (0..<self.count).each { i in
+            self[i] = object
+        }
     }
 
     /**

@@ -449,4 +449,12 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(array.combination(5), [[1, 2, 3, 4, 5]])
         XCTAssertEqual(array.combination(6), [])
     }
+
+    func testFill() {
+        array.fill(0)
+        XCTAssertEqual(array, [0, 0, 0, 0, 0])
+        var emptyArray: [String] = []
+        emptyArray.fill("foo")
+        XCTAssertEqual(emptyArray, [])
+    }
 }
