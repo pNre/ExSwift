@@ -224,6 +224,7 @@ public extension NSDate{
     public func getComponent (component : NSCalendarUnit) -> Int {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components(component, fromDate: self)
+
         return components.valueForComponent(component)
     }
 }
@@ -239,7 +240,7 @@ public func <(lhs: NSDate, rhs: NSDate) -> Bool {
 }
 
 public func >(lhs: NSDate, rhs: NSDate) -> Bool {
-    return !(lhs < rhs)
+    return !(lhs <= rhs)
 }
 
 public func <=(lhs: NSDate, rhs: NSDate) -> Bool {

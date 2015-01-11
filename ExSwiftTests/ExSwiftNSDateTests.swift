@@ -206,9 +206,11 @@ class ExSwiftNSDataTests: XCTestCase {
 
         XCTAssertTrue(startDate > date, "Date should be greater")
         XCTAssertFalse(startDate > anotherDate, "Date shouldn't be greater")
+        XCTAssertFalse(startDate > shouldBeTheSameDate, "Date shouldn't be greater")
         
         XCTAssertTrue(startDate < anotherDate, "Date should be lower")
         XCTAssertFalse(startDate < date, "Date shouldn't be lower")
+        XCTAssertFalse(startDate < shouldBeTheSameDate, "Date shouldn't be lower")
 
         XCTAssertTrue(startDate >= shouldBeTheSameDate, "Date should be greater or equal")
         XCTAssertTrue(startDate >= date, "Date should be greater or equal")
