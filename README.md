@@ -274,6 +274,7 @@ Name | Signatures
 **`all`**|`all (test: (Key, Value) -> (Bool)) -> Bool`
 **`reduce`**|`reduce <U> (initial: U, combine: (U, Element) -> U) -> U`
 **`pick`, `at`**|`pick (keys: [Key]) -> Dictionary`<br>`pick (keys: Key...) -> Dictionary`<br>`at (keys: Key...) -> Dictionary`
+**`toArray`**|`toArray <V> (mapFunction map: (Key, Value) -> V) -> [V]`
 
 #### Operators ####
 Name | Signature | Function
@@ -360,7 +361,7 @@ Name | Signatures
 
 #### Properties ####
 Name | Signatures
----- | ---- 
+---- | ----
 **`year`** |`Int`
 **`month`**|`Int`
 **`weekday`** |`Int`

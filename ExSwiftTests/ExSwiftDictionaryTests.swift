@@ -170,4 +170,27 @@ class ExSwiftDictionaryTests: XCTestCase {
         XCTAssertEqual(pick2, pick1)
         XCTAssertEqual(dictionary.pick(), [:])
     }
+    
+    func testToArray () {
+        let array1 = dictionary.toArray { (key, value) -> String in
+            return "A"
+        }
+        
+        let array2 = dictionary.toArray { (key, value) -> String in
+            return key
+        }
+        
+        let array3 = dictionary.toArray { (key, value) -> Int in
+            return value
+        }
+        
+        let array4 = [String: String]().toArray { (key, value) -> String in
+            return value
+        }
+        
+        XCTAssertEqual(array1, ["A", "A", "A"])
+        XCTAssertEqual(array2 - ["A", "B", "C"], [])
+        XCTAssertEqual(array3 - [1, 2, 3], [])
+        XCTAssertEqual(array4, [])
+    }
 }
