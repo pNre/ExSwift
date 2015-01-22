@@ -56,6 +56,17 @@ public extension Double {
     }
     
     /**
+        Clamps self to a specified range.
+    
+        :param: min Lower bound
+        :param: max Upper bound
+        :returns: Clamped value
+    */
+    func clamp (min: Double, _ max: Double) -> Double {
+        return Swift.max(min, Swift.min(max, self))
+    }
+    
+    /**
         Random double between min and max (inclusive).
     
         :params: min

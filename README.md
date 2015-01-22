@@ -170,6 +170,7 @@ Name | Signature
 **`round`**|`round () -> Float`
 **`ceil`**|`ceil () -> Float`
 **`floor`**|`floor () -> Float`
+**`clamp`**|`clamp (min: Float, _ max: Float) -> Float`
 
 #### Class Methods ####
 
@@ -336,6 +337,7 @@ Name | Signature
 **`round`**|`round () -> Double`
 **`ceil`**|`ceil () -> Double`
 **`floor`**|`floor () -> Double`
+**`clamp`**|`clamp (min: Double, _ max: Double) -> Double`
 
 #### Class Methods ####
 
