@@ -54,6 +54,17 @@ public extension Float {
     func round () -> Float {
         return roundf(self)
     }
+        
+    /**
+        Clamps self to a specified range.
+    
+        :param: min Lower bound
+        :param: max Upper bound
+        :returns: Clamped value
+    */
+    func clamp (min: Float, _ max: Float) -> Float {
+        return Swift.max(min, Swift.min(max, self))
+    }
     
     /**
         Random float between min and max (inclusive).
