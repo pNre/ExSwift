@@ -31,6 +31,12 @@ class ExSwiftDoubleTests: XCTestCase {
         XCTAssertEqual(2, Double(2.4).round())
     }
     
+    func testClamp () {
+        XCTAssertEqualWithAccuracy(Double(0.25).clamp(0, 0.5), Double(0.25), 0.01)
+        XCTAssertEqualWithAccuracy(Double(2).clamp(0, 0.5), Double(0.5), 0.01)
+        XCTAssertEqualWithAccuracy(Double(-2).clamp(0, 0.5), Double(0), 0.01)
+    }
+    
     func testRandom() {
     }
     

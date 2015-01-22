@@ -31,6 +31,12 @@ class ExSwiftFloatTests: XCTestCase {
         XCTAssertEqual(Float(2), Float(2.4).round())
     }
     
+    func testClamp () {
+        XCTAssertEqualWithAccuracy(Float(0.25).clamp(0, 0.5), Float(0.25), 0.01)
+        XCTAssertEqualWithAccuracy(Float(2).clamp(0, 0.5), Float(0.5), 0.01)
+        XCTAssertEqualWithAccuracy(Float(-2).clamp(0, 0.5), Float(0), 0.01)
+    }
+    
     func testRandom() {
     }
 
