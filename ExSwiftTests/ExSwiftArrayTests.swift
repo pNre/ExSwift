@@ -438,7 +438,6 @@ class ExtensionsArrayTests: XCTestCase {
             for j in 1...i {
                 factorial *= j
             }
-            // this would also benefit from a check to make sure each permutation is unique, but i couldn't figure out how to do that with .unique()
             XCTAssert(permutations.count == self.array.combination(i).count * factorial)
             var mappedPermutations: [Int] = permutations.map({ (i: [Int]) -> [Int] in i.unique()}).flatten()
             var flattenedPermutations: [Int] = permutations.flatten()
