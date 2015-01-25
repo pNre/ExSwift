@@ -444,8 +444,10 @@ class ExtensionsArrayTests: XCTestCase {
             var flattenedPermutations: [Int] = permutations.flatten()
             XCTAssert(mappedPermutations == flattenedPermutations)
             XCTAssert(permutations.flatten().all({$0 >= 1 && $0 <= 5}))
+            XCTAssert(permutations.unique() == permutations)
         }
         XCTAssertEqual(array.permutation(-1), [])
+        XCTAssertEqual(array.permutation(0), [[]])
         XCTAssertEqual(array.permutation(array.count + 1), [])
     }
 }
