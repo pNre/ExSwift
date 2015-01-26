@@ -816,10 +816,8 @@ internal extension Array {
 	*/
 	func transposition (array: [[T]]) -> [[T]] { //<U: AnyObject where Element == [U]> () -> [[U]] {
 		var maxWidth: Int = array.map({ $0.count }).max()
-		var transposition: [[T]] = []
-		maxWidth.times {
-			transposition.append([])
-		}
+        var transposition = [[T]](count: maxWidth, repeatedValue: [])
+        
 		(0..<maxWidth).each { i in
     		array.eachIndex { j in
 				if array[j].count > i {
