@@ -449,4 +449,21 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(array.combination(5), [[1, 2, 3, 4, 5]])
         XCTAssertEqual(array.combination(6), [])
     }
+
+	func testTransposition() {
+		var arrays: [[Int]] = []
+		array.count.times {
+			arrays.append(self.array)
+		}
+		var arraysTransposition: [[Int]] = [].transposition(arrays)
+		arrays.eachIndex { i in
+			arrays[0].eachIndex { j in
+				XCTAssertEqual(arrays[i][j], arraysTransposition[j][i])
+			}
+		}
+
+		var jagged: [[String]] = [["a", "b", "c"], ["d", "e"], ["f", "g", "h"]]
+		var jaggedTransposition = [].transposition(jagged)
+		XCTAssertEqual(jaggedTransposition, [["a", "d", "f"], ["b", "e", "g"], ["c", "h"]])
+	}
 }
