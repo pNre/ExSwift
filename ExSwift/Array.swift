@@ -684,53 +684,40 @@ internal extension Array {
         :returns: All permutations of a given length within an array
     */
     func permutation (length: Int) -> [[T]] {
-        assert(length < 12) // any more than this would be pretty nuts
-        var permutations: [[T]] = []
-        for combination in self.combination(length) {
-            for permutation in combination.permutation() {
-                permutations.append(permutation)
+        var selfCopy = self
+        if length < 0 || length > self.count {
+            return []
+        } else if length == 0 {
+            return [[]]
+        } else {
+            var permutations: [[T]] = []
+            let combinations = combination(length)
+            for combination in combinations {
+                var endArray: [[T]] = []
+                var mutableCombination = combination
+                permutations += self.permutationHelper(length, array: &mutableCombination, endArray: &endArray)
             }
+            return permutations
         }
-        return permutations
     }
 
     /**
-        Helper method for the permutation(length:) method
-        It's equivalent to calling permutation(self.count)
-        :returns: The same result as with permutation(self.count)
+        Recursive helper method where all of the permutation-generating work is done
+        This is Heap's algorithm
     */
-    func permutation () -> [[T]] {
-        if self.count == 0 {
-            return [[]]
-        } else if self.count == 1 {
-            return [[self.first!]]
+    private func permutationHelper(n: Int, inout array: [T], inout endArray: [[T]]) -> [[T]] {
+        if n == 1 {
+            endArray += [array]
         }
-        var result: [T] = []
-        var currentPermutation: [T] = self
-        var permutations: [[T]] = []
-        var currentFactorial: Int = 1
-        var factorials: [Int] = []
-        1.upTo(self.count + 1) { i in
-            currentFactorial *= i
-            factorials.append(currentFactorial)
+        for var i = 0; i < n; i++ {
+            permutationHelper(n - 1, array: &array, endArray: &endArray)
+            var j = n % 2 == 0 ? i : 0;
+            //(array[j], array[n - 1]) = (array[n - 1], array[j])
+            var temp: T = array[j]
+            array[j] = array[n - 1]
+            array[n - 1] = temp
         }
-        var i = 1
-        while true {
-            permutations.append(currentPermutation)
-            if i >= factorials[self.count - 1] {
-                break
-            }
-            var swapIndex = 0
-            while i % factorials[swapIndex + 1] == 0 {
-                swapIndex++
-            }
-            var temp = currentPermutation[swapIndex]
-            println(currentPermutation)
-            currentPermutation[swapIndex] = currentPermutation[swapIndex + 1]
-            currentPermutation[swapIndex + 1] = temp
-            i++
-        }
-        return permutations
+        return endArray
     }
 
     /**
