@@ -466,4 +466,24 @@ class ExtensionsArrayTests: XCTestCase {
 		var jaggedTransposition = [].transposition(jagged)
 		XCTAssertEqual(jaggedTransposition, [["a", "d", "f"], ["b", "e", "g"], ["c", "h"]])
 	}
+
+    func testPermutations() {
+        1.upTo(array.count) { i in
+            var permutations: [[Int]] = self.array.permutation(i)
+            var factorial = 1
+            for j in 1...i {
+                factorial *= j
+            }
+            XCTAssert(permutations.count == self.array.combination(i).count * factorial)
+            var mappedPermutations: [Int] = permutations.map({ (i: [Int]) -> [Int] in i.unique()}).flatten()
+            var flattenedPermutations: [Int] = permutations.flatten()
+            XCTAssert(mappedPermutations == flattenedPermutations)
+            XCTAssert(permutations.flatten().all({$0 >= 1 && $0 <= 5}))
+            XCTAssert(permutations.unique() == permutations)
+        }
+        XCTAssertEqual(array.permutation(-1), [])
+        XCTAssertEqual(array.permutation(0), [[]])
+        XCTAssertEqual(array.permutation(array.count + 1), [])
+    }
 }
+

@@ -676,17 +676,17 @@ internal extension Array {
 
         return result
     }
-
+    
     /**
         Returns the set of elements for which call(element) is unique
-		
-		:param: call The closure to use to determine uniqueness
-		:returns: The set of elements for which call(element) is unique
+    
+        :param: call The closure to use to determine uniqueness
+        :returns: The set of elements for which call(element) is unique
     */
     func uniqueBy <T: Equatable> (call: (Element) -> (T)) -> [Element] {
         var result: [Element] = []
         var uniqueItems: [T] = []
-
+        
         for item in self {
             var callResult: T = call(item)
             if !uniqueItems.contains(callResult) {
@@ -694,8 +694,51 @@ internal extension Array {
                 result.append(item)
             }
         }
-
+        
         return result
+    }
+    
+    /**
+        Returns all permutations of a given length within an array
+        
+        :param: length The length of each permutation
+        :returns: All permutations of a given length within an array
+    */
+    func permutation (length: Int) -> [[T]] {
+        var selfCopy = self
+        if length < 0 || length > self.count {
+            return []
+        } else if length == 0 {
+            return [[]]
+        } else {
+            var permutations: [[T]] = []
+            let combinations = combination(length)
+            for combination in combinations {
+                var endArray: [[T]] = []
+                var mutableCombination = combination
+                permutations += self.permutationHelper(length, array: &mutableCombination, endArray: &endArray)
+            }
+            return permutations
+        }
+    }
+
+    /**
+        Recursive helper method where all of the permutation-generating work is done
+        This is Heap's algorithm
+    */
+    private func permutationHelper(n: Int, inout array: [T], inout endArray: [[T]]) -> [[T]] {
+        if n == 1 {
+            endArray += [array]
+        }
+        for var i = 0; i < n; i++ {
+            permutationHelper(n - 1, array: &array, endArray: &endArray)
+            var j = n % 2 == 0 ? i : 0;
+            //(array[j], array[n - 1]) = (array[n - 1], array[j])
+            var temp: T = array[j]
+            array[j] = array[n - 1]
+            array[n - 1] = temp
+        }
+        return endArray
     }
 
     /**
