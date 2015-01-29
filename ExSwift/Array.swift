@@ -793,10 +793,47 @@ internal extension Array {
     }
 
     /**
+        Returns all of the combinations in the array of the given length, allowing repeats
+        
+        :param: length
+        :returns: Combinations
+    */
+    func repeatedCombination (length: Int) -> [[Element]] {
+        if length < 0 {
+            return []
+        }
+        var indexes: [Int] = []
+        length.times {
+            indexes.append(0)
+        }
+        var combinations: [[Element]] = []
+        var offset = self.count - indexes.count
+        while true {
+            var combination: [Element] = []
+            for index in indexes {
+                combination.append(self[index])
+            }
+            combinations.append(combination)
+            var i = indexes.count - 1
+            while i >= 0 && indexes[i] == self.count - 1 {
+                i--
+            }
+            if i < 0 {
+                break
+            }
+            indexes[i]++
+            (i+1).upTo(indexes.count - 1) { j in
+                indexes[j] = indexes[i]
+            }
+        }
+        return combinations
+    }
+
+    /**
         Returns all of the combinations in the array of the given length
-		
-		:param: length
-		:returns: Combinations
+        
+        :param: length
+        :returns: Combinations
     */
     func combination (length: Int) -> [[Element]] {
         if length < 0 || length > self.count {
@@ -825,6 +862,33 @@ internal extension Array {
             }
         }
         return combinations
+    }
+
+    /**
+        Returns all of the permutations of this array of a given length, allowing repeats
+        
+        :param: length The length of each permutations
+        :returns All of the permutations of this array of a given length, allowing repeats
+    */
+    func repeatedPermutation(length: Int) -> [[T]] {
+        if length < 1 {
+            return []
+        }
+        var permutationIndexes: [[Int]] = []
+        permutationIndexes.repeatedPermutationHelper([], length: length, arrayLength: self.count, permutationIndexes: &permutationIndexes)
+        return permutationIndexes.map({ $0.map({ i in self[i] }) })
+    }
+
+    func repeatedPermutationHelper(seed: [Int], length: Int, arrayLength: Int, inout permutationIndexes: [[Int]]) {
+        if seed.count == length {
+            permutationIndexes.append(seed)
+            return
+        }
+        for i in (0..<arrayLength) {
+            var newSeed: [Int] = seed
+            newSeed.append(i)
+            self.repeatedPermutationHelper(newSeed, length: length, arrayLength: arrayLength, permutationIndexes: &permutationIndexes)
+        }
     }
 
     /**
@@ -870,6 +934,17 @@ internal extension Array {
 		}
 		return transposition
 	}
+
+    /**
+        Replaces each element in the array with object. I.e., it keeps the length the same but makes the element at every index be object
+        
+        :param: object The object to replace each element with
+    */
+    mutating func fill (object: T) -> () {
+        (0..<self.count).each { i in
+            self[i] = object
+        }
+    }
 
     /**
         Joins the array elements with a separator.
