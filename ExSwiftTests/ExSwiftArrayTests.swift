@@ -438,6 +438,16 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(array.uniqueBy({$0 % 3}), [1, 2, 3])
         XCTAssertEqual(array.uniqueBy({$0 < 3}), [1, 3])
     }
+    
+    func testRepeatedCombination() {
+        var shortArray = [1, 2, 3]
+        XCTAssertEqual(shortArray.repeatedCombination(-1), [])
+        XCTAssertEqual(shortArray.repeatedCombination(0), [[]])
+        XCTAssertEqual(shortArray.repeatedCombination(1), [[1], [2], [3]])
+        XCTAssertEqual(shortArray.repeatedCombination(2), [[1, 1], [1, 2], [1, 3], [2, 2], [2, 3], [3, 3]])
+            XCTAssertEqual(shortArray.repeatedCombination(3), [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3], [1,3,3],[2,2,2],[2,2,3],[2,3,3],[3,3,3]])
+            XCTAssertEqual(shortArray.repeatedCombination(4), [[1,1,1,1],[1,1,1,2],[1,1,1,3],[1,1,2,2],[1,1,2,3], [1,1,3,3],[1,2,2,2],[1,2,2,3],[1,2,3,3],[1,3,3,3], [2,2,2,2],[2,2,2,3],[2,2,3,3],[2,3,3,3],[3,3,3,3]])
+    }
 
     func testCombinations() {
         XCTAssertEqual(array.combination(-1), [])
@@ -450,22 +460,22 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(array.combination(6), [])
     }
 
-	func testTransposition() {
-		var arrays: [[Int]] = []
-		array.count.times {
-			arrays.append(self.array)
-		}
-		var arraysTransposition: [[Int]] = [].transposition(arrays)
-		arrays.eachIndex { i in
-			arrays[0].eachIndex { j in
-				XCTAssertEqual(arrays[i][j], arraysTransposition[j][i])
-			}
-		}
+    func testTransposition() {
+        var arrays: [[Int]] = []
+        array.count.times {
+            arrays.append(self.array)
+        }
+        var arraysTransposition: [[Int]] = [].transposition(arrays)
+        arrays.eachIndex { i in
+            arrays[0].eachIndex { j in
+                XCTAssertEqual(arrays[i][j], arraysTransposition[j][i])
+            }
+        }
 
-		var jagged: [[String]] = [["a", "b", "c"], ["d", "e"], ["f", "g", "h"]]
-		var jaggedTransposition = [].transposition(jagged)
-		XCTAssertEqual(jaggedTransposition, [["a", "d", "f"], ["b", "e", "g"], ["c", "h"]])
-	}
+        var jagged: [[String]] = [["a", "b", "c"], ["d", "e"], ["f", "g", "h"]]
+        var jaggedTransposition = [].transposition(jagged)
+        XCTAssertEqual(jaggedTransposition, [["a", "d", "f"], ["b", "e", "g"], ["c", "h"]])
+    }
 
     func testPermutations() {
         1.upTo(array.count) { i in
@@ -484,6 +494,22 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(array.permutation(-1), [])
         XCTAssertEqual(array.permutation(0), [[]])
         XCTAssertEqual(array.permutation(array.count + 1), [])
+    }
+        
+    func testRepeatedPermutations() {
+        var shortArray = [1, 2]
+        XCTAssertEqual(shortArray.repeatedPermutation(0), [])
+        XCTAssertEqual(shortArray.repeatedPermutation(1), [[1], [2]])
+        XCTAssertEqual(shortArray.repeatedPermutation(2), [[1, 1], [1, 2], [2, 1], [2, 2]])
+        XCTAssertEqual(shortArray.repeatedPermutation(3), [[1, 1, 1], [1, 1, 2], [1, 2, 1], [1, 2, 2], [2, 1, 1], [2, 1, 2], [2, 2, 1], [2, 2, 2]])
+    }
+
+    func testFill() {
+        array.fill(0)
+        XCTAssertEqual(array, [0, 0, 0, 0, 0])
+        var emptyArray: [String] = []
+        emptyArray.fill("foo")
+        XCTAssertEqual(emptyArray, [])
     }
 }
 
