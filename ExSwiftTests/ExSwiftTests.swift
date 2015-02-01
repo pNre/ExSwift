@@ -102,5 +102,10 @@ class ExSwiftTests: XCTestCase {
         fibonacci(12)
         XCTAssertEqual(465, calls)
     }
-    
+
+    func testSpaceshipOperator() {
+        XCTAssertEqual(4 <=> 5, -1)
+        XCTAssertEqual(5 <=> 4, 1)
+        XCTAssertEqual(4 <=> 4, 0)
+    }
 }
