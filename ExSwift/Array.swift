@@ -910,30 +910,30 @@ internal extension Array {
         return result
     }
 
-	func eachIndex (call: (Int) -> ()) -> () {
-		(0..<self.count).each({ call($0) })
-	}
+    func eachIndex (call: (Int) -> ()) -> () {
+        (0..<self.count).each({ call($0) })
+    }
 
-	/**
-		Returns a transposed version of the array, where the object at array[i][j] goes to array[j][i].
-    	The array must have two or more dimensions.
-		If it's a jagged array that has empty spaces between elements in the transposition, those empty spaces are "removed" and the element on the right side of the empty space gets squashed next to the element on the left.
+    /**
+        Returns a transposed version of the array, where the object at array[i][j] goes to array[j][i].
+        The array must have two or more dimensions.
+        If it's a jagged array that has empty spaces between elements in the transposition, those empty spaces are "removed" and the element on the right side of the empty space gets squashed next to the element on the left.
 
-		:return: A transposed version of the array, where the object at array[i][j] goes to array[j][i]
-	*/
-	func transposition (array: [[T]]) -> [[T]] { //<U: AnyObject where Element == [U]> () -> [[U]] {
-		var maxWidth: Int = array.map({ $0.count }).max()
+        :return: A transposed version of the array, where the object at array[i][j] goes to array[j][i]
+    */
+    func transposition (array: [[T]]) -> [[T]] { //<U: AnyObject where Element == [U]> () -> [[U]] {
+        var maxWidth: Int = array.map({ $0.count }).max()
         var transposition = [[T]](count: maxWidth, repeatedValue: [])
         
-		(0..<maxWidth).each { i in
-    		array.eachIndex { j in
-				if array[j].count > i {
-					transposition[i].append(array[j][i])
-				}
-    		}
-		}
-		return transposition
-	}
+        (0..<maxWidth).each { i in
+            array.eachIndex { j in
+                if array[j].count > i {
+                    transposition[i].append(array[j][i])
+                }
+            }
+        }
+        return transposition
+    }
 
     /**
         Replaces each element in the array with object. I.e., it keeps the length the same but makes the element at every index be object
@@ -1097,6 +1097,28 @@ internal extension Array {
     func sortBy (isOrderedBefore: (T, T) -> Bool) -> [T] {
         return sorted(isOrderedBefore)
     }
+
+    /**
+        Calls the passed block for each element in the array, either n times or infinitely, if n isn't specified
+
+        :param: n the number of times to cycle through
+        :param: block the block to run for each element in each cycle
+    */
+    func cycle (n: Int? = nil, block: (T) -> ()) {
+        var cyclesRun = 0
+        while true {
+            if let n = n {
+                if cyclesRun >= n {
+                    break
+                }
+            }
+            for item in self {
+                block(item)
+            }
+            cyclesRun++
+        }
+    }
+
 
     /**
         Removes the last element from self and returns it.

@@ -511,5 +511,25 @@ class ExtensionsArrayTests: XCTestCase {
         emptyArray.fill("foo")
         XCTAssertEqual(emptyArray, [])
     }
+
+    func testCycle() {
+        var sum = 0
+        array.cycle(n: 2) { item in
+            sum += item
+        }
+        XCTAssertEqual(sum, 30)
+
+        sum = 0
+        array.cycle(n: 0) { item in
+            sum += item
+        }
+
+        array.cycle(n: -1) { item in
+            sum += item
+        }
+        XCTAssertEqual(sum, 0)
+
+        // can't think of a good test for an infinite cycle
+    }
 }
 
