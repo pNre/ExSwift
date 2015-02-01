@@ -229,6 +229,44 @@ public extension NSDate{
     }
 }
 
+// MARK: Arithmetic
+
+func +(date: NSDate, timeInterval: Int) -> NSDate {
+    return date + NSTimeInterval(timeInterval)
+}
+
+func -(date: NSDate, timeInterval: Int) -> NSDate {
+    return date - NSTimeInterval(timeInterval)
+}
+
+func +=(inout date: NSDate, timeInterval: Int) {
+    date = date + timeInterval
+}
+
+func -=(inout date: NSDate, timeInterval: Int) {
+    date = date - timeInterval
+}
+
+func +(date: NSDate, timeInterval: Double) -> NSDate {
+    return date.dateByAddingTimeInterval(NSTimeInterval(timeInterval))
+}
+
+func -(date: NSDate, timeInterval: Double) -> NSDate {
+    return date.dateByAddingTimeInterval(NSTimeInterval(-timeInterval))
+}
+
+func +=(inout date: NSDate, timeInterval: Double) {
+    date = date + timeInterval
+}
+
+func -=(inout date: NSDate, timeInterval: Double) {
+    date = date - timeInterval
+}
+
+func -(date: NSDate, otherDate: NSDate) -> NSTimeInterval {
+    return date.timeIntervalSinceDate(otherDate)
+}
+
 // MARK: Comparable functions
 
 public func ==(lhs: NSDate, rhs: NSDate) -> Bool {

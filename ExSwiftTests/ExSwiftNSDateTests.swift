@@ -224,4 +224,17 @@ class ExSwiftNSDataTests: XCTestCase {
         XCTAssertFalse(anotherDate == startDate, "Date should mismatch")
         XCTAssertTrue(shouldBeTheSameDate == startDate, "Date shouldn't mismatch")
     }
+
+    func testArithmetic() {
+        let date = NSDate() as NSDate
+        XCTAssertTrue(date.timeIntervalSinceDate(date - 1.hour) == 1.hour)
+        XCTAssertTrue(date.timeIntervalSinceDate(date + 1.hour) == -1.hour)
+
+        var otherDate = date
+        otherDate -= 1.minute
+        XCTAssertFalse(otherDate === date)
+        XCTAssertTrue(date.timeIntervalSinceDate(otherDate) == 1.minute)
+        otherDate += 1.hour
+        XCTAssertTrue(date.timeIntervalSinceDate(otherDate) == 1.minute - 1.hour)
+    }
 }
