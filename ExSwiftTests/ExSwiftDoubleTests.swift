@@ -39,5 +39,12 @@ class ExSwiftDoubleTests: XCTestCase {
     
     func testRandom() {
     }
-    
+
+    func testRoundToNearest () {
+        XCTAssertEqualWithAccuracy(2.5.roundToNearest(0.3), 2.4, 0.01)
+        XCTAssertEqualWithAccuracy(0.roundToNearest(0.3), 0.0, 0.01)
+        XCTAssertEqualWithAccuracy(4.0.roundToNearest(2), 4.0, 0.01)
+        XCTAssertEqualWithAccuracy(10.0.roundToNearest(3), 9.0, 0.01)
+        XCTAssertEqualWithAccuracy(-2.0.roundToNearest(3), -3.0, 0.01)
+    }
 }
