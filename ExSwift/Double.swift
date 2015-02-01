@@ -79,7 +79,6 @@ public extension Double {
         return ((rand / Double(RAND_MAX)) * diff) + min;
     }
 
-
     /**
         Just like round(), except it supports rounding to an arbitrary number, not just 1
         Be careful about rounding errors
