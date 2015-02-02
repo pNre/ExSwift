@@ -1099,6 +1099,61 @@ internal extension Array {
     }
 
     /**
+        Runs a binary search to find the smallest element for which the block evaluates to true
+        The block should return true for all items in the array above a certain point and false for all items below a certain point
+        If that point is beyond the furthest item in the array, it returns nil
+
+        See http://ruby-doc.org/core-2.2.0/Array.html#method-i-bsearch regarding find-minimum mode for more
+
+        :param: block the block to run each time
+        :returns: the min element, or nil if there are no items for which the block returns true
+    */
+    func bSearch (block: (T) -> (Bool)) -> T? {
+        if count == 0 {
+            return nil
+        }
+
+        var low = 0
+        var high = count - 1
+        while low <= high {
+            var mid = low + (high - low) / 2
+            if block(self[mid]) {
+                if mid == 0 || !block(self[mid - 1]) {
+                    return self[mid]
+                } else {
+                    high = mid
+                }
+            } else {
+                low = mid + 1
+            }
+        }
+
+        return nil
+    }
+
+    /**
+        Runs a binary search to find some element for which the block returns 0.
+        The block should return a negative number if the current value is before the target in the array, 0 if it's the target, and a positive number if it's after the target
+        The Spaceship operator is a perfect fit for this operation, e.g. if you want to find the object with a specific date and name property, you could keep the array sorted by date first, then name, and use this call:
+        let match = bSearch {  [targetDate, targetName] <=> [$0.date, $0.name] }
+
+        See http://ruby-doc.org/core-2.2.0/Array.html#method-i-bsearch regarding find-any mode for more
+    
+        :param: block the block to run each time
+        :returns: an item (there could be multiple matches) for which the block returns true
+    */
+    func bSearch (block: (T) -> (Int)) -> T? {
+        let match = bSearch { item in
+            block(item) >= 0
+        }
+        if let match = match {
+            return block(match) == 0 ? match : nil
+        } else {
+            return nil
+        }
+    }
+
+    /**
         Removes the last element from self and returns it.
     
         :returns: The removed element

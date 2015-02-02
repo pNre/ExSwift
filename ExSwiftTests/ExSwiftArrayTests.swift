@@ -511,5 +511,33 @@ class ExtensionsArrayTests: XCTestCase {
         emptyArray.fill("foo")
         XCTAssertEqual(emptyArray, [])
     }
+
+    func testBSearchFindMin() {
+        var largeArray: [Int] = []
+        1.upTo(30) { largeArray += [$0] }
+        for i in largeArray {
+            XCTAssertEqual(largeArray.bSearch({ $0 >= i})!, i)
+        }
+        XCTAssertTrue(largeArray.bSearch({ $0 >= 101}) == nil)
+        XCTAssertEqual(largeArray.bSearch({ $0 >= 0})!, 1)
+
+        var primeSizeArray: [Int] = []
+        1.upTo(23) { primeSizeArray += [$0] }
+        for i in primeSizeArray {
+            XCTAssertEqual(primeSizeArray.bSearch({ $0 >= i})!, i)
+        }
+        XCTAssert(primeSizeArray.bSearch({ $0 >= 101}) == nil)
+        XCTAssertEqual(primeSizeArray.bSearch({ $0 >= 0})!, 1)
+    }
+
+    func testBSearchFindAny() {
+        var largeArray: [Int] = []
+        1.upTo(30) { largeArray += [$0] }
+        for i in largeArray {
+            XCTAssertEqual(largeArray.bSearch({ $0 - i })!, i)
+        }
+        XCTAssertTrue(largeArray.bSearch({ $0 - (-1) }) == nil)
+        XCTAssertTrue(largeArray.bSearch({ $0 - 101 }) == nil)
+    }
 }
 
