@@ -78,5 +78,16 @@ public extension Double {
         let rand = Double(arc4random() % (UInt32(RAND_MAX) + 1))
         return ((rand / Double(RAND_MAX)) * diff) + min;
     }
+
+    /**
+        Just like round(), except it supports rounding to an arbitrary number, not just 1
+        Be careful about rounding errors
     
+        :params: increment the increment to round to
+    */
+    func roundToNearest(increment: Double) -> Double {
+        let remainder = self % increment
+        return remainder < increment / 2 ? self - remainder : self - remainder + increment
+    }
+
 }
