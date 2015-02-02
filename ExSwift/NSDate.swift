@@ -229,27 +229,16 @@ public extension NSDate{
     }
 }
 
-// MARK: Comparable functions
+extension NSDate: Equatable {
+}
 
 public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
     return lhs.compare(rhs) == NSComparisonResult.OrderedSame
 }
 
+extension NSDate: Comparable {
+}
+
 public func <(lhs: NSDate, rhs: NSDate) -> Bool {
     return lhs.compare(rhs) == NSComparisonResult.OrderedAscending
-}
-
-public func >(lhs: NSDate, rhs: NSDate) -> Bool {
-    return !(lhs <= rhs)
-}
-
-public func <=(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs < rhs || lhs == rhs
-}
-
-public func >=(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs > rhs || lhs == rhs
-}
-
-extension NSDate: Comparable {
 }
