@@ -1099,8 +1099,18 @@ internal extension Array {
     }
 
     /**
+        Sorts the array by the value returned from the block, in ascending order
+
+        :param: block the block to use to sort by
+        :returns: an array sorted by that block, in ascending order
+    */
+    func sortUsing<U:Comparable>(block: ((T) -> U)) -> [T] {
+        return self.sortBy({ block($0.0) < block($0.1) })
+    }
+
+    /**
         Removes the last element from self and returns it.
-    
+
         :returns: The removed element
     */
     mutating func pop () -> Element {
