@@ -229,6 +229,16 @@ public extension NSDate{
     }
 }
 
+extension NSDate: Strideable {
+    public func distanceTo(other: NSDate) -> NSTimeInterval {
+        return other - self
+    }
+    
+    public func advancedBy(n: NSTimeInterval) -> Self {
+        return self.dynamicType(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate + n)
+    }
+}
+
 extension NSDate: Equatable {
 }
 
