@@ -238,6 +238,43 @@ extension NSDate: Strideable {
         return self.dynamicType(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate + n)
     }
 }
+// MARK: Arithmetic
+
+func +(date: NSDate, timeInterval: Int) -> NSDate {
+    return date + NSTimeInterval(timeInterval)
+}
+
+func -(date: NSDate, timeInterval: Int) -> NSDate {
+    return date - NSTimeInterval(timeInterval)
+}
+
+func +=(inout date: NSDate, timeInterval: Int) {
+    date = date + timeInterval
+}
+
+func -=(inout date: NSDate, timeInterval: Int) {
+    date = date - timeInterval
+}
+
+func +(date: NSDate, timeInterval: Double) -> NSDate {
+    return date.dateByAddingTimeInterval(NSTimeInterval(timeInterval))
+}
+
+func -(date: NSDate, timeInterval: Double) -> NSDate {
+    return date.dateByAddingTimeInterval(NSTimeInterval(-timeInterval))
+}
+
+func +=(inout date: NSDate, timeInterval: Double) {
+    date = date + timeInterval
+}
+
+func -=(inout date: NSDate, timeInterval: Double) {
+    date = date - timeInterval
+}
+
+func -(date: NSDate, otherDate: NSDate) -> NSTimeInterval {
+    return date.timeIntervalSinceDate(otherDate)
+}
 
 extension NSDate: Equatable {
 }

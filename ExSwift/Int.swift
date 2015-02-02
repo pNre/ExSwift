@@ -205,5 +205,45 @@ public extension Int {
     static func random(min: Int = 0, max: Int) -> Int {
         return Int(arc4random_uniform(UInt32((max - min) + 1))) + min
     }
+
+    var years: NSTimeInterval {
+        return 365 * self.days
+    }
+
+    var year: NSTimeInterval {
+        return self.years
+    }
+
+    var days: NSTimeInterval {
+        return 24 * self.hours
+    }
+
+    var day: NSTimeInterval {
+        return self.days
+    }
+
+    var hours: NSTimeInterval {
+        return 60 * self.minutes
+    }
+
+    var hour: NSTimeInterval {
+        return self.hours
+    }
+
+    var minutes: NSTimeInterval {
+        return 60 * self.seconds
+    }
+
+    var minute: NSTimeInterval {
+        return self.minutes
+    }
+
+    var seconds: NSTimeInterval {
+        return NSTimeInterval(self)
+    }
+
+    var second: NSTimeInterval {
+        return self.seconds
+    }
 }
 

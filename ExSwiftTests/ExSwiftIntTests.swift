@@ -121,5 +121,30 @@ class ExSwiftIntTests: XCTestCase {
         XCTAssertEqual(12, 3.lcm(4))
         XCTAssertEqual(12, 4.lcm(3))
     }
+
+    func testYears () {
+        XCTAssertEqual(94608000, 3.year)
+        XCTAssertEqual(31536000, 1.years)
+    }
+
+    func testDays () {
+        XCTAssertEqual(1728000, 20.day)
+        XCTAssertEqual(86400, 1.days)
+    }
+
+    func testHours () {
+        XCTAssertEqual(72000, 20.hour)
+        XCTAssertEqual(10800, 3.hours)
+    }
+
+    func testMinutes () {
+        XCTAssertEqual(60, 1.minute)
+        XCTAssertEqual(3600, 60.minutes)
+    }
+
+    func testSeconds () {
+        XCTAssertEqual(20, 20.second)
+        XCTAssertEqual(-1, -1.second)
+    }
 }
 
