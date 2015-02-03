@@ -11,6 +11,7 @@ import Foundation
 infix operator =~ {}
 infix operator |~ {}
 infix operator .. {}
+infix operator <=> {}
 
 public typealias Ex = ExSwift
 
@@ -201,6 +202,16 @@ public class ExSwift {
         
     }
     
+}
+
+func <=> <T: Comparable>(lhs: T, rhs: T) -> Int {
+    if lhs < rhs {
+        return -1
+    } else if lhs > rhs {
+        return 1
+    } else {
+        return 0
+    }
 }
 
 /**
