@@ -532,5 +532,34 @@ class ExtensionsArrayTests: XCTestCase {
 
         // can't think of a good test for an infinite cycle
     }
-}
 
+    func testBSearchFindMin() {
+        1.upTo(10) { arraySize in
+            var testArray: [Int] = []
+            1.upTo(arraySize) { i in
+                testArray += [i]
+            }
+            for i in testArray {
+                XCTAssertEqual(testArray.bSearch({ $0 >= i })!, i)
+            }
+        }
+        XCTAssertTrue(array.bSearch({ $0 >= 101 }) == nil)
+        XCTAssertEqual(array.bSearch({ $0 >= 0 })!, 1)
+        XCTAssertTrue([].bSearch({ true }) == nil)
+    }
+
+    func testBSearchFindAny() {
+        1.upTo(10) { arraySize in
+            var testArray: [Int] = []
+            1.upTo(arraySize) { i in
+                testArray += [i]
+            }
+            for i in testArray {
+                XCTAssertEqual(testArray.bSearch({ $0 - i })!, i)
+            }
+        }
+        XCTAssertTrue(array.bSearch({ $0 - (self.array.max() + 1) }) == nil)
+        XCTAssertTrue(array.bSearch({ $0 - (self.array.min() - 1) }) == nil)
+        XCTAssertTrue([Int]().bSearch({ $0 }) == nil)
+    }
+}
