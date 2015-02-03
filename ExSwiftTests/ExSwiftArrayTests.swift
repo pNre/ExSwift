@@ -205,6 +205,7 @@ class ExtensionsArrayTests: XCTestCase {
     func testShuffled() {
         let shuffled = array.shuffled()
         XCTAssertEqual(shuffled.difference(array), [])
+        //  Not the best test, the arrays can still be equal
         XCTAssertNotEqual(shuffled, array)
     }
 

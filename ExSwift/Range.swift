@@ -87,3 +87,6 @@ public func .. <U : Comparable> (first: U, second: U) -> HalfOpenInterval<U> {
     return first..<second
 }
 
+public func .. <Pos : ForwardIndexType> (minimum: Pos, maximum: Pos) -> Range<Pos> {
+    return minimum..<maximum
+}

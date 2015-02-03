@@ -44,6 +44,14 @@ class ExSwiftRangeTests: XCTestCase {
             XCTFail()
             return
         })
+        
+        items.removeAll(keepCapacity: false)
+        
+        for i in 0..5 {
+            items.append(i)
+        }
+        
+        XCTAssertEqual(items, [0, 1, 2, 3, 4])
 
     }
 
