@@ -206,6 +206,12 @@ public extension Int {
         return Int(arc4random_uniform(UInt32((max - min) + 1))) + min
     }
 
+}
+
+/**
+    NSTimeInterval conversion extensions
+*/
+public extension Int {
     var years: NSTimeInterval {
         return 365 * self.days
     }
@@ -246,4 +252,3 @@ public extension Int {
         return self.seconds
     }
 }
-
