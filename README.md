@@ -109,8 +109,17 @@ Name | Signature
 **`implode`**|`implode <C: ExtensibleCollection> (separator: C) -> C?`
 **`flatten`**|`flatten <OutType> () -> [OutType]`
 **`flattenAny`**|`flattenAny () -> [AnyObject]`
-**`sortBy`**|`sortBy (isOrderedBefore: (T, T) -> Bool) -> [T]`
 **`toDictionary`**|`toDictionary <U> (keySelector:(Element) -> U) -> [U: Element]`
+**`toDictionary`**|`toDictionary <K, V> (transform: (Element) -> (key: K, value: V)?) -> [K: V]`
+**`cycle`**|`cycle (n: Int? = nil, block: (T) -> ())`
+**`bSearch`**|`bSearch (block: (T) -> (Bool)) -> T?`
+**`bSearch`**|`bSearch (block: (T) -> (Int)) -> T?`
+**`sortUsing`**|`sortUsing<U:Comparable>(block: ((T) -> U)) -> [T]`
+**`transposition`**|`transposition (array: [[T]]) -> [[T]]`
+**`permutation`**|`permutation (length: Int) -> [[T]]`
+**`repeatedPermutation`**|`repeatedPermutation(length: Int) -> [[T]]`
+**`combination`**|`combination (length: Int) -> [[Element]]`
+**`repeatedCombination `**|`repeatedCombination (length: Int) -> [[Element]]`
 
 #### Class Methods ####
 
