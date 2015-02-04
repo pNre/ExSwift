@@ -24,13 +24,14 @@ components.takeFirst() { $0.completed }
 		- [Class Methods](#class-methods)
 		- [Operators](#operators)
     - [Int](#int)
+       - [Properties](#properties)
     	- [Instance Methods](#instance-methods-1)
     	- [Class Methods](#class-methods-1)
     - [Float](#float)
     	- [Instance Methods](#instance-methods-2)
     	- [Class Methods](#class-methods-2)
     - [String](#string)
-    	- [Properties](#properties)
+    	- [Properties](#properties-1)
     	- [Instance Methods](#instance-methods-3)
 		- [Class Methods](#class-methods-3)
 		- [Operators](#operators-1)
@@ -48,9 +49,13 @@ components.takeFirst() { $0.completed }
 	- [Double](#double)
 		- [Instance Methods](#instance-methods-8)
 		- [Class Methods](#class-methods-5)
+	- [NSDate](#nsdate)
+		- [Instance Methods](#instance-methods-9)
+		- [Operators](#operators-4)
 
 - [Utilities](#utilities)
 	- [Class Methods](#class-methods-6)
+	- [Operators](#operators-5)
 
 # Extensions #
 
@@ -259,6 +264,7 @@ Name | Signatures
 ---- | ----------
 **`times`**|`times (call: (T) -> ())`<br>`times (call: () -> ())`
 **`each`**|`each (call: (T) -> ())`
+**`toArray`**|`toArray () -> [T]`
 
 #### Class Methods ####
 
@@ -369,20 +375,6 @@ Name | Signatures
 ---- | ----------
 **`random`**|`random(min: Double = 0, max: Double) -> Double`
 
-# Utilities #
-
-Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/ExSwift)
-
-#### Class Methods ####
-
-Name | Signatures
----- | ----------
-**`after`**|`after <P, T> (n: Int, function: P -> T) -> (P -> T?)`<br>`func after <T> (n: Int, function: () -> T) -> (() -> T?)`
-**`once`**|`once <P, T> (function: P -> T) -> (P -> T?)`<br>`once <T> (call: Void -> T) -> (Void -> T?)`
-**`partial`**|`partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T?)`
-**`bind`**|`bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (() -> T)`
-**`cached`**|`cached <P, R> (function: (P...) -> R) -> ((P...) -> R)`<br>`cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R)`
-
 # NSDate #
 
 #### Properties ####
@@ -423,6 +415,24 @@ Name | Signatures
 **`>=`**|`>=(lhs: NSDate, rhs: NSDate) -> Bool`
 **`==`**|`==(lhs: NSDate, rhs: NSDate) -> Bool`
 
+# Utilities #
+
+Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/ExSwift)
+
+#### Class Methods ####
+
+Name | Signatures
+---- | ----------
+**`after`**|`after <P, T> (n: Int, function: P -> T) -> (P -> T?)`<br>`func after <T> (n: Int, function: () -> T) -> (() -> T?)`
+**`once`**|`once <P, T> (function: P -> T) -> (P -> T?)`<br>`once <T> (call: Void -> T) -> (Void -> T?)`
+**`partial`**|`partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T?)`
+**`bind`**|`bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (() -> T)`
+**`cached`**|`cached <P, R> (function: (P...) -> R) -> ((P...) -> R)`<br>`cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R)`
+
+#### Operators ####
+Name | Signatures
+---- | ----------
+**`<=>`**|`<=> <T: Comparable>(lhs: T, rhs: T) -> Int`
 
 # To Do #
 * [X] Wiki
