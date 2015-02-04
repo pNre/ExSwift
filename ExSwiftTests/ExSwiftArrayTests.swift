@@ -33,6 +33,13 @@ class ExtensionsArrayTests: XCTestCase {
         // check that the destination has been sorted
         XCTAssertEqual(sortedArray, [2, 3, 5, 6])
     }
+
+    func testSortUsing() {
+        let sourceArray: [Int] = [3, 2, 7]
+        XCTAssertEqual(sourceArray.sortUsing({ $0 / 3 }), [2, 3, 7])
+        XCTAssertEqual(sourceArray.sortUsing({ $0 % 3 }), [3, 7, 2])
+        XCTAssertEqual(sourceArray.sortUsing({ -$0 }), [7, 3, 2])
+    }
   
     func testReject () {
         var odd = array.reject({
