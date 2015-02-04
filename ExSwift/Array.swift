@@ -1054,6 +1054,23 @@ internal extension Array {
     }
 
     /**
+        Converts the array to a dictionary with keys and values supplied via the transform function.
+    
+        :param: transform
+        :returns: A dictionary
+    */
+    func toDictionary <K, V> (transform: (Element) -> (key: K, value: V)?) -> [K: V] {
+        var result: [K: V] = [:]
+        for item in self {
+            if let entry = transform(item) {
+                result[entry.key] = entry.value
+            }
+        }
+        
+        return result
+    }
+    
+    /**
         Flattens a nested Array self to an array of OutType objects.
     
         :returns: Flattened array

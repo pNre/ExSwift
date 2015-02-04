@@ -32,21 +32,42 @@ class ExtensionsArrayTests: XCTestCase {
     }
   
     func testReject () {
-        var odd = array.reject({
+        let odd = array.reject({
             return $0 % 2 == 0
         })
 
         XCTAssertEqual(odd, [1, 3, 5])
+        
+        let empty = array.reject { value in
+            return true
+        }
+        
+        XCTAssertEqual(empty, [])
+        
+        let full = array.reject { value in
+            return false
+        }
+        
+        XCTAssertEqual(full, array)
     }
   
     func testToDictionary () {
-        var dictionary = people.toDictionary { $0.id }
+        //  toDictionary mapping the array values to new keys
+        let dictionary = people.toDictionary { $0.id }
         
         XCTAssertTrue(Array(dictionary.keys).difference(["P3", "P1", "P2"]).isEmpty)
         
         XCTAssertEqual(dictionary["P1"]!.name, "bob")
         XCTAssertEqual(dictionary["P2"]!.name, "frank")
         XCTAssertEqual(dictionary["P3"]!.name, "ian")
+        
+        //  toDictionary transforming the array values
+        let map = people.toDictionary { (person: (name: String, id: String)) -> (key: String, value: String)? in
+            return (key: String(reverse(person.id)), value: String(reverse(person.name)))
+        }
+        
+        XCTAssert(map.values.array.all { ["bob", "knarf", "nai"].contains($0) })
+        XCTAssert(map.keys.array.all { ["1P", "2P", "3P"].contains($0) })
     }
     
     func testEach() {
