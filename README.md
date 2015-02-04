@@ -143,6 +143,20 @@ Name | Signature | Function
 
 Examples in the [Wiki](https://github.com/pNre/ExSwift/wiki/Int)
 
+#### Properties ####
+Name |
+---- |
+`NSTimeInterval`**`years`**|
+`NSTimeInterval`**`year`**|
+`NSTimeInterval`**`days`**|
+`NSTimeInterval`**`day`**|
+`NSTimeInterval`**`hours`**|
+`NSTimeInterval`**`hour`**|
+`NSTimeInterval`**`minutes`**|
+`NSTimeInterval`**`minute`**|
+`NSTimeInterval`**`seconds`**|
+`NSTimeInterval`**`second`**|
+
 #### Instance Methods ####
 
 Name | Signatures
@@ -347,6 +361,7 @@ Name | Signature
 **`ceil`**|`ceil () -> Double`
 **`floor`**|`floor () -> Double`
 **`clamp`**|`clamp (min: Double, _ max: Double) -> Double`
+**`roundToNearest`**|`roundToNearest(increment: Double) -> Double`
 
 #### Class Methods ####
 
