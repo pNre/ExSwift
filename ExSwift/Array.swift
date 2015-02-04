@@ -1094,7 +1094,7 @@ internal extension Array {
         :param: isOrderedBefore Comparison function.
         :returns: An array that is sorted according to the given function
     */
-    func sortBy (isOrderedBefore: (T, T) -> Bool) -> [T] {
+    @availability(*, unavailable, message="use 'sorted' instead") func sortBy (isOrderedBefore: (T, T) -> Bool) -> [T] {
         return sorted(isOrderedBefore)
     }
 
