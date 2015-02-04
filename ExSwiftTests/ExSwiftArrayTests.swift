@@ -24,16 +24,6 @@ class ExtensionsArrayTests: XCTestCase {
         people = [bob, frank, ian]
     }
 
-    func testSortBy () {
-        var sourceArray = [2, 3, 6, 5]
-        var sortedArray = sourceArray.sortBy {$0 < $1}
-
-        // check that the source array as not been mutated
-        XCTAssertEqual(sourceArray, [2, 3, 6, 5])
-        // check that the destination has been sorted
-        XCTAssertEqual(sortedArray, [2, 3, 5, 6])
-    }
-
     func testSortUsing() {
         let sourceArray: [Int] = [3, 2, 7]
         XCTAssertEqual(sourceArray.sortUsing({ $0 / 3 }), [2, 3, 7])
