@@ -879,7 +879,7 @@ internal extension Array {
         return permutationIndexes.map({ $0.map({ i in self[i] }) })
     }
 
-    func repeatedPermutationHelper(seed: [Int], length: Int, arrayLength: Int, inout permutationIndexes: [[Int]]) {
+    private func repeatedPermutationHelper(seed: [Int], length: Int, arrayLength: Int, inout permutationIndexes: [[Int]]) {
         if seed.count == length {
             permutationIndexes.append(seed)
             return
