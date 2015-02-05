@@ -462,17 +462,17 @@ internal extension Array {
     func minBy <U: Comparable> (call: (Element) -> (U)) -> Element? {
 
         if let firstValue = self.first {
-            var maxElement: T = firstValue
+            var minElement: T = firstValue
             var minValue: U = call(firstValue)
             for i in 1..<self.count {
                 let element: Element = self[i]
                 let value: U = call(element)
                 if value < minValue {
-                    maxElement = element
+                    minElement = element
                     minValue = value
                 }
             }
-            return maxElement
+            return minElement
         } else {
             return nil
         }
