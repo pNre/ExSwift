@@ -12,7 +12,7 @@ class ExSwiftTests: XCTestCase {
 
     func testAfter () {
         
-        let f = ExSwift.after(2, { () -> Bool in return true })
+        let f = ExSwift.after(2, function: { () -> Bool in return true })
         
         XCTAssertNil(f())
         XCTAssertNil(f())
@@ -20,7 +20,7 @@ class ExSwiftTests: XCTestCase {
         
         var called = false
         
-        let g = ExSwift.after(2, { called = true })
+        let g = ExSwift.after(2, function: { called = true })
         
         g()
         g()
@@ -57,7 +57,7 @@ class ExSwiftTests: XCTestCase {
     func testPartial () {
         let add = {
             (params: Int...) -> Int in
-            return params.reduce(0, { return $0 + $1 })
+            return params.reduce(0, combine: { return $0 + $1 })
         }
         let add5 = ExSwift.partial(add, 5)
 

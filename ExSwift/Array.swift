@@ -75,7 +75,7 @@ internal extension Array {
             //  to intersect in the next loop
             value.each { (item: U) -> Void in
                 if result.contains(item) {
-                    intersection.append(item as Element)
+                    intersection.append(item as! Element)
                 }
             }
 
@@ -98,7 +98,7 @@ internal extension Array {
         for array in values {
             for value in array {
                 if !result.contains(value) {
-                    result.append(value as Element)
+                    result.append(value as! Element)
                 }
             }
         }
@@ -164,7 +164,7 @@ internal extension Array {
     func lastIndexOf <U: Equatable> (item: U) -> Int? {
         if item is Element {
             for (index, value) in enumerate(lazy(self).reverse()) {
-                if value as U == item {
+                if value as! U == item {
                     return count - 1 - index
                 }
             }
@@ -351,7 +351,7 @@ internal extension Array {
         for item in self {
             let value = cond(item)
 
-            if value == lastValue? {
+            if value == lastValue {
                 let index: Int = result.count - 1
                 result[index] += [item]
             } else {
@@ -411,7 +411,7 @@ internal extension Array {
     func max <U: Comparable> () -> U {
 
         return maxElement(map {
-            return $0 as U
+            return $0 as! U
         })
 
     }
@@ -424,7 +424,7 @@ internal extension Array {
     func min <U: Comparable> () -> U {
 
         return minElement(map {
-            return $0 as U
+            return $0 as! U
         })
 
     }
@@ -669,8 +669,8 @@ internal extension Array {
         var result = [T]()
 
         for item in self {
-            if !result.contains(item as T) {
-                result.append(item as T)
+            if !result.contains(item as! T) {
+                result.append(item as! T)
             }
         }
 
@@ -1259,7 +1259,7 @@ internal extension Array {
 
         anotherSelf.each {
             (index: Int, current: Element) in
-            if current as U != element {
+            if (current as! U) != element {
                 self.append(current)
             }
         }

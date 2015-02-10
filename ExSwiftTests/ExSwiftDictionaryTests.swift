@@ -123,7 +123,7 @@ class ExSwiftDictionaryTests: XCTestCase {
     }
 
     func testReduce () {
-        let reduced = dictionary.reduce(Dictionary<Int, String>(), {
+        let reduced = dictionary.reduce(Dictionary<Int, String>(), combine: {
             (var initial: Dictionary<Int, String>, couple: (String, Int)) in
             initial.updateValue(couple.0, forKey: couple.1)
             return initial

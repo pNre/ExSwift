@@ -13,7 +13,7 @@ public extension String {
     /**
         String length
     */
-    var length: Int { return countElements(self) }
+    var length: Int { return count(self) }
     
     /**
         self.capitalizedString shorthand
@@ -107,7 +107,7 @@ public extension String {
 
         if let regex = ExSwift.regex(pattern, ignoreCase: ignoreCase) {
             //  Using map to prevent a possible bug in the compiler
-            return regex.matchesInString(self, options: nil, range: NSMakeRange(0, length)).map { $0 as NSTextCheckingResult }
+            return regex.matchesInString(self, options: nil, range: NSMakeRange(0, length)).map { $0 as! NSTextCheckingResult }
         }
 
         return nil
@@ -220,7 +220,7 @@ public extension String {
 
         if let regex = ExSwift.regex(pattern, ignoreCase: true) {
             let text = self.trimmed()
-            let matches = regex.matchesInString(text, options: nil, range: NSMakeRange(0, countElements(text)))
+            let matches = regex.matchesInString(text, options: nil, range: NSMakeRange(0, count(text)))
             if matches.isEmpty {
                 return nil
             }

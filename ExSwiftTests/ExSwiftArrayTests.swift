@@ -169,14 +169,14 @@ class ExtensionsArrayTests: XCTestCase {
     func testZip() {
         var zip1 = [1, 2].zip(["A", "B"])
 
-        var a = zip1[0][0] as Int
-        var b = zip1[0][1] as String
+        var a = zip1[0][0] as! Int
+        var b = zip1[0][1] as! String
 
         XCTAssertEqual(1, a)
         XCTAssertEqual("A", b)
 
-        a = zip1[1][0] as Int
-        b = zip1[1][1] as String
+        a = zip1[1][0] as! Int
+        b = zip1[1][1] as! String
 
         XCTAssertEqual(2, a)
         XCTAssertEqual("B", b)
@@ -324,7 +324,7 @@ class ExtensionsArrayTests: XCTestCase {
     func testReduceRight () {
         let list = [[1, 1], [2, 3], [4, 5]]
         
-        let flat = list.reduceRight([Int](), { return $0 + $1 })
+        let flat = list.reduceRight([Int](), combine: { return $0 + $1 })
         
         XCTAssertEqual(flat, [4, 5, 2, 3, 1, 1])
         
@@ -357,7 +357,7 @@ class ExtensionsArrayTests: XCTestCase {
     func testFlatten () {
         let array = [5, [6, [7]], 8]
         XCTAssertEqual(array.flatten() as [Int], [5, 6, 7, 8])
-        XCTAssertEqual(array.flattenAny() as [Int], [5, 6, 7, 8])
+        XCTAssertEqual(array.flattenAny() as! [Int], [5, 6, 7, 8])
     }
     
     func testGet () {
