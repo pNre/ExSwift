@@ -69,7 +69,7 @@ class ExSwiftIntTests: XCTestCase {
     func testUpTo() {
         var result = Array<Int>()
         
-        5.upTo(10, { result.append($0) })
+        5.upTo(10, function: { result.append($0) })
      
         XCTAssertEqual(result, Array(5...10))
     }
@@ -78,7 +78,7 @@ class ExSwiftIntTests: XCTestCase {
         
         var result = Array<Int>()
         
-        3.downTo(0, { result.append($0) })
+        3.downTo(0, function: { result.append($0) })
         
         XCTAssertEqual(result, [3, 2, 1, 0])
         
