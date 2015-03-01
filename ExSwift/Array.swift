@@ -145,12 +145,8 @@ internal extension Array {
     :param: condition A function which returns a boolean if an element satisfies a given condition or not.
     :returns: First matched item or nil
     */
-    func find (condition: Element -> Bool) -> T? {
-        if let index = indexOf(condition) {
-            return self[index]
-        }
-        
-        return nil
+    func find (condition: Element -> Bool) -> Element? {
+        return takeFirst(condition)
     }
 
     /**
