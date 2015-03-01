@@ -185,10 +185,10 @@ internal extension Array {
 
         //  If the index is out of bounds it's assumed relative
         func relativeIndex (index: Int) -> Int {
-            var _index = (index % count)
+            var _index = (index % self.count)
 
             if _index < 0 {
-                _index = count + _index
+                _index = self.count + _index
             }
 
             return _index
