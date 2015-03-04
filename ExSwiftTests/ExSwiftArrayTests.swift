@@ -128,6 +128,21 @@ class ExtensionsArrayTests: XCTestCase {
         XCTAssertEqual(diff, array)
         XCTAssertEqual(array - [], array)
     }
+    
+    func testFind() {
+        //  Equatable parameter
+        XCTAssertEqual(1, array.find(1)!)
+        XCTAssertEqual(3, array.find(3)!)
+        XCTAssertNil(array.find(6))
+        
+        //  Matching block
+        XCTAssertEqual(2, array.find { item in
+            return item % 2 == 0
+        }!)
+        XCTAssertNil(array.find { item in
+            return item > 10
+        })
+    }
 
     func testIndexOf() {
         //  Equatable parameter

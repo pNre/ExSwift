@@ -124,6 +124,30 @@ internal extension Array {
     @availability(*, unavailable, message="use the 'last' property instead") func last () -> Element? {
         return last
     }
+    
+    /**
+    First occurrence of item, if found.
+    
+    :param: item The item to search for
+    :returns: Matched item or nil
+    */
+    func find <U: Equatable> (item: U) -> T? {
+        if let index = indexOf(item) {
+            return self[index]
+        }
+        
+        return nil
+    }
+    
+    /**
+    First item that meets the condition.
+    
+    :param: condition A function which returns a boolean if an element satisfies a given condition or not.
+    :returns: First matched item or nil
+    */
+    func find (condition: Element -> Bool) -> Element? {
+        return takeFirst(condition)
+    }
 
     /**
         Index of the first occurrence of item, if found.
@@ -133,7 +157,7 @@ internal extension Array {
     */
     func indexOf <U: Equatable> (item: U) -> Int? {
         if item is Element {
-            return find(unsafeBitCast(self, [U].self), item)
+            return Swift.find(unsafeBitCast(self, [U].self), item)
         }
 
         return nil
