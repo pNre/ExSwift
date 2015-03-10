@@ -91,9 +91,9 @@ public extension String {
         :returns: Array of substrings
     */
     func explode (separator: Character) -> [String] {
-        return split(self) { (element: Character) -> Bool in
+        return split(self, { (element: Character) -> Bool in
             return element == separator
-        }
+        })
     }
 
     /**
