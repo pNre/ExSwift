@@ -39,5 +39,27 @@ class ExSwiftFloatTests: XCTestCase {
     
     func testRandom() {
     }
+    
+    func testFormat(){
+        var price:Float = 789.424
+        var formatter = ExSwiftFormatter.numberFormatter
+
+        formatter.decimalSeparator = "."
+        formatter.numberStyle = .DecimalStyle
+        formatter.setPrecision(3)
+
+        XCTAssertEqual("789.424", price.format())
+        
+        formatter = ExSwiftFormatter.numberFormatter
+        formatter.setPrecision(4)
+        XCTAssertEqual("789.4240", price.format())
+        
+        formatter = ExSwiftFormatter.numberFormatter
+        formatter.decimalSeparator = "."
+        formatter.numberStyle = .CurrencyStyle
+        
+        XCTAssertEqual("$789.4240", price.format())
+        
+    }
 
 }

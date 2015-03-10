@@ -206,6 +206,10 @@ public extension Int {
         return Int(arc4random_uniform(UInt32((max - min) + 1))) + min
     }
 
+    func format() -> String{
+        return ExSwiftFormatter.numberFormatter.stringFromNumber(self)!
+    }
+    
 }
 
 /**

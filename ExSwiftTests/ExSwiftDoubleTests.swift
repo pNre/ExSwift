@@ -47,4 +47,27 @@ class ExSwiftDoubleTests: XCTestCase {
         XCTAssertEqualWithAccuracy(10.0.roundToNearest(3), 9.0, 0.01)
         XCTAssertEqualWithAccuracy(-2.0.roundToNearest(3), -3.0, 0.01)
     }
+    
+    func testFormat(){
+        var price:Double = 12356789.424
+        var formatter = ExSwiftFormatter.numberFormatter
+
+        formatter.decimalSeparator = "."
+        formatter.numberStyle = .DecimalStyle
+        formatter.setPrecision(3)
+
+        XCTAssertEqual("12,356,789.424", price.format())
+    
+        formatter = ExSwiftFormatter.numberFormatter
+        formatter.setPrecision(4)
+        XCTAssertEqual("12,356,789.4240", price.format())
+        
+        formatter = ExSwiftFormatter.numberFormatter
+        formatter.decimalSeparator = "."
+        formatter.numberStyle = .CurrencyStyle
+        
+        XCTAssertEqual("$12,356,789.4240", price.format())
+
+    }
+
 }
