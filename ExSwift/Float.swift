@@ -79,5 +79,8 @@ public extension Float {
         return ((rand / Float(RAND_MAX)) * diff) + min;
     }
     
+    func format() -> String{
+        return ExSwiftFormatter.numberFormatter.stringFromNumber(self)!
+    }
 }
 

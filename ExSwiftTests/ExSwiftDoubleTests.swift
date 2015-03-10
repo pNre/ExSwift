@@ -52,6 +52,10 @@ class ExSwiftDoubleTests: XCTestCase {
         var price:Double = 12356789.424
         var formatter = ExSwiftFormatter.numberFormatter
 
+        formatter.decimalSeparator = "."
+        formatter.numberStyle = .DecimalStyle
+        formatter.setPrecision(3)
+
         XCTAssertEqual("12,356,789.424", price.format())
     
         formatter = ExSwiftFormatter.numberFormatter
