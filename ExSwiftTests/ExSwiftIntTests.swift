@@ -146,5 +146,27 @@ class ExSwiftIntTests: XCTestCase {
         XCTAssertEqual(20, 20.second)
         XCTAssertEqual(-1, -1.second)
     }
+    
+    func testFormat(){
+        var price:Int = 456789
+        var formatter = ExSwiftFormatter.numberFormatter
+        
+        formatter.decimalSeparator = "."
+        formatter.numberStyle = .DecimalStyle
+        formatter.setPrecision(3)
+        
+        XCTAssertEqual("456,789.000", price.format())
+        
+        formatter = ExSwiftFormatter.numberFormatter
+        formatter.setPrecision(4)
+        XCTAssertEqual("456,789.0000", price.format())
+        
+        formatter = ExSwiftFormatter.numberFormatter
+        formatter.decimalSeparator = "."
+        formatter.numberStyle = .CurrencyStyle
+        
+        XCTAssertEqual("$456,789.0000", price.format())
+        
+    }
 }
 
