@@ -427,7 +427,7 @@ Name | Signatures
 **`once`**|`once <P, T> (function: P -> T) -> (P -> T?)`<br>`once <T> (call: Void -> T) -> (Void -> T?)`
 **`partial`**|`partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T?)`
 **`bind`**|`bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (() -> T)`
-**`cached`**|`cached <P, R> (function: (P...) -> R) -> ((P...) -> R)`<br>`cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R)`
+**`cached`**|`cached <P, R> (function: P -> R) -> (P -> R)`<br>`cached <P, R> (function: (P...) -> R) -> ((P...) -> R)`<br>`cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R)`
 
 #### Operators ####
 Name | Signatures
