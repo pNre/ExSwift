@@ -216,19 +216,15 @@ public extension String {
     */
     func toDouble() -> Double? {
 
-        let pattern = "^[-+]?[0-9]*\\.?[0-9]+$"
+        let scanner = NSScanner(string: self)
+        var double: Double = 0
 
-        if let regex = ExSwift.regex(pattern, ignoreCase: true) {
-            let text = self.trimmed()
-            let matches = regex.matchesInString(text, options: nil, range: NSMakeRange(0, countElements(text)))
-            if matches.isEmpty {
-                return nil
-            }
-
-            return (self as NSString).doubleValue
+        if scanner.scanDouble(&double) {
+            return double
         }
 
         return nil
+
     }
 
     /**
@@ -237,11 +233,16 @@ public extension String {
        :returns: A float parsed from the string or nil if it cannot be parsed.
     */
     func toFloat() -> Float? {
-        if let val = self.toDouble() {
-            return Float(val)
+    
+        let scanner = NSScanner(string: self)
+        var float: Float = 0
+        
+        if scanner.scanFloat(&float) {
+            return float
         }
-
+        
         return nil
+
     }
 
     /**

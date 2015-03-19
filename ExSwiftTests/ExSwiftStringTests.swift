@@ -150,6 +150,7 @@ class ExSwiftStringTests: XCTestCase {
     }
 
     func testToDouble() {
+    
         var d : Double = "  7.2 ".toDouble()!
         XCTAssertEqual(7.2, d)
 
@@ -159,7 +160,15 @@ class ExSwiftStringTests: XCTestCase {
         d = "42".toDouble()!
         XCTAssertEqual(42, d)
 
-       XCTAssertNil("a772.2".toDouble())
+        XCTAssertNil("a772.2".toDouble())
+        
+        //  scientific notation
+        d = "2.1e3".toDouble()!
+        XCTAssertEqualWithAccuracy(d, 2100.0, 0.001)
+        
+        d = "10.5e-2".toDouble()!
+        XCTAssertEqualWithAccuracy(d, 0.105, 0.001)
+        
     }
 
     func testToFloat() {
