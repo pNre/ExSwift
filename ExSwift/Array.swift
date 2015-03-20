@@ -510,7 +510,7 @@ internal extension Array {
     
         :param: call Function to call for each element
     */
-    func eachRight (call: (Element) -> ()) {
+    @availability(*, unavailable, message="use 'reverse().each' instead") func eachRight (call: (Element) -> ()) {
         reverse().each(call)
     }
 
@@ -519,7 +519,7 @@ internal extension Array {
     
         :param: call Function to call for each element
     */
-    func eachRight (call: (Int, Element) -> ()) {
+    @availability(*, unavailable, message="use 'reverse().each' instead") func eachRight (call: (Int, Element) -> ()) {
         for (index, item) in enumerate(reverse()) {
             call(count - index - 1, item)
         }
@@ -598,6 +598,7 @@ internal extension Array {
         }
 
         return take(lastTrue + 1)
+    
     }
 
     /**
@@ -1271,7 +1272,7 @@ internal extension Array {
         :param: range
         :returns: Array of values
     */
-    static func range <U: ForwardIndexType> (range: Range<U>) -> [U] {
+    @availability(*, unavailable, message="use the '[U](range)' constructor") static func range <U: ForwardIndexType> (range: Range<U>) -> [U] {
         return [U](range)
     }
 
