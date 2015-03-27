@@ -26,7 +26,8 @@ public extension NSDate {
     */
     public func add(seconds: Int = 0, minutes: Int = 0, hours: Int = 0, days: Int = 0, weeks: Int = 0, months: Int = 0, years: Int = 0) -> NSDate {
         var calendar = NSCalendar.currentCalendar()
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1 || floor(NSFoundationVersionNumber)  <= NSFoundationVersionNumber10_9_2  ) {
+        let version = floor(NSFoundationVersionNumber)
+        if ( version <= NSFoundationVersionNumber_iOS_7_1 || version <= NSFoundationVersionNumber10_9_2  ) {
             var component = NSDateComponents()
             component.setValue(seconds, forComponent: .CalendarUnitSecond)
             var date : NSDate! = calendar.dateByAddingComponents(component, toDate: self, options: nil)!
