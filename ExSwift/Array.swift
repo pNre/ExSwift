@@ -618,7 +618,7 @@ internal extension Array {
     */
     func tail (n: Int) -> Array {
 
-        return  self[(count - n)..<elementsCount]
+        return  self[(count - n)..<count]
         
     }
 
@@ -1226,8 +1226,14 @@ internal extension Array {
     
         :returns: The removed element
     */
-    mutating func shift () -> Element {
+    mutating func shift () -> Element? {
+        
+        if self.isEmpty {
+            return nil
+        }
+        
         return removeAtIndex(0)
+
     }
 
     /**
