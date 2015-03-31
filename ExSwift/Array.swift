@@ -617,7 +617,9 @@ internal extension Array {
         :returns: Last n elements
     */
     func tail (n: Int) -> Array {
-        return self[(count - n)..<count]
+
+        return  self[(count - n)..<elementsCount]
+        
     }
 
     /**
@@ -627,7 +629,9 @@ internal extension Array {
         :returns: Array from n to the end
     */
     func skip (n: Int) -> Array {
-        return n > count ? [] : self[n..<count]
+    
+        return n > count ? [] : self[Int(n)..<count]
+        
     }
 
     /**
@@ -1189,7 +1193,7 @@ internal extension Array {
         :param: block the block to use to sort by
         :returns: an array sorted by that block, in ascending order
     */
-    func sortUsing<U:Comparable>(block: ((T) -> U)) -> [T] {
+    func sortUsing <U:Comparable> (block: ((T) -> U)) -> [T] {
         return self.sorted({ block($0.0) < block($0.1) })
     }
 
@@ -1198,8 +1202,14 @@ internal extension Array {
 
         :returns: The removed element
     */
-    mutating func pop () -> Element {
+    mutating func pop () -> Element? {
+        
+        if self.isEmpty {
+            return nil
+        }
+    
         return removeLast()
+        
     }
 
     /**
@@ -1354,14 +1364,16 @@ public func | <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
     :param: n How many times the array must be repeated
     :returns: Array of repeated values
 */
-public func * <ItemType> (array: Array<ItemType>, n: Int) -> Array<ItemType> {
+public func * <ItemType> (array: Array<ItemType>, n: UInt) -> Array<ItemType> {
+
     var result = Array<ItemType>()
 
-    n.times {
+    (0..<n).times {
         result += array
     }
 
     return result
+
 }
 
 /**
