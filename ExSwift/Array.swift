@@ -206,20 +206,21 @@ internal extension Array {
         :param: arrays Arrays to zip
         :returns: Array of grouped elements
     */
-    func zip (arrays: [Any]...) -> [[Any?]] {
+    func zip (arrays: Any...) -> [[Any?]] {
 
         var result = [[Any?]]()
 
-        //  Gets the longest array length
-        let max = arrays.map { (array: [Any]) -> Int in
-            return array.count
+        //  Gets the longest sequence
+        let max = arrays.map { (element: Any) -> Int in
+            return reflect(element).count
         }.max() as Int
 
         for i in 0..<max {
 
             //  i-th element in self as array + every i-th element in each array in arrays
-            result.append([get(i)] + arrays.map { (array) -> Any? in
-                return array.get(i)
+            result.append([get(i)] + arrays.map { (element) -> Any? in
+                let (_, mirror) = reflect(element)[i]
+                return mirror.value
             })
 
         }
@@ -1013,14 +1014,14 @@ internal extension Array {
     /**
         self.reduce from right to left
     */
-    func reduceRight <U> (initial: U, combine: (U, Element) -> U) -> U {
+    @availability(*, unavailable, message="use 'reverse().reduce' instead") func reduceRight <U> (initial: U, combine: (U, Element) -> U) -> U {
         return reverse().reduce(initial, combine: combine)
     }
 
     /**
         self.reduceRight with initial value self.last()
     */
-    func reduceRight (combine: (Element, Element) -> Element) -> Element? {
+    @availability(*, unavailable, message="use 'reverse().reduce' instead") func reduceRight (combine: (Element, Element) -> Element) -> Element? {
         return reverse().reduce(combine)
     }
 
