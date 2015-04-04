@@ -1340,28 +1340,28 @@ internal extension Array {
 /**
     Remove an element from the array
 */
-public func - <T: Equatable> (first: Array<T>, second: T) -> Array<T> {
+public func - <T: Equatable> (first: [T], second: T) -> [T] {
     return first - [second]
 }
 
 /**
     Difference operator
 */
-public func - <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
+public func - <T: Equatable> (first: [T], second: [T]) -> [T] {
     return first.difference(second)
 }
 
 /**
     Intersection operator
 */
-public func & <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
+public func & <T: Equatable> (first: [T], second: [T]) -> [T] {
     return first.intersection(second)
 }
 
 /**
     Union operator
 */
-public func | <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
+public func | <T: Equatable> (first: [T], second: [T]) -> [T] {
     return first.union(second)
 }
 /**
@@ -1371,9 +1371,9 @@ public func | <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T> {
     :param: n How many times the array must be repeated
     :returns: Array of repeated values
 */
-public func * <ItemType> (array: Array<ItemType>, n: UInt) -> Array<ItemType> {
+public func * <ItemType> (array: [ItemType], n: Int) -> [ItemType] {
 
-    var result = Array<ItemType>()
+    var result = [ItemType]()
 
     (0..<n).times {
         result += array
@@ -1390,6 +1390,6 @@ public func * <ItemType> (array: Array<ItemType>, n: UInt) -> Array<ItemType> {
     :param: separator Separator to join the array elements
     :returns: Joined string
 */
-public func * (array: Array<String>, separator: String) -> String {
+public func * (array: [String], separator: String) -> String {
     return array.implode(separator)!
 }
