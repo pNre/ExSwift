@@ -80,7 +80,7 @@ internal extension Dictionary {
         }
 
         //  Intersection
-        return filtered.filter(testFunction: { (key: K, value: V) -> Bool in
+        return filtered.filter({ (key: K, value: V) -> Bool in
             //  check for [key: value] in all the dictionaries
             dictionaries.all { $0.has(key) && $0[key] == value }
         })
@@ -104,7 +104,7 @@ internal extension Dictionary {
         :param: mapFunction
         :returns: Mapped array
     */
-    func toArray <V> (mapFunction map: (Key, Value) -> V) -> [V] {
+    func toArray <V> (map: (Key, Value) -> V) -> [V] {
         
         var mapped = [V]()
         
@@ -123,7 +123,7 @@ internal extension Dictionary {
         :param: mapFunction
         :returns: Mapped dictionary
     */
-    func mapValues <V> (mapFunction map: (Key, Value) -> V) -> [Key: V] {
+    func mapValues <V> (map: (Key, Value) -> V) -> [Key: V] {
 
         var mapped = [Key: V]()
 
@@ -142,7 +142,7 @@ internal extension Dictionary {
         :param: mapFunction
         :returns: Mapped dictionary
     */
-    func mapFilterValues <V> (mapFunction map: (Key, Value) -> V?) -> [Key: V] {
+    func mapFilterValues <V> (map: (Key, Value) -> V?) -> [Key: V] {
         
         var mapped = [Key: V]()
 
@@ -163,7 +163,7 @@ internal extension Dictionary {
         :param: mapFunction
         :returns: Mapped dictionary
     */
-    func mapFilter <K, V> (mapFunction map: (Key, Value) -> (K, V)?) -> [K: V] {
+    func mapFilter <K, V> (map: (Key, Value) -> (K, V)?) -> [K: V] {
         
         var mapped = [K: V]()
         
@@ -184,11 +184,11 @@ internal extension Dictionary {
         :param: mapFunction
         :returns: Mapped dictionary
     */
-    func map <K, V> (mapFunction map: (Key, Value) -> (K, V)) -> [K: V] {
+    func map <K, V> (map: (Key, Value) -> (K, V)) -> [K: V] {
 
         var mapped = [K: V]()
 
-        self.each(eachFunction: {
+        self.each({
             let (_key, _value) = map($0, $1)
             mapped[_key] = _value
         })
@@ -202,7 +202,7 @@ internal extension Dictionary {
     
         :param: eachFunction Function to inovke on each loop
     */
-    func each (eachFunction each: (Key, Value) -> ()) {
+    func each (each: (Key, Value) -> ()) {
 
         for (key, value) in self {
             each(key, value)
@@ -217,7 +217,7 @@ internal extension Dictionary {
         :param: testFunction Function called to test each key, value
         :returns: Filtered dictionary
     */
-    func filter (testFunction test: (Key, Value) -> Bool) -> Dictionary {
+    func filter (test: (Key, Value) -> Bool) -> Dictionary {
 
         var result = Dictionary()
 
@@ -239,7 +239,7 @@ internal extension Dictionary {
         :param: groupingFunction
         :returns: Grouped dictionary
     */
-    func groupBy <T> (groupingFunction group: (Key, Value) -> T) -> [T: [Value]] {
+    func groupBy <T> (group: (Key, Value) -> T) -> [T: [Value]] {
 
         var result = [T: [Value]]()
 
@@ -265,7 +265,7 @@ internal extension Dictionary {
         :param: groupingFunction Function called to define the grouping key
         :returns: Grouped dictionary
     */
-    func countBy <T> (groupingFunction group: (Key, Value) -> (T)) -> [T: Int] {
+    func countBy <T> (group: (Key, Value) -> (T)) -> [T: Int] {
 
         var result = [T: Int]()
 
