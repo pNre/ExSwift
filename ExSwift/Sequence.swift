@@ -147,7 +147,7 @@ internal extension SequenceOf {
     func contains<T:Equatable> (item: T) -> Bool {
         var generator =  self.generate()
         while let nextItem = generator.next() {
-            if nextItem as T == item {
+            if nextItem as! T == item {
                 return true
             }
         }

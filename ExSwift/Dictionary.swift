@@ -73,14 +73,14 @@ internal extension Dictionary {
         //  Casts self from [Key: Value] to [K: V]
         let filtered = mapFilter { (item, value) -> (K, V)? in
             if (item is K) && (value is V) {
-                return (item as K, value as V)
+                return (item as! K, value as! V)
             }
             
             return nil
         }
 
         //  Intersection
-        return filtered.filter({ (key: K, value: V) -> Bool in
+        return filtered.filter(testFunction: { (key: K, value: V) -> Bool in
             //  check for [key: value] in all the dictionaries
             dictionaries.all { $0.has(key) && $0[key] == value }
         })
@@ -188,7 +188,7 @@ internal extension Dictionary {
 
         var mapped = [K: V]()
 
-        self.each({
+        self.each(eachFunction: {
             let (_key, _value) = map($0, $1)
             mapped[_key] = _value
         })
