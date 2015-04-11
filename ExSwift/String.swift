@@ -144,7 +144,9 @@ public extension String {
         return ""
     }
     
-    @availability(*, unavailable, message="use 'trimmedLeft' instead") func ltrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String { }
+    @availability(*, unavailable, message="use 'trimmedLeft' instead") func ltrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
+        return trimmedLeft(set: set)
+    }
     
     /**
         Strips the specified characters from the end of self.
@@ -159,7 +161,9 @@ public extension String {
         return ""
     }
     
-    @availability(*, unavailable, message="use 'trimmedRight' instead") func rtrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String { }
+    @availability(*, unavailable, message="use 'trimmedRight' instead") func rtrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
+        return trimmedRight(set: set)
+    }
     
     /**
         Strips whitespaces from both the beginning and the end of self.
