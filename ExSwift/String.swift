@@ -132,56 +132,42 @@ public extension String {
     }
 
     /**
-        Strips whitespaces from the beginning of self.
-    
-        :returns: Stripped string
-    */
-    func ltrimmed () -> String {
-        return ltrimmed(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-    }
-    
-    /**
         Strips the specified characters from the beginning of self.
     
         :returns: Stripped string
     */
-    func ltrimmed (set: NSCharacterSet) -> String {
+    func trimmedLeft (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
         if let range = rangeOfCharacterFromSet(set.invertedSet) {
             return self[range.startIndex..<endIndex]
         }
         
         return ""
     }
-
-    /**
-        Strips whitespaces from the end of self.
     
-        :returns: Stripped string
-    */
-    func rtrimmed () -> String {
-        return rtrimmed(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-    }
+    @availability(*, unavailable, message="use 'trimmedLeft' instead") func ltrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String { }
     
     /**
         Strips the specified characters from the end of self.
     
         :returns: Stripped string
     */
-    func rtrimmed (set: NSCharacterSet) -> String {
+    func trimmedRight (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
         if let range = rangeOfCharacterFromSet(set.invertedSet, options: NSStringCompareOptions.BackwardsSearch) {
             return self[startIndex..<range.endIndex]
         }
         
         return ""
     }
-
+    
+    @availability(*, unavailable, message="use 'trimmedRight' instead") func rtrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String { }
+    
     /**
         Strips whitespaces from both the beginning and the end of self.
     
         :returns: Stripped string
     */
     func trimmed () -> String {
-        return ltrimmed().rtrimmed()
+        return trimmedLeft().trimmedRight()
     }
 
     /**
@@ -307,6 +293,7 @@ public extension String {
     Repeats the string first n times
 */
 public func * (first: String, n: Int) -> String {
+
     var result = String()
 
     n.times {
@@ -314,46 +301,65 @@ public func * (first: String, n: Int) -> String {
     }
 
     return result
+    
 }
 
 //  Pattern matching using a regular expression
 public func =~ (string: String, pattern: String) -> Bool {
+
     let regex = ExSwift.regex(pattern, ignoreCase: false)!
     let matches = regex.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length))
+    
     return matches > 0
+    
 }
 
 //  Pattern matching using a regular expression
 public func =~ (string: String, regex: NSRegularExpression) -> Bool {
+
     let matches = regex.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length))
+    
     return matches > 0
+    
 }
 
 //  This version also allowes to specify case sentitivity
 public func =~ (string: String, options: (pattern: String, ignoreCase: Bool)) -> Bool {
+
     if let matches = ExSwift.regex(options.pattern, ignoreCase: options.ignoreCase)?.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length)) {
         return matches > 0
     }
 
     return false
+    
 }
 
 //  Match against all the alements in an array of String
 public func =~ (strings: [String], pattern: String) -> Bool {
+
     let regex = ExSwift.regex(pattern, ignoreCase: false)!
+    
     return strings.all { $0 =~ regex }
+    
 }
 
 public func =~ (strings: [String], options: (pattern: String, ignoreCase: Bool)) -> Bool {
+
     return strings.all { $0 =~ options }
+    
 }
 
 //  Match against any element in an array of String
 public func |~ (strings: [String], pattern: String) -> Bool {
+
     let regex = ExSwift.regex(pattern, ignoreCase: false)!
+    
     return strings.any { $0 =~ regex }
+    
 }
 
 public func |~ (strings: [String], options: (pattern: String, ignoreCase: Bool)) -> Bool {
+
     return strings.any { $0 =~ options }
+    
 }

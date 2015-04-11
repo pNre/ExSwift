@@ -212,6 +212,7 @@ public extension Int {
     NSTimeInterval conversion extensions
 */
 public extension Int {
+
     var years: NSTimeInterval {
         return 365 * self.days
     }
@@ -251,4 +252,5 @@ public extension Int {
     var second: NSTimeInterval {
         return self.seconds
     }
+
 }
