@@ -136,7 +136,7 @@ public extension String {
     
         :returns: Stripped string
     */
-    func trimmedLeft (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
+    func trimmedLeft (characterSet set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
         if let range = rangeOfCharacterFromSet(set.invertedSet) {
             return self[range.startIndex..<endIndex]
         }
@@ -145,7 +145,7 @@ public extension String {
     }
     
     @availability(*, unavailable, message="use 'trimmedLeft' instead") func ltrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
-        return trimmedLeft(set: set)
+        return trimmedLeft(characterSet: set)
     }
     
     /**
@@ -153,7 +153,7 @@ public extension String {
     
         :returns: Stripped string
     */
-    func trimmedRight (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
+    func trimmedRight (characterSet set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
         if let range = rangeOfCharacterFromSet(set.invertedSet, options: NSStringCompareOptions.BackwardsSearch) {
             return self[startIndex..<range.endIndex]
         }
@@ -162,7 +162,7 @@ public extension String {
     }
     
     @availability(*, unavailable, message="use 'trimmedRight' instead") func rtrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
-        return trimmedRight(set: set)
+        return trimmedRight(characterSet: set)
     }
     
     /**
