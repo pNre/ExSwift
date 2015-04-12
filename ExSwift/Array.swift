@@ -207,19 +207,7 @@ internal extension Array {
     */
     func get (index: Int) -> Element? {
 
-        //  If the index is out of bounds it's assumed relative
-        func relativeIndex (index: Int) -> Int {
-            var _index = (index % count)
-
-            if _index < 0 {
-                _index = count + _index
-            }
-
-            return _index
-        }
-
-        let _index = relativeIndex(index)
-        return _index < count ? self[_index] : nil
+        return (index < count && index >= 0) ? self[index] : nil
     }
 
     /**
