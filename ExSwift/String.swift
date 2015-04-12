@@ -14,15 +14,15 @@ public extension String {
         String length
     */
     var length: Int { return count(self) }
-    
+
     /**
         self.capitalizedString shorthand
     */
     var capitalized: String { return capitalizedString }
-    
+
     /**
         Returns the substring in the given range
-        
+
         :param: range
         :returns: Substring in range
     */
@@ -39,7 +39,7 @@ public extension String {
     /**
         Equivalent to at. Takes a list of indexes and returns an Array
         containing the elements at the given indexes in self.
-        
+
         :param: firstIndex
         :param: secondIndex
         :param: restOfIndexes
@@ -50,9 +50,9 @@ public extension String {
     }
 
     /**
-        Gets the character at the specified index as String. 
+        Gets the character at the specified index as String.
         If index is negative it is assumed to be relative to the end of the String.
-        
+
         :param: index Position of the character to get
         :returns: Character as String or nil if the index is out of bounds
     */
@@ -66,7 +66,7 @@ public extension String {
 
     /**
         Takes a list of indexes and returns an Array containing the elements at the given indexes in self.
-    
+
         :param: indexes Positions of the elements to get
         :returns: Array of characters (as String)
     */
@@ -76,7 +76,7 @@ public extension String {
 
     /**
         Takes a list of indexes and returns an Array containing the elements at the given indexes in self.
-    
+
         :param: indexes Positions of the elements to get
         :returns: Array of characters (as String)
     */
@@ -86,7 +86,7 @@ public extension String {
 
     /**
         Returns an array of strings, each of which is a substring of self formed by splitting it on separator.
-        
+
         :param: separator Character used to split the string
         :returns: Array of substrings
     */
@@ -98,7 +98,7 @@ public extension String {
 
     /**
         Finds any match in self for pattern.
-        
+
         :param: pattern Pattern to match
         :param: ignoreCase true for case insensitive matching
         :returns: Matches found (as [NSTextCheckingResult])
@@ -115,7 +115,7 @@ public extension String {
 
     /**
         Inserts a substring at the given index in self.
-    
+
         :param: index Where the new string is inserted
         :param: string String to insert
         :returns: String formed from self inserting string at index
@@ -127,47 +127,47 @@ public extension String {
         } else if index < 0 {
             return string + self
         }
-        
+
         return self[0..<index]! + string + self[index..<length]!
     }
 
     /**
         Strips the specified characters from the beginning of self.
-    
+
         :returns: Stripped string
     */
     func trimmedLeft (characterSet set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
         if let range = rangeOfCharacterFromSet(set.invertedSet) {
             return self[range.startIndex..<endIndex]
         }
-        
+
         return ""
     }
-    
+
     @availability(*, unavailable, message="use 'trimmedLeft' instead") func ltrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
         return trimmedLeft(characterSet: set)
     }
-    
+
     /**
         Strips the specified characters from the end of self.
-    
+
         :returns: Stripped string
     */
     func trimmedRight (characterSet set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
         if let range = rangeOfCharacterFromSet(set.invertedSet, options: NSStringCompareOptions.BackwardsSearch) {
             return self[startIndex..<range.endIndex]
         }
-        
+
         return ""
     }
-    
+
     @availability(*, unavailable, message="use 'trimmedRight' instead") func rtrimmed (set: NSCharacterSet = NSCharacterSet.whitespaceAndNewlineCharacterSet()) -> String {
         return trimmedRight(characterSet: set)
     }
-    
+
     /**
         Strips whitespaces from both the beginning and the end of self.
-    
+
         :returns: Stripped string
     */
     func trimmed () -> String {
@@ -176,7 +176,7 @@ public extension String {
 
     /**
         Costructs a string using random chars from a given set.
-    
+
         :param: length String length. If < 1, it's randomly selected in the range 0..16
         :param: charset Chars to use in the random string
         :returns: Random string
@@ -206,19 +206,15 @@ public extension String {
     */
     func toDouble() -> Double? {
 
-        let pattern = "^[-+]?[0-9]*\\.?[0-9]+$"
+        let scanner = NSScanner(string: self)
+        var double: Double = 0
 
-        if let regex = ExSwift.regex(pattern, ignoreCase: true) {
-            let text = self.trimmed()
-            let matches = regex.matchesInString(text, options: nil, range: NSMakeRange(0, count(text)))
-            if matches.isEmpty {
-                return nil
-            }
-
-            return (self as NSString).doubleValue
+        if scanner.scanDouble(&double) {
+            return double
         }
 
         return nil
+
     }
 
     /**
@@ -227,11 +223,16 @@ public extension String {
        :returns: A float parsed from the string or nil if it cannot be parsed.
     */
     func toFloat() -> Float? {
-        if let val = self.toDouble() {
-            return Float(val)
+
+        let scanner = NSScanner(string: self)
+        var float: Float = 0
+
+        if scanner.scanFloat(&float) {
+            return float
         }
 
         return nil
+
     }
 
     /**
@@ -305,7 +306,7 @@ public func * (first: String, n: Int) -> String {
     }
 
     return result
-    
+
 }
 
 //  Pattern matching using a regular expression
@@ -313,18 +314,18 @@ public func =~ (string: String, pattern: String) -> Bool {
 
     let regex = ExSwift.regex(pattern, ignoreCase: false)!
     let matches = regex.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length))
-    
+
     return matches > 0
-    
+
 }
 
 //  Pattern matching using a regular expression
 public func =~ (string: String, regex: NSRegularExpression) -> Bool {
 
     let matches = regex.numberOfMatchesInString(string, options: nil, range: NSMakeRange(0, string.length))
-    
+
     return matches > 0
-    
+
 }
 
 //  This version also allowes to specify case sentitivity
@@ -335,35 +336,35 @@ public func =~ (string: String, options: (pattern: String, ignoreCase: Bool)) ->
     }
 
     return false
-    
+
 }
 
 //  Match against all the alements in an array of String
 public func =~ (strings: [String], pattern: String) -> Bool {
 
     let regex = ExSwift.regex(pattern, ignoreCase: false)!
-    
+
     return strings.all { $0 =~ regex }
-    
+
 }
 
 public func =~ (strings: [String], options: (pattern: String, ignoreCase: Bool)) -> Bool {
 
     return strings.all { $0 =~ options }
-    
+
 }
 
 //  Match against any element in an array of String
 public func |~ (strings: [String], pattern: String) -> Bool {
 
     let regex = ExSwift.regex(pattern, ignoreCase: false)!
-    
+
     return strings.any { $0 =~ regex }
-    
+
 }
 
 public func |~ (strings: [String], options: (pattern: String, ignoreCase: Bool)) -> Bool {
 
     return strings.any { $0 =~ options }
-    
+
 }

@@ -85,6 +85,13 @@
 		CC633BA61A37142900341557 /* CharacterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC633BA51A37142900341557 /* CharacterExtensionsTests.swift */; };
 		CC633BA71A37144E00341557 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C1D701A365CA6003D386E /* Character.swift */; };
 		CC8C1D711A365CA6003D386E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C1D701A365CA6003D386E /* Character.swift */; };
+		3C0AB97E195C7FC20009BDA0 /* ExSwiftSequenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0AB97C195C7FBC0009BDA0 /* ExSwiftSequenceTests.swift */; };
+		6CB1F15F1A8AB867002EA767 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1F15E1A8AB867002EA767 /* Bool.swift */; };
+		6CB1F1611A8AB8D3002EA767 /* ExSwiftBoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1F1601A8AB8D3002EA767 /* ExSwiftBoolTests.swift */; };
+		6CB1F1621A8AB979002EA767 /* ExSwiftBoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1F1601A8AB8D3002EA767 /* ExSwiftBoolTests.swift */; };
+		6CB1F1631A8ABA1A002EA767 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1F15E1A8AB867002EA767 /* Bool.swift */; };
+		6CB1F1641A8ABA1A002EA767 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1F15E1A8AB867002EA767 /* Bool.swift */; };
+		6CB1F1661A8ABA1C002EA767 /* Bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB1F15E1A8AB867002EA767 /* Bool.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +142,7 @@
 		CC633BA51A37142900341557 /* CharacterExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterExtensionsTests.swift; sourceTree = "<group>"; };
 		CC8C1D701A365CA6003D386E /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		FA8EE3398AF8D20E3CE7A698 /* Pods-ExSwiftTests-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExSwiftTests-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExSwiftTests-OSX/Pods-ExSwiftTests-OSX.debug.xcconfig"; sourceTree = "<group>"; };
+		6CB1F15E1A8AB867002EA767 /* Bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bool.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +218,7 @@
 				1E11AFB11943225B006BCE48 /* String.swift */,
 				1EC241FB1946E91B0047109A /* NSArray.swift */,
 				12168FC91A22852300ED4105 /* NSDate.swift */,
+				6CB1F15E1A8AB867002EA767 /* Bool.swift */,
 				1E11AF891943222D006BCE48 /* ExSwift.h */,
 				1E11AF871943222D006BCE48 /* Supporting Files */,
 			);
@@ -550,6 +559,7 @@
 				3C0AB978195C7FAF0009BDA0 /* Sequence.swift in Sources */,
 				1E11AFB21943225B006BCE48 /* Array.swift in Sources */,
 				1ED536841943863100BDA94E /* ExSwift.swift in Sources */,
+				6CB1F15F1A8AB867002EA767 /* Bool.swift in Sources */,
 				1E11AFB41943225B006BCE48 /* Dictionary.swift in Sources */,
 				1E11AFB61943225B006BCE48 /* Float.swift in Sources */,
 				1E11AFB81943225B006BCE48 /* Int.swift in Sources */,
@@ -579,6 +589,7 @@
 				2EB34F0C195473AC00A8D2AF /* NSArray.swift in Sources */,
 				CC633BA71A37144E00341557 /* Character.swift in Sources */,
 				2EB34F05195473AC00A8D2AF /* ExSwift.swift in Sources */,
+				6CB1F1631A8ABA1A002EA767 /* Bool.swift in Sources */,
 				2EB34F08195473AC00A8D2AF /* Float.swift in Sources */,
 				12168FCD1A2285A900ED4105 /* NSDateExtensionsTests.swift in Sources */,
 				1E11AFAB19432236006BCE48 /* StringExtensionsTests.swift in Sources */,
