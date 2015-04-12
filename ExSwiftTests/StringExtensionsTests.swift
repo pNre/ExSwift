@@ -275,7 +275,7 @@ class StringExtensionsSpec: QuickSpec {
                     c.month = 8
                     c.day = 19
                     
-                    var gregorian = NSCalendar(identifier: NSGregorianCalendar)!
+                    var gregorian = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
                     expect(gregorian.dateFromComponents(c)) == d
                     
                     expect("a772.2".toDate()).to(beNil())
@@ -296,7 +296,7 @@ class StringExtensionsSpec: QuickSpec {
                     c.minute = 4
                     c.second = 34
                     
-                    var gregorian = NSCalendar(identifier: NSGregorianCalendar)!
+                    var gregorian = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
                     expect(gregorian.dateFromComponents(c)) == d
                     
                     expect("a772.2".toDateTime()).to(beNil())
