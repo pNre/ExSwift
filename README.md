@@ -1,11 +1,12 @@
 # ExSwift
+![CocoaPods](https://img.shields.io/cocoapods/v/ExSwift.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Set of Swift extensions for standard types and classes.
 
 # Installation
 
 Because of Xcode errors it's not possible to integrate this project with Cocoapods or as Embedded Framework.
-[Read more at Dev Forum](https://devforums.apple.com/message/983747#983747)  
+[Read more at Dev Forum](https://devforums.apple.com/message/983747#983747)
 
 ## Use submodule and copy source code
 1. Add ExSwift as a submodule
