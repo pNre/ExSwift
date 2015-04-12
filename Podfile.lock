@@ -3,8 +3,8 @@ PODS:
   - Quick (0.3.1)
 
 DEPENDENCIES:
-  - Nimble
-  - Quick
+  - Nimble (~> 0.4.2)
+  - Quick (~> 0.3.1)
 
 SPEC CHECKSUMS:
   Nimble: 49b7a7da8919f42823d37c6d68cc6d15a7009f32
