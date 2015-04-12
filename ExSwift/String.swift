@@ -57,7 +57,8 @@ public extension String {
         :returns: Character as String or nil if the index is out of bounds
     */
     subscript (index: Int) -> String? {
-        if let char = Array(self).get(index) {
+        var _index = index < 0 ? self.length + index : index
+        if let char = Array(self).get(_index) {
             return String(char)
         }
 

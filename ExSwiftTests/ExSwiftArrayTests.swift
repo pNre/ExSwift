@@ -377,8 +377,8 @@ class ExtensionsArrayTests: XCTestCase {
     
     func testGet () {
         XCTAssertEqual(1, array.get(0)!)
-        XCTAssertEqual(array.get(-1)!, array.last!)
-        XCTAssertEqual(array.get(array.count)!, array.first!)
+        XCTAssertNil(array.get(-1))
+        XCTAssertNil(array.get(array.count))
     }
 
     func testDuplicationOperator () {
