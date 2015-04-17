@@ -80,7 +80,7 @@ internal extension Dictionary {
         }
 
         //  Intersection
-        return filtered.filter(testFunction: { (key: K, value: V) -> Bool in
+        return filtered.filter({ (key: K, value: V) -> Bool in
             //  check for [key: value] in all the dictionaries
             dictionaries.all { $0.has(key) && $0[key] == value }
         })
@@ -188,7 +188,7 @@ internal extension Dictionary {
 
         var mapped = [K: V]()
 
-        self.each(eachFunction: {
+        self.each({
             let (_key, _value) = map($0, $1)
             mapped[_key] = _value
         })

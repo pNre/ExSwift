@@ -219,7 +219,7 @@ internal extension Array {
     */
     func get (range: Range<Int>) -> Array {
     
-        return self[range]
+        return self[rangeAsArray: range]
         
     }
 
