@@ -14,7 +14,6 @@ public extension String {
         String length
     */
     var length: Int { return count(self) }
-
     /**
         self.capitalizedString shorthand
     */
@@ -208,7 +207,6 @@ public extension String {
 
         let scanner = NSScanner(string: self)
         var double: Double = 0
-
         if scanner.scanDouble(&double) {
             return double
         }
