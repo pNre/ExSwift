@@ -15,11 +15,11 @@ internal extension SequenceOf {
     
         :returns: First element of the sequence if present
     */
-    func first () -> T? {
+    var first: T? {
         var generator =  self.generate()
         return generator.next()
     }
-    
+
     /**
         Checks if call returns true for any element of self.
     

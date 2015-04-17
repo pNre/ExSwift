@@ -6,106 +6,118 @@
 //  Copyright (c) 2014 pNre. All rights reserved.
 //
 
-import XCTest
+import Quick
+import Nimble
 
-class ExSwiftTests: XCTestCase {
+class ExSwiftSpec: QuickSpec {
 
-    func testAfter () {
-        
-        let f = ExSwift.after(2, { () -> Bool in return true })
-        
-        XCTAssertNil(f())
-        XCTAssertNil(f())
-        XCTAssertTrue(f()!)
-        
-        var called = false
-        
-        let g = ExSwift.after(2, { called = true })
-        
-        g()
-        g()
-        g()
-        
-        XCTAssertTrue(called)
-        
-    }
+    override func spec() {
 
-    func testOnce () {
+        it("after") {
 
-        //  Test execution
-        var test = false
+            let f = ExSwift.after(2, function: { () -> Bool in return true })
 
-        let f = Ex.once { test = !test }
-        
-        f()
-        f()
-        
-        XCTAssertTrue(test)
-        
-        //  Test return value
-        var seq = [1, 2, 3, 4].generate()
+            expect(f()).to(beNil())
+            expect(f()).to(beNil())
 
-        let g = Ex.once { Void -> Int in
-            return seq.next()!
+            expect(f()).to(beTrue())
+
+            var called = false
+            let g = ExSwift.after(2, function: { called = true })
+
+            g()
+
+            expect(called).to(beFalse())
+
+            g()
+
+            expect(called).to(beFalse())
+
+            g()
+
+            expect(called).to(beTrue())
+
         }
-        
-        XCTAssertEqual(g(), 1)
-        XCTAssertEqual(g(), 1)
-        
-    }
 
-    func testPartial () {
-        let add = {
-            (params: Int...) -> Int in
-            return params.reduce(0, { return $0 + $1 })
-        }
-        let add5 = ExSwift.partial(add, 5)
+        it("once") {
 
-        XCTAssertEqual(15, add5(10))
-        XCTAssertEqual(8, add5(1, 2))
-    }
+            var seq = [1, 2, 3, 4].generate()
 
-    func testBind () {
-        let concat = {
-            (params: String...) -> String in
-            return params.implode(" ")!
-        }
-        
-        let helloWorld = ExSwift.bind(concat, "Hello", "World")
-        
-        XCTAssertEqual(helloWorld(), "Hello World")
-    }
-    
-    func testCached () {
-        var calls = 0
-        
-        // Slow Fibonacci
-        var fib: ((Int...) -> Int)!
-        fib = { (params: Int...) -> Int in
-            let n = params[0]
-            
-            calls++
-            
-            if n <= 1 {
-                return n
+            let g = Ex.once { Void -> Int in
+                return seq.next()!
             }
-            return fib(n - 1) + fib(n - 2)
+
+            expect(g()) == 1
+            expect(g()) == 1
+
         }
-        
-        let fibonacci = Ex.cached(fib)
-        
-        // This one is computed (fib is called 465 times)
-        fibonacci(12)
-        XCTAssertEqual(465, calls)
-        
-        // The results is taken from the cache (fib is not called)
-        fibonacci(12)
-        XCTAssertEqual(465, calls)
+
+        it("partial") {
+
+            let add = { (params: Int...) -> Int in
+                return params.reduce(0, combine: +)
+            }
+
+            let add5 = ExSwift.partial(add, 5)
+
+            expect(add5(10)) == 15
+            expect(add5(1, 2)) == 8
+
+        }
+
+        it("bind") {
+
+            let concat = { (params: String...) -> String in
+                return params.implode(" ")!
+            }
+
+            let helloWorld = ExSwift.bind(concat, "Hello", "World")
+
+            expect(helloWorld()) == "Hello World"
+
+        }
+
+        it("cached") {
+
+            var calls = 0
+
+            // Slow Fibonacci
+            var fib: ((Int...) -> Int)!
+            fib = { (params: Int...) -> Int in
+                let n = params[0]
+
+                calls++
+
+                if n <= 1 {
+                    return n
+                }
+                return fib(n - 1) + fib(n - 2)
+            }
+
+            let fibonacci = Ex.cached(fib)
+
+            // This one is computed (fib is called 465 times)
+            fibonacci(12)
+            expect(calls) == 465
+
+            // The results is taken from the cache (fib is not called again)
+            fibonacci(12)
+            expect(calls) == 465
+
+        }
+
+        describe("operators") {
+
+            it("spaceship") {
+
+                expect(4 <=> 5) == -1
+                expect(5 <=> 4) == 1
+                expect(4 <=> 4) == 0
+
+            }
+
+        }
+
     }
 
-    func testSpaceshipOperator() {
-        XCTAssertEqual(4 <=> 5, -1)
-        XCTAssertEqual(5 <=> 4, 1)
-        XCTAssertEqual(4 <=> 4, 0)
-    }
 }
