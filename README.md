@@ -1,5 +1,5 @@
 # ExSwift
-![CocoaPods](https://img.shields.io/cocoapods/v/ExSwift.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+![CocoaPods](https://img.shields.io/cocoapods/v/ExSwift.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/pNre/ExSwift.svg)](https://travis-ci.org/pNre/ExSwift)
 
 Set of Swift extensions for standard types and classes.
 
