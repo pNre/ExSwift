@@ -78,14 +78,3 @@ public func == <U: ForwardIndexType> (first: Range<U>, second: Range<U>) -> Bool
     return first.startIndex == second.startIndex &&
            first.endIndex == second.endIndex
 }
-
-/**
-*  DP2 style open range operator
-*/
-public func .. <U : Comparable> (first: U, second: U) -> HalfOpenInterval<U> {
-    return first..<second
-}
-
-public func .. <Pos : ForwardIndexType> (minimum: Pos, maximum: Pos) -> Range<Pos> {
-    return minimum..<maximum
-}
