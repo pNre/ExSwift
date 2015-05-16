@@ -287,7 +287,7 @@ class ArrayExtensionsSpec: QuickSpec {
             
             it("take") {
                 
-                expect(self.intArray.take(2)) == self.intArray[0..2]
+                expect(self.intArray.take(2)) == self.intArray[0..<2]
                 expect(self.intArray.take(0)) == []
                 
             }

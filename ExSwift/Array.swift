@@ -314,7 +314,7 @@ internal extension Array {
                 end = count
             }
             
-            result += [self[i..end]]
+            result += [self[i..<end]]
             
             if end != i + n {
                 break
@@ -348,7 +348,7 @@ internal extension Array {
         if n < 1    { n = 0 }    // Allow 0 if user wants [[],[],[]] for some reason.
 
         for i in stride(from: 0, to: count, by: step!) {
-            result += [self[i..(i + n)]]
+            result += [self[i..<(i + n)]]
         }
 
         return result
