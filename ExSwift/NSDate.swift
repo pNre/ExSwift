@@ -86,8 +86,8 @@ public extension NSDate {
         :param: minutes number of minutes to add
         :returns: the NSDate computed
     */
-    public func addMinutes (minute: Int) -> NSDate {
-        return add(minutes: minute)
+    public func addMinutes (minutes: Int) -> NSDate {
+        return add(minutes: minutes)
     }
     
     /**

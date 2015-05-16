@@ -26,7 +26,7 @@ class NSDateExtensionsSpec: QuickSpec {
         beforeEach {
             
             self.startDate = self.dateFormatter.dateFromString("30/11/1988 00:00:00")
-            
+
         }
         
         describe("manipulation") {
@@ -46,9 +46,9 @@ class NSDateExtensionsSpec: QuickSpec {
             }
             
             it("addMinutes") {
-                
+
                 var expectedDate = self.dateFormatter.dateFromString("30/11/1988 00:42:00")
-                
+    
                 expect(self.startDate?.addMinutes(42)) == expectedDate
                 expect(self.startDate?.add(minutes: 42)) == expectedDate
                 

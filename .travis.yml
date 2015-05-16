@@ -19,3 +19,7 @@ matrix:
     xcode_sdk: iphonesimulator7
   - xcode_scheme: ExSwift-OSX
     xcode_sdk: iphonesimulator8.1
+
+before_install:
+  - gem install cocoapods -v '= 0.36.4'
+
