@@ -108,7 +108,7 @@ public extension Int {
         Checks if self is included a specified range.
         
         :param: range Range
-        :param: string If true, "<" is used for comparison
+        :param: strict If true, "<" is used for comparison
         :returns: true if in range
     */
     func isIn (range: Range<Int>, strict: Bool = false) -> Bool {
