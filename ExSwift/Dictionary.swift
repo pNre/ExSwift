@@ -13,7 +13,7 @@ internal extension Dictionary {
 
     /**
         Difference of self and the input dictionaries.
-        Two dictionaries are considered equal if they contain the same [key: value] copules.
+        Two dictionaries are considered equal if they contain the same [key: value] pairs.
     
         :param: dictionaries Dictionaries to subtract
         :returns: Difference of self and the input dictionaries
