@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,21 +16,21 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1E11AF831943222D006BCE48"
                BuildableName = "ExSwift.framework"
-               BlueprintName = "ExSwift-OSX"
+               BlueprintName = "ExSwift-Mac"
                ReferencedContainer = "container:ExSwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "NO"
+            buildForRunning = "YES"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1E11AF8E1943222D006BCE48"
                BuildableName = "ExSwiftTests.xctest"
-               BlueprintName = "ExSwiftTests-OSX"
+               BlueprintName = "ExSwiftTests-Mac"
                ReferencedContainer = "container:ExSwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -48,7 +48,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1E11AF8E1943222D006BCE48"
                BuildableName = "ExSwiftTests.xctest"
-               BlueprintName = "ExSwiftTests-OSX"
+               BlueprintName = "ExSwiftTests-Mac"
                ReferencedContainer = "container:ExSwift.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -58,7 +58,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1E11AF831943222D006BCE48"
             BuildableName = "ExSwift.framework"
-            BlueprintName = "ExSwift-OSX"
+            BlueprintName = "ExSwift-Mac"
             ReferencedContainer = "container:ExSwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -77,7 +77,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1E11AF831943222D006BCE48"
             BuildableName = "ExSwift.framework"
-            BlueprintName = "ExSwift-OSX"
+            BlueprintName = "ExSwift-Mac"
             ReferencedContainer = "container:ExSwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -95,7 +95,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1E11AF831943222D006BCE48"
             BuildableName = "ExSwift.framework"
-            BlueprintName = "ExSwift-OSX"
+            BlueprintName = "ExSwift-Mac"
             ReferencedContainer = "container:ExSwift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
