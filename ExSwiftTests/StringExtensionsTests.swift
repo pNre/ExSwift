@@ -159,6 +159,19 @@ class StringExtensionsSpec: QuickSpec {
             
         }
         
+
+        /**
+        *  String contains matches
+        */
+       describe("containsMatch checks"){
+           it("match") {
+               expect("Test string for match".containsMatch("for")).to(beTrue())
+           }
+           it("not match") {
+               expect("Test string for match".containsMatch("not for")).to(beFalse())
+           }
+       }
+
         /**
         *  String trimming methods
         */
