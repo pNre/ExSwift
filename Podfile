@@ -8,17 +8,17 @@ def import_test_pods
 
 end
 
-target "ExSwiftTests-OSX" do
+target "ExSwiftTests-iOS" do
 
-    platform :osx, '10.10'
+    platform :ios, '8.0'
 
     import_test_pods
 
 end
 
-target "ExSwiftTests-iOS" do
+target "ExSwiftTests-Mac" do
 
-    platform :ios, '8.0'
+    platform :osx, '10.10'
 
     import_test_pods
 

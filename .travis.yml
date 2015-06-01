@@ -1,25 +1,17 @@
 language: objective-c
-xcode_project: ExSwift.xcodeproj
+osx_image: beta-xcode6.3
+
+xcode_workspace: ExSwift.xcworkspace
 xcode_scheme:
 - ExSwift-iOS
-- ExSwift-OSX
+- ExSwift-Mac
 xcode_sdk:
-- iphonesimulator7
-- iphonesimulator8.1
+- iphonesimulator8.3
 - macosx10.10
-- macosx10.9
 
 matrix:
   exclude:
   - xcode_scheme: ExSwift-iOS
-    xcode_sdk: macosx10.9
-  - xcode_scheme: ExSwift-iOS
     xcode_sdk: macosx10.10
-  - xcode_scheme: ExSwift-OSX
-    xcode_sdk: iphonesimulator7
-  - xcode_scheme: ExSwift-OSX
-    xcode_sdk: iphonesimulator8.1
-
-before_install:
-  - gem install cocoapods -v '= 0.36.4'
-
+  - xcode_scheme: ExSwift-Mac
+    xcode_sdk: iphonesimulator8.3
