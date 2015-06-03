@@ -208,7 +208,7 @@ public class ExSwift {
         :param: ignoreCase If true the NSRegularExpression is created with the NSRegularExpressionOptions.CaseInsensitive flag
         :returns: NSRegularExpression object
     */
-    internal class func regex (pattern: String, ignoreCase: Bool = false) -> NSRegularExpression? {
+    public class func regex (pattern: String, ignoreCase: Bool = false) -> NSRegularExpression? {
         
         var options = NSRegularExpressionOptions.DotMatchesLineSeparators.rawValue
         
