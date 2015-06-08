@@ -114,6 +114,39 @@ public extension String {
     }
 
     /**
+    Check is string with this pattern included in string
+
+    :param: pattern Pattern to match
+    :param: ignoreCase true for case insensitive matching
+    :returns: true if contains match, otherwise false
+    */
+    func containsMatch (pattern: String, ignoreCase: Bool = false) -> Bool? {
+        if let regex = ExSwift.regex(pattern, ignoreCase: ignoreCase) {
+            let range = NSMakeRange(0, count(self))
+            return regex.firstMatchInString(self, options: .allZeros, range: range) != nil
+        }
+
+        return nil
+    }
+
+    /**
+    Replace all pattern matches with another string
+    
+    :param: pattern Pattern to match
+    :param: replacementString string to replace matches
+    :param: ignoreCase true for case insensitive matching
+    :returns: true if contains match, otherwise false
+    */
+    func replaceMatches (pattern: String, withString replacementString: String, ignoreCase: Bool = false) -> String? {
+        if let regex = ExSwift.regex(pattern, ignoreCase: ignoreCase) {
+            let range = NSMakeRange(0, count(self))
+            return regex.stringByReplacingMatchesInString(self, options: .allZeros, range: range, withTemplate: replacementString)
+        }
+        
+        return nil
+    }
+    
+    /**
         Inserts a substring at the given index in self.
 
         :param: index Where the new string is inserted
