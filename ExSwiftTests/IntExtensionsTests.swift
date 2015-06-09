@@ -73,7 +73,7 @@ class IntExtensionsSpec: QuickSpec {
         it("random") {
         
             var indexes = [Int]()
-            10.times { indexes.append(Int.random(min: 5, max: 25)) }
+            10.times { indexes.append(Int.random(5, max: 25)) }
             
             expect(indexes).to(allPass { $0 >= 5 && $0 <= 25 })
         

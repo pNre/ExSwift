@@ -13,7 +13,7 @@ public extension NSArray {
     /**
         Converts an NSArray object to an OutType[] array containing the items in the NSArray of type OutType.
         
-        :returns: Array of Swift objects
+        - returns: Array of Swift objects
     */
     func cast <OutType> () -> [OutType] {
         var result = [OutType]()
@@ -29,7 +29,7 @@ public extension NSArray {
         Flattens a multidimensional NSArray to an OutType[] array 
         containing the items in the NSArray that can be bridged from their ObjC type to OutType.
     
-        :returns: Flattened array
+        - returns: Flattened array
     */
     func flatten <OutType> () -> [OutType] {
         var result = [OutType]()
@@ -45,7 +45,7 @@ public extension NSArray {
     /**
         Flattens a multidimensional NSArray to a [AnyObject].
     
-        :returns: Flattened array
+        - returns: Flattened array
     */
     func flattenAny () -> [AnyObject] {
         var result = [AnyObject]()

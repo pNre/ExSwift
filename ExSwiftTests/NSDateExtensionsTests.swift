@@ -149,8 +149,8 @@ class NSDateExtensionsSpec: QuickSpec {
                 
                 let date = NSDate()
                 
-                var futureDate = date.addSeconds(42)
-                var pastDate = date.addSeconds(-42)
+                let futureDate = date.addSeconds(42)
+                let pastDate = date.addSeconds(-42)
                 
                 expect(futureDate.isAfter(date)).to(beTrue())
                 expect(date.isAfter(date)).to(beFalse())
@@ -162,8 +162,8 @@ class NSDateExtensionsSpec: QuickSpec {
                 
                 let date = NSDate()
                 
-                var futureDate = date.addSeconds(42)
-                var pastDate = date.addSeconds(-42)
+                let futureDate = date.addSeconds(42)
+                let pastDate = date.addSeconds(-42)
                 
                 expect(futureDate.isBefore(date)).to(beFalse())
                 expect(date.isBefore(date)).to(beFalse())
@@ -201,14 +201,14 @@ class NSDateExtensionsSpec: QuickSpec {
                 let expected = [fifthDate, secondDate, firstDate, thirdDate, fourthDate]
                 let expectedReverded = expected.reverse()
                 
-                for i in 0 ... 42 {
+                for _ in 0 ... 42 {
                     dates.shuffle()
                     
-                    dates.sort( { $0 > $1 } )
+                    dates.sortInPlace( { $0 > $1 } )
                     expect(dates) == expected
                     
-                    dates.sort( { $0 < $1 } )
-                    expect(dates) == expectedReverded
+                    dates.sortInPlace( { $0 < $1 } )
+                    expect(dates) == Array(expectedReverded)
                 }
                 
             }

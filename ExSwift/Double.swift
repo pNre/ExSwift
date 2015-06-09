@@ -13,7 +13,7 @@ public extension Double {
     /**
         Absolute value.
     
-        :returns: fabs(self)
+        - returns: fabs(self)
     */
     func abs () -> Double {
         return Foundation.fabs(self)
@@ -22,7 +22,7 @@ public extension Double {
     /**
         Squared root.
     
-        :returns: sqrt(self)
+        - returns: sqrt(self)
     */
     func sqrt () -> Double {
         return Foundation.sqrt(self)
@@ -31,7 +31,7 @@ public extension Double {
     /**
         Rounds self to the largest integer <= self.
     
-        :returns: floor(self)
+        - returns: floor(self)
     */
     func floor () -> Double {
         return Foundation.floor(self)
@@ -40,7 +40,7 @@ public extension Double {
     /**
         Rounds self to the smallest integer >= self.
     
-        :returns: ceil(self)
+        - returns: ceil(self)
     */
     func ceil () -> Double {
         return Foundation.ceil(self)
@@ -49,7 +49,7 @@ public extension Double {
     /**
         Rounds self to the nearest integer.
     
-        :returns: round(self)
+        - returns: round(self)
     */
     func round () -> Double {
         return Foundation.round(self)
@@ -58,9 +58,9 @@ public extension Double {
     /**
         Clamps self to a specified range.
     
-        :param: min Lower bound
-        :param: max Upper bound
-        :returns: Clamped value
+        - parameter min: Lower bound
+        - parameter max: Upper bound
+        - returns: Clamped value
     */
     func clamp (min: Double, _ max: Double) -> Double {
         return Swift.max(min, Swift.min(max, self))
@@ -82,7 +82,7 @@ public extension Double {
     
         :params: min
         :params: max
-        :returns: Random number
+        - returns: Random number
     */
     static func random(min: Double = 0, max: Double) -> Double {
         let diff = max - min;
