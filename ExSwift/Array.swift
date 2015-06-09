@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal extension Array {
+public extension Array {
     
     private var indexesInterval: HalfOpenInterval<Int> { return HalfOpenInterval<Int>(0, self.count) }
     
