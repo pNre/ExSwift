@@ -198,6 +198,19 @@ class IntExtensionsSpec: QuickSpec {
                 
             }
             
+            it("weeks") {
+                expect(0.weeks) == 0
+                expect(1.week) == 604800
+                expect(111.weeks) == 604800 * 111
+                
+                expect(-1.week) == -604800
+                expect(-111.weeks) == -604800 * 111
+                
+                expect(0.year) == 0.years
+                expect(1.year) == 1.years
+                expect(1010.year) == 1010.years
+            }
+            
             it("days") {
             
                 expect(0.days) == 0
