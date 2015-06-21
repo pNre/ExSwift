@@ -516,6 +516,13 @@ class ArrayExtensionsSpec: QuickSpec {
                 
             }
             
+            it("operator") {
+                
+                self.intArray += 20
+                
+                expect(self.intArray.last) == 20
+            }
+            
         }
         
         /**

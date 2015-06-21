@@ -1362,6 +1362,13 @@ internal extension Array {
 }
 
 /**
+    Push an element to the array
+*/
+public func += <T: Equatable> (inout first: [T], second: T) {
+    first.append(second)
+}
+
+/**
     Remove an element from the array
 */
 public func - <T: Equatable> (first: [T], second: T) -> [T] {
