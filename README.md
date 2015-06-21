@@ -136,6 +136,7 @@ Name | Signatures
 #### Operators ####
 Name | Signature | Function
 ---- | --------- | --------
+`+=`|`+= <T: Equatable> (inout first: T, second: Array<T>)`|Push
 `-`|`- <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Difference
 `-`|`- <T: Equatable> (first: Array<T>, second: T) -> Array<T>`|Element removal
 `&`|`& <T: Equatable> (first: Array<T>, second: Array<T>) -> Array<T>`|Intersection
