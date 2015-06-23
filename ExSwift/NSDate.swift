@@ -258,6 +258,9 @@ public extension NSDate {
         if component & NSCalendarUnit.CalendarUnitMonth != nil {
             return components.month
         }
+        if component & NSCalendarUnit.CalendarUnitDay != nil {
+            return components.day
+        }
         if component & NSCalendarUnit.CalendarUnitWeekday != nil {
             return components.weekday
         }
@@ -273,7 +276,6 @@ public extension NSDate {
         if component & NSCalendarUnit.CalendarUnitSecond != nil {
             return components.second
         }
-        
         
         return 0
     }
