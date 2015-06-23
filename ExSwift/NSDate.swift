@@ -252,7 +252,30 @@ public extension NSDate {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components(component, fromDate: self)
 
-        return components.valueForComponent(component)
+        if component & NSCalendarUnit.CalendarUnitYear != nil {
+            return components.year
+        }
+        if component & NSCalendarUnit.CalendarUnitMonth != nil {
+            return components.month
+        }
+        if component & NSCalendarUnit.CalendarUnitWeekday != nil {
+            return components.weekday
+        }
+        if component & NSCalendarUnit.CalendarUnitWeekOfMonth != nil {
+            return components.weekOfMonth
+        }
+        if component & NSCalendarUnit.CalendarUnitHour != nil {
+            return components.hour
+        }
+        if component & NSCalendarUnit.CalendarUnitMinute != nil {
+            return components.minute
+        }
+        if component & NSCalendarUnit.CalendarUnitSecond != nil {
+            return components.second
+        }
+        
+        
+        return 0
     }
 }
 
