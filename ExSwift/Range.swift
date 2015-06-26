@@ -35,7 +35,7 @@ internal extension Range {
     
         :param: function Function to invoke
     */
-    func each (function: (T) -> ()) {
+    func each (@noescape function: (T) -> ()) {
         for i in self {
             function(i)
         }
