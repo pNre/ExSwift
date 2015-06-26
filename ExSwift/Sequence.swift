@@ -26,7 +26,7 @@ internal extension SequenceOf {
         :param: call Function to call for each element
         :returns: True if call returns true for any element of self
     */
-    func any (call: (T) -> Bool) -> Bool {
+    func any (@noescape call: (T) -> Bool) -> Bool {
         var generator =  self.generate()
         while let nextItem = generator.next() {
             if call(nextItem) {
@@ -121,7 +121,7 @@ internal extension SequenceOf {
         :param: condition A function which returns a boolean if an element satisfies a given condition or not
         :returns: Elements of the sequence starting with the element which does not meet the condition
     */
-    func skipWhile(condition:(T) -> Bool) -> SequenceOf<T> {
+    func skipWhile(@noescape condition:(T) -> Bool) -> SequenceOf<T> {
         var generator =  self.generate()
         var checkingGenerator = self.generate()
         

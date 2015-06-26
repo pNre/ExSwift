@@ -145,7 +145,7 @@ internal extension Array {
     :param: condition A function which returns a boolean if an element satisfies a given condition or not.
     :returns: First matched item or nil
     */
-    func find (condition: Element -> Bool) -> Element? {
+    func find (@noescape condition: Element -> Bool) -> Element? {
         return takeFirst(condition)
     }
 
@@ -169,7 +169,7 @@ internal extension Array {
         :param: condition A function which returns a boolean if an element satisfies a given condition or not.
         :returns: Index of the first matched item or nil
     */
-    func indexOf (condition: Element -> Bool) -> Int? {
+    func indexOf (@noescape condition: Element -> Bool) -> Int? {
         for (index, element) in enumerate(self) {
             if condition(element) {
                 return index
@@ -360,7 +360,7 @@ internal extension Array {
         :param: cond Function which takes an element and produces an equatable result.
         :returns: Array partitioned in order, splitting via results of cond.
     */
-    func partitionBy <T: Equatable> (cond: (Element) -> T) -> [Array] {
+    func partitionBy <T: Equatable> (@noescape cond: (Element) -> T) -> [Array] {
         var result = [Array]()
         var lastValue: T? = nil
 
@@ -500,7 +500,7 @@ internal extension Array {
     
         :param: call Function to call for each element
     */
-    func each (call: (Element) -> ()) {
+    func each (@noescape call: (Element) -> ()) {
 
         for item in self {
             call(item)
@@ -513,7 +513,7 @@ internal extension Array {
     
         :param: call Function to call for each element
     */
-    func each (call: (Int, Element) -> ()) {
+    func each (@noescape call: (Int, Element) -> ()) {
 
         for (index, item) in enumerate(self) {
             call(index, item)
@@ -547,7 +547,7 @@ internal extension Array {
         :param: test Function to call for each element
         :returns: true if test returns true for any element of self
     */
-    func any (test: (Element) -> Bool) -> Bool {
+    func any (@noescape test: (Element) -> Bool) -> Bool {
         for item in self {
             if test(item) {
                 return true
@@ -563,7 +563,7 @@ internal extension Array {
         :param: test Function to call for each element
         :returns: True if test returns true for all the elements in self
     */
-    func all (test: (Element) -> Bool) -> Bool {
+    func all (@noescape test: (Element) -> Bool) -> Bool {
         for item in self {
             if !test(item) {
                 return false
@@ -601,7 +601,7 @@ internal extension Array {
         :param: condition A function which returns a boolean if an element satisfies a given condition or not.
         :returns: Elements of the array up until an element does not meet the condition
     */
-    func takeWhile (condition: (Element) -> Bool) -> Array {
+    func takeWhile (@noescape condition: (Element) -> Bool) -> Array {
 
         var lastTrue = -1
 
@@ -623,7 +623,7 @@ internal extension Array {
         :param: condition A function which returns a boolean if an element satisfies a given condition or not.
         :returns: The first element in the array to meet the condition
     */
-    func takeFirst (condition: (Element) -> Bool) -> Element? {
+    func takeFirst (@noescape condition: (Element) -> Bool) -> Element? {
         
         for value in self {
             if condition(value) {
@@ -665,7 +665,7 @@ internal extension Array {
         :param: condition A function which returns a boolean if an element satisfies a given condition or not
         :returns: Elements of the array starting with the element which does not meet the condition
     */
-    func skipWhile (condition: (Element) -> Bool) -> Array {
+    func skipWhile (@noescape condition: (Element) -> Bool) -> Array {
 
         var lastTrue = -1
 
@@ -704,7 +704,7 @@ internal extension Array {
         :param: call The closure to use to determine uniqueness
         :returns: The set of elements for which call(element) is unique
     */
-    func uniqueBy <T: Equatable> (call: (Element) -> (T)) -> [Element] {
+    func uniqueBy <T: Equatable> (@noescape call: (Element) -> (T)) -> [Element] {
         var result: [Element] = []
         var uniqueItems: [T] = []
         
@@ -770,7 +770,7 @@ internal extension Array {
         :param: groupingFunction
         :returns: Grouped dictionary
     */
-    func groupBy <U> (groupingFunction group: (Element) -> U) -> [U: Array] {
+    func groupBy <U> (@noescape groupingFunction group: (Element) -> U) -> [U: Array] {
 
         var result = [U: Array]()
 
@@ -796,7 +796,7 @@ internal extension Array {
         :param: groupingFunction
         :returns: Grouped dictionary
     */
-    func countBy <U> (groupingFunction group: (Element) -> U) -> [U: Int] {
+    func countBy <U> (@noescape groupingFunction group: (Element) -> U) -> [U: Int] {
 
         var result = [U: Int]()
 
@@ -918,7 +918,7 @@ internal extension Array {
         :param: test Function to call for each element
         :returns: the number of elements meeting the condition
     */
-    func countWhere (test: (Element) -> Bool) -> Int {
+    func countWhere (@noescape test: (Element) -> Bool) -> Int {
 
         var result = 0
 
@@ -931,7 +931,7 @@ internal extension Array {
         return result
     }
 
-    func eachIndex (call: (Int) -> ()) -> () {
+    func eachIndex (@noescape call: (Int) -> ()) -> () {
         (0..<self.count).each({ call($0) })
     }
 
@@ -989,7 +989,7 @@ internal extension Array {
         :param: mapFunction
         :returns: Mapped array
     */
-    func mapFilter <V> (mapFunction map: (Element) -> (V)?) -> [V] {
+    func mapFilter <V> (@noescape mapFunction map: (Element) -> (V)?) -> [V] {
         
         var mapped = [V]()
         
@@ -1011,7 +1011,7 @@ internal extension Array {
         :param: mapFunction
         :returns: Accumulated value and mapped array
     */
-    func mapAccum <U, V> (initial: U, mapFunction map: (U, Element) -> (U, V)) -> (U, [V]) {
+    func mapAccum <U, V> (initial: U, @noescape mapFunction map: (U, Element) -> (U, V)) -> (U, [V]) {
         var mapped = [V]()
         var acc = initial
         
@@ -1027,7 +1027,7 @@ internal extension Array {
     /**
         self.reduce with initial value self.first()
     */
-    func reduce (combine: (Element, Element) -> Element) -> Element? {
+    func reduce (@noescape combine: (Element, Element) -> Element) -> Element? {
         if let firstElement = first {
             return skip(1).reduce(firstElement, combine: combine)
         }
@@ -1065,7 +1065,7 @@ internal extension Array {
         :param: keySelector
         :returns: A dictionary
     */
-    func toDictionary <U> (keySelector:(Element) -> U) -> [U: Element] {
+    func toDictionary <U> (@noescape keySelector:(Element) -> U) -> [U: Element] {
         var result: [U: Element] = [:]
         for item in self {
             result[keySelector(item)] = item
@@ -1080,7 +1080,7 @@ internal extension Array {
         :param: transform
         :returns: A dictionary
     */
-    func toDictionary <K, V> (transform: (Element) -> (key: K, value: V)?) -> [K: V] {
+    func toDictionary <K, V> (@noescape transform: (Element) -> (key: K, value: V)?) -> [K: V] {
         var result: [K: V] = [:]
         for item in self {
             if let entry = transform(item) {
@@ -1142,7 +1142,7 @@ internal extension Array {
         :param: n the number of times to cycle through
         :param: block the block to run for each element in each cycle
     */
-    func cycle (n: Int? = nil, block: (T) -> ()) {
+    func cycle (n: Int? = nil, @noescape block: (T) -> ()) {
         var cyclesRun = 0
         while true {
             if let n = n {
@@ -1167,7 +1167,7 @@ internal extension Array {
         :param: block the block to run each time
         :returns: the min element, or nil if there are no items for which the block returns true
     */
-    func bSearch (block: (T) -> (Bool)) -> T? {
+    func bSearch (@noescape block: (T) -> (Bool)) -> T? {
         if count == 0 {
             return nil
         }
@@ -1201,7 +1201,7 @@ internal extension Array {
         :param: block the block to run each time
         :returns: an item (there could be multiple matches) for which the block returns true
     */
-    func bSearch (block: (T) -> (Int)) -> T? {
+    func bSearch (@noescape block: (T) -> (Int)) -> T? {
         let match = bSearch { item in
             block(item) >= 0
         }
