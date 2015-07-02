@@ -220,6 +220,14 @@ public extension Int {
     var year: NSTimeInterval {
         return self.years
     }
+    
+    var weeks: NSTimeInterval {
+        return 7 * self.days
+    }
+    
+    var week: NSTimeInterval {
+        return self.weeks
+    }
 
     var days: NSTimeInterval {
         return 24 * self.hours

@@ -1221,6 +1221,27 @@ internal extension Array {
     func sortUsing <U:Comparable> (block: ((T) -> U)) -> [T] {
         return self.sorted({ block($0.0) < block($0.1) })
     }
+    
+    /**
+        Sorts the array by the value returned from the block, in ascending order
+        Elements with nil values returned from the block appear at the end of the sorted array
+    
+        :param: the block to use to sort by
+        :returns: an array sorted by that block, in ascending order
+    */
+    
+    func sortUsing<U: Comparable>(block: (T) -> U?) -> [T] {
+        return sorted {
+            let value1 = block($0.0)
+            let value2 = block($0.1)
+            
+            if value1 != nil && value2 != nil {
+                return value1 < value2
+            } else {
+                return value1 > value2
+            }
+        }
+    }
 
     /**
         Removes the last element from self and returns it.
