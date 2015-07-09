@@ -54,7 +54,7 @@ components.takeFirst() { $0.completed }
 		- [Instance Methods](#instance-methods-9)
 		- [Operators](#operators-4)
 	- [UIColor](#uicolor)
-		- [Init Methods](#init-methods-1)
+		- [Init Methods](#init-methods)
 
 - [Utilities](#utilities)
 	- [Class Methods](#class-methods-6)
