@@ -87,6 +87,7 @@
 		CC633BA61A37142900341557 /* CharacterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC633BA51A37142900341557 /* CharacterExtensionsTests.swift */; };
 		CC633BA71A37144E00341557 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C1D701A365CA6003D386E /* Character.swift */; };
 		CC8C1D711A365CA6003D386E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C1D701A365CA6003D386E /* Character.swift */; };
+		DF00F2961B4EC1F900406084 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF00F2951B4EC1F900406084 /* UIColor.swift */; };
 		F3AC8B534C220FCC23ECFD1A /* Pods_ExSwiftTests_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886BBDB908D7803BE253AAA4 /* Pods_ExSwiftTests_iOS.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -158,6 +159,7 @@
 		CC8C1D701A365CA6003D386E /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		D287101692BE043B1DEF9DE1 /* Pods-ExSwiftTests-Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExSwiftTests-Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExSwiftTests-Mac/Pods-ExSwiftTests-Mac.debug.xcconfig"; sourceTree = "<group>"; };
 		DAAD7D28C374710DA8DAAA9B /* Pods-ExSwiftTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExSwiftTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExSwiftTests-iOS/Pods-ExSwiftTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		DF00F2951B4EC1F900406084 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		F24FF2CA18EA113B248D8C4D /* Pods-ExSwiftTests-Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExSwiftTests-Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExSwiftTests-Mac/Pods-ExSwiftTests-Mac.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -236,6 +238,7 @@
 				12168FC91A22852300ED4105 /* NSDate.swift */,
 				6CB1F15E1A8AB867002EA767 /* Bool.swift */,
 				1E11AF891943222D006BCE48 /* ExSwift.h */,
+				DF00F2951B4EC1F900406084 /* UIColor.swift */,
 				1E11AF871943222D006BCE48 /* Supporting Files */,
 			);
 			path = ExSwift;
@@ -632,6 +635,7 @@
 				24D9BC061AC54C1C000FDBB8 /* Float.swift in Sources */,
 				24D9BC071AC54C1C000FDBB8 /* Int.swift in Sources */,
 				24D9BC081AC54C1C000FDBB8 /* Range.swift in Sources */,
+				DF00F2961B4EC1F900406084 /* UIColor.swift in Sources */,
 				24D9BC091AC54C1C000FDBB8 /* String.swift in Sources */,
 				24D9BC0A1AC54C1C000FDBB8 /* NSArray.swift in Sources */,
 				24D9BC0B1AC54C1C000FDBB8 /* NSDate.swift in Sources */,

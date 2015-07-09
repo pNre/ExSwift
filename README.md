@@ -53,6 +53,8 @@ components.takeFirst() { $0.completed }
 	- [NSDate](#nsdate)
 		- [Instance Methods](#instance-methods-9)
 		- [Operators](#operators-4)
+	- [UIColor](#uicolor)
+		- [Init Methods](#init-methods)
 
 - [Utilities](#utilities)
 	- [Class Methods](#class-methods-6)
@@ -415,6 +417,14 @@ Name | Signatures
 **`<=`**|`<=(lhs: NSDate, rhs: NSDate) -> Bool`
 **`>=`**|`>=(lhs: NSDate, rhs: NSDate) -> Bool`
 **`==`**|`==(lhs: NSDate, rhs: NSDate) -> Bool`
+
+# UIColor #
+
+#### Init Methods ####
+Name | Signatures
+---- | ----
+**`hex`** |`(hex: Int)`
+**`hex`** |`(hex: Int, alpha: CGFloat)`
 
 # Utilities #
 
