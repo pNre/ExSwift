@@ -681,7 +681,7 @@ internal extension Array {
     }
 
     /**
-        Costructs an array removing the duplicate values in self
+        Constructs an array removing the duplicate values in self
         if Array.Element implements the Equatable protocol.
     
         :returns: Array of unique values
