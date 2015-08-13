@@ -89,5 +89,13 @@ public extension Double {
         let rand = Double(arc4random() % (UInt32(RAND_MAX) + 1))
         return ((rand / Double(RAND_MAX)) * diff) + min;
     }
+    
+    /**
+        Convert self to string
+        :return: String
+    */
+    func toString() -> String {
+        return String(stringInterpolationSegment: self)
+    }
 
 }
