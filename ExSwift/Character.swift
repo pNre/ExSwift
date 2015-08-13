@@ -18,4 +18,12 @@ public extension Character {
         return String(self).toInt()
     }
     
+    /**
+        Convert self to string
+        :return: String
+    */
+    func toString() -> String {
+        return String(stringInterpolationSegment: self)
+    }
+    
 }

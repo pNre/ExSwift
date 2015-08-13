@@ -79,5 +79,12 @@ public extension Float {
         return ((rand / Float(RAND_MAX)) * diff) + min;
     }
     
+    /**
+        Convert self to string
+        :return: String
+    */
+    func toString() -> String {
+        return String(stringInterpolationSegment: self)
+    }
 }
 

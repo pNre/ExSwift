@@ -14,5 +14,14 @@ extension Bool {
     self = !self
     return self
   }
+    
+    func toString() ->String {
+        if(self){
+            return "true"
+        }
+        else{
+            return "false"
+        }
+    }
   
 }
