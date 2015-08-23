@@ -18,8 +18,8 @@ internal extension Array {
         - parameter items: Items to search for
         - returns: true if self contains all the items
     */
-    func contains <T: Equatable> (items: T...) -> Bool {
-        return items.all { (item: T) -> Bool in self.indexOf(item) >= 0 }
+    func contains <Element: Equatable> (items: Element...) -> Bool {
+        return items.all { (item: Element) -> Bool in self.indexOf(item) >= 0 }
     }
 
     /**
@@ -28,12 +28,12 @@ internal extension Array {
         - parameter values: Arrays to subtract
         - returns: Difference of self and the input arrays
     */
-    func difference <T: Equatable> (values: [T]...) -> [T] {
+    func difference <Element: Equatable> (values: [Element]...) -> [Element] {
 
-        var result = [T]()
+        var result = [Element]()
 
         elements: for e in self {
-            if let element = e as? T {
+            if let element = e as? Element {
                 for value in values {
                     //  if a value is in both self and one of the values arrays
                     //  jump to the next iteration of the outer loop
@@ -131,7 +131,7 @@ internal extension Array {
         - parameter item: The item to search for
         - returns: Matched item or nil
     */
-    func find <U: Equatable> (item: U) -> T? {
+    func find <U: Equatable> (item: U) -> Element? {
         if let index: Int = indexOf(item) {
             return self[index]
         }
@@ -221,16 +221,18 @@ internal extension Array {
         var result = [[Any?]]()
 
         //  Gets the longest sequence
-        let max = arrays.map { (element: Any) -> Int in
-            return reflect(element).count
-        }.max() as Int
+        let arrayCount = arrays.map({ (element : Any) -> Int64 in
+            let mirrored = Mirror(reflecting: element)
+            return mirrored.children.count
+        })
 
-        for i in 0..<max {
+        
+        for i in 0..<(arrayCount.max() as Int) {
 
             //  i-th element in self as array + every i-th element in each array in arrays
             result.append([get(i)] + arrays.map { (element) -> Any? in
-                let (_, mirror) = reflect(element)[i]
-                return mirror.value
+                //let (_, mirror) = Mirror(reflecting: element).children[i]
+                return Mirror(reflecting: element).children
             })
 
         }
@@ -346,12 +348,12 @@ internal extension Array {
         - parameter cond: Function which takes an element and produces an equatable result.
         - returns: Array partitioned in order, splitting via results of cond.
     */
-    func partitionBy <T: Equatable> (cond: (Element) -> T) -> [Array] {
+    func partitionBy <Element: Equatable> (cond: (Element) -> Element) -> [Array] {
         var result = [Array]()
-        var lastValue: T? = nil
+        var lastValue: Element? = nil
 
         for item in self {
-            let value = cond(item)
+            let value = cond(item as! Element)
 
             if value == lastValue {
                 let index: Int = result.count - 1
@@ -439,7 +441,7 @@ internal extension Array {
     func maxBy <U: Comparable> (call: (Element) -> (U)) -> Element? {
 
         if let firstValue = self.first {
-            var maxElement: T = firstValue
+            var maxElement: Element = firstValue
             var maxValue: U = call(firstValue)
             for i in 1..<self.count {
                 let element: Element = self[i]
@@ -464,7 +466,7 @@ internal extension Array {
     func minBy <U: Comparable> (call: (Element) -> (U)) -> Element? {
 
         if let firstValue = self.first {
-            var minElement: T = firstValue
+            var minElement: Element = firstValue
             var minValue: U = call(firstValue)
             for i in 1..<self.count {
                 let element: Element = self[i]
@@ -672,12 +674,12 @@ internal extension Array {
     
         - returns: Array of unique values
     */
-    func unique <T: Equatable> () -> [T] {
-        var result = [T]()
+    func unique <Element: Equatable> () -> [Element] {
+        var result = [Element]()
 
         for item in self {
-            if !result.contains(item as! T) {
-                result.append(item as! T)
+            if !result.contains(item as! Element) {
+                result.append(item as! Element)
             }
         }
 
@@ -690,15 +692,15 @@ internal extension Array {
         - parameter call: The closure to use to determine uniqueness
         - returns: The set of elements for which call(element) is unique
     */
-    func uniqueBy <T: Equatable> (call: (Element) -> (T)) -> [Element] {
-        var result: [Element] = []
-        var uniqueItems: [T] = []
+    func uniqueBy <Element: Equatable> (call: (Element) -> (Element)) -> [Element] {
+        var result = [Element]()
+        var uniqueItems: [Element] = []
         
         for item in self {
-            let callResult: T = call(item)
+            let callResult: Element = call(item as! Element)
             if !uniqueItems.contains(callResult) {
                 uniqueItems.append(callResult)
-                result.append(item)
+                result.append(item as! Element)
             }
         }
         
@@ -711,16 +713,16 @@ internal extension Array {
         - parameter length: The length of each permutation
         - returns: All permutations of a given length within an array
     */
-    func permutation (length: Int) -> [[T]] {
+    func permutation (length: Int) -> [[Element]] {
         if length < 0 || length > self.count {
             return []
         } else if length == 0 {
             return [[]]
         } else {
-            var permutations: [[T]] = []
+            var permutations: [[Element]] = []
             let combinations = combination(length)
             for combination in combinations {
-                var endArray: [[T]] = []
+                var endArray: [[Element]] = []
                 var mutableCombination = combination
                 permutations += self.permutationHelper(length, array: &mutableCombination, endArray: &endArray)
             }
@@ -732,7 +734,7 @@ internal extension Array {
         Recursive helper method where all of the permutation-generating work is done
         This is Heap's algorithm
     */
-    private func permutationHelper(n: Int, inout array: [T], inout endArray: [[T]]) -> [[T]] {
+    private func permutationHelper(n: Int, inout array: [Element], inout endArray: [[Element]]) -> [[Element]] {
         if n == 1 {
             endArray += [array]
         }
@@ -740,7 +742,7 @@ internal extension Array {
             permutationHelper(n - 1, array: &array, endArray: &endArray)
             let j = n % 2 == 0 ? i : 0;
             //(array[j], array[n - 1]) = (array[n - 1], array[j])
-            let temp: T = array[j]
+            let temp: Element = array[j]
             array[j] = array[n - 1]
             array[n - 1] = temp
         }
@@ -878,7 +880,7 @@ internal extension Array {
         - parameter length: The length of each permutations
         :returns All of the permutations of this array of a given length, allowing repeats
     */
-    func repeatedPermutation(length: Int) -> [[T]] {
+    func repeatedPermutation(length: Int) -> [[Element]] {
         if length < 1 {
             return []
         }
@@ -929,9 +931,9 @@ internal extension Array {
 
         :return: A transposed version of the array, where the object at array[i][j] goes to array[j][i]
     */
-    func transposition (array: [[T]]) -> [[T]] { //<U: AnyObject where Element == [U]> () -> [[U]] {
+    func transposition (array: [[Element]]) -> [[Element]] { //<U: AnyObject where Element == [U]> () -> [[U]] {
         let maxWidth: Int = array.map({ $0.count }).max()
-        var transposition = [[T]](count: maxWidth, repeatedValue: [])
+        var transposition = [[Element]](count: maxWidth, repeatedValue: [])
         
         (0..<maxWidth).each { i in
             array.eachIndex { j in
@@ -948,7 +950,7 @@ internal extension Array {
         
         - parameter object: The object to replace each element with
     */
-    mutating func fill (object: T) -> () {
+    mutating func fill (object: Element) -> () {
         (0..<self.count).each { i in
             self[i] = object
         }
@@ -960,7 +962,7 @@ internal extension Array {
         - parameter separator:
         :return: Joined object if self is not empty and its elements are instances of C, nil otherwise
     */
-    func implode <C: ExtensibleCollectionType> (separator: C) -> C? {
+    func implode <C: RangeReplaceableCollectionType> (separator: C) -> C? {
         if Element.self is C.Type {
             return Swift.join(separator, unsafeBitCast(self, [C].self))
         }
@@ -1083,16 +1085,16 @@ internal extension Array {
     
         - returns: Flattened array
     */
-    func flatten <OutType> () -> [OutType] {
+    /*func flatten <OutType> () -> [OutType] {
         var result = [OutType]()
-        let reflection = reflect(self)
+        let reflection = Mirror(reflecting: self)
         
-        for i in 0..<reflection.count {
-            result += Ex.bridgeObjCObject(reflection[i].1.value) as [OutType]
+        for i in 0..<reflection.children.count {
+            result.append(Ex.bridgeObjCObject(reflection.children[i].1.value))
         }
         
         return result
-    }
+    }*/
     
     /**
         Flattens a nested Array self to an array of AnyObject.
@@ -1119,7 +1121,7 @@ internal extension Array {
         - parameter isOrderedBefore: Comparison function.
         - returns: An array that is sorted according to the given function
     */
-    @available(*, unavailable, message="use 'sort' instead") func sortBy (isOrderedBefore: (T, T) -> Bool) -> [T] {
+    @available(*, unavailable, message="use 'sort' instead") func sortBy (isOrderedBefore: (Element, Element) -> Bool) -> [Element] {
         return sort(isOrderedBefore)
     }
 
@@ -1129,7 +1131,7 @@ internal extension Array {
         - parameter n: the number of times to cycle through
         - parameter block: the block to run for each element in each cycle
     */
-    func cycle (n: Int? = nil, block: (T) -> ()) {
+    func cycle (n: Int? = nil, block: (Element) -> ()) {
         var cyclesRun = 0
         while true {
             if let n = n {
@@ -1154,7 +1156,7 @@ internal extension Array {
         - parameter block: the block to run each time
         - returns: the min element, or nil if there are no items for which the block returns true
     */
-    func bSearch (block: (T) -> (Bool)) -> T? {
+    func bSearch (block: (Element) -> (Bool)) -> Element? {
         if count == 0 {
             return nil
         }
@@ -1188,7 +1190,7 @@ internal extension Array {
         - parameter block: the block to run each time
         - returns: an item (there could be multiple matches) for which the block returns true
     */
-    func bSearch (block: (T) -> (Int)) -> T? {
+    func bSearch (block: (Element) -> (Int)) -> Element? {
         let match = bSearch { item in
             block(item) >= 0
         }
@@ -1205,7 +1207,7 @@ internal extension Array {
         - parameter block: the block to use to sort by
         - returns: an array sorted by that block, in ascending order
     */
-    func sortUsing <U:Comparable> (block: ((T) -> U)) -> [T] {
+    func sortUsing <U:Comparable> (block: ((Element) -> U)) -> [Element] {
         return self.sort({ block($0.0) < block($0.1) })
     }
 
@@ -1310,7 +1312,7 @@ internal extension Array {
             return []
         }
             
-        return Array(self[Range(start: start, end: end)] as ArraySlice<T>)
+        return Array(self[Range(start: start, end: end)] as ArraySlice<Element>)
     }
 
     /**
@@ -1351,28 +1353,28 @@ internal extension Array {
 /**
     Remove an element from the array
 */
-public func - <T: Equatable> (first: [T], second: T) -> [T] {
+public func - <Element: Equatable> (first: [Element], second: Element) -> [Element] {
     return first - [second]
 }
 
 /**
     Difference operator
 */
-public func - <T: Equatable> (first: [T], second: [T]) -> [T] {
+public func - <Element: Equatable> (first: [Element], second: [Element]) -> [Element] {
     return first.difference(second)
 }
 
 /**
     Intersection operator
 */
-public func & <T: Equatable> (first: [T], second: [T]) -> [T] {
+public func & <Element: Equatable> (first: [Element], second: [Element]) -> [Element] {
     return first.intersection(second)
 }
 
 /**
     Union operator
 */
-public func | <T: Equatable> (first: [T], second: [T]) -> [T] {
+public func | <Element: Equatable> (first: [Element], second: [Element]) -> [Element] {
     return first.union(second)
 }
 /**

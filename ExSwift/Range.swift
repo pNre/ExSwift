@@ -16,7 +16,7 @@ internal extension Range {
         - parameter function: Function to call
     */
     func times (function: () -> ()) {
-        each { (current: T) -> () in
+        each { (current: Element) -> () in
             function()
         }
     }
@@ -26,7 +26,7 @@ internal extension Range {
     
         - parameter function: Function to invoke
     */
-    func times (function: (T) -> ()) {
+    func times (function: (Element) -> ()) {
         each (function)
     }
 
@@ -35,7 +35,7 @@ internal extension Range {
     
         - parameter function: Function to invoke
     */
-    func each (function: (T) -> ()) {
+    func each (function: (Element) -> ()) {
         for i in self {
             function(i)
         }
@@ -46,8 +46,8 @@ internal extension Range {
 	
 		- returns: Each element of the range in an array
 	*/
-    func toArray () -> [T] {
-        var result: [T] = []
+    func toArray () -> [Element] {
+        var result: [Element] = []
         for i in self {
             result.append(i)
         }

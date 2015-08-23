@@ -243,9 +243,9 @@ extension ExSwift {
     *  @param object Object to convert
     *  @returns Flattenend array of converted values
     */
-    internal class func bridgeObjCObject <T, S> (object: S) -> [T] {
+    /*internal class func bridgeObjCObject <T, S> (object: S) -> [T] {
         var result = [T]()
-        let reflection = reflect(object)
+        let reflection = Mirror(reflecting: object)
         
         //  object has an Objective-C type
         if let obj = object as? T {
@@ -264,7 +264,7 @@ extension ExSwift {
             //  object is a native Swift array
             
             //  recursively convert each item
-            (0..<reflection.count).each {
+            (0..<reflection.children.count).each {
                 let ref = reflection[$0].1
 
                 result += Ex.bridgeObjCObject(ref.value)
@@ -273,6 +273,6 @@ extension ExSwift {
         }
         
         return result
-    }
+    }*/
     
 }
