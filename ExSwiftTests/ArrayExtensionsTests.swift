@@ -30,7 +30,7 @@ class ArrayExtensionsSpec: QuickSpec {
             
             it("in bounds") {
                 
-                for i in enumerate(self.intArray) {
+                for i in self.intArray.enumerate() {
                     expect(self.intArray.get(i.index)) == (i.element)
                 }
                 
@@ -370,18 +370,19 @@ class ArrayExtensionsSpec: QuickSpec {
             
             it("method") {
                 
-                expect(self.intArray.difference([3, 4])) == [1, 2, 5]
-                
+                //  Xcode 7.0 b1: diff_1 and diff_2 are needed in order to prevent crashes
+                let diff_1 = [3, 4]
+                expect(self.intArray.difference(diff_1)) == [1, 2, 5]
                 expect(self.intArray.difference([3], [4])) == [1, 2, 5]
                 
-                expect(self.intArray.difference([])) == self.intArray
+                let diff_2: [Int] = []
+                expect(self.intArray.difference(diff_2)) == self.intArray
                 
             }
             
             it("operator") {
                 
                 expect(self.intArray - [3, 4]) == [1, 2, 5]
-                
                 expect(self.intArray - [3] - [4]) == [1, 2, 5]
                 
                 expect(self.intArray - []) == self.intArray
@@ -397,7 +398,9 @@ class ArrayExtensionsSpec: QuickSpec {
         
             it("method") {
                 
-                expect(self.intArray.intersection([])) == []
+                //  Xcode 7.0 b1: int_1 is needed in order to prevent crashes
+                let int_1: [Int] = []
+                expect(self.intArray.intersection(int_1)) == []
             
                 expect(self.intArray.intersection([1])) == [1]
                 
@@ -414,7 +417,7 @@ class ArrayExtensionsSpec: QuickSpec {
                 expect(self.intArray & [1, 2] & [1, 2] & [1, 2, 3]) == [1, 2]
             
             }
-            
+    
         }
         
         /**
@@ -424,7 +427,9 @@ class ArrayExtensionsSpec: QuickSpec {
             
             it("method") {
                 
-                expect(self.intArray.union([])) == self.intArray
+                //  Xcode 7.0 b1: uni_1 is needed in order to prevent crashes
+                let uni_1: [Int] = []
+                expect(self.intArray.union(uni_1)) == self.intArray
                 
                 expect(self.intArray.union([1])) == self.intArray
                 
@@ -594,7 +599,7 @@ class ArrayExtensionsSpec: QuickSpec {
                     
                 }
                 
-                for i in enumerate(self.intArray) {
+                for i in self.intArray.enumerate() {
                     
                     expect(dictionary["Number \(i.element)"]) == i.element
                     
@@ -618,27 +623,6 @@ class ArrayExtensionsSpec: QuickSpec {
                 expect(dictionary[2]) == "Number 2"
                 
                 expect(dictionary.keys.array - [1, 2]) == []
-                
-            }
-            
-        }
-        
-        /**
-        *  Array.implode
-        */
-        describe("implode") {
-        
-            it("method") {
-                
-                expect(self.stringArray.implode("")) == "ABCDEF"
-                expect(self.stringArray.implode("*")) == "A*B*C*D*E*F"
-
-            }
-            
-            it("operator") {
-                
-                expect(self.stringArray * "") == "ABCDEF"
-                expect(self.stringArray * "*") == "A*B*C*D*E*F"
                 
             }
             
@@ -861,7 +845,7 @@ class ArrayExtensionsSpec: QuickSpec {
         */
         it("shuffled") {
             
-            var array = self.intArray
+            let array = self.intArray
             
             self.intArray.shuffle()
             
@@ -903,7 +887,7 @@ class ArrayExtensionsSpec: QuickSpec {
         
             var sum = 0
             
-            self.intArray.cycle(n: 2) {
+            self.intArray.cycle(2) {
                 sum += $0
             }
         
@@ -911,13 +895,13 @@ class ArrayExtensionsSpec: QuickSpec {
         
             sum = 0
             
-            self.intArray.cycle(n: 0) {
+            self.intArray.cycle(0) {
                 sum += $0
             }
             
             expect(sum) == 0
             
-            self.intArray.cycle(n: -1) {
+            self.intArray.cycle(-1) {
                 sum += $0
             }
             
@@ -980,7 +964,7 @@ class ArrayExtensionsSpec: QuickSpec {
         */
         it("repeatedCombination") {
             
-            var array = [1, 2, 3]
+            let array = [1, 2, 3]
             
             expect(array.repeatedCombination(-1)) == []
             
@@ -1025,8 +1009,8 @@ class ArrayExtensionsSpec: QuickSpec {
                 }
             }
             
-            var jagged: [[String]] = [["a", "b", "c"], ["d", "e"], ["f", "g", "h"]]
-            var jaggedTransposition = [].transposition(jagged)
+            let jagged: [[String]] = [["a", "b", "c"], ["d", "e"], ["f", "g", "h"]]
+            let jaggedTransposition = [].transposition(jagged)
             
             expect(jaggedTransposition) == [["a", "d", "f"], ["b", "e", "g"], ["c", "h"]]
             
@@ -1038,7 +1022,7 @@ class ArrayExtensionsSpec: QuickSpec {
         it("permutation") {
         
             1.upTo(self.intArray.count) { i in
-                var permutations: [[Int]] = self.intArray.permutation(i)
+                let permutations: [[Int]] = self.intArray.permutation(i)
                 var factorial = 1
                 
                 for j in 1...i {
@@ -1047,8 +1031,8 @@ class ArrayExtensionsSpec: QuickSpec {
                 
                 expect(permutations.count) == self.intArray.combination(i).count * factorial
                 
-                var mappedPermutations: [Int] = permutations.map({ (i: [Int]) -> [Int] in i.unique()}).flatten()
-                var flattenedPermutations: [Int] = permutations.flatten()
+                let mappedPermutations: [Int] = permutations.map({ (i: [Int]) -> [Int] in i.unique()}).flatten()
+                let flattenedPermutations: [Int] = permutations.flatten()
                 
                 expect(mappedPermutations) == flattenedPermutations
                 expect(permutations.flatten().all({$0 >= 1 && $0 <= 5})).to(beTrue())
@@ -1066,7 +1050,7 @@ class ArrayExtensionsSpec: QuickSpec {
         */
         it("repeatedPermutation") {
         
-            var shortArray = [1, 2]
+            let shortArray = [1, 2]
             
             expect(shortArray.repeatedPermutation(0)) == []
             expect(shortArray.repeatedPermutation(1)) == [[1], [2]]

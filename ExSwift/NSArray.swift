@@ -13,9 +13,9 @@ public extension NSArray {
     /**
         Converts an NSArray object to an OutType[] array containing the items in the NSArray of type OutType.
         
-        :returns: Array of Swift objects
+        - returns: Array of Swift objects
     */
-    func cast <OutType> () -> [OutType] {
+    /*func cast <OutType> () -> [OutType] {
         var result = [OutType]()
         
         for item : AnyObject in self {
@@ -23,29 +23,29 @@ public extension NSArray {
         }
         
         return result
-    }
+    }*/
 
     /**
         Flattens a multidimensional NSArray to an OutType[] array 
         containing the items in the NSArray that can be bridged from their ObjC type to OutType.
     
-        :returns: Flattened array
+        - returns: Flattened array
     */
-    func flatten <OutType> () -> [OutType] {
+    /*func flatten <OutType> () -> [OutType] {
         var result = [OutType]()
-        let reflection = reflect(self)
+        let reflection = Mirror(reflecting: self)
         
-        for i in 0..<reflection.count {
-            result += Ex.bridgeObjCObject(reflection[i].1.value) as [OutType]
+        for i in 0..<reflection.children.count {
+            result += Ex.bridgeObjCObject(reflection.children[i].1.value) as [OutType]
         }
         
         return result
-    }
+    }*/
     
     /**
         Flattens a multidimensional NSArray to a [AnyObject].
     
-        :returns: Flattened array
+        - returns: Flattened array
     */
     func flattenAny () -> [AnyObject] {
         var result = [AnyObject]()

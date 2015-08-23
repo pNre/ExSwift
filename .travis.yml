@@ -15,3 +15,7 @@ matrix:
     xcode_sdk: macosx10.10
   - xcode_scheme: ExSwift-Mac
     xcode_sdk: iphonesimulator8.3
+
+branches:
+  except:
+    - Swift-2.0
