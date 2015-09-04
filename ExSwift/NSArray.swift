@@ -33,12 +33,13 @@ public extension NSArray {
     */
     func flatten <OutType> () -> [OutType] {
         var result = [OutType]()
-        let reflection = reflect(self)
-        
-        for i in 0..<reflection.count {
-            result += Ex.bridgeObjCObject(reflection[i].1.value) as [OutType]
+        let mirror = Mirror(reflecting: self)
+        if let mirrorChildrenCollection = AnyRandomAccessCollection(mirror.children) {
+            for (_, value) in mirrorChildrenCollection {
+                result += Ex.bridgeObjCObject(value) as [OutType]
+            }
         }
-        
+
         return result
     }
     

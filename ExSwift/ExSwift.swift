@@ -52,7 +52,7 @@ public class ExSwift {
         - parameter function: Function to wrap
         - returns: Wrapper function
     */
-    public class func after <T> (n: Int, function: Void -> T) -> (Void -> T?) {
+    /*public class func after <T> (n: Int, function: Void -> T) -> (Void -> T?) {
         func callAfter (args: Any?...) -> T {
             return function()
         }
@@ -60,7 +60,7 @@ public class ExSwift {
         let f = ExSwift.after(n, function: callAfter)
         
         return { f([nil]) }
-    }
+    }*/
     
     /**
         Creates a wrapper function that invokes function once.
@@ -97,14 +97,14 @@ public class ExSwift {
         - parameter function: Function to wrap
         - returns: Wrapper function
     */
-    public class func once <T> (function: Void -> T) -> (Void -> T) {
+    /*public class func once <T> (function: Void -> T) -> (Void -> T) {
         let f = ExSwift.once {
             (params: Any?...) -> T in
             return function()
         }
         
         return { f([nil]) }
-    }
+    }*/
     
     /**
         Creates a wrapper that, when called, invokes function with any additional 
@@ -245,29 +245,28 @@ extension ExSwift {
     */
     internal class func bridgeObjCObject <T, S> (object: S) -> [T] {
         var result = [T]()
-        let reflection = reflect(object)
+        let reflection = Mirror(reflecting: object)
+        let mirrorChildrenCollection = AnyRandomAccessCollection(reflection.children)
         
         //  object has an Objective-C type
         if let obj = object as? T {
             //  object has type T
             result.append(obj)
-        } else if reflection.disposition == .ObjCObject {
+        } else if reflection.subjectType == NSArray.self {
             
             //  If it is an NSArray, flattening will produce the expected result
             if let array = object as? NSArray {
                 result += array.flatten()
-            } else if let bridged = reflection.value as? T {
+            } else if let bridged = mirrorChildrenCollection as? T {
                 result.append(bridged)
             }
             
-        } else if reflection.disposition == .IndexContainer {
+        } else if object is Array<T> {
             //  object is a native Swift array
             
             //  recursively convert each item
-            (0..<reflection.count).each {
-                let ref = reflection[$0].1
-
-                result += Ex.bridgeObjCObject(ref.value)
+            for (_, value) in mirrorChildrenCollection! {
+                result += Ex.bridgeObjCObject(value)
             }
             
         }

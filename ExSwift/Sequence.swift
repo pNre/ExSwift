@@ -15,7 +15,7 @@ internal extension AnySequence {
     
         - returns: First element of the sequence if present
     */
-    var first: T? {
+    var first: Element? {
         let generator =  self.generate()
         return generator.next()
     }
@@ -26,7 +26,7 @@ internal extension AnySequence {
         - parameter call: Function to call for each element
         - returns: True if call returns true for any element of self
     */
-    func any (call: (T) -> Bool) -> Bool {
+    func any (call: (Element) -> Bool) -> Bool {
         let generator =  self.generate()
         while let nextItem = generator.next() {
             if call(nextItem) {
@@ -42,7 +42,7 @@ internal extension AnySequence {
         - parameter index:
         - returns: Object at index in sequence, nil if index is out of bounds
     */
-    func get (index: Int) -> T? {
+    func get (index: Int) -> Element? {
         let generator =  self.generate()
         for _ in 0..<(index - 1) {
             generator.next()
@@ -56,7 +56,7 @@ internal extension AnySequence {
         - parameter range:
         - returns: Subsequence in range
     */
-    func get (range: Range<Int>) -> AnySequence<T> {
+    func get (range: Range<Int>) -> AnySequence<Element> {
         return self.skip(range.startIndex).take(range.endIndex - range.startIndex)
     }
     
@@ -85,7 +85,7 @@ internal extension AnySequence {
         - parameter n: Number of elements to skip
         - returns: Sequence from n to the end
     */
-    func skip (n: Int) -> AnySequence<T> {
+    func skip (n: Int) -> AnySequence<Element> {
         let generator =  self.generate()
         for _ in 0..<n {
             generator.next()
@@ -99,8 +99,8 @@ internal extension AnySequence {
         - parameter include: Function invoked to test elements for inclusion in the sequence
         - returns: Filtered sequence
     */
-    func filter(include: (T) -> Bool) -> AnySequence<T> {
-        return AnySequence(lazy(self).filter(include))
+    func filter(include: (Element) -> Bool) -> AnySequence<Element> {
+        return AnySequence(self.filter(include))
     }
     
     /**
@@ -109,7 +109,7 @@ internal extension AnySequence {
         - parameter exclude: Function invoked to test elements for exlcusion from the sequence
         - returns: Filtered sequence
     */
-    func reject (exclude: (T -> Bool)) -> AnySequence<T> {
+    func reject (exclude: (Element -> Bool)) -> AnySequence<Element> {
         return self.filter {
             return !exclude($0)
         }
@@ -121,7 +121,7 @@ internal extension AnySequence {
         - parameter condition: A function which returns a boolean if an element satisfies a given condition or not
         - returns: Elements of the sequence starting with the element which does not meet the condition
     */
-    func skipWhile(condition:(T) -> Bool) -> AnySequence<T> {
+    func skipWhile(condition:(Element) -> Bool) -> AnySequence<Element> {
         let generator =  self.generate()
         let checkingGenerator = self.generate()
         
@@ -144,10 +144,10 @@ internal extension AnySequence {
         - parameter item: The item to search for
         - returns: true if self contains item
     */
-    func contains<T:Equatable> (item: T) -> Bool {
+    func contains<Element:Equatable> (item: Element) -> Bool {
         let generator =  self.generate()
         while let nextItem = generator.next() {
-            if nextItem as! T == item {
+            if nextItem as! Element == item {
                 return true
             }
         }
@@ -160,7 +160,7 @@ internal extension AnySequence {
         - parameter n: Number of elements to take
         - returns: First n elements
     */
-    func take (n: Int) -> AnySequence<T> {
+    func take (n: Int) -> AnySequence<Element> {
         return AnySequence(TakeSequence(self, n))
     }
     
@@ -170,7 +170,7 @@ internal extension AnySequence {
         - parameter condition: A function which returns a boolean if an element satisfies a given condition or not.
         - returns: Elements of the sequence up until an element does not meet the condition
     */
-    func takeWhile (condition:(T?) -> Bool) -> AnySequence<T>  {
+    func takeWhile (condition:(Element?) -> Bool) -> AnySequence<Element>  {
         return AnySequence(TakeWhileSequence(self, condition))
     }
 
@@ -179,8 +179,8 @@ internal extension AnySequence {
 	
         - returns: Each element of the sequence in an array
     */
-    func toArray () -> [T] {
-        var result: [T] = []
+    func toArray () -> [Element] {
+        var result: [Element] = []
         for item in self {
             result.append(item)
         }

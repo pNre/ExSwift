@@ -31,7 +31,7 @@ public extension String {
             return nil
         }
 
-        let range = Range(start: advance(startIndex, range.startIndex), end: advance(startIndex, range.endIndex))
+        let range = Range(start: startIndex.advancedBy(range.startIndex), end: startIndex.advancedBy(range.endIndex))
 
         return self[range]
     }
@@ -91,9 +91,7 @@ public extension String {
         - returns: Array of substrings
     */
     func explode (separator: Character) -> [String] {
-        return split(self.characters, isSeparator: { (element: Character) -> Bool in
-            return element == separator
-        }).map { String($0) }
+      return self.characters.split { $0 == separator }.map { String($0) }
     }
 
     /**

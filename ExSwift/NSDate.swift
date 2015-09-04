@@ -262,7 +262,7 @@ extension NSDate: Strideable {
     }
     
     public func advancedBy(n: NSTimeInterval) -> Self {
-        return self.dynamicType(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate + n)
+        return self.dynamicType.init(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate + n)
     }
 }
 // MARK: Arithmetic
