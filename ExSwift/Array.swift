@@ -589,10 +589,10 @@ internal extension Array {
         Returns an array containing the first n elements of self.
     
         :param: n Number of elements to take
-        :returns: First n elements
+        :returns: First n elements or max elements
     */
     func take (n: Int) -> Array {
-        return self[0..<Swift.max(0, n)]
+        return self[0..<Swift.max(0, Swift.min(n, count))]
     }
 
     /**
