@@ -3,6 +3,7 @@
 
 Set of Swift extensions for standard types and classes.
 
+
 # Installation
 
 Because of Xcode errors it's not possible to integrate this project with Cocoapods or as Embedded Framework.
