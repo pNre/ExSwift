@@ -738,7 +738,7 @@ internal extension Array {
         if n == 1 {
             endArray += [array]
         }
-        for var i = 0; i < n; i += 1 {
+        for i in 0 ..< n {
             permutationHelper(n - 1, array: &array, endArray: &endArray)
             let j = n % 2 == 0 ? i : 0;
             //(array[j], array[n - 1]) = (array[n - 1], array[j])
@@ -1319,7 +1319,7 @@ internal extension Array {
             return []
         }
             
-        return Array(self[Range(start: start, end: end)] as ArraySlice<Element>)
+        return Array(self[start ..< end] as ArraySlice<Element>)
     }
 
     /**
@@ -1329,7 +1329,7 @@ internal extension Array {
         - returns: Subarray or nil if the index is out of bounds
     */
     subscript (interval: HalfOpenInterval<Int>) -> Array {
-        return self[rangeAsArray: Range(start: interval.start, end: interval.end)]
+        return self[rangeAsArray: interval.start ..< interval.end]
     }
     
     /**
