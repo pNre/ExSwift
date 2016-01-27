@@ -275,7 +275,7 @@ internal extension Dictionary {
 
             // If element has already been added to dictionary, append to it. If not, create one.
             if result.has(groupKey) {
-                result[groupKey]!++
+                result[groupKey]! += 1
             } else {
                 result[groupKey] = 1
             }
@@ -333,7 +333,7 @@ internal extension Dictionary {
 
         for (key, value) in self {
             if test(key, value) {
-                result++
+                result += 1
             }
         }
 

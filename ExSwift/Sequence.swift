@@ -74,7 +74,7 @@ internal extension AnySequence {
                     return index
                 }
             }
-            index++
+            index += 1
         }
         return nil
     }
@@ -203,8 +203,8 @@ public struct TakeSequence<S: SequenceType>: SequenceType {
     public func generate() -> AnyGenerator<S.Generator.Element> {
         var count = 0
         var generator = self.sequence.generate()
-        return anyGenerator {
-            count++
+        return AnyGenerator {
+            count += 1
             if count > self.n {
                 return nil
             } else {
