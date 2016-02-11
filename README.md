@@ -5,7 +5,7 @@ Set of Swift extensions for standard types and classes.
 
 # Installation
 
-Because of Xcode errors it's not possible to integrate this project with Cocoapods or as Embedded Framework.
+Because of Xcode errors it's not possible to integrate this project with CocoaPods or as Embedded Framework.
 [Read more at Dev Forum](https://devforums.apple.com/message/983747#983747)
 
 ## Use submodule and copy source code
