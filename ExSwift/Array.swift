@@ -247,7 +247,10 @@ internal extension Array {
         - parameter step: The number of elements to progress between each partition.  Set to n if not supplied.
         - returns: Array partitioned into n element arrays, starting step elements apart.
     */
-    func partition (var n: Int, var step: Int? = nil) -> [Array] {
+    func partition (n: Int, step: Int? = nil) -> [Array] {
+        var n = n
+        var step = step
+
         var result = [Array]()
         
         // If no step is supplied move n each step.
@@ -276,8 +279,10 @@ internal extension Array {
                     the last partition may less than n elements long.
         - returns: Array partitioned into n element arrays, starting step elements apart.
     */
-    func partition (var n: Int, var step: Int? = nil, pad: Array?) -> [Array] {
+    func partition (n: Int, step: Int? = nil, pad: Array?) -> [Array] {
         var result = [Array]()
+        var n = n
+        var step = step
         
         // If no step is supplied move n each step.
         if step == nil {
@@ -323,8 +328,10 @@ internal extension Array {
         - parameter step: The number of elements to progress between each partition. Set to n if not supplied.
         - returns: Array partitioned into n element arrays, starting step elements apart.
     */
-    func partitionAll (var n: Int, var step: Int? = nil) -> [Array] {
+    func partitionAll (n: Int, step: Int? = nil) -> [Array] {
         var result = [Array]()
+        var n = n
+        var step = step
 
         // If no step is supplied move n each step.
         if step == nil {
@@ -1339,7 +1346,7 @@ internal extension Array {
         - returns: Subarray or nil if the index is out of bounds
     */
     subscript (interval: ClosedInterval<Int>) -> Array {
-        return self[rangeAsArray: Range(start: interval.start, end: interval.end + 1)]
+        return self[rangeAsArray: interval.start ..< (interval.end + 1)]
     }
     
     /**

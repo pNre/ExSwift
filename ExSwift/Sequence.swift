@@ -229,7 +229,7 @@ public struct TakeWhileSequence<S: SequenceType>: SequenceType {
     public func generate() -> AnyGenerator<S.Generator.Element> {
         var generator = self.sequence.generate()
         var endConditionMet = false
-        return anyGenerator {
+        return AnyGenerator {
             let next: S.Generator.Element? = generator.next()
             if !endConditionMet {
                 endConditionMet = !self.condition(next)
