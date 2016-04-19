@@ -31,7 +31,7 @@ public extension String {
             return nil
         }
 
-        let range = Range(start: advance(startIndex, range.startIndex), end: advance(startIndex, range.endIndex))
+        let range = startIndex.advancedBy(range.startIndex) ..< startIndex.advancedBy(range.endIndex)
 
         return self[range]
     }
@@ -91,9 +91,7 @@ public extension String {
         - returns: Array of substrings
     */
     func explode (separator: Character) -> [String] {
-        return split(self.characters, isSeparator: { (element: Character) -> Bool in
-            return element == separator
-        }).map { String($0) }
+      return self.characters.split { $0 == separator }.map { String($0) }
     }
 
     /**
@@ -215,7 +213,8 @@ public extension String {
         - parameter charset: Chars to use in the random string
         - returns: Random string
     */
-    static func random (var length len: Int = 0, charset: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") -> String {
+    static func random (length: Int = 0, charset: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") -> String {
+        var len = length
 
         if len < 1 {
             len = Int.random(max: 16)
