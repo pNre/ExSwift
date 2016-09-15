@@ -8,14 +8,14 @@
 
 import Foundation
 
-infix operator =~ {}
-infix operator |~ {}
-infix operator .. {}
-infix operator <=> {}
+infix operator =~
+infix operator |~
+infix operator ..
+infix operator <=>
 
 public typealias Ex = ExSwift
 
-public class ExSwift {
+open class ExSwift {
     
     /**
         Creates a wrapper that, executes function only after being called n times.
@@ -24,9 +24,9 @@ public class ExSwift {
         - parameter function: Function to wrap
         - returns: Wrapper function
     */
-    public class func after <P, T> (n: Int, function: (P...) -> T) -> ((P...) -> T?) {
+    open class func after <P, T> (_ n: Int, function: @escaping (P...) -> T) -> ((P...) -> T?) {
         
-        typealias Function = [P] -> T
+        typealias Function = ([P]) -> T
     
         var times = n
         
@@ -34,7 +34,7 @@ public class ExSwift {
             (params: P...) -> T? in
             
             //  Workaround for the now illegal (T...) type.
-            let adaptedFunction = unsafeBitCast(function, Function.self)
+            let adaptedFunction = unsafeBitCast(function, to: Function.self)
             times -= 1
             if times <= 0 {
                 return adaptedFunction(params)
@@ -69,9 +69,9 @@ public class ExSwift {
         - parameter function: Function to wrap
         - returns: Wrapper function
     */
-    public class func once <P, T> (function: (P...) -> T) -> ((P...) -> T) {
+    open class func once <P, T> (_ function: @escaping (P...) -> T) -> ((P...) -> T) {
         
-        typealias Function = [P] -> T
+        typealias Function = ([P]) -> T
     
         var returnValue: T? = nil
         
@@ -81,7 +81,7 @@ public class ExSwift {
                 return returnValue!
             }
             
-            let adaptedFunction = unsafeBitCast(function, Function.self)
+            let adaptedFunction = unsafeBitCast(function, to: Function.self)
             returnValue = adaptedFunction(params)
             
             return returnValue!
@@ -114,11 +114,11 @@ public class ExSwift {
         - parameter parameters: Arguments to prepend
         - returns: Wrapper function
     */
-    public class func partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T) {
-        typealias Function = [P] -> T
+    open class func partial <P, T> (_ function: @escaping (P...) -> T, _ parameters: P...) -> ((P...) -> T) {
+        typealias Function = ([P]) -> T
 
         return { (params: P...) -> T in
-            let adaptedFunction = unsafeBitCast(function, Function.self)
+            let adaptedFunction = unsafeBitCast(function, to: Function.self)
             return adaptedFunction(parameters + params)
         }
     }
@@ -131,11 +131,11 @@ public class ExSwift {
         - parameter parameters: Arguments to pass to function
         - returns: Wrapper function
     */
-    public class func bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (Void -> T) {
-        typealias Function = [P] -> T
+    open class func bind <P, T> (_ function: @escaping (P...) -> T, _ parameters: P...) -> ((Void) -> T) {
+        typealias Function = ([P]) -> T
 
         return { Void -> T in
-            let adaptedFunction = unsafeBitCast(function, Function.self)
+            let adaptedFunction = unsafeBitCast(function, to: Function.self)
             return adaptedFunction(parameters)
         }
     }
@@ -146,7 +146,7 @@ public class ExSwift {
         - parameter function: Function with one parameter to cache
         - returns: Wrapper function
     */
-    public class func cached <P: Hashable, R> (function: P -> R) -> (P -> R) {
+    open class func cached <P: Hashable, R> (_ function: @escaping (P) -> R) -> ((P) -> R) {
         var cache = [P:R]()
         
         return { (param: P) -> R in
@@ -169,15 +169,15 @@ public class ExSwift {
         - parameter hash: Parameters based hashing function that computes the key used to store each result in the cache
         - returns: Wrapper function
     */
-    public class func cached <P: Hashable, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R) {
-        typealias Function = [P] -> R
-        typealias Hash = [P] -> P
+    open class func cached <P: Hashable, R> (_ function: @escaping (P...) -> R, hash: @escaping ((P...) -> P)) -> ((P...) -> R) {
+        typealias Function = ([P]) -> R
+        typealias Hash = ([P]) -> P
         
         var cache = [P:R]()
         
         return { (params: P...) -> R in
-            let adaptedFunction = unsafeBitCast(function, Function.self)
-            let adaptedHash = unsafeBitCast(hash, Hash.self)
+            let adaptedFunction = unsafeBitCast(function, to: Function.self)
+            let adaptedHash = unsafeBitCast(hash, to: Hash.self)
             
             let key = adaptedHash(params)
             
@@ -197,7 +197,7 @@ public class ExSwift {
         - parameter function: Function to cache
         - returns: Wrapper function
     */
-    public class func cached <P: Hashable, R> (function: (P...) -> R) -> ((P...) -> R) {
+    open class func cached <P: Hashable, R> (_ function: @escaping (P...) -> R) -> ((P...) -> R) {
         return cached(function, hash: { (params: P...) -> P in return params[0] })
     }
     
@@ -208,15 +208,15 @@ public class ExSwift {
         - parameter ignoreCase: If true the NSRegularExpression is created with the NSRegularExpressionOptions.CaseInsensitive flag
         - returns: NSRegularExpression object
     */
-    internal class func regex (pattern: String, ignoreCase: Bool = false) throws -> NSRegularExpression? {
+    internal class func regex (_ pattern: String, ignoreCase: Bool = false) throws -> NSRegularExpression? {
         
-        var options = NSRegularExpressionOptions.DotMatchesLineSeparators.rawValue
+        var options = NSRegularExpression.Options.dotMatchesLineSeparators.rawValue
         
         if ignoreCase {
-            options = NSRegularExpressionOptions.CaseInsensitive.rawValue | options
+            options = NSRegularExpression.Options.caseInsensitive.rawValue | options
         }
 
-        return try NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions(rawValue: options))
+        return try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options(rawValue: options))
         
     }
 
@@ -243,7 +243,7 @@ extension ExSwift {
     *  @param object Object to convert
     *  @returns Flattenend array of converted values
     */
-    internal class func bridgeObjCObject <T, S> (object: S) -> [T] {
+    internal class func bridgeObjCObject <T, S> (_ object: S) -> [T] {
         var result = [T]()
         let reflection = Mirror(reflecting: object)
         let mirrorChildrenCollection = AnyRandomAccessCollection(reflection.children)

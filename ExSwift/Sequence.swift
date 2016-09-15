@@ -16,7 +16,7 @@ internal extension AnySequence {
         - returns: First element of the sequence if present
     */
     var first: Element? {
-        let generator =  self.generate()
+        let generator =  self.makeIterator()
         return generator.next()
     }
 
@@ -26,8 +26,8 @@ internal extension AnySequence {
         - parameter call: Function to call for each element
         - returns: True if call returns true for any element of self
     */
-    func any (call: (Element) -> Bool) -> Bool {
-        let generator =  self.generate()
+    func any (_ call: (Element) -> Bool) -> Bool {
+        let generator =  self.makeIterator()
         while let nextItem = generator.next() {
             if call(nextItem) {
                 return true
@@ -42,8 +42,8 @@ internal extension AnySequence {
         - parameter index:
         - returns: Object at index in sequence, nil if index is out of bounds
     */
-    func get (index: Int) -> Element? {
-        let generator =  self.generate()
+    func get (_ index: Int) -> Element? {
+        let generator =  self.makeIterator()
         for _ in 0..<(index - 1) {
             generator.next()
         }
@@ -56,8 +56,8 @@ internal extension AnySequence {
         - parameter range:
         - returns: Subsequence in range
     */
-    func get (range: Range<Int>) -> AnySequence<Element> {
-        return self.skip(range.startIndex).take(range.endIndex - range.startIndex)
+    func get (_ range: Range<Int>) -> AnySequence<Element> {
+        return self.skip(range.lowerBound).take(range.upperBound - range.lowerBound)
     }
     
     /**
@@ -66,7 +66,7 @@ internal extension AnySequence {
         - parameter item: The item to search for
         - returns: Index of the matched item or nil
     */
-    func indexOf <U: Equatable> (item: U) -> Int? {
+    func indexOf <U: Equatable> (_ item: U) -> Int? {
         var index = 0
         for current in self {
             if let equatable = current as? U {
@@ -85,8 +85,8 @@ internal extension AnySequence {
         - parameter n: Number of elements to skip
         - returns: Sequence from n to the end
     */
-    func skip (n: Int) -> AnySequence<Element> {
-        let generator =  self.generate()
+    func skip (_ n: Int) -> AnySequence<Element> {
+        let generator =  self.makeIterator()
         for _ in 0..<n {
             generator.next()
         }
@@ -99,7 +99,7 @@ internal extension AnySequence {
         - parameter include: Function invoked to test elements for inclusion in the sequence
         - returns: Filtered sequence
     */
-    func filter(include: (Element) -> Bool) -> AnySequence<Element> {
+    func filter(_ include: (Element) -> Bool) -> AnySequence<Element> {
         return AnySequence(self.filter(include))
     }
     
@@ -109,7 +109,7 @@ internal extension AnySequence {
         - parameter exclude: Function invoked to test elements for exlcusion from the sequence
         - returns: Filtered sequence
     */
-    func reject (exclude: (Element -> Bool)) -> AnySequence<Element> {
+    func reject (_ exclude: ((Element) -> Bool)) -> AnySequence<Element> {
         return self.filter {
             return !exclude($0)
         }
@@ -121,9 +121,9 @@ internal extension AnySequence {
         - parameter condition: A function which returns a boolean if an element satisfies a given condition or not
         - returns: Elements of the sequence starting with the element which does not meet the condition
     */
-    func skipWhile(condition:(Element) -> Bool) -> AnySequence<Element> {
-        let generator =  self.generate()
-        let checkingGenerator = self.generate()
+    func skipWhile(_ condition:(Element) -> Bool) -> AnySequence<Element> {
+        let generator =  self.makeIterator()
+        let checkingGenerator = self.makeIterator()
         
         var keepSkipping = true
         
@@ -144,8 +144,8 @@ internal extension AnySequence {
         - parameter item: The item to search for
         - returns: true if self contains item
     */
-    func contains<Element:Equatable> (item: Element) -> Bool {
-        let generator =  self.generate()
+    func contains<Element:Equatable> (_ item: Element) -> Bool {
+        let generator =  self.makeIterator()
         while let nextItem = generator.next() {
             if nextItem as! Element == item {
                 return true
@@ -160,7 +160,7 @@ internal extension AnySequence {
         - parameter n: Number of elements to take
         - returns: First n elements
     */
-    func take (n: Int) -> AnySequence<Element> {
+    func take (_ n: Int) -> AnySequence<Element> {
         return AnySequence(TakeSequence(self, n))
     }
     
@@ -170,7 +170,7 @@ internal extension AnySequence {
         - parameter condition: A function which returns a boolean if an element satisfies a given condition or not.
         - returns: Elements of the sequence up until an element does not meet the condition
     */
-    func takeWhile (condition:(Element?) -> Bool) -> AnySequence<Element>  {
+    func takeWhile (_ condition:@escaping (Element?) -> Bool) -> AnySequence<Element>  {
         return AnySequence(TakeWhileSequence(self, condition))
     }
 
@@ -191,19 +191,19 @@ internal extension AnySequence {
 /**
     A sequence adapter that implements the 'take' functionality
 */
-public struct TakeSequence<S: SequenceType>: SequenceType {
-    private let sequence: S
-    private let n: Int
+public struct TakeSequence<S: Sequence>: Sequence {
+    fileprivate let sequence: S
+    fileprivate let n: Int
 
     public init(_ sequence: S, _ n: Int) {
         self.sequence = sequence
         self.n = n
     }
  
-    public func generate() -> AnyGenerator<S.Generator.Element> {
+    public func makeIterator() -> AnyIterator<S.Iterator.Element> {
         var count = 0
-        var generator = self.sequence.generate()
-        return AnyGenerator {
+        var generator = self.sequence.makeIterator()
+        return AnyIterator {
             count += 1
             if count > self.n {
                 return nil
@@ -217,20 +217,20 @@ public struct TakeSequence<S: SequenceType>: SequenceType {
 /**
     a sequence adapter that implements the 'takeWhile' functionality
 */
-public struct TakeWhileSequence<S: SequenceType>: SequenceType {
-    private let sequence: S
-    private let condition: (S.Generator.Element?) -> Bool
+public struct TakeWhileSequence<S: Sequence>: Sequence {
+    fileprivate let sequence: S
+    fileprivate let condition: (S.Iterator.Element?) -> Bool
     
-    public init(_ sequence:S, _ condition:(S.Generator.Element?) -> Bool) {
+    public init(_ sequence:S, _ condition:@escaping (S.Iterator.Element?) -> Bool) {
         self.sequence = sequence
         self.condition = condition
     }
     
-    public func generate() -> AnyGenerator<S.Generator.Element> {
-        var generator = self.sequence.generate()
+    public func makeIterator() -> AnyIterator<S.Iterator.Element> {
+        var generator = self.sequence.makeIterator()
         var endConditionMet = false
-        return AnyGenerator {
-            let next: S.Generator.Element? = generator.next()
+        return AnyIterator {
+            let next: S.Iterator.Element? = generator.next()
             if !endConditionMet {
                 endConditionMet = !self.condition(next)
             }

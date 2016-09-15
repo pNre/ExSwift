@@ -55,7 +55,7 @@ public extension NSArray {
             if let array = item as? NSArray {
                 result += array.flattenAny()
             } else {
-                result.append(item)
+                result.append(item as AnyObject)
             }
         }
         

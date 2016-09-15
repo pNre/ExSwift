@@ -62,7 +62,7 @@ public extension Double {
         - parameter max: Upper bound
         - returns: Clamped value
     */
-    func clamp (min: Double, _ max: Double) -> Double {
+    func clamp (_ min: Double, _ max: Double) -> Double {
         return Swift.max(min, Swift.min(max, self))
     }
     
@@ -72,8 +72,8 @@ public extension Double {
     
         :params: increment the increment to round to
     */
-    func roundToNearest(increment: Double) -> Double {
-        let remainder = self % increment
+    func roundToNearest(_ increment: Double) -> Double {
+        let remainder = self.truncatingRemainder(dividingBy: increment)
         return remainder < increment / 2 ? self - remainder : self - remainder + increment
     }
 
@@ -84,7 +84,7 @@ public extension Double {
         :params: max
         - returns: Random number
     */
-    static func random(min: Double = 0, max: Double) -> Double {
+    static func random(_ min: Double = 0, max: Double) -> Double {
         let diff = max - min;
         let rand = Double(arc4random() % (UInt32(RAND_MAX) + 1))
         return ((rand / Double(RAND_MAX)) * diff) + min;

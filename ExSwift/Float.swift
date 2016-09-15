@@ -62,7 +62,7 @@ public extension Float {
         - parameter max: Upper bound
         - returns: Clamped value
     */
-    func clamp (min: Float, _ max: Float) -> Float {
+    func clamp (_ min: Float, _ max: Float) -> Float {
         return Swift.max(min, Swift.min(max, self))
     }
     
@@ -73,7 +73,7 @@ public extension Float {
         - parameter max:
         - returns: Random number
     */
-    static func random(min: Float = 0, max: Float) -> Float {
+    static func random(_ min: Float = 0, max: Float) -> Float {
         let diff = max - min;
         let rand = Float(arc4random() % (UInt32(RAND_MAX) + 1))
         return ((rand / Float(RAND_MAX)) * diff) + min;
