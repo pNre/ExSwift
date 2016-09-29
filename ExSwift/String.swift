@@ -18,7 +18,7 @@ public extension String {
     /**
         self.capitalizedString shorthand
     */
-    var capitalized: String { return capitalized }
+    var capitalized: String { return self.capitalized }
 
     /**
         Returns the substring in the given range
