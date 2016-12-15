@@ -45,7 +45,7 @@ internal extension AnySequence {
     func get (_ index: Int) -> Element? {
         let generator =  self.makeIterator()
         for _ in 0..<(index - 1) {
-            generator.next()
+            _ = generator.next()
         }
         return generator.next()
     }
@@ -88,7 +88,7 @@ internal extension AnySequence {
     func skip (_ n: Int) -> AnySequence<Element> {
         let generator =  self.makeIterator()
         for _ in 0..<n {
-            generator.next()
+            _ = generator.next()
         }
         return AnySequence(generator)
     }
@@ -132,7 +132,7 @@ internal extension AnySequence {
             keepSkipping = nextItem != nil ? condition(nextItem!) : false
             
             if keepSkipping {
-                generator.next()
+                _ = generator.next()
             }
         }
         return AnySequence(generator)
