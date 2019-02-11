@@ -10,55 +10,56 @@ import Foundation
 
 public extension NSArray {
 
-    /**
-        Converts an NSArray object to an OutType[] array containing the items in the NSArray of type OutType.
-        
-        :returns: Array of Swift objects
-    */
-    func cast <OutType> () -> [OutType] {
-        var result = [OutType]()
-        
-        for item : AnyObject in self {
-            result += Ex.bridgeObjCObject(item) as [OutType]
-        }
-        
-        return result
+  /**
+   Converts an NSArray object to an OutType[] array containing the items in the NSArray of type OutType.
+
+   - returns: Array of Swift objects
+   */
+  public func cast <OutType> () -> [OutType] {
+    var result = [OutType]()
+
+    for item : Any in self {
+      result += Ex.bridgeObjCObject(item) as [OutType]
     }
 
-    /**
-        Flattens a multidimensional NSArray to an OutType[] array 
-        containing the items in the NSArray that can be bridged from their ObjC type to OutType.
-    
-        :returns: Flattened array
-    */
-    func flatten <OutType> () -> [OutType] {
-        var result = [OutType]()
-        let reflection = reflect(self)
-        
-        for i in 0..<reflection.count {
-            result += Ex.bridgeObjCObject(reflection[i].1.value) as [OutType]
-        }
-        
-        return result
+    return result
+  }
+
+  /**
+   Flattens a multidimensional NSArray to an OutType[] array
+   containing the items in the NSArray that can be bridged from their ObjC type to OutType.
+
+   - returns: Flattened array
+   */
+  public func flatten <OutType> () -> [OutType] {
+    var result = [OutType]()
+    let mirror = Mirror(reflecting: self)
+    if let mirrorChildrenCollection = AnyRandomAccessCollection(mirror.children) {
+      for (_, value) in mirrorChildrenCollection {
+        result += Ex.bridgeObjCObject(value) as [OutType]
+      }
     }
-    
-    /**
-        Flattens a multidimensional NSArray to a [AnyObject].
-    
-        :returns: Flattened array
-    */
-    func flattenAny () -> [AnyObject] {
-        var result = [AnyObject]()
-        
-        for item in self {
-            if let array = item as? NSArray {
-                result += array.flattenAny()
-            } else {
-                result.append(item)
-            }
-        }
-        
-        return result
+
+    return result
+  }
+
+  /**
+   Flattens a multidimensional NSArray to a [Any].
+
+   - returns: Flattened array
+   */
+  public func flattenAny () -> [Any] {
+    var result = [Any]()
+
+    for item in self {
+      if let array = item as? NSArray {
+        result += array.flattenAny()
+      } else {
+        result.append(item)
+      }
     }
-    
+
+    return result
+  }
+
 }

@@ -15,7 +15,7 @@ public extension Character {
         the corresponding integer.
     */
     public func toInt () -> Int? {
-        return String(self).toInt()
+        return Int(String(self))
     }
     
 }

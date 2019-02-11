@@ -116,18 +116,18 @@ class StringExtensionsSpec: QuickSpec {
 
                 let string = "ABcd"
 
-                expect(string =~ "^A").to(beTrue())
+                expect(try! string =~ "^A").to(beTrue())
 
-                expect(string =~ (pattern: "D$", ignoreCase: true)).to(beTrue())
-                expect(string =~ "D$").to(beFalse())
+                expect(try! string =~ (pattern: "D$", ignoreCase: true)).to(beTrue())
+                expect(try! string =~ "D$").to(beFalse())
 
                 //  String[] all
                 let strings = [string, string, string]
 
-                expect(strings =~ "^A").to(beTrue())
+                expect(try! strings =~ "^A").to(beTrue())
 
-                expect(strings =~ (pattern: "D$", ignoreCase: true)).to(beTrue())
-                expect(strings =~ "D$").to(beFalse())
+                expect(try! strings =~ (pattern: "D$", ignoreCase: true)).to(beTrue())
+                expect(try! strings =~ "D$").to(beFalse())
 
             }
 
@@ -136,10 +136,10 @@ class StringExtensionsSpec: QuickSpec {
                 //  String[] any
                 let strings = ["ABcd", "ABcd", "ABcd"]
 
-                XCTAssertTrue(strings |~ "^A")
+                XCTAssertTrue(try! strings |~ "^A")
 
-                XCTAssertTrue(strings |~ (pattern: "D$", ignoreCase: true))
-                XCTAssertFalse(strings |~ "D$")
+                XCTAssertTrue(try! strings |~ (pattern: "D$", ignoreCase: true))
+                XCTAssertFalse(try! strings |~ "D$")
 
             }
 
@@ -147,13 +147,13 @@ class StringExtensionsSpec: QuickSpec {
 
                 let string = "AB[31]"
 
-                let matches = string.matches("\\d+")!
+                let matches = try! string.matches("\\d+")!
                 let range = matches[0].rangeAtIndex(0)
 
                 let substringRange = range.location..<(range.location + range.length)
 
                 expect(string[substringRange]) == "31"
-                expect(string.matches("N")!.isEmpty).to(beTrue())
+                expect(try! string.matches("N")!.isEmpty).to(beTrue())
 
             }
 
@@ -165,10 +165,10 @@ class StringExtensionsSpec: QuickSpec {
         */
        describe("containsMatch checks"){
            it("match") {
-               expect("Test string for match".containsMatch("for")).to(beTrue())
+               expect(try! "Test string for match".containsMatch("for")).to(beTrue())
            }
            it("not match") {
-               expect("Test string for match".containsMatch("not for")).to(beFalse())
+               expect(try! "Test string for match".containsMatch("not for")).to(beFalse())
            }
        }
 
@@ -177,15 +177,15 @@ class StringExtensionsSpec: QuickSpec {
         */
         describe("ReplaceMatches checks"){
             it("find match to replace") {
-                expect("Test_string".replaceMatches("_.*", withString: "_replace")) == "Test_replace"
+                expect(try! "Test_string".replaceMatches("_.*", withString: "_replace")) == "Test_replace"
             }
             
             it("find match to replacei with empty string") {
-                expect("Test 111string 222for333 match".replaceMatches("\\d+", withString: "")) == "Test string for match"
+                expect(try! "Test 111string 222for333 match".replaceMatches("\\d+", withString: "")) == "Test string for match"
             }
             
             it("not find match to replace") {
-                expect("Test string for match".replaceMatches("\\d+", withString: "some string")) == "Test string for match"
+                expect(try! "Test string for match".replaceMatches("\\d+", withString: "some string")) == "Test string for match"
             }
         }
 
@@ -298,14 +298,14 @@ class StringExtensionsSpec: QuickSpec {
 
                 it("toDate") {
 
-                    var d : NSDate = " 2015-08-19 \t ".toDate()!
+                    let d : NSDate = " 2015-08-19 \t ".toDate()!
 
-                    var c = NSDateComponents()
+                    let c = NSDateComponents()
                     c.year = 2015
                     c.month = 8
                     c.day = 19
 
-                    var gregorian = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+                    let gregorian = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
                     expect(gregorian.dateFromComponents(c)) == d
 
                     expect("a772.2".toDate()).to(beNil())
@@ -316,9 +316,9 @@ class StringExtensionsSpec: QuickSpec {
 
                 it("toDateTime") {
 
-                    var d : NSDate = " 2015-08-19 03:04:34\t ".toDateTime()!
+                    let d : NSDate = " 2015-08-19 03:04:34\t ".toDateTime()!
 
-                    var c = NSDateComponents()
+                    let c = NSDateComponents()
                     c.year = 2015
                     c.month = 8
                     c.day = 19
@@ -326,7 +326,7 @@ class StringExtensionsSpec: QuickSpec {
                     c.minute = 4
                     c.second = 34
 
-                    var gregorian = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+                    let gregorian = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
                     expect(gregorian.dateFromComponents(c)) == d
 
                     expect("a772.2".toDateTime()).to(beNil())
