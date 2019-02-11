@@ -16,11 +16,6 @@ public extension String {
     var length: Int { return self.characters.count }
 
     /**
-        self.capitalizedString shorthand
-    */
-    var capitalized: String { return self.capitalized }
-
-    /**
         Returns the substring in the given range
 
         - parameter range:
